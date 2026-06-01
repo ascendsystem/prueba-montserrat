@@ -1,0 +1,3512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Historia de Transports Montserrat - Empresa familiar fundada en 1940 en Sant Sadurní d'Anoia. Más de 85 años de experiencia en logística y transporte.">
+<title>Historia | Transports Montserrat</title>
+
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & RESET
+   ============================================================ */
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   LANG SWITCHER
+   ============================================================ */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+#mobile-menu.animating { display: flex; }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer; transition: color 0.2s;
+}
+.mob-sub-item > a:hover { color: var(--white); }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* ============================================================
+   HISTORY HERO — UNIFIED PREMIUM SECTION
+   ============================================================ */
+
+/* Keyframes */
+@keyframes hh-fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hh-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes hh-scaleIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes hh-gridDrift {
+  from { transform: translate(0,0); }
+  to   { transform: translate(60px,60px); }
+}
+
+@keyframes hh-glowPulse {
+  from { opacity: 0.5; transform: scale(1); }
+  to   { opacity: 0.9; transform: scale(1.08); }
+}
+
+@keyframes hh-lineSlide {
+  0%   { opacity: 0; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ============================================================
+   WRAPPER
+   ============================================================ */
+
+.history-hero {
+  position: relative;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(
+      160deg,
+      #020c1e 0%,
+      #010912 60%,
+      #030e22 100%
+    );
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   GRID BG
+   ============================================================ */
+
+.history-hero-grid {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+
+  background-size: 60px 60px;
+
+  animation: hh-gridDrift 55s linear infinite;
+
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse 110% 90% at 30% 50%,
+      black 20%,
+      transparent 75%
+    );
+
+  mask-image:
+    radial-gradient(
+      ellipse 110% 90% at 30% 50%,
+      black 20%,
+      transparent 75%
+    );
+
+  pointer-events: none;
+}
+
+/* ============================================================
+   GLOWS
+   ============================================================ */
+
+.history-hero-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 2;
+}
+
+.history-hero-glow--red {
+  width: 700px;
+  height: 500px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(207,0,28,0.07) 0%,
+      transparent 70%
+    );
+
+  top: 0;
+  left: -180px;
+
+  animation:
+    hh-glowPulse 7s ease-in-out infinite alternate;
+}
+
+.history-hero-glow--blue {
+  width: 600px;
+  height: 600px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(6,48,98,0.18) 0%,
+      transparent 70%
+    );
+
+  bottom: -140px;
+  right: 5%;
+
+  animation:
+    hh-glowPulse 9s ease-in-out infinite alternate-reverse;
+}
+
+/* ============================================================
+   NOISE
+   ============================================================ */
+
+.history-hero-noise {
+  position: absolute;
+  inset: 0;
+
+  z-index: 3;
+
+  opacity: 0.032;
+
+  pointer-events: none;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  background-size: 200px;
+}
+
+/* ============================================================
+   DIAGONAL PHOTO BACKGROUND (right half)
+   ============================================================ */
+
+.hh-diagonal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 52%;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hh-img-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: url('../../assets/images/empresa/montserrat3.png');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.06);
+  filter: saturate(0.35) contrast(1.1) brightness(0.6);
+  will-change: transform;
+}
+
+.hh-img-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    160deg,
+    rgba(2,9,18,0.88) 0%,
+    rgba(2,12,30,0.55) 40%,
+    rgba(2,9,18,0.22) 100%
+  );
+}
+
+/* ============================================================
+   TOP LINE
+   ============================================================ */
+
+.history-hero::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 2px;
+
+  z-index: 20;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(207,0,28,0.0) 10%,
+      var(--red) 50%,
+      rgba(207,0,28,0.0) 90%,
+      transparent 100%
+    );
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+
+.history-hero-container {
+  position: relative;
+  z-index: 10;
+
+  flex: 1;
+
+  width: 100%;
+  max-width: 1700px;
+
+  margin: 0 auto;
+
+  padding:
+    70px
+    clamp(40px,5vw,90px)
+    70px
+    clamp(30px,3vw,60px);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(420px, 620px)
+    minmax(620px, 860px);
+
+  gap: clamp(80px,8vw,160px);
+
+  align-items: center;
+}
+
+/* ============================================================
+   LEFT
+   ============================================================ */
+
+.history-hero-left {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 560px;
+
+  justify-self: start;
+
+  margin-left: -30px;
+}
+
+.history-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  margin-bottom: 32px;
+
+  animation:
+    hh-fadeUp .7s var(--easing) .25s both;
+}
+
+.history-hero-eyebrow-line {
+  width: 44px;
+  height: 1.5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--red),
+      rgba(207,0,28,0.25)
+    );
+}
+
+.history-hero-eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+
+  color: rgba(207,0,28,0.85);
+}
+
+.history-hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+
+  line-height: .90;
+
+  text-transform: uppercase;
+
+  letter-spacing: -.02em;
+
+  margin-bottom: 36px;
+
+  overflow: hidden;
+}
+
+.history-hero-title-line {
+  display: block;
+
+  font-size: clamp(56px,6.5vw,104px);
+
+  line-height: .90;
+
+  animation:
+    hh-fadeUp .85s var(--easing) .4s both;
+}
+
+.history-hero-title-line--accent {
+  color: var(--red);
+}
+
+.history-hero-title-line--outline {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.18);
+  color: transparent;
+}
+
+.history-hero-divider {
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.08),
+      transparent
+    );
+
+  margin-bottom: 36px;
+}
+
+.history-hero-body {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.82;
+
+  letter-spacing: .01em;
+
+  color: rgba(255,255,255,0.46);
+
+  max-width: 500px;
+
+  margin-bottom: 44px;
+}
+
+.history-hero-body strong {
+  color: rgba(255,255,255,0.88);
+  font-weight: 500;
+}
+
+/* ============================================================
+   RIGHT VISUAL
+   ============================================================ */
+
+.history-hero-visual {
+  position: relative;
+
+  width: 100%;
+
+  transform: translateX(30px);
+
+  padding-bottom: 20px;
+}
+
+/* ============================================================
+   IMAGE COMPOSITION
+   ============================================================ */
+
+.history-hero-image-frame {
+  position: relative;
+
+  width: 100%;
+  height: 680px;
+
+  overflow: visible;
+}
+
+/* MAIN IMAGE */
+.history-hero-main-image {
+  position: absolute;
+
+  top: 40px;
+  right: 0;
+
+  width: 58%;
+  height: 58%;
+
+  overflow: hidden;
+
+  z-index: 2;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(255,255,255,0.07);
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.history-hero-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* SECONDARY IMAGE */
+.history-hero-secondary-image {
+  position: absolute;
+
+  top: 54%;
+  left: 8%;
+
+  width: 42%;
+  height: 34%;
+
+  overflow: hidden;
+
+  z-index: 4;
+
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(255,255,255,0.07);
+
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.history-hero-secondary-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* IMAGE CAPTION */
+.hh-img-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(to top, rgba(2,9,18,0.85) 0%, transparent 100%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.72);
+}
+
+/* ============================================================
+   BADGE — at intersection of both images
+   Main image: top=40px, right=0, width=58%, height=58%
+   → bottom-left corner at: top≈54% of frame, left=42% of frame
+   Secondary image: top=54%, left=8%, width=42%
+   → top-right corner at: top=54%, left=50% of frame
+   Badge is centered at (≈46%, ≈54%) with transform to center it on that corner
+   ============================================================ */
+
+.history-hero-badge {
+  position: absolute;
+
+  /* Sits right at the corner where the two images meet:
+     main image's bottom-left ≈ secondary image's top-right */
+  top: 54%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--red) 0%,
+      #8c0013 100%
+    );
+
+  padding: 20px 26px 18px;
+
+  clip-path:
+    polygon(
+      0 0,
+      92% 0,
+      100% 100%,
+      8% 100%
+    );
+
+  box-shadow:
+    0 8px 32px rgba(207,0,28,0.4),
+    0 0 0 3px rgba(2,9,18,0.9);
+}
+
+.history-hero-badge-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+
+  letter-spacing: -.03em;
+
+  color: var(--white);
+
+  display: block;
+}
+
+.history-hero-badge-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: .22em;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.72);
+
+  display: block;
+
+  margin-top: 2px;
+}
+
+/* ============================================================
+   CORNERS
+   ============================================================ */
+
+.history-hero-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 3px;
+  height: 80px;
+
+  z-index: 10;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--red),
+      transparent
+    );
+}
+
+.history-hero-corner-h {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  height: 3px;
+  width: 80px;
+
+  z-index: 10;
+
+  background:
+    linear-gradient(
+      to left,
+      var(--red),
+      transparent
+    );
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+
+.history-hero-stats {
+  display: grid;
+
+  grid-template-columns: repeat(4,1fr);
+
+  margin-top: -30px;
+
+  position: relative;
+
+  z-index: 30;
+
+  border-top:
+    1px solid rgba(255,255,255,0.06);
+}
+
+.history-hero-stat {
+  padding: 20px 18px;
+
+  
+}
+
+.history-hero-stat:last-child {
+  border-right: none;
+}
+
+.history-hero-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+
+  line-height: 1;
+
+  color: var(--white);
+
+  letter-spacing: -.03em;
+
+  display: block;
+}
+
+.history-hero-stat-num span,
+.history-hero-stat-num sup {
+  color: var(--red);
+}
+
+.history-hero-stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+
+  letter-spacing: .2em;
+
+  text-transform: uppercase;
+
+  color: rgba(255,255,255,0.28);
+
+  display: block;
+
+  margin-top: 7px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .history-hero-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .history-hero-visual {
+    transform: none;
+  }
+
+  .history-hero-image-frame {
+    width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  }
+
+  .history-hero-main-image {
+    width: 78%;
+    height: 72%;
+  }
+
+  .history-hero-secondary-image {
+    width: 44%;
+    height: 36%;
+  }
+
+  .history-hero-stats {
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+@media (max-width: 560px) {
+
+  .history-hero-container {
+    padding: 36px 20px 52px;
+  }
+
+  .history-hero-left {
+    margin-left: 0;
+  }
+
+  .history-hero-title-line {
+    font-size: clamp(44px,14vw,68px);
+  }
+
+  .history-hero-main-image,
+.history-hero-secondary-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+  .history-hero-badge {
+    top: 54%;
+    left: 44%;
+    transform: translate(-50%, -50%);
+  }
+
+  .history-hero-stats {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .history-hero-stat-num {
+    font-size: 28px;
+  }
+}
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+#marquee-strip {
+  background: var(--red); overflow: hidden;
+  padding: 14px 0; position: relative; z-index: 5;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.marquee-track {
+  display: flex; gap: 0; width: max-content;
+  animation: marquee 28s linear infinite;
+}
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.marquee-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85); white-space: nowrap;
+  padding: 0 32px; display: flex; align-items: center; gap: 32px;
+}
+.marquee-dot {
+  display: inline-block; width: 4px; height: 4px;
+  border-radius: 50%; background: rgba(255,255,255,0.4);
+}
+
+/* ============================================================
+   SECTION COMMON
+   ============================================================ */
+.section-label {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+}
+.section-label-line {
+  width: 36px; height: 1.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 6px rgba(207,0,28,0.4);
+}
+.section-label-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase;
+  letter-spacing: -0.02em; line-height: 0.93;
+}
+.section-body {
+  font-size: 15px; line-height: 1.78; color: rgba(255,255,255,0.42); letter-spacing: 0.005em;
+}
+
+/* Reveal animations */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo); }
+.reveal-left { opacity: 0; transform: translateX(-50px); transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo); }
+.reveal-right { opacity: 0; transform: translateX(50px); transition: opacity 0.8s var(--ease-expo), transform 0.8s var(--ease-expo); }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: translate(0); }
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  text-decoration: none; padding: 17px 40px;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 30px rgba(207,0,28,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform .35s var(--ease-expo), box-shadow .35s;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--red-bright), var(--red));
+  opacity: 0; transition: opacity .3s;
+}
+.btn-primary:hover { transform: translateY(-2px) scaleX(1.01); box-shadow: 0 10px 40px rgba(207,0,28,0.55); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-arrow { width: 16px; height: 16px; position: relative; z-index: 1; transition: transform .35s var(--ease-expo); }
+.btn-primary:hover .btn-arrow { transform: translateX(4px); }
+.btn-secondary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px; transition: color .25s, border-color .25s;
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.6); }
+
+/* ============================================================
+   [historia-intro and page-hero replaced by history-hero above]
+   ============================================================ */
+
+/* =========================================================
+   TIMELINE — RADICAL PREMIUM REDESIGN
+   Level: Apple · Porsche · McKinsey Digital
+========================================================= */
+
+/* Extra keyframes for timeline */
+@keyframes tl-lineGrow {
+  from { transform: translateX(-50%) scaleY(0); }
+  to   { transform: translateX(-50%) scaleY(1); }
+}
+@keyframes tl-dotPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(207,0,28,0.5), 0 0 0 4px rgba(207,0,28,0.12); }
+  50%      { box-shadow: 0 0 0 6px rgba(207,0,28,0), 0 0 24px 8px rgba(207,0,28,0.25); }
+}
+@keyframes tl-glowFloat {
+  0%,100% { opacity:0.4; transform:translateY(0) scale(1); }
+  50%      { opacity:0.75; transform:translateY(-30px) scale(1.1); }
+}
+@keyframes tl-scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes tl-shimmer {
+  0%   { background-position: -400% center; }
+  100% { background-position: 400% center; }
+}
+@keyframes tl-yearFloat {
+  0%,100% { transform: translateY(0px); opacity:1; }
+  50%      { transform: translateY(-6px); opacity:0.85; }
+}
+
+/* =========================================================
+   SECTION WRAPPER
+========================================================= */
+
+#historia-timeline {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background: #020609;
+  isolation: isolate;
+}
+
+/* =========================================================
+   LAYERED BACKGROUND SYSTEM
+========================================================= */
+
+/* Layer 0 — deep space base */
+#historia-timeline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%,   rgba(6,48,98,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 80%  80% at 15% 50%,  rgba(207,0,28,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 80%  80% at 85% 50%,  rgba(207,0,28,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 50% at 50% 100%, rgba(6,48,98,0.22) 0%, transparent 55%),
+    linear-gradient(180deg, #020609 0%, #04091a 35%, #030812 65%, #020609 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layer 1 — photo bg with cinematic overlay */
+.timeline-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("../../assets/images/empresa/montserrat5.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 1;
+  transform: scale(1.04);
+  will-change: transform;
+}
+
+/* Heavy cinematic overlay — crushes photo to near-black, only ghost visible */
+.timeline-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg,
+      rgba(2,6,9,0.97)  0%,
+      rgba(2,6,9,0.88)  20%,
+      rgba(2,9,18,0.82) 50%,
+      rgba(2,6,9,0.88)  80%,
+      rgba(2,6,9,0.97)  100%
+    );
+  backdrop-filter: blur(0.5px);
+}
+
+/* Layer 2 — noise grain */
+#historia-timeline .tl-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  opacity: 0.028;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* Layer 3 — precision grid */
+#historia-timeline .tl-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+  background-size: 80px 80px;
+  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 50%, black 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 50%, black 20%, transparent 80%);
+}
+
+/* Layer 4 — ambient glow orbs */
+#historia-timeline .tl-glow-left {
+  position: absolute;
+  left: -120px;
+  top: 20%;
+  width: 600px;
+  height: 700px;
+  background: radial-gradient(ellipse, rgba(207,0,28,0.055) 0%, transparent 65%);
+  filter: blur(60px);
+  z-index: 3;
+  pointer-events: none;
+  animation: tl-glowFloat 12s ease-in-out infinite;
+}
+
+#historia-timeline .tl-glow-right {
+  position: absolute;
+  right: -120px;
+  bottom: 15%;
+  width: 600px;
+  height: 700px;
+  background: radial-gradient(ellipse, rgba(6,48,98,0.12) 0%, transparent 65%);
+  filter: blur(60px);
+  z-index: 3;
+  pointer-events: none;
+  animation: tl-glowFloat 14s ease-in-out infinite reverse;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.timeline-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* =========================================================
+   HEADER — CINEMATIC, MONUMENTAL
+========================================================= */
+
+.timeline-header {
+  text-align: center;
+  padding: 130px 0 100px;
+  position: relative;
+}
+
+/* Subtle horizontal rule above header */
+.timeline-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, rgba(207,0,28,0.6), transparent);
+}
+
+.timeline-main-title {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: clamp(72px, 9vw, 136px) !important;
+  font-weight: 900 !important;
+  line-height: 0.88 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+  color: var(--white) !important;
+  margin-top: 28px !important;
+  position: relative;
+}
+
+/* "85 años" gets the red accent treatment */
+.timeline-main-title .tl-title-accent {
+  color: var(--red);
+  display: block;
+  text-shadow: 0 0 80px rgba(207,0,28,0.35);
+}
+
+/* "escribiendo historia" gets an outlined ghost treatment */
+.timeline-main-title .tl-title-ghost {
+  display: block;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.22);
+  color: transparent;
+  font-size: 0.78em;
+  letter-spacing: -0.02em;
+}
+
+.timeline-main-text {
+  max-width: 560px;
+  margin: 32px auto 0;
+  color: rgba(255,255,255,0.38);
+  font-size: 15px;
+  line-height: 1.78;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* Bottom edge of header — decorative line */
+.timeline-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(207,0,28,0.5), transparent);
+}
+
+/* =========================================================
+   TIMELINE WRAPPER
+========================================================= */
+
+.timeline {
+  position: relative;
+  padding: 20px 0 80px;
+}
+
+/* =========================================================
+   CENTRAL LINE — PROTAGONIST, GLOWING
+========================================================= */
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(207,0,28,0.0) 3%,
+      rgba(207,0,28,0.6) 8%,
+      rgba(207,0,28,0.8) 15%,
+      rgba(255,60,80,0.9) 50%,
+      rgba(207,0,28,0.8) 85%,
+      rgba(207,0,28,0.6) 92%,
+      rgba(207,0,28,0.0) 97%,
+      transparent 100%
+    );
+  box-shadow:
+    0 0 8px rgba(207,0,28,0.4),
+    0 0 20px rgba(207,0,28,0.2),
+    0 0 40px rgba(207,0,28,0.1);
+  z-index: 1;
+  animation: tl-lineGrow 1.8s var(--ease-expo) both;
+  transform-origin: top center;
+}
+
+/* Scanline effect on the central line */
+.timeline::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent);
+  z-index: 2;
+  animation: tl-scanline 6s linear infinite;
+  pointer-events: none;
+}
+
+/* =========================================================
+   ITEMS
+========================================================= */
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 1fr 72px 1fr;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 48px 0;
+  position: relative;
+}
+
+/* =========================================================
+   CARD — ULTRA PREMIUM GLASSMORPHISM
+========================================================= */
+
+.timeline-card {
+  position: relative;
+  padding: 40px 36px 36px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.065) 0%,
+      rgba(255,255,255,0.028) 50%,
+      rgba(6,48,98,0.08) 100%
+    );
+  border: 1px solid rgba(255,255,255,0.09);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.06) inset,
+    0 24px 60px rgba(0,0,0,0.55),
+    0 4px 12px rgba(0,0,0,0.3);
+  transition:
+    transform 0.55s var(--ease-expo),
+    box-shadow 0.55s var(--ease-expo),
+    border-color 0.4s,
+    background 0.4s;
+  overflow: hidden;
+}
+
+/* Top-left corner accent */
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  transition: width 0.5s var(--ease-expo);
+}
+
+/* Inner glow overlay */
+.timeline-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* HOVER STATE */
+.timeline-card:hover {
+  transform: translateY(-8px) translateX(var(--card-hover-x, 0));
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.1) inset,
+    0 40px 80px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(207,0,28,0.2),
+    0 0 40px rgba(207,0,28,0.08);
+  border-color: rgba(255,255,255,0.16);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.09) 0%,
+      rgba(255,255,255,0.04) 50%,
+      rgba(207,0,28,0.05) 100%
+    );
+}
+
+.timeline-card:hover::before {
+  width: 100%;
+}
+
+/* Left cards hover direction */
+.timeline-item.left .timeline-card { --card-hover-x: -4px; }
+/* Right cards hover direction */
+.timeline-item.right .timeline-card { --card-hover-x: 4px; }
+
+/* =========================================================
+   YEAR — MONUMENTAL TYPOGRAPHIC ELEMENT
+========================================================= */
+
+.timeline-year {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 6vw, 86px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.9) 0%,
+      rgba(255,255,255,0.5) 60%,
+      rgba(207,0,28,0.7) 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: tl-shimmer 6s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.timeline-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.timeline-description {
+  color: rgba(255,255,255,0.42);
+  line-height: 1.72;
+  font-size: 13.5px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================================
+   CENTER COLUMN
+========================================================= */
+
+.timeline-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+/* =========================================================
+   DOT — PREMIUM GLOWING NODE
+========================================================= */
+
+.timeline-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 2px solid rgba(2,6,9,0.9);
+  box-shadow:
+    0 0 0 4px rgba(207,0,28,0.18),
+    0 0 16px rgba(207,0,28,0.5),
+    0 0 32px rgba(207,0,28,0.2);
+  position: relative;
+  z-index: 6;
+  transition: all 0.45s var(--ease-expo);
+  animation: tl-dotPulse 3.5s ease-in-out infinite;
+}
+
+/* Inner dot core */
+.timeline-dot::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  transition: all 0.4s var(--ease-expo);
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.4);
+  box-shadow:
+    0 0 0 6px rgba(207,0,28,0.12),
+    0 0 24px rgba(207,0,28,0.8),
+    0 0 48px rgba(207,0,28,0.3);
+  animation: none;
+}
+
+.timeline-item:hover .timeline-dot::before {
+  background: var(--white);
+  box-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+
+/* =========================================================
+   FINAL CARD — SPECIAL TREATMENT FOR 2025
+========================================================= */
+
+.final-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(207,0,28,0.12) 0%,
+      rgba(207,0,28,0.06) 40%,
+      rgba(255,255,255,0.04) 100%
+    );
+  border-color: rgba(207,0,28,0.22);
+  border-top-color: rgba(207,0,28,0.45);
+}
+
+.final-card::before {
+  background: linear-gradient(90deg, var(--red), rgba(255,60,80,0.4));
+  width: 100%;
+}
+
+.final-card .timeline-year {
+  background: linear-gradient(135deg, var(--red) 0%, #ff4060 50%, rgba(255,255,255,0.8) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+/* =========================================================
+   SECTION BOTTOM PADDING
+========================================================= */
+
+.timeline-container > .timeline + * {
+  margin-top: 80px;
+}
+
+/* section close — vertical line to bottom */
+#historia-timeline .tl-bottom-cap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0 100px;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+#historia-timeline .tl-bottom-cap::before {
+  content: '';
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(207,0,28,0.5), transparent);
+}
+
+#historia-timeline .tl-bottom-cap-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 12px rgba(207,0,28,0.6);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 980px) {
+
+  #historia-timeline { padding: 0; }
+
+  .timeline-container { padding: 0 20px; }
+
+  .timeline-header { padding: 90px 0 70px; }
+
+  .timeline-main-title {
+    font-size: clamp(52px, 14vw, 90px) !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .timeline-main-text { font-size: 14px; }
+
+  .timeline::before { left: 20px; transform: none; }
+  .timeline::after  { left: 20px; transform: none; }
+
+  .timeline-item {
+    grid-template-columns: 46px 1fr;
+    gap: 0;
+    padding: 28px 0;
+  }
+
+  .timeline-item > div:first-child { display: none; }
+
+  .timeline-center { justify-content: center; }
+
+  .timeline-card {
+    padding: 28px 24px;
+  }
+
+  .timeline-year { font-size: clamp(40px, 12vw, 64px); }
+
+  .timeline-title { font-size: 17px; }
+
+  .timeline-description { font-size: 13px; }
+
+}
+/* ============================================================
+   GENERACIONES (light bg)
+   ============================================================ */
+#historia-generaciones {
+  background: var(--off-white);
+  padding: 140px 0;
+  overflow: hidden;
+  position: relative;
+}
+.generaciones-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+}
+.generaciones-header {
+  text-align: center; margin-bottom: 80px;
+}
+.generaciones-header .section-title { font-size: clamp(40px,5vw,72px); color: var(--navy); }
+.generaciones-header .section-body { margin-top: 20px; max-width: 580px; margin-left: auto; margin-right: auto; color: rgba(20,20,20,0.52); }
+
+.generaciones-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+}
+.generacion-card {
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 52px 44px;
+  position: relative; overflow: hidden;
+  transition: transform .45s var(--ease-expo), box-shadow .45s, border-color .3s;
+}
+.generacion-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transform: scaleX(0); transition: transform .55s var(--ease-expo);
+  transform-origin: left;
+}
+.generacion-card:hover { transform: translateY(-6px); box-shadow: 0 28px 70px rgba(0,0,0,0.12); border-color: rgba(207,0,28,0.1); }
+.generacion-card:hover::before { transform: scaleX(1); }
+.generacion-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 80px; font-weight: 900; line-height: 1;
+  color: rgba(207,0,28,0.07); letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+.generacion-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 16px;
+}
+.generacion-years {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.01em; margin-bottom: 16px;
+}
+.generacion-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--navy); margin-bottom: 16px;
+}
+.generacion-desc {
+  font-size: 13.5px; line-height: 1.75;
+  color: rgba(20,20,20,0.5);
+}
+
+/* ============================================================
+   VALORES (dark bg)
+   ============================================================ */
+#historia-valores {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(13,74,143,0.08) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 140px 0;
+  overflow: hidden; position: relative;
+}
+#historia-valores::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+.valores-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 2fr; gap: 100px; align-items: start;
+}
+.valores-left .section-title { font-size: clamp(38px,4.5vw,64px); color: var(--white); }
+.valores-left .section-body { margin-top: 24px; max-width: 380px; }
+.valores-left .btn-primary { margin-top: 44px; display: inline-flex; }
+.valores-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px;
+}
+.valor-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.055);
+  padding: 40px 36px;
+  position: relative; overflow: hidden;
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo);
+}
+.valor-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transition: width .5s var(--ease-expo);
+}
+.valor-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); transform: translateY(-3px); }
+.valor-card:hover::before { width: 100%; }
+.valor-icon {
+  width: 50px; height: 50px;
+  background: rgba(207,0,28,0.09);
+  border: 1px solid rgba(207,0,28,0.18);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .3s, border-color .3s;
+}
+.valor-card:hover .valor-icon { background: rgba(207,0,28,0.18); border-color: rgba(207,0,28,0.35); }
+.valor-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+.valor-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--white); margin-bottom: 10px;
+}
+.valor-desc { font-size: 13px; line-height: 1.72; color: rgba(255,255,255,0.38); }
+
+/* ============================================================
+   NUMBERS STRIP
+   ============================================================ */
+#historia-numbers {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13,74,143,0.12) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 100px 0; overflow: hidden; position: relative;
+}
+#historia-numbers::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+.hn-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+}
+.hn-card {
+  padding: 44px 36px; text-align: center; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.055);
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo), box-shadow .4s;
+}
+.hn-card::after {
+  content: ''; position: absolute; top: 0; left: 50%;
+  width: 40px; height: 2.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(207,0,28,0.4);
+}
+.hn-card:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.1); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+.hn-value { font-family: 'Barlow Condensed', sans-serif; font-size: 58px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; }
+.hn-value span { color: var(--red); text-shadow: 0 0 20px rgba(207,0,28,0.4); }
+.hn-label { font-size: 10.5px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 10px; line-height: 1.4; }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 160px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 300px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; flex-wrap: wrap; }
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* Lang inline/block */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .nav-links { gap: 16px; }
+  .generaciones-grid { grid-template-columns: repeat(2, 1fr); }
+  .valores-container { grid-template-columns: 1fr; gap: 60px; }
+  .hn-container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+}
+@media (max-width: 900px) {
+  #nav { padding: 0 24px; }
+  .timeline::before { left: 20px; }
+  .timeline-item { grid-template-columns: 40px 1fr; }
+  .timeline-item.left .timeline-item-content,
+  .timeline-item.right .timeline-item-content { grid-column: 2; }
+  .timeline-item.left .timeline-item-year,
+  .timeline-item.right .timeline-item-year { grid-column: 1; }
+  .timeline-item.left .timeline-empty,
+  .timeline-item.right .timeline-empty { display: none; }
+  .timeline-year-label { display: none; }
+  .generaciones-grid { grid-template-columns: 1fr; }
+  .valores-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .timeline-container, .generaciones-container, .valores-container, .hn-container, .cta-container, .footer-container { padding: 0 24px; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  .cta-bg-text { font-size: 120px; }
+  #nav { padding: 0 20px; }
+  .btn-primary { padding: 15px 32px; font-size: 11px; }
+  .hn-container { grid-template-columns: repeat(2, 1fr); }
+}
+img { transition: opacity .5s; }
+
+
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+
+  <ul class="nav-links" role="menubar">
+
+    <!-- EMPRESA -->
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- TRANSPORTE -->
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/grupajes-cargas-completas/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+          <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+          <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- PALLETWAYS -->
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+
+    <!-- NOTICIAS -->
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+
+    <!-- CONTACTO -->
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+
+  </ul>
+
+  <button class="mobile-menu-btn" id="hamburger-btn"
+          aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+</nav>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/grupajes-cargas-completas/index.html">
+        <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+        <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+        <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../palletways/index.html">Palletways</a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../noticias/index.html">
+      <span data-lang-inline="es" class="active">Noticias</span>
+      <span data-lang-inline="ca">Notícies</span>
+      <span data-lang-inline="en">News</span>
+    </a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../contacto/index.html">
+      <span data-lang-inline="es" class="active">Contacto</span>
+      <span data-lang-inline="ca">Contacte</span>
+      <span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     HISTORY HERO — UNIFIED PREMIUM SECTION
+     ============================================================ -->
+<section class="history-hero" aria-label="Historia de Transports Montserrat">
+
+  <!-- Backgrounds -->
+  <div class="history-hero-grid" aria-hidden="true"></div>
+  <div class="history-hero-glow history-hero-glow--red" aria-hidden="true"></div>
+  <div class="history-hero-glow history-hero-glow--blue" aria-hidden="true"></div>
+  <div class="history-hero-noise" aria-hidden="true"></div>
+
+  <!-- Diagonal photo background (right half) -->
+  <div class="hh-diagonal" aria-hidden="true">
+    <div class="hh-img-bg"></div>
+    <div class="hh-img-overlay"></div>
+  </div>
+
+  <!-- Main two-column layout -->
+  <div class="history-hero-container">
+
+    <!-- LEFT: Content -->
+    <div class="history-hero-left">
+
+      <div class="history-hero-eyebrow">
+        <div class="history-hero-eyebrow-line"></div>
+        <span class="history-hero-eyebrow-text">
+          <span data-lang-inline="es" class="active">Empresa Familiar · Sant Sadurní d'Anoia</span>
+          <span data-lang-inline="ca">Empresa Familiar · Sant Sadurní d'Anoia</span>
+          <span data-lang-inline="en">Family Business · Sant Sadurní d'Anoia</span>
+        </span>
+      </div>
+
+      <h1 class="history-hero-title">
+        <span class="history-hero-title-line" data-lang="es">Nuestra</span>
+        <span class="history-hero-title-line" data-lang="ca">La nostra</span>
+        <span class="history-hero-title-line" data-lang="en">Our</span>
+
+        <span class="history-hero-title-line history-hero-title-line--accent" data-lang="es">Historia</span>
+        <span class="history-hero-title-line history-hero-title-line--accent" data-lang="ca">Història</span>
+        <span class="history-hero-title-line history-hero-title-line--accent" data-lang="en">History</span>
+
+        <span class="history-hero-title-line history-hero-title-line--outline" data-lang="es">Desde 1940</span>
+        <span class="history-hero-title-line history-hero-title-line--outline" data-lang="ca">Des de 1940</span>
+        <span class="history-hero-title-line history-hero-title-line--outline" data-lang="en">Since 1940</span>
+      </h1>
+
+      <div class="history-hero-divider"></div>
+
+      <p class="history-hero-body">
+        <span data-lang="es" class="active">En 1940, <strong>Josep Montserrat i Dolors Culleré</strong> iniciaron la actividad de transporte en Sant Sadurní d'Anoia con un único camión y una visión clara: ofrecer un servicio de confianza a los productores de la comarca del Penedès.<br><br>Más de ocho décadas después, Montserrat sigue siendo una empresa familiar —ahora en su <strong>tercera generación</strong>— que ha sabido crecer manteniendo los valores de proximidad, compromiso y excelencia que la caracterizan desde sus inicios.</span>
+        <span data-lang="ca">L'any 1940, <strong>Josep Montserrat i Dolors Culleré</strong> van iniciar l'activitat de transport a Sant Sadurní d'Anoia amb un únic camió i una visió clara: oferir un servei de confiança als productors de la comarca del Penedès.<br><br>Més de vuit dècades després, Montserrat continua sent una empresa familiar —ara en la seva <strong>tercera generació</strong>— que ha sabut créixer mantenint els valors de proximitat, compromís i excel·lència que la caracteritzen des dels seus inicis.</span>
+        <span data-lang="en">In 1940, <strong>Josep Montserrat and Dolors Culleré</strong> started the transport business in Sant Sadurní d'Anoia with a single truck and a clear vision: to offer a reliable service to producers in the Penedès region.<br><br>More than eight decades later, Montserrat remains a family company — now in its <strong>third generation</strong> — that has grown while maintaining the values of proximity, commitment and excellence that have defined it from the very beginning.</span>
+      </p>
+
+      <div class="history-hero-cta">
+        <a href="../../contacto/index.html" class="btn-primary">
+          <span>
+            <span data-lang-inline="es" class="active">Trabajar con nosotros</span>
+            <span data-lang-inline="ca">Treballar amb nosaltres</span>
+            <span data-lang-inline="en">Work with us</span>
+          </span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Visual -->
+    <div class="history-hero-visual">
+
+      <div class="history-hero-image-frame">
+
+
+  <!-- IMAGEN PRINCIPAL -->
+  <div class="history-hero-main-image">
+    <img
+      class="history-hero-image"
+      src="../../assets/images/empresa/montserrat4.png"
+      alt="Transports Montserrat"
+      loading="eager"
+    >
+  </div>
+
+  <!-- IMAGEN SECUNDARIA -->
+  <div class="history-hero-secondary-image">
+    <img
+      src="../../assets/images/empresa/montserrat1.png"
+      alt="1940: Josep Montserrat i Dolors Culleré"
+      loading="lazy"
+    >
+    <div class="hh-img-caption">1940: Josep Montserrat i Dolors Culleré.</div>
+  </div>
+
+  <!-- TU BADGE ORIGINAL -->
+  <div class="history-hero-badge" aria-label="Fundada en 1940">
+    <span class="history-hero-badge-year">1940</span>
+    <span class="history-hero-badge-label">
+      <span data-lang-inline="es" class="active">Año de Fundación</span>
+      <span data-lang-inline="ca">Any de Fundació</span>
+      <span data-lang-inline="en">Year of Foundation</span>
+    </span>
+  </div>
+
+</div>
+
+      <div class="history-hero-stats">
+        <div class="history-hero-stat">
+          <span class="history-hero-stat-num">85<span>+</span></span>
+          <span class="history-hero-stat-label">
+            <span data-lang-inline="es" class="active">Años de experiencia</span>
+            <span data-lang-inline="ca">Anys d'experiència</span>
+            <span data-lang-inline="en">Years experience</span>
+          </span>
+        </div>
+        <div class="history-hero-stat">
+          <span class="history-hero-stat-num">3<sup>ª</sup></span>
+          <span class="history-hero-stat-label">
+            <span data-lang-inline="es" class="active">Generación familiar</span>
+            <span data-lang-inline="ca">Generació familiar</span>
+            <span data-lang-inline="en">Family generation</span>
+          </span>
+        </div>
+        <div class="history-hero-stat">
+          <span class="history-hero-stat-num">55<span>k</span></span>
+          <span class="history-hero-stat-label">
+            <span data-lang-inline="es" class="active">m² de almacén</span>
+            <span data-lang-inline="ca">m² de magatzem</span>
+            <span data-lang-inline="en">m² warehouse</span>
+          </span>
+        </div>
+        <div class="history-hero-stat">
+          <span class="history-hero-stat-num">40<span>+</span></span>
+          <span class="history-hero-stat-label">
+            <span data-lang-inline="es" class="active">Vehículos propios</span>
+            <span data-lang-inline="ca">Vehicles propis</span>
+            <span data-lang-inline="en">Own vehicles</span>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div id="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">1940 — Fundación <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Empresa Familiar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">3 Generaciones <span class="marquee-dot"></span></span>
+    <span class="marquee-item">85 Años de Historia <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sant Sadurní d'Anoia <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Logística Integral <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Barcelona · Tarragona <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Red Palletways <span class="marquee-dot"></span></span>
+    <span class="marquee-item">1940 — Fundación <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Empresa Familiar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">3 Generaciones <span class="marquee-dot"></span></span>
+    <span class="marquee-item">85 Años de Historia <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sant Sadurní d'Anoia <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Logística Integral <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Barcelona · Tarragona <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Red Palletways <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- historia-intro merged into .history-hero above -->
+
+<!-- ============================================================
+     TIMELINE PREMIUM
+     ============================================================ -->
+<section id="historia-timeline">
+
+  <!-- Background layers -->
+  <div class="timeline-bg"></div>
+  <div class="timeline-overlay"></div>
+  <div class="tl-noise" aria-hidden="true"></div>
+  <div class="tl-grid" aria-hidden="true"></div>
+  <div class="tl-glow-left" aria-hidden="true"></div>
+  <div class="tl-glow-right" aria-hidden="true"></div>
+
+  <div class="timeline-container">
+
+    <!-- HEADER -->
+    <div class="timeline-header">
+
+      <div class="section-label reveal" style="justify-content:center;">
+        <div class="section-label-line"></div>
+
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Cronología</span>
+          <span data-lang-inline="ca">Cronologia</span>
+          <span data-lang-inline="en">Timeline</span>
+        </span>
+
+        <div class="section-label-line"></div>
+      </div>
+
+      <h2 class="section-title reveal timeline-main-title">
+        <span data-lang="es" class="active">
+          <span class="tl-title-accent">85 años</span><span class="tl-title-ghost">escribiendo historia</span>
+        </span>
+
+        <span data-lang="ca">
+          <span class="tl-title-accent">85 anys</span><span class="tl-title-ghost">escrivint història</span>
+        </span>
+
+        <span data-lang="en">
+          <span class="tl-title-accent">85 years</span><span class="tl-title-ghost">making history</span>
+        </span>
+      </h2>
+
+      <p class="section-body reveal timeline-main-text">
+        <span data-lang="es" class="active">
+          De un único camión en el Penedès a una empresa logística líder con presencia en toda Europa. Este es el camino recorrido por las tres generaciones de la familia Montserrat.
+        </span>
+
+        <span data-lang="ca">
+          D'un únic camió al Penedès a una empresa logística líder amb presència a tota Europa.
+        </span>
+
+        <span data-lang="en">
+          From a single truck in the Penedès to a leading logistics company with presence across Europe.
+        </span>
+      </p>
+
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+
+      <!-- ITEM -->
+      <div class="timeline-item left reveal-left">
+
+        <div class="timeline-card">
+
+          <span class="timeline-year">1940</span>
+
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Los orígenes</span>
+            <span data-lang-inline="ca">Els orígens</span>
+            <span data-lang-inline="en">The beginnings</span>
+          </h3>
+
+          <p class="timeline-description">
+            <span data-lang="es" class="active">
+              Josep Montserrat i Dolors Culleré inician la actividad de transporte en Sant Sadurní d'Anoia con un único camión.
+            </span>
+
+            <span data-lang="ca">
+              Josep Montserrat i Dolors Culleré inicien l'activitat de transport a Sant Sadurní d'Anoia.
+            </span>
+
+            <span data-lang="en">
+              Josep Montserrat and Dolors Culleré start the transport business in Sant Sadurní d'Anoia.
+            </span>
+          </p>
+
+        </div>
+
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div></div>
+
+      </div>
+
+      <!-- ITEM -->
+      <div class="timeline-item right reveal-right">
+
+        <div></div>
+
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-card">
+
+          <span class="timeline-year">1960s</span>
+
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Expansión de la flota</span>
+            <span data-lang-inline="ca">Expansió de la flota</span>
+            <span data-lang-inline="en">Fleet expansion</span>
+          </h3>
+
+          <p class="timeline-description">
+            <span data-lang="es" class="active">
+              La segunda generación moderniza la flota y consolida el crecimiento regional.
+            </span>
+
+            <span data-lang="ca">
+              La segona generació modernitza la flota i consolida el creixement regional.
+            </span>
+
+            <span data-lang="en">
+              The second generation modernises the fleet and consolidates regional growth.
+            </span>
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- ITEM -->
+      <div class="timeline-item left reveal-left">
+
+        <div class="timeline-card">
+
+          <span class="timeline-year">1980s</span>
+
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Logística integral</span>
+            <span data-lang-inline="ca">Logística integral</span>
+            <span data-lang-inline="en">Integrated logistics</span>
+          </h3>
+
+          <p class="timeline-description">
+            <span data-lang="es" class="active">
+              Montserrat amplía su actividad hacia almacenaje y logística avanzada.
+            </span>
+
+            <span data-lang="ca">
+              Montserrat amplia la seva activitat cap a l'emmagatzematge i la logística avançada.
+            </span>
+
+            <span data-lang="en">
+              Montserrat expands into warehousing and advanced logistics.
+            </span>
+          </p>
+
+        </div>
+
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div></div>
+
+      </div>
+
+      <!-- ITEM -->
+      <div class="timeline-item right reveal-right">
+
+        <div></div>
+
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-card">
+
+          <span class="timeline-year">2000s</span>
+
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Tercera generación</span>
+            <span data-lang-inline="ca">Tercera generació</span>
+            <span data-lang-inline="en">Third generation</span>
+          </h3>
+
+          <p class="timeline-description">
+            <span data-lang="es" class="active">
+              La empresa incorpora trazabilidad y tecnología logística avanzada.
+            </span>
+
+            <span data-lang="ca">
+              L'empresa incorpora traçabilitat i tecnologia logística avançada.
+            </span>
+
+            <span data-lang="en">
+              The company incorporates traceability and advanced logistics technology.
+            </span>
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- ITEM -->
+      <div class="timeline-item left reveal-left">
+
+        <div class="timeline-card">
+
+          <span class="timeline-year">2012</span>
+
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways network</span>
+          </h3>
+
+          <p class="timeline-description">
+            <span data-lang="es" class="active">
+              Integración en la mayor red europea de distribución paletizada.
+            </span>
+
+            <span data-lang="ca">
+              Integració a la major xarxa europea de distribució paletitzada.
+            </span>
+
+            <span data-lang="en">
+              Integration into Europe’s largest pallet distribution network.
+            </span>
+          </p>
+
+        </div>
+
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div></div>
+
+      </div>
+
+      <!-- ITEM -->
+      <div class="timeline-item right reveal-right">
+
+        <div></div>
+
+        <div class="timeline-center">
+          <div class="timeline-dot"></div>
+        </div>
+
+        <div class="timeline-card final-card">
+
+          <span class="timeline-year">2026</span>
+
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">85 años de liderazgo</span>
+            <span data-lang-inline="ca">85 anys de lideratge</span>
+            <span data-lang-inline="en">85 years of leadership</span>
+          </h3>
+
+          <p class="timeline-description">
+            <span data-lang="es" class="active">
+              Más de 55.000 m² de almacenaje y presencia logística en toda Europa.
+            </span>
+
+            <span data-lang="ca">
+              Més de 55.000 m² d'emmagatzematge i presència logística a tota Europa.
+            </span>
+
+            <span data-lang="en">
+              Over 55,000 m² of warehousing and logistics presence across Europe.
+            </span>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom cap -->
+  <div class="tl-bottom-cap" aria-hidden="true">
+    <div class="tl-bottom-cap-dot"></div>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     GENERACIONES
+     ============================================================ -->
+<section id="historia-generaciones">
+  <div class="generaciones-container">
+    <div class="generaciones-header">
+      <div class="section-label reveal" style="justify-content:center;">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Familia Montserrat</span>
+          <span data-lang-inline="ca">Família Montserrat</span>
+          <span data-lang-inline="en">The Montserrat Family</span>
+        </span>
+        <div class="section-label-line"></div>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(40px,5vw,72px);color:var(--navy);">
+        <span data-lang="es" class="active">Tres generaciones,<br>una misma pasión</span>
+        <span data-lang="ca">Tres generacions,<br>una mateixa passió</span>
+        <span data-lang="en">Three generations,<br>one shared passion</span>
+      </h2>
+      <p class="section-body reveal" style="margin-top:20px;max-width:580px;margin-left:auto;margin-right:auto;color:rgba(20,20,20,0.52);">
+        <span data-lang="es" class="active">El carácter familiar de Montserrat no es solo una herencia, es la garantía de un compromiso que perdura generación tras generación con cada uno de nuestros clientes.</span>
+        <span data-lang="ca">El caràcter familiar de Montserrat no és només una herència, és la garantia d'un compromís que perdura generació rere generació amb cada un dels nostres clients.</span>
+        <span data-lang="en">The family nature of Montserrat is not just a heritage, it is the guarantee of a commitment that endures generation after generation with each of our clients.</span>
+      </p>
+    </div>
+
+    <div class="generaciones-grid">
+      <!-- 1ª Generación -->
+      <div class="generacion-card reveal">
+        <div class="generacion-num">01</div>
+        <div class="generacion-label">
+          <span data-lang-inline="es" class="active">1ª Generación</span>
+          <span data-lang-inline="ca">1a Generació</span>
+          <span data-lang-inline="en">1st Generation</span>
+        </div>
+        <div class="generacion-years">1940 – 1960s</div>
+        <div class="generacion-name">Josep Montserrat<br><small style="font-size:0.6em;font-weight:400;letter-spacing:0;text-transform:none;color:rgba(6,48,98,0.6);">&amp; Dolors Culleré</small></div>
+        <div class="generacion-desc">
+          <span data-lang="es" class="active">Fundadores de la empresa. Iniciaron la actividad de transporte en Sant Sadurní d'Anoia con un único camión, prestando servicio principalmente a los productores vitivinícolas del Penedès.</span>
+          <span data-lang="ca">Fundadors de l'empresa. Van iniciar l'activitat de transport a Sant Sadurní d'Anoia amb un únic camió, prestant servei principalment als productors vitivinícoles del Penedès.</span>
+          <span data-lang="en">Founders of the company. They started the transport business in Sant Sadurní d'Anoia with a single truck, providing service mainly to the wine producers of the Penedès.</span>
+        </div>
+      </div>
+
+      <!-- 2ª Generación -->
+      <div class="generacion-card reveal">
+        <div class="generacion-num">02</div>
+        <div class="generacion-label">
+          <span data-lang-inline="es" class="active">2ª Generación</span>
+          <span data-lang-inline="ca">2a Generació</span>
+          <span data-lang-inline="en">2nd Generation</span>
+        </div>
+        <div class="generacion-years">1960s – 2000s</div>
+        <div class="generacion-name">
+          <span data-lang-inline="es" class="active">Familia Montserrat</span>
+          <span data-lang-inline="ca">Família Montserrat</span>
+          <span data-lang-inline="en">Montserrat Family</span>
+        </div>
+        <div class="generacion-desc">
+          <span data-lang="es" class="active">Modernización y crecimiento. La segunda generación amplía la flota, diversifica los servicios hacia el almacenaje logístico y consolida la presencia en las provincias de Barcelona y Tarragona.</span>
+          <span data-lang="ca">Modernització i creixement. La segona generació amplia la flota, diversifica els serveis cap a l'emmagatzematge logístic i consolida la presència a les províncies de Barcelona i Tarragona.</span>
+          <span data-lang="en">Modernisation and growth. The second generation expands the fleet, diversifies services towards logistics warehousing and consolidates presence in the provinces of Barcelona and Tarragona.</span>
+        </div>
+      </div>
+
+      <!-- 3ª Generación -->
+      <div class="generacion-card reveal" style="border-top:3px solid var(--red);">
+        <div class="generacion-num" style="color:rgba(207,0,28,0.12);">03</div>
+        <div class="generacion-label">
+          <span data-lang-inline="es" class="active">3ª Generación · Actual</span>
+          <span data-lang-inline="ca">3a Generació · Actual</span>
+          <span data-lang-inline="en">3rd Generation · Current</span>
+        </div>
+        <div class="generacion-years">2000s – Hoy</div>
+        <div class="generacion-name">
+          <span data-lang-inline="es" class="active">Familia Montserrat</span>
+          <span data-lang-inline="ca">Família Montserrat</span>
+          <span data-lang-inline="en">Montserrat Family</span>
+        </div>
+        <div class="generacion-desc">
+          <span data-lang="es" class="active">Tecnología y expansión europea. La tercera generación incorpora tecnología de última generación, se integra en la red Palletways y supera los 55.000 m² de superficie logística, consolidando Montserrat como referente logístico en Cataluña y España.</span>
+          <span data-lang="ca">Tecnologia i expansió europea. La tercera generació incorpora tecnologia d'última generació, s'integra a la xarxa Palletways i supera els 55.000 m² de superfície logística.</span>
+          <span data-lang="en">Technology and European expansion. The third generation incorporates latest-generation technology, joins the Palletways network and surpasses 55,000 m² of logistics space, consolidating Montserrat as a logistics benchmark.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VALORES
+     ============================================================ -->
+<section id="historia-valores">
+  <div class="valores-container">
+    <div class="valores-left">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Filosofía</span>
+          <span data-lang-inline="ca">Filosofia</span>
+          <span data-lang-inline="en">Philosophy</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(38px,4.5vw,64px);color:var(--white);">
+        <span data-lang="es" class="active">Valores que<br>nos definen</span>
+        <span data-lang="ca">Valors que<br>ens defineixen</span>
+        <span data-lang="en">Values that<br>define us</span>
+      </h2>
+      <p class="section-body reveal" style="margin-top:24px;max-width:380px;">
+        <span data-lang="es" class="active">Nuestra experiencia se traduce en soluciones adaptadas a las realidades y necesidades de cada uno de nuestros clientes. Este objetivo impregna la filosofía de la empresa y su equipo humano.</span>
+        <span data-lang="ca">La nostra experiència es tradueix en solucions adaptades a les realitats i necessitats de cada un dels nostres clients.</span>
+        <span data-lang="en">Our experience translates into solutions adapted to the realities and needs of each of our clients. This goal permeates the philosophy of the company and its team.</span>
+      </p>
+      <a href="../../servicios/logistica-integral-barcelona/index.html" class="btn-primary reveal" style="margin-top:44px;display:inline-flex;">
+        <span>
+          <span data-lang-inline="es" class="active">Ver nuestros servicios</span>
+          <span data-lang-inline="ca">Veure els nostres serveis</span>
+          <span data-lang-inline="en">Our services</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="valores-grid">
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="valor-title">
+          <span data-lang-inline="es" class="active">Valor Añadido</span>
+          <span data-lang-inline="ca">Valor Afegit</span>
+          <span data-lang-inline="en">Added Value</span>
+        </div>
+        <div class="valor-desc">
+          <span data-lang="es" class="active">Ofrecemos elementos de competitividad a nuestros clientes que les permiten mejorar la calidad de sus procesos y la diferenciación de sus productos y servicios.</span>
+          <span data-lang="ca">Oferim elements de competitivitat als nostres clients que els permeten millorar la qualitat dels seus processos i la diferenciació dels seus productes.</span>
+          <span data-lang="en">We offer competitive elements that allow clients to improve process quality and the differentiation of their products and services.</span>
+        </div>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="valor-title">
+          <span data-lang-inline="es" class="active">Eficacia</span>
+          <span data-lang-inline="ca">Eficàcia</span>
+          <span data-lang-inline="en">Efficiency</span>
+        </div>
+        <div class="valor-desc">
+          <span data-lang="es" class="active">Respuestas rápidas y eficaces. Servicio las 24 horas del día. Distribución y entregas just in time adaptadas a las necesidades de cada cliente.</span>
+          <span data-lang="ca">Respostes ràpides i eficaces. Servei les 24 hores del dia. Distribució i lliuraments just in time adaptats a les necessitats de cada client.</span>
+          <span data-lang="en">Fast and effective responses. 24-hour service. Just-in-time distribution and deliveries adapted to each client's needs.</span>
+        </div>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="valor-title">
+          <span data-lang-inline="es" class="active">Mejora Continua</span>
+          <span data-lang-inline="ca">Millora Contínua</span>
+          <span data-lang-inline="en">Continuous Improvement</span>
+        </div>
+        <div class="valor-desc">
+          <span data-lang="es" class="active">Trabajamos para mejorar a diario en cada uno de nuestros procesos. Cuestionamos, analizamos y mejoramos para llegar a la mayor eficiencia en cada servicio.</span>
+          <span data-lang="ca">Treballem per millorar diàriament en cada un dels nostres processos. Qüestionem, analitzem i millorem per arribar a la màxima eficiència en cada servei.</span>
+          <span data-lang="en">We work to improve daily in each of our processes. We question, analyse and improve to reach maximum efficiency in every service.</span>
+        </div>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="valor-title">
+          <span data-lang-inline="es" class="active">Excelencia</span>
+          <span data-lang-inline="ca">Excel·lència</span>
+          <span data-lang-inline="en">Excellence</span>
+        </div>
+        <div class="valor-desc">
+          <span data-lang="es" class="active">Comprometidos con un alto estándar de excelencia. Replanteamos los procesos existentes para encontrar mejoras constantemente y evitar tareas que no generen valor.</span>
+          <span data-lang="ca">Compromesos amb un alt estàndard d'excel·lència. Replantegem els processos existents per trobar millores constantment.</span>
+          <span data-lang="en">Committed to a high standard of excellence. We rethink existing processes to constantly find improvements and avoid tasks that don't generate value.</span>
+        </div>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="valor-title">
+          <span data-lang-inline="es" class="active">Tecnología</span>
+          <span data-lang-inline="ca">Tecnologia</span>
+          <span data-lang-inline="en">Technology</span>
+        </div>
+        <div class="valor-desc">
+          <span data-lang="es" class="active">Nuevas tecnologías que ofrecen información en tiempo real sobre cargas, descargas, movimientos de mercancía en almacenes e inventarios de stocks.</span>
+          <span data-lang="ca">Noves tecnologies que ofereixen informació en temps real sobre càrregues, descàrregues, moviments de mercaderia als magatzems i inventaris d'estocs.</span>
+          <span data-lang="en">New technologies offering real-time information on loads, unloads, merchandise movements in warehouses and stock inventories.</span>
+        </div>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="valor-title">
+          <span data-lang-inline="es" class="active">Equipo Humano</span>
+          <span data-lang-inline="ca">Equip Humà</span>
+          <span data-lang-inline="en">Our People</span>
+        </div>
+        <div class="valor-desc">
+          <span data-lang="es" class="active">Nuestro equipo humano altamente cualificado es la clave de todo. Trabajamos para establecer relaciones de colaboración activa y de larga duración con cada cliente.</span>
+          <span data-lang="ca">El nostre equip humà altament qualificat és la clau de tot. Treballem per establir relacions de col·laboració activa i de llarga durada amb cada client.</span>
+          <span data-lang="en">Our highly qualified team is the key to everything. We work to establish long-lasting active collaboration relationships with every client.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-bg-text" aria-hidden="true">TM</div>
+  <div class="cta-container">
+    <div class="cta-label reveal">
+      <div class="cta-label-line"></div>
+      <span class="cta-label-text">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="cta-title reveal">
+      <span data-lang="es" class="active">
+        Listo para
+        <span class="cta-red">optimizar</span>
+        <br>tu logística?
+      </span>
+      <span data-lang="ca">
+        Preparat per
+        <span class="cta-red">optimitzar</span>
+        <br>la teva logística?
+      </span>
+      <span data-lang="en">
+        Ready to
+        <span class="cta-red">optimize</span>
+        <br>your logistics?
+      </span>
+    </h2>
+    <p class="cta-desc reveal">
+      <span data-lang="es" class="active">Si buscas un operador logístico de confianza que ofrezca soluciones personalizadas y eficientes, estamos preparados para ayudarte.</span>
+      <span data-lang="ca">Si busques un operador logístic de confiança que ofereixi solucions personalitzades i eficients, estem preparats per ajudar-te.</span>
+      <span data-lang="en">If you're looking for a trusted logistics operator that offers personalised and efficient solutions, we're ready to help you.</span>
+    </p>
+    <div class="cta-actions reveal">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Enviar mensaje</span>
+          <span data-lang-inline="ca">Enviar missatge</span>
+          <span data-lang-inline="en">Send message</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:+34938911018" class="cta-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +34 938 911 018
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/grupajes-cargas-completas/index.html">
+            <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+            <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+            <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+          </a></li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2026 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">Cookies</a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* CUSTOM CURSOR */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* SCROLL PROGRESS */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* NAV SCROLL STATE */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* HERO PARALLAX */
+const heroImgBg = document.querySelector('.hero-img-bg');
+if (heroImgBg) {
+  window.addEventListener('scroll', () => {
+    heroImgBg.style.transform = `scale(1.12) translateY(${window.scrollY * 0.12}px)`;
+  }, { passive: true });
+}
+
+/* TIMELINE PARALLAX */
+(function initTimelineParallax() {
+  const tlBg = document.querySelector('#historia-timeline .timeline-bg');
+  const tlGlowL = document.querySelector('#historia-timeline .tl-glow-left');
+  const tlGlowR = document.querySelector('#historia-timeline .tl-glow-right');
+  const tlSection = document.getElementById('historia-timeline');
+  if (!tlBg || !tlSection) return;
+
+  window.addEventListener('scroll', () => {
+    const rect = tlSection.getBoundingClientRect();
+    const viewH = window.innerHeight;
+    if (rect.bottom < 0 || rect.top > viewH) return;
+
+    const progress = (-rect.top) / (rect.height + viewH);
+    const parallaxY = progress * 80;
+
+    tlBg.style.transform = `scale(1.04) translateY(${parallaxY}px)`;
+    if (tlGlowL) tlGlowL.style.transform = `translateY(${parallaxY * 0.4}px)`;
+    if (tlGlowR) tlGlowR.style.transform = `translateY(${-parallaxY * 0.3}px)`;
+  }, { passive: true });
+})();
+
+/* SCROLL REVEAL — enhanced with stagger per-section */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+/* Stagger timeline items beautifully */
+document.querySelectorAll('.timeline-item').forEach((item, i) => {
+  item.style.transitionDelay = `${i * 0.08}s`;
+  const card = item.querySelector('.timeline-card');
+  if (card) {
+    card.style.transitionDelay = `${i * 0.06}s`;
+  }
+});
+
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 5) * 0.09;
+  revealObserver.observe(el);
+});
+
+/* LANGUAGE SWITCHER */
+let currentLang = 'es';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    if (el.getAttribute('data-lang') !== lang) el.style.display = 'none';
+    else el.style.display = '';
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+  document.documentElement.lang = lang;
+}
+
+/* MOBILE MENU */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+function openMenu() {
+  menuOpen = true;
+  mobileMenu.style.display = 'flex';
+  mobileMenu.offsetHeight;
+  mobileMenu.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  hamburgerBtn.setAttribute('aria-label', 'Cerrar menú');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  hamburgerBtn.setAttribute('aria-label', 'Abrir menú');
+  document.body.style.overflow = '';
+  setTimeout(() => { if (!menuOpen) mobileMenu.style.display = 'none'; }, 400);
+}
+hamburgerBtn.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => closeMenu()); });
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.getAttribute('data-target');
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      sub.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* HERO CANVAS */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodeCount = 24;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 2 + 1.5,
+      pulse: Math.random() * Math.PI * 2,
+    });
+  }
+  const packets = [];
+  for (let i = 0; i < 10; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({ from: fromIdx, to: toIdx, t: Math.random(), speed: 0.003 + Math.random() * 0.004 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy; n.pulse += 0.025;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          const alpha = (1 - dist / 180) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      const pulseR = n.r + Math.sin(n.pulse) * 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.7)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(207,0,28,0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        p.t = 0; p.from = p.to;
+        p.to = Math.floor(Math.random() * nodeCount);
+        while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount);
+      }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y;
+      const tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t;
+      const py = fy + (ty - fy) * p.t;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fill();
+      const trailLen = 0.06;
+      const tStart = Math.max(0, p.t - trailLen);
+      const tpx = fx + (tx - fx) * tStart;
+      const tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,200,200,0.4)');
+      ctx.beginPath();
+      ctx.moveTo(tpx, tpy);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* CTA CANVAS */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.12 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) {
+          const a = (1 - d / 220) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* INIT */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+
+</body>
+</html>

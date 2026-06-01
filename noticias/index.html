@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Noticias y actualidad de Transports Montserrat - Operador Logístico Barcelona. 85 años de experiencia en logística integral, almacenaje y transporte.">
+<title>Noticias | Transports Montserrat</title>
+<link rel="icon" type="image/png" href="../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md: 0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg: 0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:'Barlow',sans-serif;
+  background:var(--navy-deep);
+  color:var(--white);
+  overflow-x:hidden;
+  cursor:none;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* CURSOR */
+#cursor,#cursor-ring{display:none;}
+@media(pointer:fine){
+  body{cursor:none;}
+  #cursor{display:block;position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 16px rgba(207,0,28,0.8),0 0 6px rgba(207,0,28,1);transition:width .18s var(--ease-expo),height .18s var(--ease-expo),background .18s,box-shadow .18s;}
+  #cursor-ring{display:block;position:fixed;width:38px;height:38px;border:1px solid rgba(207,0,28,0.55);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:inset 0 0 8px rgba(207,0,28,0.1);transition:width .3s var(--ease-expo),height .3s var(--ease-expo);}
+  body:has(a:hover) #cursor{width:16px;height:16px;background:var(--red-bright);box-shadow:0 0 20px rgba(255,0,34,0.9);}
+  body:has(a:hover) #cursor-ring{width:52px;height:52px;border-color:rgba(207,0,28,0.35);}
+  body:has(.news-card-item:hover) #cursor{width:22px;height:22px;background:var(--red-bright);box-shadow:0 0 30px rgba(255,0,34,1);}
+}
+
+/* SCROLL PROGRESS */
+#progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--red),#ff4560,var(--red));background-size:200% 100%;animation:progressShimmer 2s linear infinite;z-index:10000;transition:width 0.1s linear;pointer-events:none;box-shadow:0 0 12px rgba(207,0,28,0.7),0 0 4px rgba(207,0,28,0.9);}
+@keyframes progressShimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+/* LANG SWITCHER */
+#lang-switcher{position:fixed;top:17px;right:32px;z-index:1001;display:flex;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;backdrop-filter:blur(16px);box-shadow:0 2px 12px rgba(0,0,0,0.3);}
+.lang-btn{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);background:transparent;border:none;padding:8px 14px;cursor:pointer;transition:all .2s var(--ease-smooth);border-right:1px solid rgba(255,255,255,0.1);}
+.lang-btn:last-child{border-right:none;}
+.lang-btn.active,.lang-btn:hover{color:var(--white);background:linear-gradient(135deg,rgba(207,0,28,0.7),rgba(160,0,20,0.7));box-shadow:0 0 8px rgba(207,0,28,0.3);}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:0 56px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;transition:background .5s var(--ease-expo),height .35s var(--ease-expo),border-color .3s,box-shadow .5s;}
+#nav.scrolled{background:rgba(2,10,28,0.97);backdrop-filter:blur(28px) saturate(1.6);-webkit-backdrop-filter:blur(28px) saturate(1.6);height:62px;border-bottom:1px solid rgba(255,255,255,0.07);box-shadow:0 1px 0 rgba(207,0,28,0.15),0 8px 40px rgba(0,0,0,0.5);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;}
+.nav-logo-img{height:130px;width:auto;object-fit:contain;}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:24px;list-style:none;}
+.nav-item{position:relative;}
+.nav-links>.nav-item>a{font-family:'Barlow Condensed',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;display:flex;align-items:center;gap:5px;padding-bottom:4px;position:relative;transition:color .25s var(--ease-smooth),letter-spacing .25s;white-space:nowrap;}
+.nav-links>.nav-item>a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--red),transparent);box-shadow:0 0 6px rgba(207,0,28,0.5);transition:width .35s var(--ease-expo);}
+.nav-links>.nav-item>a:hover{color:var(--white);letter-spacing:0.14em;}
+.nav-links>.nav-item>a:hover::after{width:100%;}
+
+.nav-arrow{font-size:8px;opacity:0.6;transition:transform 0.25s;display:inline-block;margin-top:1px;}
+.nav-item:hover>a .nav-arrow{transform:rotate(180deg);}
+.nav-dropdown{position:absolute;top:calc(100% + 14px);left:0;background:rgba(2,10,28,0.98);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);border:1px solid rgba(255,255,255,0.07);border-top:2px solid var(--red);box-shadow:0 24px 60px rgba(0,0,0,0.7),0 0 0 1px rgba(207,0,28,0.05);min-width:230px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity 0.2s,visibility 0.2s,transform 0.2s;z-index:999;}
+.nav-item:hover>.nav-dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-dropdown li{list-style:none;}
+.nav-dropdown>li>a{display:flex;justify-content:space-between;align-items:center;padding:11px 20px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.04);border-left:2px solid transparent;transition:all .22s var(--ease-smooth);white-space:nowrap;}
+.nav-dropdown>li>a:hover{color:var(--white);background:rgba(207,0,28,0.12);padding-left:28px;border-left:2px solid var(--red);}
+.nav-cta{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--white);text-decoration:none;clip-path:polygon(0 0,94% 0,100% 100%,6% 100%);background:linear-gradient(135deg,var(--red) 0%,#a80016 100%);box-shadow:0 4px 20px rgba(207,0,28,0.35);padding:10px 24px;flex-shrink:0;transition:background .3s,transform .3s var(--ease-expo),box-shadow .3s;}
+.nav-cta:hover{background:linear-gradient(135deg,var(--red-bright) 0%,var(--red) 100%);box-shadow:0 6px 30px rgba(255,0,34,0.5);transform:scaleX(1.04);}
+
+/* HAMBURGER */
+.mobile-menu-btn{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;z-index:1100;position:relative;}
+.mobile-menu-btn span{display:block;width:24px;height:2px;background:rgba(255,255,255,0.9);transition:all .38s var(--ease-expo);transform-origin:center;}
+.mobile-menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.mobile-menu-btn.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.mobile-menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* MOBILE MENU */
+#mobile-menu{display:none;position:fixed;inset:0;z-index:1000;background:rgba(2,8,22,0.99);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);overflow-y:auto;padding:100px 32px 60px;flex-direction:column;gap:0;opacity:0;transform:translateX(100%);transition:opacity 0.4s var(--easing),transform 0.4s var(--easing);}
+#mobile-menu.open{display:flex;opacity:1;transform:translateX(0);}
+#mobile-menu.animating{display:flex;}
+.mob-nav-item{border-bottom:1px solid rgba(255,255,255,0.05);}
+.mob-nav-item>a,.mob-nav-toggle{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.8);text-decoration:none;background:none;border:none;width:100%;cursor:pointer;transition:color .25s,letter-spacing .25s;}
+.mob-nav-item>a:hover,.mob-nav-toggle:hover{color:var(--white);letter-spacing:0.1em;}
+.mob-nav-toggle.active{color:var(--red);}
+.mob-nav-arrow{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:13px;opacity:0.5;transition:transform 0.3s var(--easing);flex-shrink:0;}
+.mob-nav-toggle.active .mob-nav-arrow{transform:rotate(180deg);opacity:1;color:var(--red);}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.4s var(--easing);padding-left:16px;}
+.mob-sub.open{max-height:800px;}
+.mob-sub-item{border-bottom:1px solid rgba(255,255,255,0.04);}
+.mob-sub-item:last-child{border-bottom:none;}
+.mob-sub-item>a{display:flex;padding:14px 0;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;}
+.mob-sub-item>a:hover{color:var(--white);}
+.mob-cta-block{margin-top:40px;display:flex;flex-direction:column;gap:14px;}
+.mob-cta-phone{display:flex;align-items:center;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:600;color:rgba(255,255,255,0.6);text-decoration:none;}
+.mob-lang{display:flex;gap:12px;margin-top:8px;}
+.mob-lang button{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:0.12em;padding:8px 18px;background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);cursor:pointer;transition:all 0.2s;}
+.mob-lang button.active,.mob-lang button:hover{color:var(--white);background:var(--red);border-color:var(--red);}
+
+/* REVEAL */
+.reveal,.reveal-left,.reveal-right{opacity:0;transform:translateY(36px);transition:opacity .85s var(--ease-expo),transform .85s var(--ease-expo);}
+.reveal-left{transform:translateX(-36px);}
+.reveal-right{transform:translateX(36px);}
+.reveal.visible,.reveal-left.visible,.reveal-right.visible{opacity:1;transform:none;}
+
+/* SECTION COMMONS */
+.section-label{display:inline-flex;align-items:center;gap:14px;margin-bottom:20px;}
+.section-label-line{width:28px;height:1.5px;background:var(--red);flex-shrink:0;}
+.section-label-text{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--red);}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(42px,5vw,76px);font-weight:900;text-transform:uppercase;letter-spacing:-0.02em;line-height:0.92;color:var(--white);}
+.section-body{font-size:14.5px;line-height:1.8;color:rgba(255,255,255,0.45);}
+
+/* BTN */
+.btn-primary{display:inline-flex;align-items:center;gap:14px;font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--white);text-decoration:none;clip-path:polygon(0 0,96% 0,100% 100%,4% 100%);background:linear-gradient(135deg,var(--red) 0%,#a80016 100%);box-shadow:0 6px 28px rgba(207,0,28,0.38),0 0 0 1px rgba(207,0,28,0.2);padding:18px 40px;transition:background .35s,transform .4s var(--ease-expo),box-shadow .4s,gap .3s var(--ease-expo);}
+.btn-primary:hover{background:linear-gradient(135deg,var(--red-bright) 0%,var(--red) 100%);box-shadow:0 10px 40px rgba(255,0,34,0.5),0 0 0 1px rgba(207,0,28,0.3);transform:translateY(-3px) scaleX(1.02);gap:20px;}
+.btn-arrow{width:18px;height:18px;flex-shrink:0;}
+
+/* ==============================
+   PAGE HERO — REDESIGNED
+   ============================== */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(150deg, #010d1f 0%, #020c1e 40%, #010610 100%);
+  padding-top: calc(var(--nav-h) + 60px);
+  padding-bottom: 100px;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.35;pointer-events:none;z-index:1;}
+
+/* Refined grid — subtle, lower opacity */
+.hero-bg-grid{
+  position:absolute;inset:0;z-index:2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.014) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.014) 1px,transparent 1px);
+  background-size:88px 88px;
+  animation:gridShift 55s linear infinite;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 20%,transparent 75%);
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 20%,transparent 75%);
+}
+@keyframes gridShift{0%{background-position:0 0;}100%{background-position:88px 88px;}}
+
+/* Atmospheric glows */
+.hero-glow{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;z-index:1;}
+.hero-glow-1{width:700px;height:700px;background:radial-gradient(circle,rgba(207,0,28,0.055) 0%,transparent 65%);top:-20%;left:-8%;animation:glowDrift1 20s ease-in-out infinite alternate;}
+.hero-glow-2{width:600px;height:600px;background:radial-gradient(circle,rgba(6,48,98,0.12) 0%,transparent 65%);bottom:-15%;right:2%;animation:glowDrift2 26s ease-in-out infinite alternate;}
+.hero-glow-3{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(207,0,28,0.04) 0%,transparent 70%);top:50%;right:20%;transform:translateY(-50%);filter:blur(80px);pointer-events:none;z-index:1;animation:glowDrift2 15s ease-in-out infinite alternate;}
+@keyframes glowDrift1{0%{transform:translate(0,0);}100%{transform:translate(70px,50px);}}
+@keyframes glowDrift2{0%{transform:translate(0,0);}100%{transform:translate(-60px,-35px);}}
+
+/* Horizontal speed streaks */
+.speed-streak{position:absolute;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);animation:streakFly 4s linear infinite;z-index:2;}
+@keyframes streakFly{0%{left:-30%;width:20%;opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{left:110%;width:20%;opacity:0;}}
+
+/* Vertical accent bar */
+.hero-accent-bar{
+  position:absolute;left:56px;top:50%;transform:translateY(-50%);
+  width:2px;height:220px;
+  background:linear-gradient(180deg,transparent,var(--red) 35%,rgba(207,0,28,0.4) 70%,transparent);
+  z-index:10;
+  opacity:0.55;
+}
+
+/* Hero layout */
+.page-hero-content{
+  position:relative;z-index:10;
+  max-width:1400px;margin:0 auto;padding:0 88px;
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.page-hero-left{display:flex;flex-direction:column;}
+.page-hero-right{
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+  padding-top:16px;
+  border-left:1px solid rgba(255,255,255,0.05);
+  padding-left:64px;
+}
+
+/* Eyebrow label */
+.page-hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:40px;}
+.page-hero-eyebrow-line{width:36px;height:1px;background:var(--red);flex-shrink:0;opacity:0.8;}
+.page-hero-eyebrow-text{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10.5px;font-weight:700;
+  letter-spacing:0.38em;text-transform:uppercase;
+  color:rgba(207,0,28,0.9);
+}
+/* CRITICAL: eyebrow spans — only active lang visible */
+.page-hero-eyebrow-text [data-lang-inline]{display:none !important;}
+.page-hero-eyebrow-text [data-lang-inline].active{display:inline !important;}
+
+/* Main title — premium, clean hierarchy */
+.page-hero-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(72px,9vw,138px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.025em;line-height:0.9;
+  color:var(--white);
+  margin-bottom:0;
+}
+/* CRITICAL: only show the active language block in the title */
+.page-hero-title > [data-lang]{display:none !important;}
+.page-hero-title > [data-lang].active{display:block !important;}
+
+/* The outline word inside the title */
+.page-hero-title .hero-outline-word{
+  display:block;
+  -webkit-text-stroke:1.5px rgba(255,255,255,0.2);
+  color:transparent;
+  letter-spacing:-0.025em;
+}
+
+/* Right column — stats & description */
+.page-hero-desc{
+  font-size:15.5px;line-height:1.8;
+  color:rgba(255,255,255,0.38);
+  max-width:480px;
+  letter-spacing:0.01em;
+  font-weight:300;
+}
+/* CRITICAL: desc spans — only active lang visible */
+.page-hero-desc > [data-lang]{display:none !important;}
+.page-hero-desc > [data-lang].active{display:block !important;}
+
+/* Stat pills */
+.hero-stats{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.hero-stat{
+  display:flex;align-items:baseline;gap:12px;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.hero-stat:last-child{border-bottom:none;padding-bottom:0;}
+.hero-stat-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(36px,3.5vw,52px);
+  font-weight:900;color:var(--white);
+  letter-spacing:-0.02em;line-height:1;
+}
+.hero-stat-num span{color:var(--red);}
+.hero-stat-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:rgba(255,255,255,0.3);
+  line-height:1.3;
+}
+
+/* Decorative count — bottom right */
+.page-hero-count{
+  position:absolute;right:56px;bottom:-10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:200px;font-weight:900;
+  letter-spacing:-0.06em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,0.03);
+  pointer-events:none;
+  line-height:1;
+  user-select:none;
+  z-index:3;
+}
+
+/* ==============================
+   NEWS GRID SECTION
+   ============================== */
+#news-page{
+  background:#f0ede8;
+  color:var(--text);
+  padding:120px 0 140px;
+  position:relative;
+}
+.news-page-container{max-width:1400px;margin:0 auto;padding:0 48px;}
+
+.news-page-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:3px;
+}
+
+/* Card */
+.news-card-item{
+  background:var(--white);
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.04);
+  transition:transform .45s var(--ease-expo),box-shadow .45s,border-color .3s;
+  cursor:pointer;
+  position:relative;
+}
+.news-card-item:hover{
+  transform:translateY(-8px);
+  box-shadow:0 28px 70px rgba(0,0,0,0.14);
+  border-color:rgba(207,0,28,0.15);
+}
+.news-card-item:first-child{
+  grid-column:1 / 3;
+}
+.news-card-img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  display:block;
+  filter:saturate(0.75) contrast(1.05);
+  transition:transform .7s var(--ease-expo),filter .5s;
+}
+.news-card-item:first-child .news-card-img{height:340px;}
+.news-card-item:hover .news-card-img{
+  transform:scale(1.05);
+  filter:saturate(1) contrast(1.05);
+}
+.news-card-body{padding:28px 32px 36px;}
+.news-card-meta{display:flex;align-items:center;gap:16px;margin-bottom:12px;}
+.news-card-cat{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);}
+.news-card-date{font-size:11px;color:rgba(20,20,20,0.35);letter-spacing:0.08em;}
+.news-card-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;line-height:1.15;color:var(--navy);margin-bottom:10px;}
+.news-card-item:first-child .news-card-title{font-size:26px;}
+.news-card-excerpt{font-size:12.5px;line-height:1.68;color:rgba(20,20,20,0.48);margin-bottom:18px;}
+.news-card-cta{display:inline-flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);transition:gap .3s;}
+.news-card-cta:hover{gap:18px;}
+.news-card-cta-arrow{width:18px;height:1px;background:var(--red);position:relative;}
+.news-card-cta-arrow::after{content:'>';position:absolute;right:-8px;top:-9px;font-size:16px;}
+
+/* Overlay tag on hover */
+.news-card-item::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;
+  width:0;height:2.5px;
+  background:linear-gradient(90deg,var(--red),rgba(207,0,28,0.3));
+  transition:width .55s var(--ease-expo);
+}
+.news-card-item:hover::after{width:100%;}
+
+/* ==============================
+   NEWS MODAL
+   ============================== */
+#news-modal{
+  position:fixed;
+  inset:0;
+  z-index:9990;
+  display:flex;
+  align-items:stretch;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .45s var(--ease-expo);
+}
+#news-modal.open{
+  pointer-events:all;
+  opacity:1;
+}
+.modal-backdrop{
+  position:absolute;inset:0;
+  background:rgba(1,5,16,0.88);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  cursor:pointer;
+}
+.modal-panel{
+  position:relative;
+  z-index:2;
+  margin:auto;
+  width:100%;
+  max-width:900px;
+  max-height:92vh;
+  background:var(--navy-deep);
+  border:1px solid rgba(255,255,255,0.07);
+  border-top:3px solid var(--red);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 40px 120px rgba(0,0,0,0.8),0 0 0 1px rgba(207,0,28,0.1);
+  transform:translateY(40px) scale(0.97);
+  transition:transform .5s var(--ease-expo);
+}
+#news-modal.open .modal-panel{
+  transform:none;
+}
+.modal-close{
+  position:absolute;top:20px;right:20px;
+  width:42px;height:42px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  z-index:10;
+  transition:background .25s,border-color .25s,transform .25s var(--ease-expo);
+  clip-path:polygon(0 0,88% 0,100% 100%,12% 100%);
+}
+.modal-close:hover{background:rgba(207,0,28,0.2);border-color:rgba(207,0,28,0.4);transform:scale(1.1);}
+.modal-close svg{width:16px;height:16px;stroke:rgba(255,255,255,0.7);stroke-width:2;}
+.modal-close:hover svg{stroke:var(--white);}
+
+.modal-hero-img{
+  width:100%;
+  height:280px;
+  object-fit:cover;
+  flex-shrink:0;
+  filter:saturate(0.8) contrast(1.05);
+  display:block;
+}
+.modal-body{
+  overflow-y:auto;
+  padding:44px 56px 56px;
+  flex:1;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(207,0,28,0.3) transparent;
+}
+.modal-body::-webkit-scrollbar{width:4px;}
+.modal-body::-webkit-scrollbar-track{background:transparent;}
+.modal-body::-webkit-scrollbar-thumb{background:rgba(207,0,28,0.3);border-radius:2px;}
+.modal-meta{display:flex;align-items:center;gap:16px;margin-bottom:18px;}
+.modal-cat{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);}
+.modal-date{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;}
+.modal-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:clamp(28px,4vw,48px);
+  font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.01em;line-height:1;
+  color:var(--white);
+  margin-bottom:28px;
+}
+.modal-divider{
+  width:48px;height:2px;
+  background:linear-gradient(90deg,var(--red),transparent);
+  margin-bottom:28px;
+}
+.modal-text{
+  font-size:14.5px;line-height:1.85;
+  color:rgba(255,255,255,0.52);
+}
+.modal-text p{margin-bottom:18px;}
+.modal-text p:last-child{margin-bottom:0;}
+.modal-text strong{color:rgba(255,255,255,0.82);font-weight:600;}
+.modal-tags{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-top:36px;padding-top:28px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.modal-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.4);
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:6px 14px;
+}
+.modal-tag:hover{color:rgba(207,0,28,0.8);border-color:rgba(207,0,28,0.2);}
+
+/* Body lock when modal open */
+body.modal-open{overflow:hidden;}
+
+/* ==============================
+   CTA
+   ============================== */
+#cta{
+  background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(13,74,143,0.1) 0%,transparent 70%),var(--navy);
+  padding:170px 0;overflow:hidden;position:relative;
+}
+#cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(207,0,28,0.04) 0%,transparent 50%),radial-gradient(circle at 80% 50%,rgba(207,0,28,0.04) 0%,transparent 50%);pointer-events:none;}
+#cta-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.25;pointer-events:none;z-index:0;}
+.cta-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Barlow Condensed',sans-serif;font-size:300px;font-weight:900;text-transform:uppercase;background:linear-gradient(180deg,rgba(255,255,255,0.025),rgba(255,255,255,0.008));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.06em;white-space:nowrap;pointer-events:none;user-select:none;}
+.cta-container{max-width:900px;margin:0 auto;padding:0 48px;text-align:center;position:relative;z-index:5;}
+.cta-label{display:inline-flex;align-items:center;gap:16px;margin-bottom:32px;}
+.cta-label-line{width:32px;height:1px;background:var(--red);}
+.cta-label-text{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);}
+.cta-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(52px,7vw,92px)!important;font-weight:900;text-transform:uppercase;line-height:0.95;color:var(--white);margin-bottom:28px;letter-spacing:-0.015em;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.cta-red{color:#d4001f;font-size:1.6em;font-weight:800;line-height:1;}
+.cta-desc{font-size:15.5px;line-height:1.75;color:rgba(255,255,255,0.42);max-width:520px;margin:0 auto 52px;letter-spacing:0.005em;}
+.cta-actions{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.cta-phone{display:flex;align-items:center;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;transition:color .25s,transform .25s var(--ease-expo);}
+.cta-phone:hover{color:var(--white);transform:translateX(4px);}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; flex-wrap: wrap; }
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-contact-icon { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* LANG DISPLAY */
+[data-lang]{display:none;}
+[data-lang].active{display:block;}
+[data-lang-inline]{display:none;}
+[data-lang-inline].active{display:inline;}
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+@media(max-width:1200px){
+  .nav-links{gap:16px;}
+  .news-page-grid{grid-template-columns:1fr 1fr;}
+  .news-card-item:first-child{grid-column:1/3;}
+  .footer-main{grid-template-columns:1fr 1fr;gap:40px;}
+}
+@media(max-width:1024px){
+  .nav-links{display:none!important;}
+  .nav-cta{display:none;}
+  .mobile-menu-btn{display:flex;}
+  #lang-switcher{right:72px;}
+}
+@media(max-width:900px){
+  .page-hero-content{
+    grid-template-columns:1fr;
+    gap:48px;
+    padding:0 40px;
+  }
+  .page-hero-right{
+    border-left:none;
+    padding-left:0;
+    border-top:1px solid rgba(255,255,255,0.05);
+    padding-top:40px;
+  }
+  .hero-accent-bar{display:none;}
+  .hero-stats{flex-direction:row;flex-wrap:wrap;gap:28px;}
+  .hero-stat{flex:1;min-width:120px;border-bottom:none;border-right:1px solid rgba(255,255,255,0.04);padding-right:28px;padding-bottom:0;}
+  .hero-stat:last-child{border-right:none;padding-right:0;}
+}
+@media(max-width:768px){
+  #nav{padding:0 24px;}
+  .news-page-grid{grid-template-columns:1fr;}
+  .news-card-item:first-child{grid-column:auto;}
+  .news-card-item:first-child .news-card-img{height:240px;}
+  .modal-body{padding:28px 24px 40px;}
+  .modal-hero-img{height:200px;}
+  .modal-title{font-size:clamp(22px,5vw,36px);}
+  .page-hero-content{padding:0 24px;}
+  .page-hero-count{display:none;}
+}
+@media(max-width:640px){
+  .news-page-container,.cta-container,.footer-container{padding:0 24px;}
+  .footer-main{grid-template-columns:1fr;}
+  #lang-switcher{right:64px;top:18px;}
+  .lang-btn{padding:7px 10px;}
+  .cta-bg-text{font-size:120px;}
+  #nav{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+  <a href="../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" role="menubar">
+    <li class="nav-item" role="none">
+      <a href="../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span><span data-lang-inline="ca">Empresa</span><span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../empresa/historia/index.html" role="menuitem"><span data-lang-inline="es" class="active">Historia</span><span data-lang-inline="ca">Història</span><span data-lang-inline="en">History</span></a></li>
+        <li role="none"><a href="../empresa/equipo/index.html" role="menuitem"><span data-lang-inline="es" class="active">Equipo</span><span data-lang-inline="ca">Equip</span><span data-lang-inline="en">Team</span></a></li>
+        <li role="none"><a href="../empresa/calidad/index.html" role="menuitem"><span data-lang-inline="es" class="active">Política de Calidad</span><span data-lang-inline="ca">Política de Qualitat</span><span data-lang-inline="en">Quality Policy</span></a></li>
+      </ul>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span><span data-lang-inline="ca">Serveis</span><span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../servicios/logistica-integral-barcelona/index.html"><span data-lang-inline="es" class="active">Logística Integral</span><span data-lang-inline="ca">Logística Integral</span><span data-lang-inline="en">Full Logistics</span></a></li>
+        <li role="none"><a href="../servicios/logistica-in-house/index.html"><span data-lang-inline="es" class="active">Logística In-House</span><span data-lang-inline="ca">Logística In-House</span><span data-lang-inline="en">In-House Logistics</span></a></li>
+        <li role="none"><a href="../servicios/almacenaje-dedicado/index.html"><span data-lang-inline="es" class="active">Almacenaje Dedicado</span><span data-lang-inline="ca">Emmagatzematge Dedicat</span><span data-lang-inline="en">Dedicated Storage</span></a></li>
+        <li role="none"><a href="../servicios/almacenaje-multicliente/index.html"><span data-lang-inline="es" class="active">Almacenaje Multicliente</span><span data-lang-inline="ca">Emmagatzematge Multicliente</span><span data-lang-inline="en">Multi-client Storage</span></a></li>
+        <li role="none"><a href="../servicios/manipulacion/index.html"><span data-lang-inline="es" class="active">Manipulación</span><span data-lang-inline="ca">Manipulació</span><span data-lang-inline="en">Handling</span></a></li>
+        <li role="none"><a href="../servicios/consolidacion/index.html"><span data-lang-inline="es" class="active">Consolidación</span><span data-lang-inline="ca">Consolidació</span><span data-lang-inline="en">Consolidation</span></a></li>
+      </ul>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span><span data-lang-inline="ca">Transport</span><span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../transporte/transporte-vino-granel-barcelona/index.html"><span data-lang-inline="es" class="active">Transporte Vino a Granel</span><span data-lang-inline="ca">Transport Vi a Granel</span><span data-lang-inline="en">Bulk Wine Transport</span></a></li>
+        <li role="none"><a href="../transporte/transporte-nacional-internacional/index.html"><span data-lang-inline="es" class="active">Nacional e Internacional</span><span data-lang-inline="ca">Nacional i Internacional</span><span data-lang-inline="en">National &amp; International</span></a></li>
+        <li role="none"><a href="../transporte/distribucion-palets-24h/index.html"><span data-lang-inline="es" class="active">Distribución Palets 24h</span><span data-lang-inline="ca">Distribució Palets 24h</span><span data-lang-inline="en">Pallet Distribution 24h</span></a></li>
+        <li role="none"><a href="../transporte/distribucion-paleteria-europa/index.html"><span data-lang-inline="es" class="active">Distribución Paletería Europa</span><span data-lang-inline="ca">Distribució Paleteria Europa</span><span data-lang-inline="en">European Pallet Distribution</span></a></li>
+        <li role="none"><a href="../transporte/grupajes-cargas-completas/index.html"><span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span><span data-lang-inline="ca">Grupatges i Càrregues Completes</span><span data-lang-inline="en">Groupage &amp; Full Loads</span></a></li>
+      </ul>
+    </li>
+    <li class="nav-item" role="none"><a href="../palletways/index.html" role="menuitem">Palletways</a></li>
+    <li class="nav-item" role="none">
+      <a href="../noticias/index.html" class="active-page" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span><span data-lang-inline="ca">Notícies</span><span data-lang-inline="en">News</span>
+      </a>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span><span data-lang-inline="ca">Contacte</span><span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+  </ul>
+  
+  <button class="mobile-menu-btn" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span><span data-lang-inline="ca">Empresa</span><span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../empresa/historia/index.html"><span data-lang-inline="es" class="active">Historia</span><span data-lang-inline="ca">Història</span><span data-lang-inline="en">History</span></a></div>
+      <div class="mob-sub-item"><a href="../empresa/equipo/index.html"><span data-lang-inline="es" class="active">Equipo</span><span data-lang-inline="ca">Equip</span><span data-lang-inline="en">Team</span></a></div>
+      <div class="mob-sub-item"><a href="../empresa/politica-calidad/index.html"><span data-lang-inline="es" class="active">Política de Calidad</span><span data-lang-inline="ca">Política de Qualitat</span><span data-lang-inline="en">Quality Policy</span></a></div>
+    </div>
+  </div>
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span><span data-lang-inline="ca">Serveis</span><span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../servicios/logistica-integral-barcelona/index.html"><span data-lang-inline="es" class="active">Logística Integral</span><span data-lang-inline="ca">Logística Integral</span><span data-lang-inline="en">Full Logistics</span></a></div>
+      <div class="mob-sub-item"><a href="../servicios/logistica-in-house/index.html"><span data-lang-inline="es" class="active">Logística In-House</span><span data-lang-inline="ca">Logística In-House</span><span data-lang-inline="en">In-House Logistics</span></a></div>
+      <div class="mob-sub-item"><a href="../servicios/almacenaje-dedicado/index.html"><span data-lang-inline="es" class="active">Almacenaje Dedicado</span><span data-lang-inline="ca">Emmagatzematge Dedicat</span><span data-lang-inline="en">Dedicated Storage</span></a></div>
+      <div class="mob-sub-item"><a href="../servicios/almacenaje-multicliente/index.html"><span data-lang-inline="es" class="active">Almacenaje Multicliente</span><span data-lang-inline="ca">Emmagatzematge Multicliente</span><span data-lang-inline="en">Multi-client Storage</span></a></div>
+      <div class="mob-sub-item"><a href="../servicios/manipulacion/index.html"><span data-lang-inline="es" class="active">Manipulación</span><span data-lang-inline="ca">Manipulació</span><span data-lang-inline="en">Handling</span></a></div>
+      <div class="mob-sub-item"><a href="../servicios/consolidacion/index.html"><span data-lang-inline="es" class="active">Consolidación</span><span data-lang-inline="ca">Consolidació</span><span data-lang-inline="en">Consolidation</span></a></div>
+    </div>
+  </div>
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span><span data-lang-inline="ca">Transport</span><span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../transporte/transporte-vino-granel-barcelona/index.html"><span data-lang-inline="es" class="active">Transporte Vino a Granel</span><span data-lang-inline="ca">Transport Vi a Granel</span><span data-lang-inline="en">Bulk Wine Transport</span></a></div>
+      <div class="mob-sub-item"><a href="../transporte/transporte-nacional-internacional/index.html"><span data-lang-inline="es" class="active">Nacional e Internacional</span><span data-lang-inline="ca">Nacional i Internacional</span><span data-lang-inline="en">National &amp; International</span></a></div>
+      <div class="mob-sub-item"><a href="../transporte/distribucion-palets-24h/index.html"><span data-lang-inline="es" class="active">Distribución Palets 24h</span><span data-lang-inline="ca">Distribució Palets 24h</span><span data-lang-inline="en">Pallet Distribution 24h</span></a></div>
+      <div class="mob-sub-item"><a href="../transporte/distribucion-paleteria-europa/index.html"><span data-lang-inline="es" class="active">Distribución Paletería Europa</span><span data-lang-inline="ca">Distribució Paleteria Europa</span><span data-lang-inline="en">European Pallet Distribution</span></a></div>
+      <div class="mob-sub-item"><a href="../transporte/grupajes-cargas-completas/index.html"><span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span><span data-lang-inline="ca">Grupatges i Càrregues Completes</span><span data-lang-inline="en">Groupage &amp; Full Loads</span></a></div>
+    </div>
+  </div>
+  <div class="mob-nav-item"><a href="../palletways/index.html">Palletways</a></div>
+  <div class="mob-nav-item"><a href="../noticias/index.html"><span data-lang-inline="es" class="active">Noticias</span><span data-lang-inline="ca">Notícies</span><span data-lang-inline="en">News</span></a></div>
+  <div class="mob-nav-item"><a href="../contacto/index.html"><span data-lang-inline="es" class="active">Contacto</span><span data-lang-inline="ca">Contacte</span><span data-lang-inline="en">Contact</span></a></div>
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow-3"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="speed-streak" style="top:28%;animation-delay:0s;animation-duration:3.5s;"></div>
+  <div class="speed-streak" style="top:55%;animation-delay:1.8s;animation-duration:4.2s;opacity:0.4;"></div>
+  <div class="speed-streak" style="top:80%;animation-delay:3.2s;animation-duration:3s;opacity:0.25;"></div>
+  <div class="hero-accent-bar"></div>
+  <div class="page-hero-content">
+    <!-- LEFT: title block -->
+    <div class="page-hero-left">
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line"></div>
+        <span class="page-hero-eyebrow-text">
+          <span data-lang-inline="es" class="active">Actualidad · Logística · Empresa</span>
+          <span data-lang-inline="ca">Actualitat · Logística · Empresa</span>
+          <span data-lang-inline="en">News · Logistics · Company</span>
+        </span>
+      </div>
+      <h1 class="page-hero-title">
+        <span data-lang="es" class="active">Noticias<span class="hero-outline-word">Montserrat</span></span>
+        <span data-lang="ca">Notícies<span class="hero-outline-word">Montserrat</span></span>
+        <span data-lang="en">News<span class="hero-outline-word">Montserrat</span></span>
+      </h1>
+    </div>
+    <!-- RIGHT: description + stats -->
+    <div class="page-hero-right">
+      <p class="page-hero-desc">
+        <span data-lang="es" class="active">Últimas noticias, novedades y actualidad de Transports Montserrat. 85 años construyendo soluciones logísticas de referencia en España y Europa.</span>
+        <span data-lang="ca">Últimes notícies, novetats i actualitat de Transports Montserrat. 85 anys construint solucions logístiques de referència a Espanya i Europa.</span>
+        <span data-lang="en">Latest news and updates from Transports Montserrat. 85 years building benchmark logistics solutions across Spain and Europe.</span>
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">85<span>+</span></div>
+          <div class="hero-stat-label">
+            <span data-lang-inline="es" class="active">Años de<br>experiencia</span>
+            <span data-lang-inline="ca">Anys<br>d'experiència</span>
+            <span data-lang-inline="en">Years of<br>experience</span>
+          </div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">55<span>K</span></div>
+          <div class="hero-stat-label">
+            <span data-lang-inline="es" class="active">m² de<br>almacenes</span>
+            <span data-lang-inline="ca">m² de<br>magatzems</span>
+            <span data-lang-inline="en">m² of<br>warehouses</span>
+          </div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">10</div>
+          <div class="hero-stat-label">
+            <span data-lang-inline="es" class="active">Noticias<br>publicadas</span>
+            <span data-lang-inline="ca">Notícies<br>publicades</span>
+            <span data-lang-inline="en">Published<br>articles</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-hero-count" aria-hidden="true">10</div>
+</section>
+
+<!-- NEWS GRID -->
+<section id="news-page">
+  <div class="news-page-container">
+    <div class="news-page-grid">
+
+      <!-- 01 — FEATURED -->
+      <article class="news-card-item reveal" data-news="1" tabindex="0" role="button" aria-label="Abrir noticia: Transports Montserrat y Palletways">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&q=80" alt="Palletways distribución paletizada" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Logística</span><span data-lang-inline="ca">Logística</span><span data-lang-inline="en">Logistics</span></span>
+            <span class="news-card-date">Ene 15, 2025</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Transports Montserrat y Palletways: Logística y Distribución Paletizada</span><span data-lang-inline="ca">Transports Montserrat i Palletways: Logística i Distribució Paletitzada</span><span data-lang-inline="en">Transports Montserrat and Palletways: Logistics and Pallet Distribution</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">La logística moderna requiere soluciones eficientes y rápidas. En Transports Montserrat, con décadas de experiencia en transporte y almacenamiento, hemos apostado por la red Palletways Iberia para ofrecer distribución exprés de mercancía paletizada en toda Europa.</span><span data-lang-inline="ca">La logística moderna requereix solucions eficients i ràpides. A Transports Montserrat hem apostat per la xarxa Palletways Iberia per oferir distribució exprés de mercaderia paletitzada.</span><span data-lang-inline="en">Modern logistics requires efficient and fast solutions. At Transports Montserrat we have committed to Palletways Iberia to offer express pallet distribution across Europe.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="news-card-item reveal" data-news="2" tabindex="0" role="button" aria-label="Abrir noticia: Feliz Año 2025">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80" alt="85 aniversario Transports Montserrat" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Empresa</span><span data-lang-inline="ca">Empresa</span><span data-lang-inline="en">Company</span></span>
+            <span class="news-card-date">Dic 30, 2024</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Feliz Año 2025 — 85 Aniversario</span><span data-lang-inline="ca">Feliç Any 2025 — 85è Aniversari</span><span data-lang-inline="en">Happy 2025 — 85th Anniversary</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Este año 2025 se cumplen 85 años desde que nuestro abuelo Josep Montserrat Romagosa inició la actividad del transporte junto a Lola Culleré Fabregat.</span><span data-lang-inline="ca">L'any 2025 es compleixen 85 anys des que el nostre avi Josep Montserrat Romagosa va iniciar l'activitat del transport.</span><span data-lang-inline="en">In 2025 it has been 85 years since our grandfather Josep Montserrat Romagosa started the transport business.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="news-card-item reveal" data-news="3" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80" alt="Logística Penedès Anoia Garraf" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Regional</span><span data-lang-inline="ca">Regional</span><span data-lang-inline="en">Regional</span></span>
+            <span class="news-card-date">Dic 1, 2024</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Logística en el Penedès, Anoia y Garraf</span><span data-lang-inline="ca">Logística al Penedès, Anoia i Garraf</span><span data-lang-inline="en">Logistics in Penedès, Anoia and Garraf</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Especialistas en soluciones completas de logística y transporte empresarial en las áreas entre Barcelona y Tarragona.</span><span data-lang-inline="ca">Especialistes en solucions completes de logística i transport empresarial a les àrees entre Barcelona i Tarragona.</span><span data-lang-inline="en">Specialists in complete logistics and business transport solutions in the areas between Barcelona and Tarragona.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="news-card-item reveal" data-news="4" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80" alt="Almacenamiento logística Tarragona" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Almacenaje</span><span data-lang-inline="ca">Emmagatzematge</span><span data-lang-inline="en">Storage</span></span>
+            <span class="news-card-date">Nov 10, 2024</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Almacenamiento y Logística en Tarragona y Penedès</span><span data-lang-inline="ca">Emmagatzematge i Logística a Tarragona i Penedès</span><span data-lang-inline="en">Storage and Logistics in Tarragona and Penedès</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Soluciones de almacenaje adaptadas a empresas de proximidad: temporal, reposición gradual y distribución programada.</span><span data-lang-inline="ca">Solucions d'emmagatzematge adaptades a empreses de proximitat: temporal, reposició gradual i distribució programada.</span><span data-lang-inline="en">Storage solutions tailored for local businesses: temporary, gradual replenishment and scheduled distribution.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 05 -->
+      <article class="news-card-item reveal" data-news="5" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1614102073832-030967418971?w=800&q=80" alt="Almacenaje y logística integral" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Logística</span><span data-lang-inline="ca">Logística</span><span data-lang-inline="en">Logistics</span></span>
+            <span class="news-card-date">Oct 5, 2024</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Almacenaje y Logística Integral</span><span data-lang-inline="ca">Emmagatzematge i Logística Integral</span><span data-lang-inline="en">Storage and Full Logistics</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Más de 55.000 m² disponibles, tecnología avanzada y un equipo experto para externalizar su logística con máxima eficiencia.</span><span data-lang-inline="ca">Més de 55.000 m² disponibles, tecnologia avançada i un equip expert per externalitzar la vostra logística.</span><span data-lang-inline="en">Over 55,000 m² available, advanced technology and an expert team to outsource your logistics with maximum efficiency.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 06 -->
+      <article class="news-card-item reveal" data-news="6" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&q=80" alt="Almacenamiento dedicado Barcelona" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Almacenaje</span><span data-lang-inline="ca">Emmagatzematge</span><span data-lang-inline="en">Storage</span></span>
+            <span class="news-card-date">Sep 18, 2024</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Almacenamiento Dedicado en Barcelona</span><span data-lang-inline="ca">Emmagatzematge Dedicat a Barcelona</span><span data-lang-inline="en">Dedicated Storage in Barcelona</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Espacios exclusivos para clientes con control total de inventario, operaciones personalizadas y máxima trazabilidad.</span><span data-lang-inline="ca">Espais exclusius per a clients amb control total d'inventari, operacions personalitzades i màxima traçabilitat.</span><span data-lang-inline="en">Exclusive spaces for clients with full inventory control, custom operations and maximum traceability.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 07 -->
+      <article class="news-card-item reveal" data-news="7" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?w=800&q=80" alt="Centro logístico operaciones almacén" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Empresa</span><span data-lang-inline="ca">Empresa</span><span data-lang-inline="en">Company</span></span>
+            <span class="news-card-date">Dic 31, 2023</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Mensaje de Año Nuevo 2024</span><span data-lang-inline="ca">Missatge d'Any Nou 2024</span><span data-lang-inline="en">New Year Message 2024</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Balance positivo de 2023: crecimiento empresarial, innovación tecnológica y expansión de servicios logísticos a nuevos mercados.</span><span data-lang-inline="ca">Balanç positiu del 2023: creixement empresarial, innovació tecnològica i expansió de serveis logístics.</span><span data-lang-inline="en">Positive 2023 balance: business growth, technological innovation and expansion of logistics services to new markets.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 08 -->
+      <article class="news-card-item reveal" data-news="8" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&q=80" alt="Transportistas Vilafranca del Penedès" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Transporte</span><span data-lang-inline="ca">Transport</span><span data-lang-inline="en">Transport</span></span>
+            <span class="news-card-date">Oct 22, 2023</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Transportistas en Vilafranca del Penedès</span><span data-lang-inline="ca">Transportistes a Vilafranca del Penedès</span><span data-lang-inline="en">Transport in Vilafranca del Penedès</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Empresa líder de transporte en la región del Penedès: grupajes, cargas completas, distribución regional y nacional desde 1940.</span><span data-lang-inline="ca">Empresa líder de transport a la regió del Penedès: grupatges, càrregues completes i distribució regional i nacional des de 1940.</span><span data-lang-inline="en">Leading transport company in the Penedès region: groupage, full loads, regional and national distribution since 1940.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 09 -->
+      <article class="news-card-item reveal" data-news="9" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=800&q=80" alt="Logística integral Barcelona nodo logístico" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Barcelona</span><span data-lang-inline="ca">Barcelona</span><span data-lang-inline="en">Barcelona</span></span>
+            <span class="news-card-date">Jul 14, 2023</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Logística Integral en Barcelona</span><span data-lang-inline="ca">Logística Integral a Barcelona</span><span data-lang-inline="en">Full Logistics in Barcelona</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Barcelona como nodo logístico estratégico: cercanía a centros de consumo, conexiones rápidas e infraestructura logística de vanguardia.</span><span data-lang-inline="ca">Barcelona com a node logístic estratègic: proximitat als centres de consum, connexions ràpides i infraestructura logística d'avantguarda.</span><span data-lang-inline="en">Barcelona as a strategic logistics hub: proximity to consumption centres, fast connections and cutting-edge logistics infrastructure.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+      <!-- 10 -->
+      <article class="news-card-item reveal" data-news="10" tabindex="0" role="button">
+        <img class="news-card-img" src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80" alt="Empresa líder logística Penedès" loading="lazy">
+        <div class="news-card-body">
+          <div class="news-card-meta">
+            <span class="news-card-cat"><span data-lang-inline="es" class="active">Empresa</span><span data-lang-inline="ca">Empresa</span><span data-lang-inline="en">Company</span></span>
+            <span class="news-card-date">Mar 3, 2023</span>
+          </div>
+          <h2 class="news-card-title"><span data-lang-inline="es" class="active">Empresa Líder en Logística en el Penedès</span><span data-lang-inline="ca">Empresa Líder en Logística al Penedès</span><span data-lang-inline="en">Leading Logistics Company in Penedès</span></h2>
+          <p class="news-card-excerpt"><span data-lang-inline="es" class="active">Consolidación de Montserrat como operador logístico de referencia entre Barcelona y Tarragona, con especialización en alimentación seca y gran consumo.</span><span data-lang-inline="ca">Consolidació de Montserrat com a operador logístic de referència entre Barcelona i Tarragona, amb especialització en alimentació seca i gran consum.</span><span data-lang-inline="en">Montserrat's consolidation as a benchmark logistics operator between Barcelona and Tarragona, specialising in dry food and consumer goods.</span></p>
+          <span class="news-card-cta"><span data-lang-inline="es" class="active">Leer más</span><span data-lang-inline="ca">Llegir més</span><span data-lang-inline="en">Read more</span><span class="news-card-cta-arrow"></span></span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWS MODAL -->
+<div id="news-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-panel">
+    <button class="modal-close" id="modal-close-btn" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <img class="modal-hero-img" id="modal-img" src="" alt="">
+    <div class="modal-body">
+      <div class="modal-meta">
+        <span class="modal-cat" id="modal-cat"></span>
+        <span class="modal-date" id="modal-date"></span>
+      </div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="modal-divider"></div>
+      <div class="modal-text" id="modal-text"></div>
+      <div class="modal-tags" id="modal-tags"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-bg-text" aria-hidden="true">TM</div>
+  <div class="cta-container">
+    <div class="cta-label reveal">
+      <div class="cta-label-line"></div>
+      <span class="cta-label-text"><span data-lang-inline="es" class="active">Contacto</span><span data-lang-inline="ca">Contacte</span><span data-lang-inline="en">Contact</span></span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="cta-title reveal">
+      <span data-lang="es" class="active">Listo para <span class="cta-red">optimizar</span><br>tu logística?</span>
+      <span data-lang="ca">Preparat per <span class="cta-red">optimitzar</span><br>la teva logística?</span>
+      <span data-lang="en">Ready to <span class="cta-red">optimize</span><br>your logistics?</span>
+    </h2>
+    <p class="cta-desc reveal">
+      <span data-lang="es" class="active">Si buscas un operador logístico de confianza que ofrezca soluciones personalizadas y eficientes, estamos preparados para ayudarte.</span>
+      <span data-lang="ca">Si busques un operador logístic de confiança que ofereixi solucions personalitzades i eficients, estem preparats per ajudar-te.</span>
+      <span data-lang="en">If you're looking for a trusted logistics operator that offers personalised and efficient solutions, we're ready to help you.</span>
+    </p>
+    <div class="cta-actions reveal">
+      <a href="../contacto/index.html" class="btn-primary">
+        <span><span data-lang-inline="es" class="active">Enviar mensaje</span><span data-lang-inline="ca">Enviar missatge</span><span data-lang-inline="en">Send message</span></span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:+34938911018" class="cta-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +34 938 911 018
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+      <div class="footer-column">
+        <div class="footer-col-title"><span data-lang-inline="es" class="active">Servicios</span><span data-lang-inline="ca">Serveis</span><span data-lang-inline="en">Services</span></div>
+        <ul class="footer-links">
+          <li><a href="../servicios/logistica-integral-barcelona/index.html"><span data-lang-inline="es" class="active">Logística Integral</span><span data-lang-inline="ca">Logística Integral</span><span data-lang-inline="en">Full Logistics</span></a></li>
+          <li><a href="../servicios/logistica-in-house/index.html"><span data-lang-inline="es" class="active">Logística In-House</span><span data-lang-inline="ca">Logística In-House</span><span data-lang-inline="en">In-House Logistics</span></a></li>
+          <li><a href="../servicios/almacenaje-dedicado/index.html"><span data-lang-inline="es" class="active">Almacenaje Dedicado</span><span data-lang-inline="ca">Emmagatzematge Dedicat</span><span data-lang-inline="en">Dedicated Storage</span></a></li>
+          <li><a href="../servicios/almacenaje-multicliente/index.html"><span data-lang-inline="es" class="active">Almacenaje Multicliente</span><span data-lang-inline="ca">Emmagatzematge Multiclient</span><span data-lang-inline="en">Multi-client Storage</span></a></li>
+          <li><a href="../servicios/manipulacion/index.html"><span data-lang-inline="es" class="active">Manipulación</span><span data-lang-inline="ca">Manipulació</span><span data-lang-inline="en">Handling</span></a></li>
+          <li><a href="../servicios/consolidacion/index.html"><span data-lang-inline="es" class="active">Consolidación</span><span data-lang-inline="ca">Consolidació</span><span data-lang-inline="en">Consolidation</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <div class="footer-col-title"><span data-lang-inline="es" class="active">Transporte</span><span data-lang-inline="ca">Transport</span><span data-lang-inline="en">Transport</span></div>
+        <ul class="footer-links">
+          <li><a href="../transporte/transporte-vino-granel-barcelona/index.html"><span data-lang-inline="es" class="active">Vino a Granel</span><span data-lang-inline="ca">Vi a Granel</span><span data-lang-inline="en">Bulk Wine</span></a></li>
+          <li><a href="../transporte/transporte-nacional-internacional/index.html"><span data-lang-inline="es" class="active">Nacional e Internacional</span><span data-lang-inline="ca">Nacional i Internacional</span><span data-lang-inline="en">National &amp; International</span></a></li>
+          <li><a href="../transporte/distribucion-palets-24h/index.html"><span data-lang-inline="es" class="active">Distribución 24h</span><span data-lang-inline="ca">Distribució 24h</span><span data-lang-inline="en">24h Distribution</span></a></li>
+          <li><a href="../transporte/distribucion-paleteria-europa/index.html"><span data-lang-inline="es" class="active">Distribución Europa</span><span data-lang-inline="ca">Distribució Europa</span><span data-lang-inline="en">European Distribution</span></a></li>
+          <li><a href="../transporte/grupajes-cargas-completas/index.html"><span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span><span data-lang-inline="ca">Grupatges i Càrregues Completes</span><span data-lang-inline="en">Groupage &amp; Full Loads</span></a></li>
+          
+          <li><a href="../palletways/index.html"><span data-lang-inline="es" class="active">Red Palletways</span><span data-lang-inline="ca">Xarxa Palletways</span><span data-lang-inline="en">Palletways Network</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <div class="footer-col-title"><span data-lang-inline="es" class="active">Empresa</span><span data-lang-inline="ca">Empresa</span><span data-lang-inline="en">Company</span></div>
+        <ul class="footer-links">
+          <li><a href="../empresa/historia/index.html"><span data-lang-inline="es" class="active">Historia</span><span data-lang-inline="ca">Història</span><span data-lang-inline="en">History</span></a></li>
+          <li><a href="../empresa/equipo/index.html"><span data-lang-inline="es" class="active">Nuestro Equipo</span><span data-lang-inline="ca">El Nostre Equip</span><span data-lang-inline="en">Our Team</span></a></li>
+          <li><a href="../empresa/politica-calidad/index.html"><span data-lang-inline="es" class="active">Política de Calidad</span><span data-lang-inline="ca">Política de Qualitat</span><span data-lang-inline="en">Quality Policy</span></a></li>
+          <li><a href="../noticias/index.html"><span data-lang-inline="es" class="active">Noticias</span><span data-lang-inline="ca">Notícies</span><span data-lang-inline="en">News</span></a></li>
+          <li><a href="../contacto/index.html"><span data-lang-inline="es" class="active">Contacto</span><span data-lang-inline="ca">Contacte</span><span data-lang-inline="en">Contact</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copyright">© 2025 Transports Montserrat S.L. — <span data-lang-inline="es" class="active">Todos los derechos reservados</span><span data-lang-inline="ca">Tots els drets reservats</span><span data-lang-inline="en">All rights reserved</span></span>
+      <div class="footer-legal">
+        <a href="../legal/aviso-legal/index.html"><span data-lang-inline="es" class="active">Aviso Legal</span><span data-lang-inline="ca">Avís Legal</span><span data-lang-inline="en">Legal Notice</span></a>
+        <a href="../legal/cookies/index.html">Cookies</a>
+        <a href="../legal/privacidad/index.html"><span data-lang-inline="es" class="active">Privacidad</span><span data-lang-inline="ca">Privacitat</span><span data-lang-inline="en">Privacy</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   NEWS DATA
+   ============================================================ */
+const NEWS_DATA = {
+  1: {
+    img: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1200&q=80',
+    cat: { es: 'Logística', ca: 'Logística', en: 'Logistics' },
+    date: 'Enero 15, 2025',
+    title: {
+      es: 'Transports Montserrat y Palletways: Logística y Distribución Paletizada',
+      ca: 'Transports Montserrat i Palletways: Logística i Distribució Paletitzada',
+      en: 'Transports Montserrat and Palletways: Logistics and Pallet Distribution'
+    },
+    text: {
+      es: '<p>La logística moderna requiere soluciones eficientes y rápidas. En <strong>Transports Montserrat</strong>, con décadas de experiencia en el sector del transporte y almacenamiento, hemos apostado por integrarnos en la red europea <strong>Palletways Iberia</strong>, especializada en distribución exprés de mercancía paletizada.</p><p>Esta colaboración estratégica nos permite ofrecer a nuestros clientes distribución nacional e internacional con entregas rápidas en <strong>24h y 48h</strong>, trazabilidad en tiempo real, control digital de expediciones y cobertura en toda Europa.</p><p>La integración de tecnologías como el tracking en tiempo real, el escaneo de pallets y los sistemas digitales de gestión logística nos posiciona como uno de los operadores logísticos más avanzados de la región, mejorando la eficiencia operativa y la capacidad de servicio para clientes industriales y de gran consumo.</p>',
+      ca: '<p>La logística moderna requereix solucions eficients i ràpides. A <strong>Transports Montserrat</strong>, amb dècades d\'experiència en el sector del transport i l\'emmagatzematge, hem apostat per integrar-nos a la xarxa europea <strong>Palletways Iberia</strong>, especialitzada en distribució exprés de mercaderia paletitzada.</p><p>Aquesta col·laboració estratègica ens permet oferir als nostres clients distribució nacional i internacional amb lliuraments ràpids en <strong>24h i 48h</strong>, traçabilitat en temps real, control digital d\'expedicions i cobertura a tota Europa.</p>',
+      en: '<p>Modern logistics requires efficient and fast solutions. At <strong>Transports Montserrat</strong>, with decades of experience in transport and warehousing, we have committed to integrating into the European <strong>Palletways Iberia</strong> network, specialised in express pallet distribution.</p><p>This strategic collaboration allows us to offer our clients national and international distribution with fast deliveries in <strong>24h and 48h</strong>, real-time traceability, digital shipment control and European coverage.</p>'
+    },
+    tags: { es: ['Palletways', 'Distribución Exprés', 'Trazabilidad', 'Europa', 'Paletería'], ca: ['Palletways', 'Distribució Exprés', 'Traçabilitat', 'Europa'], en: ['Palletways', 'Express Distribution', 'Traceability', 'Europe'] }
+  },
+  2: {
+    img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80',
+    cat: { es: 'Empresa', ca: 'Empresa', en: 'Company' },
+    date: 'Diciembre 30, 2024',
+    title: { es: 'Feliz Año 2025 — 85 Aniversario', ca: 'Feliç Any 2025 — 85è Aniversari', en: 'Happy 2025 — 85th Anniversary' },
+    text: {
+      es: '<p>Este año 2025 se cumplen <strong>85 años</strong> desde que nuestro abuelo <strong>Josep Montserrat Romagosa</strong> y <strong>Lola Culleré Fabregat</strong> iniciaron la actividad del transporte en 1940.</p><p>Desde aquellos primeros años de trabajo incansable, el negocio familiar ha pasado por varias generaciones, creciendo y adaptándose a los tiempos sin perder nunca los valores de honestidad, esfuerzo y compromiso con el cliente que nos fundaron.</p><p>En este nuevo año queremos agradecer a todos nuestros <strong>clientes, trabajadores, colaboradores y proveedores</strong> la confianza depositada durante todos estos años. Seguimos comprometidos con seguir creciendo y aportando el mejor servicio logístico posible.</p>',
+      ca: '<p>L\'any 2025 es compleixen <strong>85 anys</strong> des que el nostre avi <strong>Josep Montserrat Romagosa</strong> i <strong>Lola Culleré Fabregat</strong> van iniciar l\'activitat del transport l\'any 1940.</p><p>Des d\'aquells primers anys de treball incansable, el negoci familiar ha passat per diverses generacions, creixent i adaptant-se als temps sense perdre mai els valors d\'honestedat, esforç i compromís amb el client.</p>',
+      en: '<p>In 2025 it has been <strong>85 years</strong> since our grandfather <strong>Josep Montserrat Romagosa</strong> and <strong>Lola Culleré Fabregat</strong> started the transport business in 1940.</p><p>From those early years of tireless work, the family business has passed through several generations, growing and adapting to the times while never losing the values of honesty, effort and commitment to the customer.</p>'
+    },
+    tags: { es: ['85 Aniversario', 'Historia', 'Familia', '1940'], ca: ['85 Aniversari', 'Història', 'Família', '1940'], en: ['85th Anniversary', 'History', 'Family', '1940'] }
+  },
+  3: {
+    img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80',
+    cat: { es: 'Regional', ca: 'Regional', en: 'Regional' },
+    date: 'Diciembre 1, 2024',
+    title: { es: 'Logística y Transporte para Empresas en Penedès, Anoia y Garraf', ca: 'Logística i Transport per a Empreses al Penedès, Anoia i Garraf', en: 'Logistics and Transport for Companies in Penedès, Anoia and Garraf' },
+    text: {
+      es: '<p><strong>Transports Montserrat</strong> ofrece soluciones integrales para empresas situadas entre Barcelona y Tarragona, con especial implantación en las comarcas del <strong>Penedès, Anoia y Garraf</strong>.</p><p>Nuestros servicios destacados incluyen logística integral, almacenamiento estratégico, distribución regional y nacional, transporte empresarial, preparación de pedidos y gestión de stock adaptada a cada cliente.</p><p>Gracias a nuestra <strong>ubicación estratégica</strong> junto a la AP-7 y nuestra experiencia de más de 85 años en el territorio, somos el socio logístico de referencia para empresas de los sectores de alimentación seca, gran consumo, industria y distribución comercial.</p>',
+      ca: '<p><strong>Transports Montserrat</strong> ofereix solucions integrals per a empreses situades entre Barcelona i Tarragona, amb especial implantació a les comarques del <strong>Penedès, Anoia i Garraf</strong>.</p><p>Gràcies a la nostra <strong>ubicació estratègica</strong> vora l\'AP-7 i la nostra experiència de més de 85 anys al territori, som el soci logístic de referència per a empreses dels sectors d\'alimentació seca, gran consum i indústria.</p>',
+      en: '<p><strong>Transports Montserrat</strong> offers comprehensive solutions for companies located between Barcelona and Tarragona, with a strong presence in the <strong>Penedès, Anoia and Garraf</strong> regions.</p><p>Thanks to our <strong>strategic location</strong> close to the AP-7 motorway and our 85+ years of territorial experience, we are the go-to logistics partner for companies in dry food, consumer goods, industry and commercial distribution.</p>'
+    },
+    tags: { es: ['Penedès', 'Anoia', 'Garraf', 'Logística Regional', 'AP-7'], ca: ['Penedès', 'Anoia', 'Garraf', 'Logística Regional'], en: ['Penedès', 'Anoia', 'Garraf', 'Regional Logistics'] }
+  },
+  4: {
+    img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=1200&q=80',
+    cat: { es: 'Almacenaje', ca: 'Emmagatzematge', en: 'Storage' },
+    date: 'Noviembre 10, 2024',
+    title: { es: 'Almacenamiento y Logística para Empresas en Tarragona y Penedès', ca: 'Emmagatzematge i Logística per a Empreses a Tarragona i Penedès', en: 'Storage and Logistics for Companies in Tarragona and Penedès' },
+    text: {
+      es: '<p>Describimos las soluciones de almacenaje adaptadas a empresas de proximidad que requieren flexibilidad y adaptación a sus necesidades cambiantes.</p><p>Nuestros servicios incluyen <strong>almacenaje temporal</strong>, reposición gradual, distribución programada y externalización logística completa. Optimizamos tiempos, costes, control de mercancías y capacidad operativa de nuestros clientes.</p><p>Contamos con <strong>espacios flexibles</strong>, control de inventario en tiempo real, soluciones personalizadas y una gran capacidad de almacenamiento de más de 55.000 m² equipados con racks industriales de gran altura y zonas de picking automatizadas.</p>',
+      ca: '<p>Descrivim les solucions d\'emmagatzematge adaptades a empreses de proximitat que requereixen flexibilitat i adaptació a les seves necessitats canviants.</p><p>Els nostres serveis inclouen <strong>emmagatzematge temporal</strong>, reposició gradual, distribució programada i externalització logística completa.</p>',
+      en: '<p>We describe storage solutions tailored to local businesses that require flexibility and adaptation to their changing needs.</p><p>Our services include <strong>temporary storage</strong>, gradual replenishment, scheduled distribution and full logistics outsourcing. We optimise our clients\' times, costs, goods control and operational capacity.</p>'
+    },
+    tags: { es: ['Almacenaje', 'Tarragona', 'Picking', 'Inventario', 'Externalización'], ca: ['Emmagatzematge', 'Tarragona', 'Picking', 'Inventari'], en: ['Storage', 'Tarragona', 'Picking', 'Inventory'] }
+  },
+  5: {
+    img: 'https://images.unsplash.com/photo-1614102073832-030967418971?w=1200&q=80',
+    cat: { es: 'Logística', ca: 'Logística', en: 'Logistics' },
+    date: 'Octubre 5, 2024',
+    title: { es: 'Almacenaje y Logística Integral', ca: 'Emmagatzematge i Logística Integral', en: 'Storage and Full Logistics' },
+    text: {
+      es: '<p>Explicamos las ventajas de externalizar la logística con <strong>Transports Montserrat</strong>. Los beneficios incluyen ahorro de costes, optimización operativa, reducción de tiempos y mejora del flujo logístico de su empresa.</p><p>Disponemos de <strong>más de 55.000 m² de almacenes</strong> con tecnología avanzada y un equipo experto. Ofrecemos logística multicliente, logística dedicada, manipulación, preparación de pedidos y distribución nacional e internacional.</p><p>La <strong>experiencia acumulada</strong> en logística integral desde 1940 nos permite anticipar las necesidades de cada cliente y proporcionar soluciones a medida que mejoran su competitividad.</p>',
+      ca: '<p>Expliquem els avantatges d\'externalitzar la logística amb <strong>Transports Montserrat</strong>. Disposem de <strong>més de 55.000 m² de magatzems</strong> amb tecnologia avançada i un equip expert.</p>',
+      en: '<p>We explain the advantages of outsourcing logistics with <strong>Transports Montserrat</strong>. Benefits include cost savings, operational optimisation, time reduction and improved logistics flow.</p><p>We have <strong>over 55,000 m² of warehouses</strong> with advanced technology and an expert team, offering multi-client logistics, dedicated logistics, handling, order preparation and national and international distribution.</p>'
+    },
+    tags: { es: ['Logística Integral', '55.000 m²', 'Externalización', 'Ahorro', 'Tecnología'], ca: ['Logística Integral', '55.000 m²', 'Externalització'], en: ['Full Logistics', '55,000 m²', 'Outsourcing', 'Technology'] }
+  },
+  6: {
+    img: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1200&q=80',
+    cat: { es: 'Almacenaje', ca: 'Emmagatzematge', en: 'Storage' },
+    date: 'Septiembre 18, 2024',
+    title: { es: 'Almacenamiento Dedicado en Barcelona', ca: 'Emmagatzematge Dedicat a Barcelona', en: 'Dedicated Storage in Barcelona' },
+    text: {
+      es: '<p>El modelo de <strong>almacenaje dedicado</strong> de Transports Montserrat permite a cada empresa disponer de espacios exclusivos, control total de inventario, operaciones 100% personalizadas y una mejora significativa de la productividad.</p><p>Se enfatiza la <strong>eficiencia en la cadena de suministro</strong>, la trazabilidad completa de cada movimiento de mercancía y la adaptación específica a las necesidades operativas de cada empresa.</p><p>Nuestras instalaciones dedicadas en el área de Barcelona ofrecen sistemas de gestión logística de última generación, operarios especializados y procesos auditados bajo estrictos estándares de calidad.</p>',
+      ca: '<p>El model d\'<strong>emmagatzematge dedicat</strong> de Transports Montserrat permet a cada empresa disposar d\'espais exclusius, control total d\'inventari, operacions 100% personalitzades i una millora significativa de la productivitat.</p>',
+      en: '<p><strong>Transports Montserrat\'s dedicated storage</strong> model allows each company to have exclusive spaces, full inventory control, 100% customised operations and a significant improvement in productivity.</p><p>We emphasise <strong>supply chain efficiency</strong>, complete traceability of every goods movement and specific adaptation to each company\'s operational needs.</p>'
+    },
+    tags: { es: ['Almacenaje Dedicado', 'Barcelona', 'Trazabilidad', 'Exclusivo', 'Inventario'], ca: ['Emmagatzematge Dedicat', 'Barcelona', 'Traçabilitat'], en: ['Dedicated Storage', 'Barcelona', 'Traceability', 'Inventory'] }
+  },
+  7: {
+    img: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?w=1200&q=80',
+    cat: { es: 'Empresa', ca: 'Empresa', en: 'Company' },
+    date: 'Diciembre 31, 2023',
+    title: { es: 'Mensaje de Año Nuevo 2024', ca: 'Missatge d\'Any Nou 2024', en: 'New Year Message 2024' },
+    text: {
+      es: '<p>Con el inicio del año 2024, desde <strong>Transports Montserrat</strong> queremos hacer balance del ejercicio 2023, un año marcado por el crecimiento empresarial y la confianza de nuestros clientes.</p><p>Hemos ampliado nuestra capacidad operativa, afrontado nuevos retos logísticos con éxito y apostado fuerte por la <strong>innovación tecnológica</strong> y la expansión de servicios. Todo ello gracias al compromiso de nuestro equipo humano.</p><p>Entramos en 2024 con optimismo y agradecidos a todos los que confían en nosotros día a día. Seguimos trabajando con la misma dedicación de siempre para ser el <strong>operador logístico de referencia</strong> del Penedès y más allá.</p>',
+      ca: '<p>Amb l\'inici del 2024, des de <strong>Transports Montserrat</strong> fem balanç de l\'exercici 2023, un any marcat per el creixement empresarial i la confiança dels nostres clients.</p>',
+      en: '<p>As 2024 begins, from <strong>Transports Montserrat</strong> we want to review 2023, a year marked by business growth and the trust of our clients.</p><p>We have expanded our operational capacity, successfully met new logistics challenges and invested heavily in <strong>technological innovation</strong> and service expansion.</p>'
+    },
+    tags: { es: ['2024', 'Balance', 'Crecimiento', 'Innovación', 'Equipo'], ca: ['2024', 'Balanç', 'Creixement'], en: ['2024', 'Balance', 'Growth', 'Innovation', 'Team'] }
+  },
+  8: {
+    img: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=1200&q=80',
+    cat: { es: 'Transporte', ca: 'Transport', en: 'Transport' },
+    date: 'Octubre 22, 2023',
+    title: { es: 'Transportistas en Vilafranca del Penedès', ca: 'Transportistes a Vilafranca del Penedès', en: 'Transport in Vilafranca del Penedès' },
+    text: {
+      es: '<p><strong>Transports Montserrat</strong> es la empresa líder de transporte en la región del Penedès. Desde Vilafranca, operamos grupajes, cargas completas, distribución regional y transporte nacional con una flota moderna y un equipo de profesionales altamente cualificado.</p><p>Nuestra puntualidad, profesionalidad y <strong>experiencia desde 1940</strong> son los pilares que nos diferencian. La flota de más de 40 vehículos propios garantiza la cobertura y flexibilidad que nuestros clientes necesitan.</p><p>Ofrecemos soluciones de transporte para todos los sectores: alimentación, industria, gran consumo y distribución comercial, con cobertura a toda España y Europa a través de nuestra red de colaboradores.</p>',
+      ca: '<p><strong>Transports Montserrat</strong> és l\'empresa líder de transport a la regió del Penedès. Des de Vilafranca, operem grupatges, càrregues completes, distribució regional i transport nacional.</p>',
+      en: '<p><strong>Transports Montserrat</strong> is the leading transport company in the Penedès region. From Vilafranca, we operate groupage, full loads, regional distribution and national transport with a modern fleet.</p><p>Our punctuality, professionalism and <strong>experience since 1940</strong> are the pillars that set us apart, with coverage across Spain and Europe.</p>'
+    },
+    tags: { es: ['Vilafranca', 'Penedès', 'Grupajes', 'Cargas Completas', 'Flota Propia'], ca: ['Vilafranca', 'Penedès', 'Grupatges'], en: ['Vilafranca', 'Penedès', 'Groupage', 'Full Loads'] }
+  },
+  9: {
+    img: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=1200&q=80',
+    cat: { es: 'Barcelona', ca: 'Barcelona', en: 'Barcelona' },
+    date: 'Julio 14, 2023',
+    title: { es: 'Logística Integral en Barcelona', ca: 'Logística Integral a Barcelona', en: 'Full Logistics in Barcelona' },
+    text: {
+      es: '<p>Barcelona es un <strong>nodo logístico estratégico</strong> de primer orden en Europa. La empresa destaca su cercanía a los principales centros de consumo, las conexiones rápidas por carretera, ferrocarril y mar, y la infraestructura logística disponible para optimizar operaciones.</p><p>Transports Montserrat aprovecha esta posición privilegiada para ofrecer a sus clientes servicios logísticos de máxima eficiencia, rapidez y adaptación empresarial en toda el área metropolitana y más allá.</p><p>La <strong>innovación continua</strong> y la inversión en tecnología son ejes centrales de nuestra estrategia para Barcelona, posicionándonos como el operador logístico integral de referencia en la región.</p>',
+      ca: '<p>Barcelona és un <strong>node logístic estratègic</strong> de primer ordre a Europa. Transports Montserrat aprofita aquesta posició privilegiada per oferir als seus clients serveis logístics de màxima eficiència.</p>',
+      en: '<p>Barcelona is a <strong>first-class strategic logistics hub</strong> in Europe. The company highlights its proximity to major consumption centres, fast road, rail and sea connections, and the available logistics infrastructure.</p><p>Transports Montserrat leverages this privileged position to offer its clients maximum efficiency, speed and business adaptation across the greater metropolitan area and beyond.</p>'
+    },
+    tags: { es: ['Barcelona', 'Hub Logístico', 'Innovación', 'Eficiencia'], ca: ['Barcelona', 'Hub Logístic', 'Innovació'], en: ['Barcelona', 'Logistics Hub', 'Innovation', 'Efficiency'] }
+  },
+  10: {
+    img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=1200&q=80',
+    cat: { es: 'Empresa', ca: 'Empresa', en: 'Company' },
+    date: 'Marzo 3, 2023',
+    title: { es: 'Empresa Líder en Logística en el Penedès', ca: 'Empresa Líder en Logística al Penedès', en: 'Leading Logistics Company in Penedès' },
+    text: {
+      es: '<p>La noticia explica la consolidación de <strong>Transports Montserrat</strong> como operador logístico de referencia entre Barcelona y Tarragona. Los puntos clave son la experiencia territorial acumulada, la fuerte implantación regional y las soluciones personalizadas para cada cliente.</p><p>La <strong>especialización en alimentación seca</strong>, el compromiso con los clientes y la mejora continua son los valores que nos han consolidado como líderes indiscutibles en el sector logístico del Penedès.</p><p>Con más de 85 años de historia, una flota moderna y más de 55.000 m² de almacenes, seguimos invirtiendo en crecer y ofrecer el mejor servicio logístico de la región a empresas de todos los tamaños.</p>',
+      ca: '<p>La notícia explica la consolidació de <strong>Transports Montserrat</strong> com a operador logístic de referència entre Barcelona i Tarragona.</p><p>L\'<strong>especialització en alimentació seca</strong>, el compromís amb els clients i la millora contínua són els valors que ens han consolidat com a líders al Penedès.</p>',
+      en: '<p>The article explains the consolidation of <strong>Transports Montserrat</strong> as a benchmark logistics operator between Barcelona and Tarragona.</p><p><strong>Specialisation in dry food</strong>, customer commitment and continuous improvement are the values that have established us as undisputed leaders in the Penedès logistics sector.</p>'
+    },
+    tags: { es: ['Penedès', 'Alimentación Seca', 'Referente', 'Gran Consumo', 'Líder'], ca: ['Penedès', 'Alimentació Seca', 'Referent'], en: ['Penedès', 'Dry Food', 'Benchmark', 'Consumer Goods'] }
+  }
+};
+
+/* ============================================================
+   CURRENT LANG
+   ============================================================ */
+let currentLang = 'es';
+
+function setLang(l) {
+  currentLang = l;
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.dataset.lang === l);
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.dataset.langInline === l);
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === l);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === l);
+  });
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   NAV SCROLL STATE
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 0.08;
+  revealObserver.observe(el);
+});
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburgerBtn.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.contains('open');
+  if (isOpen) {
+    mobileMenu.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  } else {
+    mobileMenu.classList.add('open');
+    hamburgerBtn.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+  }
+});
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.dataset.target;
+    const target = document.getElementById(targetId);
+    const isOpen = target.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => t.classList.remove('active'));
+    if (!isOpen) {
+      target.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+/* ============================================================
+   NEWS MODAL
+   ============================================================ */
+const modal = document.getElementById('news-modal');
+const modalImg = document.getElementById('modal-img');
+const modalCat = document.getElementById('modal-cat');
+const modalDate = document.getElementById('modal-date');
+const modalTitle = document.getElementById('modal-title');
+const modalText = document.getElementById('modal-text');
+const modalTags = document.getElementById('modal-tags');
+const modalCloseBtn = document.getElementById('modal-close-btn');
+const modalBackdrop = document.getElementById('modal-backdrop');
+
+function openModal(newsId) {
+  const d = NEWS_DATA[newsId];
+  if (!d) return;
+  const l = currentLang;
+  modalImg.src = d.img;
+  modalImg.alt = d.title[l] || d.title.es;
+  modalCat.textContent = d.cat[l] || d.cat.es;
+  modalDate.textContent = d.date;
+  modalTitle.textContent = d.title[l] || d.title.es;
+  modalText.innerHTML = d.text[l] || d.text.es;
+  const tags = d.tags[l] || d.tags.es;
+  modalTags.innerHTML = tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+  // Scroll modal body to top
+  const modalBody = modal.querySelector('.modal-body');
+  if (modalBody) modalBody.scrollTop = 0;
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+document.querySelectorAll('.news-card-item').forEach(card => {
+  card.addEventListener('click', () => openModal(parseInt(card.dataset.news)));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal(parseInt(card.dataset.news));
+    }
+  });
+});
+
+modalCloseBtn.addEventListener('click', closeModal);
+modalBackdrop.addEventListener('click', closeModal);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+/* ============================================================
+   HERO CANVAS — NETWORK ANIMATION
+   ============================================================ */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodeCount = 28;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
+      r: 1.5 + Math.random() * 2, pulse: Math.random() * Math.PI * 2
+    });
+  }
+  const packets = [];
+  for (let i = 0; i < 10; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({ from: fromIdx, to: toIdx, t: Math.random(), speed: 0.003 + Math.random() * 0.004 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy; n.pulse += 0.025;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${(1 - dist / 180) * 0.18})`;
+          ctx.lineWidth = 0.6; ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      const pr = n.r + Math.sin(n.pulse) * 0.6;
+      ctx.beginPath(); ctx.arc(n.x, n.y, pr, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.7)'; ctx.fill();
+    });
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) { p.t = 0; p.from = p.to; p.to = Math.floor(Math.random() * nodeCount); while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount); }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y, tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t, py = fy + (ty - fy) * p.t;
+      ctx.beginPath(); ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.fill();
+      const tStart = Math.max(0, p.t - 0.06);
+      const tpx = fx + (tx - fx) * tStart, tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)'); grad.addColorStop(1, 'rgba(255,200,200,0.4)');
+      ctx.beginPath(); ctx.moveTo(tpx, tpy); ctx.lineTo(px, py);
+      ctx.strokeStyle = grad; ctx.lineWidth = 1.2; ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   CTA CANVAS
+   ============================================================ */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize(); window.addEventListener('resize', resize);
+  const nodes = [];
+  for (let i = 0; i < 18; i++) nodes.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.12 });
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, d = Math.sqrt(dx*dx+dy*dy);
+      if (d < 220) { ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y); ctx.lineTo(nodes[j].x,nodes[j].y); ctx.strokeStyle=`rgba(207,0,28,${(1-d/220)*0.12})`; ctx.lineWidth=0.8; ctx.stroke(); }
+    }
+    nodes.forEach(n => { ctx.beginPath(); ctx.arc(n.x,n.y,2,0,Math.PI*2); ctx.fillStyle='rgba(207,0,28,0.4)'; ctx.fill(); });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+// Bloquear teclas DevTools
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+</body>
+</html>

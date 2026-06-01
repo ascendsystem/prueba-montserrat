@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Canal Ético de Transports Montserrat. Comunica de forma confidencial cualquier incumplimiento normativo, irregularidad o conducta contraria a nuestro Código Ético.">
+<title>Canal Ético | Transports Montserrat</title>
+
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & RESET
+   ============================================================ */
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   LANG SWITCHER
+   ============================================================ */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+#mobile-menu.animating { display: flex; }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: color 0.2s;
+}
+.mob-sub-item > a:hover { color: var(--white); }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* ============================================================
+   PAGE HERO — same as #hero but for inner pages
+   ============================================================ */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(160deg, #020c1e 0%, #010814 55%, #030d20 100%);
+  padding-bottom: 80px;
+}
+
+#page-hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.45; pointer-events: none; z-index: 1;
+}
+
+.page-hero-grid {
+  position: absolute; inset: 0; z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  animation: gridShift 44s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 80%);
+}
+@keyframes gridShift { 0% { background-position: 0 0; } 100% { background-position: 72px 72px; } }
+
+.page-hero-glow-1 {
+  position: absolute; z-index: 1; pointer-events: none; border-radius: 50%;
+  top: -20%; left: -10%; width: 60%; height: 60%;
+  background: radial-gradient(ellipse, rgba(6,48,98,0.35) 0%, transparent 70%);
+  animation: glowDrift1 18s ease-in-out infinite alternate;
+}
+.page-hero-glow-2 {
+  position: absolute; z-index: 1; pointer-events: none; border-radius: 50%;
+  bottom: -10%; right: -10%; width: 55%; height: 55%;
+  background: radial-gradient(ellipse, rgba(207,0,28,0.07) 0%, transparent 70%);
+  animation: glowDrift2 22s ease-in-out infinite alternate;
+}
+@keyframes glowDrift1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(6%,4%) scale(1.06); } }
+@keyframes glowDrift2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-5%,-3%) scale(1.04); } }
+
+.page-hero-lines {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden;
+}
+.page-hero-line {
+  position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+  animation: lineScroll 12s linear infinite;
+}
+.page-hero-line:nth-child(1) { top: 25%; animation-delay: 0s; animation-duration: 14s; }
+.page-hero-line:nth-child(2) { top: 55%; animation-delay: -5s; animation-duration: 18s; }
+.page-hero-line:nth-child(3) { top: 78%; animation-delay: -9s; animation-duration: 12s; }
+@keyframes lineScroll { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+.page-hero-noise {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.page-hero-content {
+  position: relative; z-index: 10;
+  max-width: 1400px; margin: 0 auto; padding: 0 56px;
+  width: 100%;
+}
+
+.page-hero-breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 36px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.page-hero-breadcrumb a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color .2s; }
+.page-hero-breadcrumb a:hover { color: rgba(255,255,255,0.65); }
+.page-hero-breadcrumb span { color: rgba(207,0,28,0.7); }
+.page-hero-breadcrumb-sep { opacity: 0.4; }
+
+.page-hero-eyebrow {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+}
+.page-hero-eyebrow-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.4);
+}
+.page-hero-eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red);
+}
+
+.page-hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 8vw, 118px);
+  font-weight: 900; text-transform: uppercase; line-height: 0.9;
+  letter-spacing: -0.02em; color: var(--white);
+  margin-bottom: 36px;
+}
+.page-hero-title-outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.28);
+  color: transparent; display: block;
+}
+.page-hero-title-red { color: var(--red); display: block; }
+
+.page-hero-desc {
+  font-size: 16px; line-height: 1.75; color: rgba(255,255,255,0.42);
+  max-width: 560px; letter-spacing: 0.008em; margin-bottom: 48px;
+}
+.page-hero-desc strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+
+.page-hero-meta {
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.page-hero-meta-item {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+.page-hero-meta-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--red);
+  box-shadow: 0 0 8px rgba(207,0,28,0.6); flex-shrink: 0;
+}
+
+/* Speed streaks */
+.speed-streak {
+  position: absolute; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: streakFly 4s linear infinite;
+  z-index: 2;
+}
+@keyframes streakFly { 0% { left: -30%; width: 20%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 110%; width: 20%; opacity: 0; } }
+
+/* ============================================================
+   SECTION BASE STYLES
+   ============================================================ */
+.section-label {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+}
+.section-label-line {
+  width: 32px; height: 1.5px;
+  background: var(--red);
+  box-shadow: 0 0 6px rgba(207,0,28,0.4);
+}
+.section-label-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(42px, 5vw, 76px);
+  font-weight: 900; text-transform: uppercase; line-height: 0.92;
+  letter-spacing: -0.015em; color: var(--white);
+}
+.section-body {
+  font-size: 14px; line-height: 1.82; color: rgba(255,255,255,0.4);
+  max-width: 520px;
+}
+
+/* Reveal animations */
+.reveal, .reveal-left, .reveal-right {
+  opacity: 0; transition: opacity .9s var(--ease-expo), transform .9s var(--ease-expo);
+}
+.reveal { transform: translateY(32px); }
+.reveal-left { transform: translateX(-32px); }
+.reveal-right { transform: translateX(32px); }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--white);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  clip-path: polygon(0 0, 96% 0, 100% 100%, 4% 100%);
+  padding: 16px 44px; text-decoration: none;
+  box-shadow: 0 8px 32px rgba(207,0,28,0.35), 0 2px 0 rgba(255,255,255,0.06) inset;
+  transition: background .35s var(--ease-expo), transform .35s var(--ease-expo), box-shadow .35s, clip-path .35s;
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+  opacity: 0; transition: opacity .3s;
+}
+.btn-primary:hover { background: linear-gradient(135deg, #e8001f 0%, #cf001c 100%); box-shadow: 0 12px 44px rgba(207,0,28,0.55); transform: translateY(-2px) scaleX(1.02); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-arrow { width: 18px; height: 18px; flex-shrink: 0; transition: transform .35s var(--ease-expo); }
+.btn-primary:hover .btn-arrow { transform: translateX(5px); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+  background: transparent; border: 1px solid rgba(255,255,255,0.15);
+  padding: 16px 40px; text-decoration: none;
+  transition: color .3s, border-color .3s, background .3s, transform .3s var(--ease-expo);
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.04); transform: translateY(-2px); }
+
+/* ============================================================
+   CANAL ETICO MAIN CONTENT
+   ============================================================ */
+#canal-intro {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(13,74,143,0.08) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 140px 0 100px; overflow: hidden; position: relative;
+}
+#canal-intro::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(207,0,28,0.2) 50%, transparent 90%);
+}
+#canal-intro::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(207,0,28,0.03) 0%, transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(13,74,143,0.05) 0%, transparent 35%);
+  z-index: 0;
+}
+
+.canal-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 56px;
+  position: relative; z-index: 1;
+}
+
+.canal-intro-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start;
+}
+
+.canal-intro-left .section-title { font-size: clamp(40px, 5vw, 70px); }
+.canal-intro-left .section-body { margin-top: 24px; font-size: 15px; line-height: 1.8; max-width: 100%; }
+
+.canal-law-badge {
+  display: inline-flex; align-items: flex-start; gap: 14px;
+  background: rgba(207,0,28,0.07);
+  border: 1px solid rgba(207,0,28,0.18);
+  border-left: 3px solid var(--red);
+  padding: 20px 24px;
+  margin-top: 36px;
+}
+.canal-law-badge-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; }
+.canal-law-badge-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+.canal-law-badge-text { font-size: 11.5px; line-height: 1.7; color: rgba(255,255,255,0.4); }
+.canal-law-badge-text strong { color: rgba(207,0,28,0.85); font-weight: 600; display: block; margin-bottom: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+.canal-features-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+  margin-top: 8px;
+}
+.canal-feature-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.055);
+  padding: 36px 32px;
+  position: relative; overflow: hidden;
+  transition: background .45s var(--ease-expo), border-color .45s, transform .45s var(--ease-expo), box-shadow .45s;
+}
+.canal-feature-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transition: width .55s var(--ease-expo);
+}
+.canal-feature-card:hover { background: rgba(255,255,255,0.045); border-color: rgba(255,255,255,0.1); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.35); }
+.canal-feature-card:hover::before { width: 100%; }
+.canal-feature-icon {
+  width: 48px; height: 48px;
+  background: rgba(207,0,28,0.09);
+  border: 1px solid rgba(207,0,28,0.18);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .35s, border-color .35s, transform .35s var(--ease-expo);
+}
+.canal-feature-card:hover .canal-feature-icon { background: rgba(207,0,28,0.18); border-color: rgba(207,0,28,0.35); transform: scale(1.06) rotate(2deg); }
+.canal-feature-icon svg { width: 20px; height: 20px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+.canal-feature-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--white); margin-bottom: 12px; line-height: 1.1;
+}
+.canal-feature-desc {
+  font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.36);
+}
+
+/* ============================================================
+   HECHOS SECTION
+   ============================================================ */
+#hechos {
+  background: var(--navy);
+  padding: 110px 0; overflow: hidden; position: relative;
+}
+#hechos::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+#hechos::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(207,0,28,0.15) 50%, transparent 90%);
+}
+
+.hechos-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 56px;
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: 100px; align-items: start;
+}
+
+.hechos-left .section-title { font-size: clamp(38px, 4.5vw, 64px); }
+.hechos-left .section-body { margin-top: 20px; }
+
+.hechos-list {
+  display: flex; flex-direction: column; gap: 3px;
+}
+.hecho-item {
+  display: flex; align-items: flex-start; gap: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.055);
+  padding: 24px 28px;
+  position: relative; overflow: hidden;
+  transition: background .35s var(--ease-expo), border-color .35s, transform .35s var(--ease-expo);
+}
+.hecho-item::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: transparent;
+  transition: background .35s;
+}
+.hecho-item:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.1); transform: translateX(4px); }
+.hecho-item:hover::before { background: var(--red); }
+.hecho-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.18em;
+  color: rgba(207,0,28,0.5); flex-shrink: 0; margin-top: 2px;
+  min-width: 32px;
+}
+.hecho-text {
+  font-size: 13px; line-height: 1.72; color: rgba(255,255,255,0.42);
+}
+.hecho-text strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+
+/* ============================================================
+   HOW TO SECTION
+   ============================================================ */
+#como-enviar {
+  background: #f0ede8; color: var(--text);
+  padding: 140px 0; overflow: hidden; position: relative;
+}
+
+.como-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 56px;
+}
+
+.como-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+  margin-bottom: 80px;
+}
+.como-header .section-title { font-size: clamp(40px, 5vw, 68px); color: var(--navy); }
+.como-header-desc { font-size: 14.5px; line-height: 1.8; color: rgba(20,20,20,0.45); max-width: 400px; }
+
+.como-options {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+}
+
+.como-option-card {
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 60px 52px;
+  position: relative; overflow: hidden;
+  transition: transform .45s var(--ease-expo), box-shadow .45s;
+}
+.como-option-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .55s var(--ease-expo);
+}
+.como-option-card:hover { transform: translateY(-6px); box-shadow: 0 28px 70px rgba(0,0,0,0.12); }
+.como-option-card:hover::before { transform: scaleX(1); }
+
+.como-option-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+  color: rgba(207,0,28,0.45); margin-bottom: 24px;
+}
+.como-option-icon {
+  width: 64px; height: 64px;
+  background: rgba(207,0,28,0.07);
+  border: 1px solid rgba(207,0,28,0.15);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .35s, border-color .35s;
+}
+.como-option-card:hover .como-option-icon { background: rgba(207,0,28,0.14); border-color: rgba(207,0,28,0.3); }
+.como-option-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+
+.como-option-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--navy); margin-bottom: 20px; line-height: 1.05;
+}
+
+.como-steps {
+  display: flex; flex-direction: column; gap: 0; margin-bottom: 36px;
+}
+.como-step {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.como-step:last-child { border-bottom: none; }
+.como-step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--red); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+.como-step-text {
+  font-size: 13px; line-height: 1.7; color: rgba(20,20,20,0.55); padding-top: 2px;
+}
+.como-step-text strong { color: rgba(20,20,20,0.8); font-weight: 600; }
+
+.como-option-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--red); text-decoration: none;
+  transition: gap .3s var(--ease-expo), color .25s;
+}
+.como-option-link:hover { gap: 18px; }
+.como-option-link-arrow { width: 20px; height: 1px; background: var(--red); position: relative; }
+.como-option-link-arrow::after { content: '>'; position: absolute; right: -8px; top: -9px; font-size: 16px; }
+
+.como-important {
+  margin-top: 64px;
+  background: rgba(207,0,28,0.05);
+  border: 1px solid rgba(207,0,28,0.15);
+  border-left: 3px solid var(--red);
+  padding: 28px 36px;
+  display: flex; align-items: flex-start; gap: 20px;
+}
+.como-important-icon { flex-shrink: 0; width: 22px; height: 22px; margin-top: 2px; }
+.como-important-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+.como-important-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
+}
+.como-important-text {
+  font-size: 13px; line-height: 1.75; color: rgba(20,20,20,0.55);
+}
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 170px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 300px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-title em { font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 80px; padding-bottom: 30px; margin-bottom: 0; flex-wrap: wrap;
+}
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
+}
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; margin-left: auto; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* Lang */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .nav-links { gap: 16px; }
+  .canal-intro-grid { gap: 60px; }
+  .canal-features-grid { grid-template-columns: 1fr; }
+  .hechos-container { gap: 60px; }
+  .como-options { grid-template-columns: 1fr; }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+  .canal-intro-grid { grid-template-columns: 1fr; gap: 60px; }
+  .hechos-container { grid-template-columns: 1fr; gap: 48px; }
+  .como-header { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 768px) {
+  #nav { padding: 0 24px; }
+  .canal-container, .hechos-container, .como-container { padding: 0 24px; }
+  .cta-container, .footer-container { padding: 0 24px; }
+  .page-hero-content { padding: 0 24px; }
+  .canal-features-grid { grid-template-columns: 1fr; }
+  .como-options { grid-template-columns: 1fr; }
+  .como-option-card { padding: 40px 32px; }
+  .footer-main { flex-direction: column; gap: 40px; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  .cta-bg-text { font-size: 120px; }
+  .btn-primary { padding: 15px 32px; font-size: 11px; }
+}
+
+img { transition: opacity .5s; }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+
+  <ul class="nav-links" role="menubar">
+
+    <!-- EMPRESA -->
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- TRANSPORTE -->
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/grupajes-cargas-completas/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+          <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+          <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- PALLETWAYS -->
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+
+    <!-- NOTICIAS -->
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+
+    <!-- CONTACTO -->
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+
+  </ul>
+
+  <button class="mobile-menu-btn" id="hamburger-btn"
+          aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+</nav>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/grupajes-cargas-completas/index.html">
+        <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+        <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+        <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../palletways/index.html">Palletways</a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../noticias/index.html">
+      <span data-lang-inline="es" class="active">Noticias</span>
+      <span data-lang-inline="ca">Notícies</span>
+      <span data-lang-inline="en">News</span>
+    </a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../contacto/index.html">
+      <span data-lang-inline="es" class="active">Contacto</span>
+      <span data-lang-inline="ca">Contacte</span>
+      <span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAGE HERO
+     ============================================================ -->
+<section id="page-hero">
+  <canvas id="page-hero-canvas"></canvas>
+  <div class="page-hero-glow-1"></div>
+  <div class="page-hero-glow-2"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-lines">
+    <div class="page-hero-line"></div>
+    <div class="page-hero-line"></div>
+    <div class="page-hero-line"></div>
+  </div>
+  <div class="speed-streak" style="top:32%;animation-delay:0s;animation-duration:3.8s;"></div>
+  <div class="speed-streak" style="top:65%;animation-delay:2s;animation-duration:4.5s;opacity:0.4;"></div>
+  <div class="page-hero-noise"></div>
+
+  <div class="page-hero-content">
+
+    <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../index.html">
+        <span data-lang-inline="es" class="active">Inicio</span>
+        <span data-lang-inline="ca">Inici</span>
+        <span data-lang-inline="en">Home</span>
+      </a>
+      <span class="page-hero-breadcrumb-sep">›</span>
+      <span>
+        <span data-lang-inline="es" class="active">Legal</span>
+        <span data-lang-inline="ca">Legal</span>
+        <span data-lang-inline="en">Legal</span>
+      </span>
+      <span class="page-hero-breadcrumb-sep">›</span>
+      <span style="color:rgba(207,0,28,0.7);">
+        <span data-lang-inline="es" class="active">Canal Ético</span>
+        <span data-lang-inline="ca">Canal Ètic</span>
+        <span data-lang-inline="en">Ethics Channel</span>
+      </span>
+    </nav>
+
+    <div class="page-hero-eyebrow">
+      <div class="page-hero-eyebrow-line"></div>
+      <span class="page-hero-eyebrow-text">
+        <span data-lang-inline="es" class="active">Transparencia · Ética · Confianza</span>
+        <span data-lang-inline="ca">Transparència · Ètica · Confiança</span>
+        <span data-lang-inline="en">Transparency · Ethics · Trust</span>
+      </span>
+    </div>
+
+    <h1 class="page-hero-title">
+      <span data-lang="es" class="active">
+        Canal
+        <span class="page-hero-title-red">Ético</span>
+        <span class="page-hero-title-outline">Montserrat</span>
+      </span>
+      <span data-lang="ca">
+        Canal
+        <span class="page-hero-title-red">Ètic</span>
+        <span class="page-hero-title-outline">Montserrat</span>
+      </span>
+      <span data-lang="en">
+        Ethics
+        <span class="page-hero-title-red">Channel</span>
+        <span class="page-hero-title-outline">Montserrat</span>
+      </span>
+    </h1>
+
+    <p class="page-hero-desc">
+      <span data-lang="es" class="active">En Montserrat creemos firmemente en la importancia de fomentar un entorno <strong>seguro, ético, de igualdad y de confianza</strong> para todos nuestros empleados, clientes y socios.</span>
+      <span data-lang="ca">A Montserrat creiem fermament en la importància de fomentar un entorn <strong>segur, ètic, d'igualtat i de confiança</strong> per a tots els nostres empleats, clients i socis.</span>
+      <span data-lang="en">At Montserrat we firmly believe in fostering a <strong>safe, ethical, equal and trusting environment</strong> for all our employees, clients and partners.</span>
+    </p>
+
+    <div class="page-hero-meta">
+      <div class="page-hero-meta-item">
+        <div class="page-hero-meta-dot"></div>
+        <span data-lang-inline="es" class="active">Confidencial</span>
+        <span data-lang-inline="ca">Confidencial</span>
+        <span data-lang-inline="en">Confidential</span>
+      </div>
+      <div class="page-hero-meta-item">
+        <div class="page-hero-meta-dot"></div>
+        <span data-lang-inline="es" class="active">Anónimo si lo deseas</span>
+        <span data-lang-inline="ca">Anònim si ho vols</span>
+        <span data-lang-inline="en">Anonymous if you wish</span>
+      </div>
+      <div class="page-hero-meta-item">
+        <div class="page-hero-meta-dot"></div>
+        <span data-lang-inline="es" class="active">Ley 2/2023</span>
+        <span data-lang-inline="ca">Llei 2/2023</span>
+        <span data-lang-inline="en">Law 2/2023</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     INTRO + CARACTERÍSTICAS
+     ============================================================ -->
+<section id="canal-intro">
+  <div class="canal-container">
+    <div class="canal-intro-grid">
+
+      <div class="canal-intro-left">
+        <div class="section-label reveal">
+          <div class="section-label-line"></div>
+          <span class="section-label-text">
+            <span data-lang-inline="es" class="active">Nuestro Compromiso</span>
+            <span data-lang-inline="ca">El Nostre Compromís</span>
+            <span data-lang-inline="en">Our Commitment</span>
+          </span>
+        </div>
+
+        <h2 class="section-title reveal">
+          <span data-lang="es" class="active">Un canal<br>de confianza</span>
+          <span data-lang="ca">Un canal<br>de confiança</span>
+          <span data-lang="en">A channel<br>of trust</span>
+        </h2>
+
+        <p class="section-body reveal" style="margin-top:24px; font-size:15px; line-height:1.8; max-width:100%;">
+          <span data-lang="es" class="active">Hemos implementado un sólido Canal Ético donde se puede comunicar cualquier posible incumplimiento o irregularidad en la organización, tal como se describe en la <strong style="color:rgba(255,255,255,0.7);">Ley 2/2023, de 20 de febrero</strong>, reguladora de la protección de las personas que informen sobre infracciones normativas y de lucha contra la corrupción.</span>
+          <span data-lang="ca">Hem implementat un sòlid Canal Ètic on es pot comunicar qualsevol possible incompliment o irregularitat a l'organització, tal com es descriu a la <strong style="color:rgba(255,255,255,0.7);">Llei 2/2023, de 20 de febrer</strong>, reguladora de la protecció de les persones que informin sobre infraccions normatives i de lluita contra la corrupció.</span>
+          <span data-lang="en">We have implemented a robust Ethics Channel where any possible non-compliance or irregularity in the organisation can be reported, as described in <strong style="color:rgba(255,255,255,0.7);">Law 2/2023 of 20 February</strong>, regulating the protection of persons who report regulatory infringements and anti-corruption.</span>
+        </p>
+
+        <div class="canal-law-badge reveal" style="margin-top:36px;">
+          <div class="canal-law-badge-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="canal-law-badge-text">
+            <strong>Marco Normativo</strong>
+            <span data-lang="es" class="active">Ley 2/2023, de 20 de febrero — Protección de las personas informantes sobre infracciones normativas y lucha contra la corrupción.</span>
+            <span data-lang="ca">Llei 2/2023, de 20 de febrer — Protecció de les persones informants sobre infraccions normatives i lluita contra la corrupció.</span>
+            <span data-lang="en">Law 2/2023 of 20 February — Protection of persons reporting regulatory infringements and anti-corruption measures.</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="canal-features-grid">
+
+          <div class="canal-feature-card reveal">
+            <div class="canal-feature-icon">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="canal-feature-title">
+              <span data-lang-inline="es" class="active">Confidencialidad</span>
+              <span data-lang-inline="ca">Confidencialitat</span>
+              <span data-lang-inline="en">Confidentiality</span>
+            </div>
+            <p class="canal-feature-desc">
+              <span data-lang="es" class="active">Garantizamos la confidencialidad absoluta en todo el proceso y protegemos la identidad del denunciante. Se incluye la posibilidad de realizar la alerta de manera anónima.</span>
+              <span data-lang="ca">Garantim la confidencialitat absoluta en tot el procés i protegim la identitat del denunciant. S'inclou la possibilitat de realitzar l'alerta de manera anònima.</span>
+              <span data-lang="en">We guarantee absolute confidentiality throughout the process and protect the whistleblower's identity. Anonymous reporting is also available.</span>
+            </p>
+          </div>
+
+          <div class="canal-feature-card reveal">
+            <div class="canal-feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="canal-feature-title">
+              <span data-lang-inline="es" class="active">Investigación Imparcial</span>
+              <span data-lang-inline="ca">Investigació Imparcial</span>
+              <span data-lang-inline="en">Impartial Investigation</span>
+            </div>
+            <p class="canal-feature-desc">
+              <span data-lang="es" class="active">Nuestro equipo de expertos investigará minuciosamente de manera objetiva y diligente. A lo largo de todo el proceso se respetarán los derechos de los involucrados y la presunción de inocencia.</span>
+              <span data-lang="ca">El nostre equip d'experts investigarà minuciosament de manera objectiva i diligent. Al llarg de tot el procés es respectaran els drets dels involucrats i la presumpció d'innocència.</span>
+              <span data-lang="en">Our expert team will thoroughly investigate in an objective and diligent manner. The rights of those involved and the presumption of innocence will be respected throughout.</span>
+            </p>
+          </div>
+
+          <div class="canal-feature-card reveal">
+            <div class="canal-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="canal-feature-title">
+              <span data-lang-inline="es" class="active">Protección contra Represalias</span>
+              <span data-lang-inline="ca">Protecció contra Represàlies</span>
+              <span data-lang-inline="en">Protection from Retaliation</span>
+            </div>
+            <p class="canal-feature-desc">
+              <span data-lang="es" class="active">No toleramos ninguna forma de represalia contra las personas denunciantes de buena fe. Tomaremos medidas disciplinarias apropiadas contra cualquier individuo que tome represalias.</span>
+              <span data-lang="ca">No tolerem cap forma de represàlia contra les persones denunciants de bona fe. Prendrem mesures disciplinàries apropiades contra qualsevol individu que prengui represàlies.</span>
+              <span data-lang="en">We do not tolerate any form of retaliation against good-faith whistleblowers. We will take appropriate disciplinary action against any individual who retaliates.</span>
+            </p>
+          </div>
+
+          <div class="canal-feature-card reveal">
+            <div class="canal-feature-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="canal-feature-title">
+              <span data-lang-inline="es" class="active">Resolución y Seguimiento</span>
+              <span data-lang-inline="ca">Resolució i Seguiment</span>
+              <span data-lang-inline="en">Resolution &amp; Follow-up</span>
+            </div>
+            <p class="canal-feature-desc">
+              <span data-lang="es" class="active">Tomaremos las acciones necesarias para abordar el problema identificado y medidas correctivas para prevenir futuras violaciones. Mantendremos informado al denunciante sobre el progreso.</span>
+              <span data-lang="ca">Prendrem les accions necessàries per abordar el problema identificat i mesures correctives per prevenir futures violacions. Mantindrem informat el denunciant sobre el progrés.</span>
+              <span data-lang="en">We will take the necessary actions to address the identified problem and corrective measures to prevent future violations. We will keep the whistleblower informed of progress.</span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HECHOS NOTIFICABLES
+     ============================================================ -->
+<section id="hechos">
+  <div class="hechos-container">
+
+    <div class="hechos-left">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Tipología</span>
+          <span data-lang-inline="ca">Tipologia</span>
+          <span data-lang-inline="en">Types</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(36px,4vw,58px);">
+        <span data-lang="es" class="active">¿Qué hechos<br>se pueden<br>notificar?</span>
+        <span data-lang="ca">Quins fets<br>es poden<br>notificar?</span>
+        <span data-lang="en">What facts<br>can be<br>reported?</span>
+      </h2>
+      <p class="section-body reveal" style="margin-top:20px;">
+        <span data-lang="es" class="active">Puedes informar a través del Canal Ético de aquellos hechos que consideres puedan suponer un incumplimiento de la normativa legal, del Código Ético o de cualesquiera normativa interna vigente.</span>
+        <span data-lang="ca">Pots informar a través del Canal Ètic d'aquells fets que consideris que puguin suposar un incompliment de la normativa legal, del Codi Ètic o de qualsevol normativa interna vigent.</span>
+        <span data-lang="en">You can report through the Ethics Channel any facts that you consider may constitute a breach of legal regulations, the Code of Ethics or any applicable internal regulations.</span>
+      </p>
+    </div>
+
+    <div class="hechos-list">
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">01</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Fraude y corrupción</strong> — Conductas relativas al fraude, soborno, malversación u otras prácticas corruptas.</span>
+          <span data-lang="ca"><strong>Frau i corrupció</strong> — Conductes relatives al frau, suborn, malversació o altres pràctiques corruptes.</span>
+          <span data-lang="en"><strong>Fraud and corruption</strong> — Conduct related to fraud, bribery, embezzlement or other corrupt practices.</span>
+        </div>
+      </div>
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">02</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Seguridad, salud e higiene en el trabajo</strong> — Incumplimientos de la normativa de prevención de riesgos laborales y condiciones de trabajo.</span>
+          <span data-lang="ca"><strong>Seguretat, salut i higiene en el treball</strong> — Incompliments de la normativa de prevenció de riscos laborals i condicions de treball.</span>
+          <span data-lang="en"><strong>Workplace safety, health and hygiene</strong> — Breaches of occupational health and safety regulations and working conditions.</span>
+        </div>
+      </div>
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">03</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Discriminación y acoso en el lugar de trabajo</strong> — Conductas discriminatorias por razón de género, origen, religión u otras causas, y cualquier forma de acoso.</span>
+          <span data-lang="ca"><strong>Discriminació i assetjament en el lloc de treball</strong> — Conductes discriminatòries per raó de gènere, origen, religió o altres causes, i qualsevol forma d'assetjament.</span>
+          <span data-lang="en"><strong>Workplace discrimination and harassment</strong> — Discriminatory conduct based on gender, origin, religion or other grounds, and any form of harassment.</span>
+        </div>
+      </div>
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">04</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Seguridad de la información y protección de datos</strong> — Vulneraciones de la normativa de protección de datos, mercados de valores o seguridad informática.</span>
+          <span data-lang="ca"><strong>Seguretat de la informació i protecció de dades</strong> — Vulneracions de la normativa de protecció de dades, mercats de valors o seguretat informàtica.</span>
+          <span data-lang="en"><strong>Information security and data protection</strong> — Breaches of data protection regulations, securities markets or IT security.</span>
+        </div>
+      </div>
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">05</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Prácticas anticompetitivas</strong> — Acuerdos de precios, reparto de mercados u otras prácticas contrarias a la libre competencia.</span>
+          <span data-lang="ca"><strong>Pràctiques anticompetitives</strong> — Acords de preus, repartiment de mercats o altres pràctiques contràries a la lliure competència.</span>
+          <span data-lang="en"><strong>Anti-competitive practices</strong> — Price-fixing agreements, market sharing or other practices contrary to free competition.</span>
+        </div>
+      </div>
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">06</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Derechos humanos y medio ambiente</strong> — Conductas contrarias a los derechos humanos fundamentales o que causen daños al medio ambiente.</span>
+          <span data-lang="ca"><strong>Drets humans i medi ambient</strong> — Conductes contràries als drets humans fonamentals o que causin danys al medi ambient.</span>
+          <span data-lang="en"><strong>Human rights and the environment</strong> — Conduct contrary to fundamental human rights or causing harm to the environment.</span>
+        </div>
+      </div>
+
+      <div class="hecho-item reveal">
+        <div class="hecho-num">07</div>
+        <div class="hecho-text">
+          <span data-lang="es" class="active"><strong>Otras infracciones penales o administrativas</strong> — Cualquier otra posible infracción de carácter penal o administrativo no contemplada en los apartados anteriores.</span>
+          <span data-lang="ca"><strong>Altres infraccions penals o administratives</strong> — Qualsevol altra possible infracció de caràcter penal o administratiu no contemplada en els apartats anteriors.</span>
+          <span data-lang="en"><strong>Other criminal or administrative infringements</strong> — Any other possible criminal or administrative infringement not covered in the above sections.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CÓMO ENVIAR
+     ============================================================ -->
+<section id="como-enviar">
+  <div class="como-container">
+
+    <div class="como-header">
+      <div>
+        <div class="section-label reveal" style="--section-label-color: var(--red);">
+          <div class="section-label-line" style="background:var(--red);"></div>
+          <span class="section-label-text" style="color:var(--red);">
+            <span data-lang-inline="es" class="active">Proceso</span>
+            <span data-lang-inline="ca">Procés</span>
+            <span data-lang-inline="en">Process</span>
+          </span>
+        </div>
+        <h2 class="section-title reveal" style="color:var(--navy);">
+          <span data-lang="es" class="active">¿Cómo enviar<br>una comunicación?</span>
+          <span data-lang="ca">Com enviar<br>una comunicació?</span>
+          <span data-lang="en">How to send<br>a communication?</span>
+        </h2>
+      </div>
+      <p class="como-header-desc reveal">
+        <span data-lang="es" class="active">Existen dos opciones para enviar tu comunicación al Canal Ético de Transports Montserrat. Ambas garantizan la confidencialidad y la posibilidad de seguimiento posterior.</span>
+        <span data-lang="ca">Hi ha dues opcions per enviar la teva comunicació al Canal Ètic de Transports Montserrat. Ambdues garanteixen la confidencialitat i la possibilitat de seguiment posterior.</span>
+        <span data-lang="en">There are two options for submitting your communication to the Transports Montserrat Ethics Channel. Both guarantee confidentiality and the possibility of follow-up.</span>
+      </p>
+    </div>
+
+    <div class="como-options">
+
+      <!-- OPCIÓN 1: APP -->
+      <div class="como-option-card reveal-left">
+        <div class="como-option-num">OPCIÓN 01</div>
+        <div class="como-option-icon">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3 class="como-option-title">
+          <span data-lang-inline="es" class="active">Mediante la App co-resol</span>
+          <span data-lang-inline="ca">Mitjançant l'App co-resol</span>
+          <span data-lang-inline="en">Through the co-resol App</span>
+        </h3>
+        <div class="como-steps">
+          <div class="como-step">
+            <div class="como-step-num">1</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Descárgate la app <strong>co-resol</strong>, aceptando las notificaciones. Es gratuita y está disponible en la App Store y en Google Play.</span>
+              <span data-lang="ca">Descarrega't l'app <strong>co-resol</strong>, acceptant les notificacions. És gratuïta i està disponible a l'App Store i a Google Play.</span>
+              <span data-lang="en">Download the <strong>co-resol</strong> app, accepting notifications. It is free and available on the App Store and Google Play.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">2</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Pulsa el botón <strong>"Haz un click"</strong> e introduce el código <strong>MONTSERRAT</strong>.</span>
+              <span data-lang="ca">Prem el botó <strong>"Fes un clic"</strong> i introdueix el codi <strong>MONTSERRAT</strong>.</span>
+              <span data-lang="en">Press the <strong>"Make a click"</strong> button and enter the code <strong>MONTSERRAT</strong>.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">3</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Selecciona el botón del canal y escribe tu mensaje siendo lo más <strong>específico posible</strong>. Puedes adjuntar imágenes y documentación.</span>
+              <span data-lang="ca">Selecciona el botó del canal i escriu el teu missatge sent el més <strong>específic possible</strong>. Pots adjuntar imatges i documentació.</span>
+              <span data-lang="en">Select the channel button and write your message as <strong>specifically as possible</strong>. You can attach images and documentation.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">4</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Identifícate o selecciona la opción de <strong>anonimato</strong>. En ambos casos, acepta la Política de Privacidad.</span>
+              <span data-lang="ca">Identifica't o selecciona l'opció d'<strong>anonimat</strong>. En tots dos casos, accepta la Política de Privacitat.</span>
+              <span data-lang="en">Identify yourself or select the <strong>anonymous</strong> option. In both cases, accept the Privacy Policy.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">5</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Recibirás un acuse de recibo. La comunicación posterior se realizará mediante un <strong>chat seguro</strong> desde la app.</span>
+              <span data-lang="ca">Rebràs un acusament de rebuda. La comunicació posterior es realitzarà mitjançant un <strong>xat segur</strong> des de l'app.</span>
+              <span data-lang="en">You will receive an acknowledgement. Follow-up communication will be via a <strong>secure chat</strong> from the app.</span>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="como-option-link">
+          <span data-lang-inline="es" class="active">Descargar co-resol</span>
+          <span data-lang-inline="ca">Descarregar co-resol</span>
+          <span data-lang-inline="en">Download co-resol</span>
+          <span class="como-option-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- OPCIÓN 2: WEB -->
+      <div class="como-option-card reveal-right">
+        <div class="como-option-num">OPCIÓN 02</div>
+        <div class="como-option-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h3 class="como-option-title">
+          <span data-lang-inline="es" class="active">Mediante Página Web</span>
+          <span data-lang-inline="ca">Mitjançant Pàgina Web</span>
+          <span data-lang-inline="en">Through the Website</span>
+        </h3>
+        <div class="como-steps">
+          <div class="como-step">
+            <div class="como-step-num">1</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Accede a través del enlace: <strong>co-resol.bcnresol.com/webclick</strong></span>
+              <span data-lang="ca">Accedeix a través de l'enllaç: <strong>co-resol.bcnresol.com/webclick</strong></span>
+              <span data-lang="en">Access through the link: <strong>co-resol.bcnresol.com/webclick</strong></span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">2</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Pulsa <strong>"Haz un click"</strong> e introduce el código <strong>MONTSERRAT</strong>. Selecciona el botón del canal.</span>
+              <span data-lang="ca">Prem <strong>"Fes un clic"</strong> i introdueix el codi <strong>MONTSERRAT</strong>. Selecciona el botó del canal.</span>
+              <span data-lang="en">Press <strong>"Make a click"</strong> and enter the code <strong>MONTSERRAT</strong>. Select the channel button.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">3</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Escribe tu mensaje con el máximo detalle posible y adjunta documentación si es necesario.</span>
+              <span data-lang="ca">Escriu el teu missatge amb el màxim detall possible i adjunta documentació si és necessari.</span>
+              <span data-lang="en">Write your message with as much detail as possible and attach documentation if necessary.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">4</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Identifícate o selecciona el <strong>anonimato</strong>. Acepta la Política de Privacidad.</span>
+              <span data-lang="ca">Identifica't o selecciona l'<strong>anonimat</strong>. Accepta la Política de Privacitat.</span>
+              <span data-lang="en">Identify yourself or select <strong>anonymous</strong>. Accept the Privacy Policy.</span>
+            </div>
+          </div>
+          <div class="como-step">
+            <div class="como-step-num">5</div>
+            <div class="como-step-text">
+              <span data-lang="es" class="active">Recibirás un <strong>código identificador y contraseña únicos</strong>. Guárdalos para seguir la comunicación. Usa "Acceder a un click anterior" para consultas posteriores.</span>
+              <span data-lang="ca">Rebràs un <strong>codi identificador i contrasenya únics</strong>. Guarda'ls per seguir la comunicació. Usa "Accedir a un clic anterior" per a consultes posteriors.</span>
+              <span data-lang="en">You will receive a <strong>unique identifier code and password</strong>. Keep them to follow up the communication. Use "Access a previous click" for subsequent queries.</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://co-resol.bcnresol.com/webclick" target="_blank" rel="noopener noreferrer" class="como-option-link">
+          <span data-lang-inline="es" class="active">Acceder al canal web</span>
+          <span data-lang-inline="ca">Accedir al canal web</span>
+          <span data-lang-inline="en">Access web channel</span>
+          <span class="como-option-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- AVISO IMPORTANTE -->
+    <div class="como-important reveal">
+      <div class="como-important-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div>
+        <div class="como-important-title">
+          <span data-lang-inline="es" class="active">Importante</span>
+          <span data-lang-inline="ca">Important</span>
+          <span data-lang-inline="en">Important</span>
+        </div>
+        <p class="como-important-text">
+          <span data-lang="es" class="active">Este Canal Ético no es un servicio de emergencias. No hay que utilizar este canal para informar acerca de situaciones que conlleven una amenaza inmediata. Si necesitas asistencia en una situación de este tipo, por favor contacta con tus autoridades locales y utiliza los canales definidos a tal efecto.</span>
+          <span data-lang="ca">Aquest Canal Ètic no és un servei d'emergències. No s'ha d'utilitzar aquest canal per informar sobre situacions que comportin una amenaça immediata. Si necessites assistència en una situació d'aquest tipus, si us plau contacta amb les teves autoritats locals i utilitza els canals definits a tal efecte.</span>
+          <span data-lang="en">This Ethics Channel is not an emergency service. Do not use this channel to report situations involving an immediate threat. If you need assistance in such a situation, please contact your local authorities and use the channels defined for that purpose.</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca" style="display:none;">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en" style="display:none;">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/grupajes-cargas-completas/index.html">
+            <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+            <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+            <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+          </a></li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2025 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">Cookies</a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   NAV SCROLL STATE
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 0.08;
+  revealObserver.observe(el);
+});
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    if (el.getAttribute('data-lang') !== lang) el.style.display = 'none';
+    else el.style.display = '';
+  });
+
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+
+  document.documentElement.lang = lang;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+
+function openMenu() {
+  menuOpen = true;
+  mobileMenu.style.display = 'flex';
+  mobileMenu.offsetHeight;
+  mobileMenu.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  hamburgerBtn.setAttribute('aria-label', 'Cerrar menú');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  hamburgerBtn.setAttribute('aria-label', 'Abrir menú');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    if (!menuOpen) mobileMenu.style.display = 'none';
+  }, 400);
+}
+
+hamburgerBtn.addEventListener('click', () => {
+  menuOpen ? closeMenu() : openMenu();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOpen) closeMenu();
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => closeMenu());
+});
+
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.getAttribute('data-target');
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      sub.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ============================================================
+   PAGE HERO CANVAS
+   ============================================================ */
+(function initPageHeroCanvas() {
+  const canvas = document.getElementById('page-hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodeCount = 28;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 2 + 1.5,
+      pulse: Math.random() * Math.PI * 2,
+    });
+  }
+
+  const packets = [];
+  for (let i = 0; i < 10; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({ from: fromIdx, to: toIdx, t: Math.random(), speed: 0.003 + Math.random() * 0.004 });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy; n.pulse += 0.025;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          const alpha = (1 - dist / 180) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      const pulseR = n.r + Math.sin(n.pulse) * 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.7)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(207,0,28,0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        p.t = 0; p.from = p.to;
+        p.to = Math.floor(Math.random() * nodeCount);
+        while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount);
+      }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y;
+      const tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t;
+      const py = fy + (ty - fy) * p.t;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fill();
+      const trailLen = 0.06;
+      const tStart = Math.max(0, p.t - trailLen);
+      const tpx = fx + (tx - fx) * tStart;
+      const tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,200,200,0.4)');
+      ctx.beginPath();
+      ctx.moveTo(tpx, tpy);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   CTA NETWORK CANVAS
+   ============================================================ */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) {
+          const a = (1 - d / 220) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Bloquear teclas DevTools
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+
+</body>
+</html>

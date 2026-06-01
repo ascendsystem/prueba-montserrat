@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aviso Legal - Cargo-Trans Montserrat S.L. Información legal, condiciones de uso y política de protección de datos.">
+<title>Aviso Legal | Transports Montserrat</title>
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* CUSTOM CURSOR */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* SCROLL PROGRESS */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* LANG SWITCHER */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* NAVIGATION */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a, .nav-dropdown-group > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover, .nav-dropdown-group > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-dropdown-group { position: relative; }
+.nav-dropdown-group > a .nav-arrow { transform: rotate(-90deg); opacity: 0.5; }
+.nav-dropdown-sub {
+  position: absolute; left: 100%; top: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 280px; opacity: 0; visibility: hidden;
+  transform: translateX(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 1000;
+}
+.nav-dropdown-group:hover > .nav-dropdown-sub { opacity: 1; visibility: visible; transform: translateX(0); }
+.nav-dropdown-sub li { list-style: none; }
+.nav-dropdown-sub a {
+  display: block; padding: 10px 20px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent; transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown-sub a:hover { color: var(--white); background: rgba(207,0,28,0.12); padding-left: 28px; border-left: 2px solid var(--red); }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* HAMBURGER */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* MOBILE MENU */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+#mobile-menu.animating { display: flex; }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a, .mob-sub-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer; transition: color 0.2s;
+}
+.mob-sub-item > a:hover, .mob-sub-toggle:hover { color: var(--white); }
+.mob-sub-toggle.active { color: var(--red); }
+.mob-sub2 { max-height: 0; overflow: hidden; transition: max-height 0.35s var(--easing); padding-left: 14px; }
+.mob-sub2.open { max-height: 600px; }
+.mob-sub2 a { display: block; padding: 10px 0; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s, padding-left 0.2s; }
+.mob-sub2 a:hover { color: var(--red); padding-left: 6px; }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* PAGE HERO */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(160deg, #020c1e 0%, #010814 55%, #030d20 100%);
+  padding-bottom: 80px;
+}
+.page-hero-img {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=1600&q=70');
+  background-size: cover; background-position: center 30%;
+  opacity: 0.07;
+  filter: saturate(0.2) contrast(1.2);
+}
+.page-hero-img-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(160deg, rgba(2,12,30,0.92) 0%, rgba(1,8,20,0.88) 55%, rgba(3,13,32,0.95) 100%);
+}
+.page-hero-glow {
+  position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px);
+}
+.page-hero-glow-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(207,0,28,0.07) 0%, transparent 70%);
+  top: -80px; right: 10%;
+}
+.page-hero-glow-2 {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(6,48,98,0.12) 0%, transparent 70%);
+  bottom: -100px; left: 5%;
+}
+.page-hero-grid {
+  position: absolute; inset: 0; z-index: 1;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+}
+.page-hero-content {
+  position: relative; z-index: 5;
+  max-width: 1400px; margin: 0 auto; padding: 0 56px;
+  width: 100%;
+}
+.page-hero-label {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-bottom: 28px;
+}
+.page-hero-label-line { width: 28px; height: 1.5px; background: var(--red); box-shadow: 0 0 6px rgba(207,0,28,0.5); }
+.page-hero-label-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--red);
+}
+.page-hero-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); margin-bottom: 36px;
+}
+.page-hero-breadcrumb a { color: rgba(255,255,255,0.28); text-decoration: none; transition: color .2s; }
+.page-hero-breadcrumb a:hover { color: rgba(255,255,255,0.6); }
+.page-hero-breadcrumb span { color: rgba(207,0,28,0.6); }
+.page-hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(56px, 8vw, 110px);
+  font-weight: 900; text-transform: uppercase;
+  line-height: 0.9; letter-spacing: -0.025em;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.page-hero-title em {
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  color: var(--red);
+  font-weight: 700;
+  -webkit-text-stroke: 0;
+}
+.page-hero-sub {
+  font-size: 14px; line-height: 1.7;
+  color: rgba(255,255,255,0.38);
+  max-width: 480px; letter-spacing: 0.01em;
+}
+
+/* SPEED STREAKS */
+.speed-streak {
+  position: absolute; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: streakFly 4s linear infinite;
+  z-index: 2;
+}
+@keyframes streakFly { 0% { left: -30%; width: 20%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 110%; width: 20%; opacity: 0; } }
+
+/* LEGAL CONTENT */
+#legal-content {
+  background: var(--off-white);
+  color: var(--text);
+  padding: 100px 0 120px;
+  position: relative;
+}
+#legal-content::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.2) 50%, transparent 95%);
+}
+.legal-container {
+  max-width: 900px; margin: 0 auto; padding: 0 48px;
+}
+.legal-block {
+  margin-bottom: 56px;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s var(--ease-expo), transform 0.6s var(--ease-expo);
+}
+.legal-block.visible { opacity: 1; transform: translateY(0); }
+.legal-block-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 12px;
+}
+.legal-block-title::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(207,0,28,0.25), transparent);
+}
+.legal-block-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(26px, 3.5vw, 38px); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  color: var(--navy); margin-bottom: 20px; line-height: 1.05;
+}
+.legal-block p {
+  font-size: 14px; line-height: 1.8;
+  color: rgba(20,20,20,0.62);
+  margin-bottom: 14px;
+}
+.legal-block p:last-child { margin-bottom: 0; }
+.legal-block strong {
+  color: rgba(20,20,20,0.85); font-weight: 600;
+}
+
+/* Identification data table */
+.legal-data-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 1px; overflow: hidden;
+  margin: 24px 0;
+}
+.legal-data-item {
+  padding: 16px 22px; border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-right: 1px solid rgba(0,0,0,0.06);
+}
+.legal-data-item:nth-child(even) { border-right: none; }
+.legal-data-item:nth-last-child(-n+2) { border-bottom: none; }
+.legal-data-key {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 5px;
+}
+.legal-data-val {
+  font-size: 13px; color: rgba(20,20,20,0.72); line-height: 1.4;
+}
+
+/* CTA */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 300px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-title em { font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+
+/* BUTTONS */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); text-decoration: none;
+  background: linear-gradient(135deg, var(--red) 0%, #a00014 100%);
+  clip-path: polygon(0 0, 96% 0, 100% 100%, 4% 100%);
+  padding: 17px 44px; position: relative; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(207,0,28,0.3), inset 0 1px 0 rgba(255,255,255,0.12);
+  transition: transform .3s var(--ease-expo), box-shadow .3s, background .3s;
+}
+.btn-primary:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 12px 48px rgba(207,0,28,0.5); transform: translateY(-2px) scaleX(1.03); }
+.btn-arrow { width: 18px; height: 18px; transition: transform .3s var(--ease-expo); }
+.btn-primary:hover .btn-arrow { transform: translateX(5px); }
+
+/* FOOTER */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; flex-wrap: wrap; }
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* LANG */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s var(--ease-expo), transform 0.7s var(--ease-expo);
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+  .legal-data-grid { grid-template-columns: 1fr; }
+  .legal-data-item { border-right: none; }
+  .legal-data-item:nth-last-child(2) { border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .legal-data-item:last-child { border-bottom: none; }
+}
+@media (max-width: 900px) {
+  #nav { padding: 0 24px; }
+  .page-hero-content { padding: 0 24px; }
+}
+@media (max-width: 640px) {
+  .legal-container, .cta-container, .footer-container { padding: 0 24px; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  .cta-bg-text { font-size: 120px; }
+  #nav { padding: 0 20px; }
+  .btn-primary { padding: 15px 32px; font-size: 11px; }
+  .page-hero-title { font-size: clamp(48px, 14vw, 80px); }
+}
+
+img { transition: opacity .5s; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+  <ul class="nav-links" role="menubar">
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/grupajes-cargas-completas/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+          <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+          <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+        </a></li>
+      </ul>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+  </ul>
+  <button class="mobile-menu-btn" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/grupajes-cargas-completas/index.html">
+        <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+        <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+        <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+      </a></div>
+    </div>
+  </div>
+  <div class="mob-nav-item">
+    <a href="../../palletways/index.html">Palletways</a>
+  </div>
+  <div class="mob-nav-item">
+    <a href="../../noticias/index.html">
+      <span data-lang-inline="es" class="active">Noticias</span>
+      <span data-lang-inline="ca">Notícies</span>
+      <span data-lang-inline="en">News</span>
+    </a>
+  </div>
+  <div class="mob-nav-item">
+    <a href="../../contacto/index.html">
+      <span data-lang-inline="es" class="active">Contacto</span>
+      <span data-lang-inline="ca">Contacte</span>
+      <span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section id="page-hero">
+  <div class="page-hero-img"></div>
+  <div class="page-hero-img-overlay"></div>
+  <div class="page-hero-glow page-hero-glow-1"></div>
+  <div class="page-hero-glow page-hero-glow-2"></div>
+  <div class="page-hero-grid"></div>
+  <div class="speed-streak" style="top:30%;animation-delay:0s;animation-duration:3.8s;"></div>
+  <div class="speed-streak" style="top:65%;animation-delay:2s;animation-duration:4.5s;opacity:0.4;"></div>
+
+  <div class="page-hero-content">
+    <div class="page-hero-breadcrumb">
+      <a href="../../index.html">
+        <span data-lang-inline="es" class="active">Inicio</span>
+        <span data-lang-inline="ca">Inici</span>
+        <span data-lang-inline="en">Home</span>
+      </a>
+      <span>—</span>
+      <span>
+        <span data-lang-inline="es" class="active">Legal</span>
+        <span data-lang-inline="ca">Legal</span>
+        <span data-lang-inline="en">Legal</span>
+      </span>
+      <span>—</span>
+      <span style="color:rgba(255,255,255,0.55);">
+        <span data-lang-inline="es" class="active">Aviso Legal</span>
+        <span data-lang-inline="ca">Avís Legal</span>
+        <span data-lang-inline="en">Legal Notice</span>
+      </span>
+    </div>
+
+    <div class="page-hero-label">
+      <div class="page-hero-label-line"></div>
+      <span class="page-hero-label-text">
+        <span data-lang-inline="es" class="active">Información Legal</span>
+        <span data-lang-inline="ca">Informació Legal</span>
+        <span data-lang-inline="en">Legal Information</span>
+      </span>
+    </div>
+
+    <h1 class="page-hero-title">
+      <span data-lang="es" class="active">Aviso<br><em>Legal</em></span>
+      <span data-lang="ca">Avís<br><em>Legal</em></span>
+      <span data-lang="en">Legal<br><em>Notice</em></span>
+    </h1>
+
+    <p class="page-hero-sub">
+      <span data-lang="es" class="active">Información sobre el titular del sitio web, condiciones de uso y protección de datos de CARGO-TRANS MONTSERRAT S.L.</span>
+      <span data-lang="ca">Informació sobre el titular del lloc web, condicions d'ús i protecció de dades de CARGO-TRANS MONTSERRAT S.L.</span>
+      <span data-lang="en">Information about the website owner, terms of use and data protection for CARGO-TRANS MONTSERRAT S.L.</span>
+    </p>
+  </div>
+</section>
+
+<!-- LEGAL CONTENT -->
+<section id="legal-content">
+  <div class="legal-container">
+
+    <!-- IDENTIFICACIÓN -->
+    <div class="legal-block reveal">
+      <div class="legal-block-title">
+        <span data-lang-inline="es" class="active">01 — Identificación</span>
+        <span data-lang-inline="ca">01 — Identificació</span>
+        <span data-lang-inline="en">01 — Identification</span>
+      </div>
+      <h2 class="legal-block-heading">
+        <span data-lang="es" class="active">Datos del Titular</span>
+        <span data-lang="ca">Dades del Titular</span>
+        <span data-lang="en">Company Details</span>
+      </h2>
+      <p>
+        <span data-lang="es" class="active">En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la Información, los datos identificativos del titular de este sitio web son los siguientes:</span>
+        <span data-lang="ca">En compliment de l'article 10 de la Llei 34/2002, de Serveis de la Societat de la Informació, les dades identificatives del titular d'aquest lloc web són les següents:</span>
+        <span data-lang="en">In compliance with Article 10 of Law 34/2002 on Information Society Services, the identifying details of the website owner are as follows:</span>
+      </p>
+      <div class="legal-data-grid">
+        <div class="legal-data-item">
+          <div class="legal-data-key">
+            <span data-lang-inline="es" class="active">Denominación</span>
+            <span data-lang-inline="ca">Denominació</span>
+            <span data-lang-inline="en">Name</span>
+          </div>
+          <div class="legal-data-val">CARGO-TRANS MONTSERRAT S.L.</div>
+        </div>
+        <div class="legal-data-item">
+          <div class="legal-data-key">CIF</div>
+          <div class="legal-data-val">B60167319</div>
+        </div>
+        <div class="legal-data-item">
+          <div class="legal-data-key">
+            <span data-lang-inline="es" class="active">Domicilio</span>
+            <span data-lang-inline="ca">Domicili</span>
+            <span data-lang-inline="en">Address</span>
+          </div>
+          <div class="legal-data-val">C/ Agricultura, 18, Pol. Ind. Domenys II<br>08720 Vilafranca del Penedès (Barcelona)</div>
+        </div>
+        <div class="legal-data-item">
+          <div class="legal-data-key">
+            <span data-lang-inline="es" class="active">Registro Mercantil</span>
+            <span data-lang-inline="ca">Registre Mercantil</span>
+            <span data-lang-inline="en">Company Registry</span>
+          </div>
+          <div class="legal-data-val">Barcelona · Tomo 24.605, Folio 188<br>Hoja B-70.873</div>
+        </div>
+        <div class="legal-data-item">
+          <div class="legal-data-key">
+            <span data-lang-inline="es" class="active">Teléfono</span>
+            <span data-lang-inline="ca">Telèfon</span>
+            <span data-lang-inline="en">Phone</span>
+          </div>
+          <div class="legal-data-val">938 91 10 18</div>
+        </div>
+        <div class="legal-data-item">
+          <div class="legal-data-key">Email</div>
+          <div class="legal-data-val">montserrat@tmontserrat.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPIEDAD INTELECTUAL -->
+    <div class="legal-block reveal">
+      <div class="legal-block-title">
+        <span data-lang-inline="es" class="active">02 — Propiedad Intelectual</span>
+        <span data-lang-inline="ca">02 — Propietat Intel·lectual</span>
+        <span data-lang-inline="en">02 — Intellectual Property</span>
+      </div>
+      <h2 class="legal-block-heading">
+        <span data-lang="es" class="active">Derechos de Autor</span>
+        <span data-lang="ca">Drets d'Autor</span>
+        <span data-lang="en">Copyright</span>
+      </h2>
+      <p>
+        <span data-lang="es" class="active">Todos los derechos de Propiedad Industrial e Intelectual de los contenidos de esta web —incluyendo marcas, diseños, textos e imágenes— pertenecen a <strong>CARGO-TRANS MONTSERRAT</strong> y están protegidos por la legislación española e internacional. Queda expresamente prohibida su reproducción total o parcial sin autorización escrita.</span>
+        <span data-lang="ca">Tots els drets de Propietat Industrial i Intel·lectual dels continguts d'aquest web —incloent marques, dissenys, textos i imatges— pertanyen a <strong>CARGO-TRANS MONTSERRAT</strong> i estan protegits per la legislació espanyola i internacional. Queda expressament prohibida la seva reproducció total o parcial sense autorització escrita.</span>
+        <span data-lang="en">All Industrial and Intellectual Property rights over the content of this website —including trademarks, designs, texts and images— belong to <strong>CARGO-TRANS MONTSERRAT</strong> and are protected by Spanish and international legislation. Any total or partial reproduction without written authorisation is expressly prohibited.</span>
+      </p>
+    </div>
+
+    <!-- CONDICIONES DE USO -->
+    <div class="legal-block reveal">
+      <div class="legal-block-title">
+        <span data-lang-inline="es" class="active">03 — Condiciones de Uso</span>
+        <span data-lang-inline="ca">03 — Condicions d'Ús</span>
+        <span data-lang-inline="en">03 — Terms of Use</span>
+      </div>
+      <h2 class="legal-block-heading">
+        <span data-lang="es" class="active">Uso del Sitio Web</span>
+        <span data-lang="ca">Ús del Lloc Web</span>
+        <span data-lang="en">Website Use</span>
+      </h2>
+      <p>
+        <span data-lang="es" class="active">El acceso a este sitio implica la aceptación de estas condiciones. Queda prohibida la utilización de los contenidos con fines comerciales, su distribución, transformación o comunicación sin autorización. CARGO-TRANS MONTSERRAT no responderá de los daños derivados del uso de la información aquí publicada.</span>
+        <span data-lang="ca">L'accés a aquest lloc implica l'acceptació d'aquestes condicions. Queda prohibida la utilització dels continguts amb finalitats comercials, la seva distribució, transformació o comunicació sense autorització. CARGO-TRANS MONTSERRAT no respondrà dels danys derivats de l'ús de la informació aquí publicada.</span>
+        <span data-lang="en">Access to this site implies acceptance of these terms. The use of content for commercial purposes, its distribution, transformation or communication without authorisation is prohibited. CARGO-TRANS MONTSERRAT shall not be liable for any damages arising from the use of information published here.</span>
+      </p>
+      <p>
+        <span data-lang="es" class="active">El usuario se obliga a no utilizar la información publicada para fines ilícitos o lesivos, ni a realizar acciones contrarias al contenido de este Aviso Legal. CARGO-TRANS MONTSERRAT no garantiza la ausencia de interrupciones en el acceso al sitio.</span>
+        <span data-lang="ca">L'usuari es compromet a no utilitzar la informació publicada per a fins il·lícits o lesius, ni a realitzar accions contràries al contingut d'aquest Avís Legal. CARGO-TRANS MONTSERRAT no garanteix l'absència d'interrupcions en l'accés al lloc.</span>
+        <span data-lang="en">Users undertake not to use published information for unlawful or harmful purposes, nor to take any action contrary to the content of this Legal Notice. CARGO-TRANS MONTSERRAT does not guarantee uninterrupted access to the site.</span>
+      </p>
+    </div>
+
+    <!-- PROTECCIÓN DE DATOS -->
+    <div class="legal-block reveal">
+      <div class="legal-block-title">
+        <span data-lang-inline="es" class="active">04 — Protección de Datos</span>
+        <span data-lang-inline="ca">04 — Protecció de Dades</span>
+        <span data-lang-inline="en">04 — Data Protection</span>
+      </div>
+      <h2 class="legal-block-heading">
+        <span data-lang="es" class="active">Política de Privacidad</span>
+        <span data-lang="ca">Política de Privacitat</span>
+        <span data-lang="en">Privacy Policy</span>
+      </h2>
+      <p>
+        <span data-lang="es" class="active">En cumplimiento del <strong>Reglamento (UE) 2016/679</strong>, los datos personales facilitados serán tratados para gestionar la información solicitada y dar respuesta a sus consultas. El interesado presta consentimiento expreso al cumplimentar los formularios de contacto o enviar cualquier solicitud a CARGO-TRANS MONTSERRAT.</span>
+        <span data-lang="ca">En compliment del <strong>Reglament (UE) 2016/679</strong>, les dades personals facilitades seran tractades per gestionar la informació sol·licitada i donar resposta a les seves consultes. L'interessat presta consentiment exprés en emplenar els formularis de contacte o enviar qualsevol sol·licitud a CARGO-TRANS MONTSERRAT.</span>
+        <span data-lang="en">In compliance with <strong>Regulation (EU) 2016/679</strong>, personal data provided will be processed to manage requested information and respond to enquiries. The data subject provides express consent by completing contact forms or sending any request to CARGO-TRANS MONTSERRAT.</span>
+      </p>
+      <p>
+        <span data-lang="es" class="active">Sus datos se conservarán durante un máximo de dos años. Puede ejercer sus derechos de acceso, rectificación, supresión, limitación y portabilidad dirigiéndose por escrito a <strong>CARGO-TRANS MONTSERRAT, S.L., C/ Torras i Bages S/N, 08770 Sant Sadurní d'Anoia</strong>. Tiene derecho a presentar reclamación ante la Agencia Española de Protección de Datos.</span>
+        <span data-lang="ca">Les seves dades es conservaran durant un màxim de dos anys. Pot exercir els seus drets d'accés, rectificació, supressió, limitació i portabilitat adreçant-se per escrit a <strong>CARGO-TRANS MONTSERRAT, S.L., C/ Torras i Bages S/N, 08770 Sant Sadurní d'Anoia</strong>. Té dret a presentar reclamació davant l'Agència Espanyola de Protecció de Dades.</span>
+        <span data-lang="en">Your data will be retained for a maximum of two years. You may exercise your rights of access, rectification, erasure, restriction and portability by writing to <strong>CARGO-TRANS MONTSERRAT, S.L., C/ Torras i Bages S/N, 08770 Sant Sadurní d'Anoia</strong>. You have the right to lodge a complaint with the Spanish Data Protection Agency.</span>
+      </p>
+    </div>
+
+    <!-- LEGISLACIÓN -->
+    <div class="legal-block reveal">
+      <div class="legal-block-title">
+        <span data-lang-inline="es" class="active">05 — Legislación</span>
+        <span data-lang-inline="ca">05 — Legislació</span>
+        <span data-lang-inline="en">05 — Legislation</span>
+      </div>
+      <h2 class="legal-block-heading">
+        <span data-lang="es" class="active">Jurisdicción Aplicable</span>
+        <span data-lang="ca">Jurisdicció Aplicable</span>
+        <span data-lang="en">Applicable Jurisdiction</span>
+      </h2>
+      <p>
+        <span data-lang="es" class="active">El presente Aviso Legal se rige por la normativa española vigente. Para la resolución de cualquier controversia, el usuario renuncia expresamente a cualquier otro fuero y se somete a la jurisdicción de los <strong>Juzgados y Tribunales de Barcelona</strong>.</span>
+        <span data-lang="ca">El present Avís Legal es regeix per la normativa espanyola vigent. Per a la resolució de qualsevol controvèrsia, l'usuari renuncia expressament a qualsevol altre fur i se sotmet a la jurisdicció dels <strong>Jutjats i Tribunals de Barcelona</strong>.</span>
+        <span data-lang="en">This Legal Notice is governed by current Spanish legislation. For the resolution of any dispute, the user expressly waives any other jurisdiction and submits to the jurisdiction of the <strong>Courts of Barcelona</strong>.</span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+
+      <div class="footer-column">
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/grupajes-cargas-completas/index.html">
+            <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+            <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+            <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+          </a></li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2026 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">
+          <span data-lang-inline="es" class="active">Cookies</span>
+          <span data-lang-inline="ca">Cookies</span>
+          <span data-lang-inline="en">Cookies</span>
+        </a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* CUSTOM CURSOR */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* SCROLL PROGRESS */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* NAV SCROLL */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* SCROLL REVEAL */
+const revealEls = document.querySelectorAll('.reveal, .legal-block');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 0.08;
+  revealObserver.observe(el);
+});
+
+/* MOBILE MENU */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburgerBtn.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.contains('open');
+  if (isOpen) {
+    mobileMenu.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  } else {
+    mobileMenu.classList.add('animating');
+    requestAnimationFrame(() => {
+      mobileMenu.classList.add('open');
+      hamburgerBtn.classList.add('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'true');
+      setTimeout(() => mobileMenu.classList.remove('animating'), 400);
+    });
+  }
+});
+document.querySelectorAll('.mob-nav-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.dataset.target;
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub.open').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle.active').forEach(b => b.classList.remove('active'));
+    if (!isOpen) {
+      sub.classList.add('open');
+      btn.classList.add('active');
+      btn.setAttribute('aria-expanded', 'true');
+    } else {
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+
+/* LANG SWITCHER */
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.dataset.lang === lang);
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.dataset.langInline === lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+  });
+}
+
+/* CTA CANVAS */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.12 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 220) {
+          const a = (1 - d/220) * 0.12;
+          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`; ctx.lineWidth = 0.8; ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, 2, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)'; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'F12') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+  if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+</body>
+</html>

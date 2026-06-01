@@ -1,0 +1,2688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Grupajes y Cargas Completas - Transports Montserrat. Gran fiabilidad, gran flexibilidad y alta calidad en transporte nacional e internacional desde 1940.">
+<title>Grupajes y Cargas Completas | Transports Montserrat</title>
+
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & RESET
+   ============================================================ */
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   LANG SWITCHER
+   ============================================================ */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a, .nav-dropdown-group > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover, .nav-dropdown-group > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-dropdown-group { position: relative; }
+.nav-dropdown-group > a .nav-arrow { transform: rotate(-90deg); opacity: 0.5; }
+.nav-dropdown-sub {
+  position: absolute; left: 100%; top: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 280px; opacity: 0; visibility: hidden;
+  transform: translateX(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s; z-index: 1000;
+}
+.nav-dropdown-group:hover > .nav-dropdown-sub { opacity: 1; visibility: visible; transform: translateX(0); }
+.nav-dropdown-sub li { list-style: none; }
+.nav-dropdown-sub a {
+  display: block; padding: 10px 20px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6);
+  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent; transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown-sub a:hover { color: var(--white); background: rgba(207,0,28,0.12); padding-left: 28px; border-left: 2px solid var(--red); }
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+#mobile-menu.animating { display: flex; }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a, .mob-sub-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer; transition: color 0.2s;
+}
+.mob-sub-item > a:hover, .mob-sub-toggle:hover { color: var(--white); }
+.mob-sub-toggle.active { color: var(--red); }
+.mob-sub2 { max-height: 0; overflow: hidden; transition: max-height 0.35s var(--easing); padding-left: 14px; }
+.mob-sub2.open { max-height: 600px; }
+.mob-sub2 a { display: block; padding: 10px 0; font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.03); transition: color 0.2s, padding-left 0.2s; }
+.mob-sub2 a:hover { color: var(--red); padding-left: 6px; }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+section { position: relative; }
+.section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.section-label-line {
+  width: 36px; height: 2px; flex-shrink: 0;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.4);
+}
+.section-label-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); text-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.section-body { font-size: 14.5px; line-height: 1.8; font-weight: 300; color: rgba(255,255,255,0.55); letter-spacing: 0.01em; }
+
+/* Reveal animations */
+.reveal {
+  opacity: 0; transform: translateY(44px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-64px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(64px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  text-decoration: none; padding: 17px 40px;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 30px rgba(207,0,28,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform .35s var(--ease-expo), box-shadow .35s;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--red-bright), var(--red));
+  transform: translateX(-100%); transition: transform 0.35s var(--ease-expo);
+}
+.btn-primary:hover { transform: scaleX(1.03) translateY(-1px); box-shadow: 0 12px 40px rgba(207,0,28,0.55), inset 0 1px 0 rgba(255,255,255,0.15); }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-arrow { position: relative; z-index: 1; width: 16px; height: 16px; flex-shrink: 0; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 2px;
+  transition: color .25s, border-color .25s, letter-spacing .25s;
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.45); letter-spacing: 0.16em; }
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+#marquee-strip {
+  background: linear-gradient(90deg, #b5001a 0%, var(--red) 30%, #cf001c 70%, #b5001a 100%);
+  padding: 13px 0; overflow: hidden; white-space: nowrap;
+  position: relative; z-index: 10;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(207,0,28,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.marquee-track {
+  display: inline-flex; gap: 0;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 28px; padding: 0 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+}
+.marquee-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.55); flex-shrink: 0; box-shadow: 0 0 4px rgba(255,255,255,0.3); }
+
+/* ============================================================
+   PAGE HERO — SPLIT VERTICAL LAYOUT (diferente del index)
+   ============================================================ */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(160deg, #020c1e 0%, #010814 55%, #030d20 100%);
+  padding-bottom: 80px;
+}
+
+/* Canvas de fondo */
+#hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.4; pointer-events: none; z-index: 1;
+}
+
+/* Grid animado */
+.hero-bg-grid {
+  position: absolute; inset: 0; z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridShift 50s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse 100% 90% at 50% 60%, black 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 100% 90% at 50% 60%, black 20%, transparent 80%);
+}
+@keyframes gridShift { from { transform: translate(0,0); } to { transform: translate(80px,80px); } }
+
+/* Scan lines */
+.hero-bg-lines { position: absolute; inset: 0; overflow: hidden; z-index: 3; }
+.hero-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent 0%, rgba(207,0,28,0.0) 8%, rgba(207,0,28,0.55) 50%, rgba(207,0,28,0.0) 92%, transparent 100%);
+  height: 1px; width: 55%;
+  filter: blur(0.4px);
+  animation: lineMove 10s var(--ease-expo) infinite; opacity: 0;
+}
+.hero-line:nth-child(1) { top: 22%; left: -20%; animation-delay: 0s; }
+.hero-line:nth-child(2) { top: 52%; left: -20%; animation-delay: 3.2s; }
+.hero-line:nth-child(3) { top: 78%; left: -20%; animation-delay: 6.5s; }
+@keyframes lineMove { 0% { opacity:0; transform: translateX(0); } 10% { opacity:1; } 90% { opacity:1; } 100% { opacity:0; transform: translateX(265%); } }
+
+/* Noise overlay */
+.hero-noise {
+  position: absolute; inset: 0; opacity: 0.038; z-index: 8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px; pointer-events: none;
+}
+
+/* Ambient glow orbs */
+.hero-glow {
+  position: absolute; pointer-events: none; z-index: 3;
+  border-radius: 50%; filter: blur(80px);
+}
+.hero-glow-1 {
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(207,0,28,0.07) 0%, transparent 70%);
+  top: 5%; right: -100px;
+  animation: glowPulse 7s ease-in-out infinite alternate;
+}
+.hero-glow-2 {
+  width: 500px; height: 600px;
+  background: radial-gradient(ellipse, rgba(13,74,143,0.1) 0%, transparent 70%);
+  bottom: -80px; left: 5%;
+  animation: glowPulse 9s ease-in-out infinite alternate-reverse;
+}
+@keyframes glowPulse { from { opacity: 0.5; transform: scale(1); } to { opacity: 1; transform: scale(1.12); } }
+
+/* Speed streaks */
+.speed-streak {
+  position: absolute; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.055), transparent);
+  animation: streakFly 4s linear infinite; z-index: 2;
+}
+@keyframes streakFly { 0% { left: -30%; width: 20%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 110%; width: 20%; opacity: 0; } }
+
+/* Hero layout — full-width bottom-anchored columns */
+.hero-inner {
+  position: relative; z-index: 10;
+  width: 100%; max-width: 1400px; margin: 0 auto;
+  padding: 0 56px 0 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  align-items: end;
+}
+
+/* Left: title block */
+.hero-left {
+  padding-right: 80px;
+  padding-bottom: 0;
+}
+
+.hero-breadcrumb {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 36px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 0.3s forwards;
+}
+.hero-breadcrumb a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); text-decoration: none;
+  transition: color .2s;
+}
+.hero-breadcrumb a:hover { color: rgba(207,0,28,0.8); }
+.hero-breadcrumb-sep { color: rgba(255,255,255,0.18); font-size: 10px; }
+.hero-breadcrumb-current {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(207,0,28,0.7);
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 12px;
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 0.45s forwards;
+}
+.hero-tag-line {
+  width: 44px; height: 1.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.5);
+}
+.hero-tag-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(207,0,28,0.9); text-shadow: 0 0 20px rgba(207,0,28,0.3);
+}
+
+.hero-title-block { margin-bottom: 36px; overflow: hidden; }
+.hero-title-line-wrap { overflow: hidden; }
+.hero-title-line {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase;
+  line-height: 0.91; letter-spacing: -0.02em;
+  font-size: clamp(56px, 7.5vw, 110px);
+}
+.hero-title-line:nth-child(1) { animation: slideUp 0.9s var(--easing) 0.6s both; }
+.hero-title-line:nth-child(2) { animation: slideUp 0.9s var(--easing) 0.75s both; color: var(--red); }
+.hero-title-line:nth-child(3) {
+  animation: slideUp 0.9s var(--easing) 0.9s both;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.22);
+  color: transparent;
+}
+@keyframes slideUp { from { opacity:0; transform: translateY(100%); } to { opacity:1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+.hero-tagline-strip {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 44px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.1s forwards;
+}
+.hero-tagline-pill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid rgba(207,0,28,0.3);
+  background: rgba(207,0,28,0.06);
+  color: rgba(207,0,28,0.8);
+  padding: 6px 16px;
+  backdrop-filter: blur(8px);
+  transition: all .3s;
+}
+.hero-tagline-pill:hover { border-color: rgba(207,0,28,0.6); background: rgba(207,0,28,0.14); }
+.hero-tagline-sep { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+
+.hero-actions {
+  display: flex; align-items: center; gap: 24px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.3s forwards; flex-wrap: wrap;
+}
+
+/* Right: metrics column */
+.hero-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 0;
+  padding-bottom: 8px;
+  opacity: 0; animation: fadeUp 0.9s var(--easing) 1.0s forwards;
+}
+
+.hero-metric-stack {
+  display: flex; flex-direction: column; gap: 3px; width: 100%;
+}
+.hero-metric-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-left: 3px solid rgba(207,0,28,0.4);
+  padding: 24px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .35s, border-color .35s, transform .35s var(--ease-expo);
+  position: relative; overflow: hidden;
+}
+.hero-metric-card::before {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0;
+  width: 0;
+  background: rgba(207,0,28,0.06);
+  transition: width .4s var(--ease-expo);
+}
+.hero-metric-card:hover { background: rgba(255,255,255,0.055); border-left-color: var(--red); transform: translateX(-4px); }
+.hero-metric-card:hover::before { width: 100%; }
+.hero-metric-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.38); position: relative; z-index: 1;
+}
+.hero-metric-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 42px; font-weight: 900; color: var(--white);
+  line-height: 1; letter-spacing: -0.02em;
+  position: relative; z-index: 1;
+}
+.hero-metric-value span { color: var(--red); text-shadow: 0 0 20px rgba(207,0,28,0.4); font-size: 0.6em; }
+
+/* Scroll indicator */
+.hero-scroll-indicator {
+  position: absolute; bottom: 40px; left: 56px;
+  display: flex; align-items: center; gap: 16px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.8s forwards; z-index: 10;
+}
+.scroll-line {
+  width: 72px; height: 1px;
+  background: rgba(255,255,255,0.15); position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100% { left:-100%; } 50% { left:100%; } }
+.scroll-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+/* ============================================================
+   INTRO — EXPERIENCIA DESDE 1940 (SPLIT TEXT + NÚMERO GRANDE)
+   ============================================================ */
+#intro {
+  background: var(--off-white); color: var(--text);
+  padding: 120px 0; overflow: hidden; position: relative;
+}
+#intro::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 90% 10%, rgba(6,48,98,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 90%, rgba(207,0,28,0.025) 0%, transparent 60%);
+  pointer-events: none;
+}
+.intro-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  position: relative; z-index: 2;
+}
+.intro-left { position: relative; }
+.intro-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(120px, 18vw, 220px);
+  font-weight: 900; line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(6,48,98,0.12);
+  letter-spacing: -0.04em;
+  user-select: none; pointer-events: none;
+  position: absolute; top: -20px; left: -20px;
+}
+.intro-content { position: relative; z-index: 2; padding-top: 60px; }
+.intro-content .section-label-text { color: var(--red); }
+.intro-content .section-title { font-size: clamp(40px,5vw,68px); color: var(--navy); }
+.intro-content .section-body { color: rgba(20,20,20,0.6); margin-top: 24px; max-width: 480px; }
+.intro-right {
+  display: flex; flex-direction: column; gap: 0;
+}
+.intro-feature {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding: 30px 0; border-top: 1px solid rgba(0,0,0,0.07);
+  transition: transform .4s var(--ease-expo), border-color .3s;
+}
+.intro-feature:hover { transform: translateX(12px); border-color: rgba(207,0,28,0.15); }
+.intro-feature:last-child { border-bottom: 1px solid rgba(0,0,0,0.07); }
+.intro-feature-icon {
+  width: 52px; height: 52px; flex-shrink: 0;
+  background: var(--navy);
+  clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(6,48,98,0.2);
+  transition: background .3s, box-shadow .3s, transform .3s var(--ease-expo);
+}
+.intro-feature:hover .intro-feature-icon { background: linear-gradient(135deg, var(--navy-mid), var(--navy)); box-shadow: 0 6px 24px rgba(6,48,98,0.35); transform: scale(1.06); }
+.intro-feature-icon svg { width: 22px; height: 22px; fill: var(--white); }
+.intro-feature-body {}
+.intro-feature-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--navy); margin-bottom: 8px; }
+.intro-feature-desc { font-size: 13.5px; line-height: 1.65; color: rgba(20,20,20,0.5); max-width: 380px; }
+
+/* ============================================================
+   SERVICIOS CARDS — BENTO GRID ASIMÉTRICO
+   ============================================================ */
+#servicios-grid {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(13,74,143,0.07) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+#servicios-grid::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(207,0,28,0.18) 50%, transparent 90%);
+}
+#servicios-grid::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(207,0,28,0.025) 0%, transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(13,74,143,0.04) 0%, transparent 35%);
+}
+.sg-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  position: relative; z-index: 1;
+}
+.sg-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: end; margin-bottom: 80px;
+}
+.sg-header .section-title { font-size: clamp(40px,5vw,72px); color: var(--white); }
+.sg-header-desc { font-size: 14.5px; line-height: 1.8; color: rgba(255,255,255,0.42); max-width: 380px; }
+
+/* Bento grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  gap: 3px;
+}
+.bento-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 48px 44px;
+  position: relative; overflow: hidden;
+  transition: background .45s var(--ease-expo), border-color .45s, transform .4s var(--ease-expo), box-shadow .4s;
+  cursor: default;
+}
+.bento-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transition: width .5s var(--ease-expo);
+  box-shadow: 0 0 10px rgba(207,0,28,0.4);
+}
+.bento-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(207,0,28,0.06); }
+.bento-card:hover::after { width: 100%; }
+
+/* Grid placement */
+.bento-card:nth-child(1) { grid-column: span 5; grid-row: 1; }
+.bento-card:nth-child(2) { grid-column: span 4; grid-row: 1; }
+.bento-card:nth-child(3) { grid-column: span 3; grid-row: 1; }
+.bento-card:nth-child(4) { grid-column: span 3; grid-row: 2; }
+.bento-card:nth-child(5) { grid-column: span 5; grid-row: 2; }
+.bento-card:nth-child(6) { grid-column: span 4; grid-row: 2; background: linear-gradient(145deg, var(--red) 0%, #a80016 100%) !important; border-color: transparent !important; box-shadow: 0 12px 50px rgba(207,0,28,0.35) !important; }
+.bento-card:nth-child(6):hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(207,0,28,0.5) !important; }
+.bento-card:nth-child(6)::after { background: rgba(255,255,255,0.25) !important; }
+.bento-card:nth-child(6) .bento-num { color: rgba(255,255,255,0.45); }
+.bento-card:nth-child(6) .bento-title { color: var(--white); }
+.bento-card:nth-child(6) .bento-desc { color: rgba(255,255,255,0.65); }
+.bento-card:nth-child(6) .bento-icon { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+.bento-card:nth-child(6) .bento-icon svg { fill: var(--white); }
+.bento-card:nth-child(6) .bento-link { color: rgba(255,255,255,0.85); }
+.bento-card:nth-child(6) .bento-link-arrow { background: rgba(255,255,255,0.85); }
+
+.bento-num { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; color: rgba(207,0,28,0.4); margin-bottom: 28px; }
+.bento-icon {
+  width: 52px; height: 52px;
+  background: rgba(207,0,28,0.08);
+  border: 1px solid rgba(207,0,28,0.16);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.05);
+  transition: background .35s, border-color .35s, transform .35s var(--ease-expo);
+}
+.bento-card:hover .bento-icon { background: rgba(207,0,28,0.16); border-color: rgba(207,0,28,0.3); transform: scale(1.05) rotate(1.5deg); }
+.bento-icon svg { width: 22px; height: 22px; fill: var(--red); }
+.bento-title { font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--white); margin-bottom: 14px; line-height: 1.05; }
+.bento-desc { font-size: 13px; line-height: 1.72; color: rgba(255,255,255,0.36); margin-bottom: 28px; }
+.bento-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--red);
+  text-decoration: none; transition: gap .3s var(--ease-expo), color .25s;
+}
+.bento-link:hover { gap: 18px; }
+.bento-link-arrow { width: 20px; height: 1px; background: var(--red); position: relative; }
+.bento-link-arrow::after { content: '>'; position: absolute; right: -8px; top: -9px; font-size: 16px; }
+
+/* ============================================================
+   TORRE DE CONTROL — PROCESS STICKY SECTION
+   ============================================================ */
+#torre {
+  background: #060e1f;
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+#torre::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.15) 50%, transparent 95%);
+}
+.torre-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 5fr 7fr; gap: 100px; align-items: start;
+}
+.torre-left { position: sticky; top: 120px; }
+.torre-left .section-title { font-size: clamp(38px,5vw,62px); color: var(--white); margin-bottom: 28px; }
+.torre-left .section-body { max-width: 380px; }
+.torre-visual {
+  margin-top: 48px; position: relative;
+  width: 100%; height: 260px;
+}
+#torre-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.torre-right {
+  display: flex; flex-direction: column; gap: 3px; padding-top: 4px;
+}
+.process-step {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 36px 40px;
+  display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: start;
+  position: relative; overflow: hidden;
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo), box-shadow .4s;
+}
+.process-step::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 0; background: rgba(207,0,28,0.07);
+  transition: width .5s var(--ease-expo);
+}
+.process-step:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); transform: translateX(6px); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+.process-step:hover::before { width: 100%; }
+.process-step-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 52px; font-weight: 900;
+  color: rgba(207,0,28,0.15); line-height: 1;
+  letter-spacing: -0.03em; transition: color .35s;
+  position: relative; z-index: 1;
+}
+.process-step:hover .process-step-num { color: rgba(207,0,28,0.35); }
+.process-step-body { position: relative; z-index: 1; }
+.process-step-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--white); margin-bottom: 10px; }
+.process-step-desc { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,0.38); }
+
+/* ============================================================
+   TRANSFERS — SPLIT LAYOUT INVERSO (fondo oscuro puro)
+   ============================================================ */
+#transfers {
+  background: #030a18;
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+#transfers::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.12) 50%, transparent 95%);
+}
+.transfers-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.transfers-left { position: relative; }
+.transfers-img-wrap {
+  position: relative; height: 520px;
+}
+.transfers-img-main {
+  position: absolute; top: 0; right: 0; width: 88%; height: 78%;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+}
+.transfers-img-main img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.55) contrast(1.12); display: block; transition: transform 6s var(--ease-expo); }
+.transfers-img-main:hover img { transform: scale(1.06); }
+.transfers-img-accent {
+  position: absolute; bottom: 0; left: 0; width: 54%; height: 44%;
+  background: linear-gradient(145deg, var(--red), #a80016);
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end;
+  padding: 28px 32px; z-index: 2;
+  box-shadow: 0 12px 50px rgba(207,0,28,0.35);
+  overflow: hidden;
+}
+.transfers-img-accent::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.08) 0%, transparent 60%);
+}
+.transfers-accent-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); margin-bottom: 8px; position: relative; z-index: 1;
+}
+.transfers-accent-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px; font-weight: 900; text-transform: uppercase;
+  color: var(--white); line-height: 1.05; position: relative; z-index: 1;
+}
+
+.transfers-right { padding-left: 20px; }
+.transfers-right .section-title { font-size: clamp(38px,5vw,64px); color: var(--white); }
+.transfers-right .section-body { margin-top: 24px; max-width: 440px; }
+.transfers-tags {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; margin-bottom: 44px;
+}
+.transfers-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.45);
+  padding: 7px 18px;
+  transition: all .25s;
+}
+.transfers-tag:hover { border-color: rgba(207,0,28,0.4); background: rgba(207,0,28,0.07); color: rgba(255,255,255,0.8); }
+
+/* ============================================================
+   FLOTA — KPI HIGHLIGHT SECTION
+   ============================================================ */
+#flota {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 110px 0; overflow: hidden; position: relative;
+}
+#flota::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+.flota-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 2fr 5fr; gap: 80px; align-items: center;
+}
+.flota-left .section-title { font-size: clamp(34px,4vw,54px); color: var(--white); }
+.flota-left .section-body { margin-top: 18px; }
+.flota-kpi-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+}
+.flota-kpi {
+  padding: 40px 32px; text-align: center; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo), box-shadow .4s;
+}
+.flota-kpi::after {
+  content: ''; position: absolute; top: 0; left: 50%;
+  width: 36px; height: 2.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(207,0,28,0.4);
+}
+.flota-kpi:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.1); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(207,0,28,0.05); }
+.flota-kpi-value { font-family: 'Barlow Condensed', sans-serif; font-size: 58px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; }
+.flota-kpi-value span { color: var(--red); text-shadow: 0 0 20px rgba(207,0,28,0.4); }
+.flota-kpi-label { font-size: 10.5px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 10px; line-height: 1.4; }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 170px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 300px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-title em { font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 80px;
+  padding-bottom: 30px;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+}
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-contact-icon { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 30px;
+}
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal {
+  display: flex; gap: 24px; margin-left: auto;
+}
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* Lang inline/block */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* Palletways route pulse */
+.palletways-route-line {
+  position: absolute; bottom: 30px; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, transparent, rgba(207,0,28,0.15), transparent);
+  overflow: hidden; z-index: 1;
+}
+.palletways-route-pulse {
+  position: absolute; top: 0; left: -40%; width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(207,0,28,0.6), transparent);
+  animation: routePulse 4s ease-in-out infinite;
+}
+@keyframes routePulse { 0% { left: -40%; } 100% { left: 140%; } }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .nav-links { gap: 16px; }
+  .bento-card:nth-child(1) { grid-column: span 6; }
+  .bento-card:nth-child(2) { grid-column: span 6; }
+  .bento-card:nth-child(3) { grid-column: span 12; }
+  .bento-card:nth-child(4) { grid-column: span 4; }
+  .bento-card:nth-child(5) { grid-column: span 4; }
+  .bento-card:nth-child(6) { grid-column: span 4; }
+  .flota-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+  .torre-container { grid-template-columns: 1fr; gap: 60px; }
+  .torre-left { position: static; }
+}
+@media (max-width: 900px) {
+  #nav { padding: 0 24px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .intro-container { grid-template-columns: 1fr; gap: 48px; }
+  .intro-year { display: none; }
+  .intro-content { padding-top: 0; }
+  .sg-header { grid-template-columns: 1fr; gap: 24px; }
+  .transfers-container { grid-template-columns: 1fr; gap: 60px; }
+  .transfers-left { display: none; }
+  .flota-container { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 640px) {
+  .bento-card:nth-child(1), .bento-card:nth-child(2), .bento-card:nth-child(3),
+  .bento-card:nth-child(4), .bento-card:nth-child(5), .bento-card:nth-child(6) { grid-column: span 12; }
+  .hero-inner, .sg-container, .torre-container, .transfers-container, .flota-container, .cta-container, .footer-container, .intro-container { padding: 0 24px; }
+  .hero-title-line { font-size: clamp(44px, 13vw, 72px); }
+  .cta-bg-text { font-size: 120px; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  #nav { padding: 0 20px; }
+  .flota-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Image loading */
+img { transition: opacity .5s; }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+
+  <ul class="nav-links" role="menubar">
+
+    <!-- EMPRESA -->
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- TRANSPORTE -->
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/grupajes-cargas-completas/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+          <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+          <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- PALLETWAYS -->
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+
+    <!-- NOTICIAS -->
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+
+    <!-- CONTACTO -->
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+
+  </ul>
+
+
+
+  <button class="mobile-menu-btn" id="hamburger-btn"
+          aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+</nav>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/grupajes-cargas-completas/index.html">
+        <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+        <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+        <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../palletways/index.html">Palletways</a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../noticias/index.html">
+      <span data-lang-inline="es" class="active">Noticias</span>
+      <span data-lang-inline="ca">Notícies</span>
+      <span data-lang-inline="en">News</span>
+    </a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../contacto/index.html">
+      <span data-lang-inline="es" class="active">Contacto</span>
+      <span data-lang-inline="ca">Contacte</span>
+      <span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAGE HERO — BOTTOM-ANCHORED SPLIT
+     ============================================================ -->
+<section id="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-lines">
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+  </div>
+  <div class="speed-streak" style="top:28%;animation-delay:0s;animation-duration:3.8s;"></div>
+  <div class="speed-streak" style="top:58%;animation-delay:2s;animation-duration:4.5s;opacity:0.45;"></div>
+  <div class="speed-streak" style="top:82%;animation-delay:3.5s;animation-duration:3.2s;opacity:0.28;"></div>
+  <div class="hero-noise"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      
+      <div class="hero-tag">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">
+          <span data-lang-inline="es" class="active">Transporte · Barcelona · España · Europa</span>
+          <span data-lang-inline="ca">Transport · Barcelona · Espanya · Europa</span>
+          <span data-lang-inline="en">Transport · Barcelona · Spain · Europe</span>
+        </span>
+      </div>
+
+      <div class="hero-title-block">
+        <div class="hero-title-line-wrap">
+          <span class="hero-title-line" data-lang="es" style="display:block;">Grupajes</span>
+          <span class="hero-title-line" data-lang="ca" style="display:block;">Grupatges</span>
+          <span class="hero-title-line" data-lang="en" style="display:block;">Groupage</span>
+        </div>
+        <div class="hero-title-line-wrap">
+          <span class="hero-title-line" data-lang="es" style="display:block;">y Cargas</span>
+          <span class="hero-title-line" data-lang="ca" style="display:block;">i Càrregues</span>
+          <span class="hero-title-line" data-lang="en" style="display:block;">&amp; Full</span>
+        </div>
+        <div class="hero-title-line-wrap">
+          <span class="hero-title-line" data-lang="es" style="display:block;">Completas</span>
+          <span class="hero-title-line" data-lang="ca" style="display:block;">Completes</span>
+          <span class="hero-title-line" data-lang="en" style="display:block;">Loads</span>
+        </div>
+      </div>
+
+      <div class="hero-tagline-strip">
+        <span class="hero-tagline-pill">
+          <span data-lang-inline="es" class="active">Gran Fiabilidad</span>
+          <span data-lang-inline="ca">Gran Fiabilitat</span>
+          <span data-lang-inline="en">High Reliability</span>
+        </span>
+        <span class="hero-tagline-sep"></span>
+        <span class="hero-tagline-pill">
+          <span data-lang-inline="es" class="active">Gran Flexibilidad</span>
+          <span data-lang-inline="ca">Gran Flexibilitat</span>
+          <span data-lang-inline="en">High Flexibility</span>
+        </span>
+        <span class="hero-tagline-sep"></span>
+        <span class="hero-tagline-pill">
+          <span data-lang-inline="es" class="active">Alta Calidad</span>
+          <span data-lang-inline="ca">Alta Qualitat</span>
+          <span data-lang-inline="en">High Quality</span>
+        </span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="../../contacto/index.html" class="btn-primary">
+          <span>
+            <span data-lang-inline="es" class="active">Solicitar presupuesto</span>
+            <span data-lang-inline="ca">Sol·licitar pressupost</span>
+            <span data-lang-inline="en">Request a quote</span>
+          </span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#servicios-grid" class="btn-secondary">
+          <span data-lang-inline="es" class="active">Ver servicios</span>
+          <span data-lang-inline="ca">Veure serveis</span>
+          <span data-lang-inline="en">Our services</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-metric-stack">
+        <div class="hero-metric-card">
+          <span class="hero-metric-label">
+            <span data-lang-inline="es" class="active">Años de experiencia</span>
+            <span data-lang-inline="ca">Anys d'experiència</span>
+            <span data-lang-inline="en">Years of experience</span>
+          </span>
+          <span class="hero-metric-value">85<span>+</span></span>
+        </div>
+        <div class="hero-metric-card">
+          <span class="hero-metric-label">
+            <span data-lang-inline="es" class="active">Vehículos propios</span>
+            <span data-lang-inline="ca">Vehicles propis</span>
+            <span data-lang-inline="en">Own vehicles</span>
+          </span>
+          <span class="hero-metric-value">40<span>+</span></span>
+        </div>
+        <div class="hero-metric-card">
+          <span class="hero-metric-label">
+            <span data-lang-inline="es" class="active">Cobertura nacional</span>
+            <span data-lang-inline="ca">Cobertura nacional</span>
+            <span data-lang-inline="en">National coverage</span>
+          </span>
+          <span class="hero-metric-value">24<span>h</span></span>
+        </div>
+        <div class="hero-metric-card">
+          <span class="hero-metric-label">
+            <span data-lang-inline="es" class="active">Red europea</span>
+            <span data-lang-inline="ca">Xarxa europea</span>
+            <span data-lang-inline="en">European network</span>
+          </span>
+          <span class="hero-metric-value">EU<span></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">
+      <span data-lang-inline="es" class="active">Descubrir</span>
+      <span data-lang-inline="ca">Descobrir</span>
+      <span data-lang-inline="en">Discover</span>
+    </span>
+  </div>
+</section>
+
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div id="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Grupajes Nacionales</span>
+      <span data-lang-inline="ca">Grupatges Nacionals</span>
+      <span data-lang-inline="en">National Groupage</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Cargas Completas</span>
+      <span data-lang-inline="ca">Càrregues Completes</span>
+      <span data-lang-inline="en">Full Loads</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Aprovisionamientos</span>
+      <span data-lang-inline="ca">Aprovisionaments</span>
+      <span data-lang-inline="en">Supply Chain</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Corta Distancia</span>
+      <span data-lang-inline="ca">Curta Distància</span>
+      <span data-lang-inline="en">Short Haul</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Torre de Control</span>
+      <span data-lang-inline="ca">Torre de Control</span>
+      <span data-lang-inline="en">Control Tower</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Transfers Barcelona · Tarragona</span>
+      <span data-lang-inline="ca">Transfers Barcelona · Tarragona</span>
+      <span data-lang-inline="en">Transfers Barcelona · Tarragona</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Desde 1940</span>
+      <span data-lang-inline="ca">Des de 1940</span>
+      <span data-lang-inline="en">Since 1940</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Grupajes Nacionales</span>
+      <span data-lang-inline="ca">Grupatges Nacionals</span>
+      <span data-lang-inline="en">National Groupage</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Cargas Completas</span>
+      <span data-lang-inline="ca">Càrregues Completes</span>
+      <span data-lang-inline="en">Full Loads</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Aprovisionamientos</span>
+      <span data-lang-inline="ca">Aprovisionaments</span>
+      <span data-lang-inline="en">Supply Chain</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Corta Distancia</span>
+      <span data-lang-inline="ca">Curta Distància</span>
+      <span data-lang-inline="en">Short Haul</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Torre de Control</span>
+      <span data-lang-inline="ca">Torre de Control</span>
+      <span data-lang-inline="en">Control Tower</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Transfers Barcelona · Tarragona</span>
+      <span data-lang-inline="ca">Transfers Barcelona · Tarragona</span>
+      <span data-lang-inline="en">Transfers Barcelona · Tarragona</span>
+      <span class="marquee-dot"></span>
+    </div>
+    <div class="marquee-item">
+      <span data-lang-inline="es" class="active">Desde 1940</span>
+      <span data-lang-inline="ca">Des de 1940</span>
+      <span data-lang-inline="en">Since 1940</span>
+      <span class="marquee-dot"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     INTRO — EXPERIENCIA DESDE 1940
+     ============================================================ -->
+<section id="intro">
+  <div class="intro-container">
+    <div class="intro-left reveal-left">
+      <div class="intro-year" aria-hidden="true">1940</div>
+      <div class="intro-content">
+        <div class="section-label">
+          <div class="section-label-line"></div>
+          <span class="section-label-text">
+            <span data-lang-inline="es" class="active">Transports Montserrat</span>
+            <span data-lang-inline="ca">Transports Montserrat</span>
+            <span data-lang-inline="en">Transports Montserrat</span>
+          </span>
+        </div>
+        <h2 class="section-title" style="font-size:clamp(38px,5vw,62px);">
+          <span data-lang="es" class="active">Experiencia<br>desde 1940</span>
+          <span data-lang="ca">Experiència<br>des de 1940</span>
+          <span data-lang="en">Experience<br>since 1940</span>
+        </h2>
+        <p class="section-body" style="color:rgba(20,20,20,0.6);margin-top:24px;max-width:420px;">
+          <span data-lang="es" class="active">En Montserrat contamos con una amplia experiencia desde 1940 en el transporte de mercancías. Le ayudamos y asesoramos a escoger la mejor solución que cubra sus necesidades de logística y transporte de la forma más eficiente.</span>
+          <span data-lang="ca">A Montserrat comptem amb una àmplia experiència des de 1940 en el transport de mercaderies. L'ajudem i assessorem a escollir la millor solució per cobrir les seves necessitats de logística i transport de la manera més eficient.</span>
+          <span data-lang="en">At Montserrat we have extensive experience since 1940 in freight transport. We help and advise you to choose the best solution to cover your logistics and transport needs in the most efficient way.</span>
+        </p>
+      </div>
+    </div>
+    <div class="intro-right reveal-right">
+      <div class="intro-feature">
+        <div class="intro-feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        </div>
+        <div class="intro-feature-body">
+          <div class="intro-feature-title">
+            <span data-lang-inline="es" class="active">Coordinación integral</span>
+            <span data-lang-inline="ca">Coordinació integral</span>
+            <span data-lang-inline="en">Full coordination</span>
+          </div>
+          <p class="intro-feature-desc">
+            <span data-lang="es" class="active">Coordinamos el transporte y la logística con el objetivo final de garantizar una cadena de suministro eficiente que cumpla con sus objetivos de negocio.</span>
+            <span data-lang="ca">Coordinem el transport i la logística amb l'objectiu final de garantir una cadena de subministrament eficient que compleixi amb els seus objectius de negoci.</span>
+            <span data-lang="en">We coordinate transport and logistics with the ultimate goal of guaranteeing an efficient supply chain that meets your business objectives.</span>
+          </p>
+        </div>
+      </div>
+      <div class="intro-feature">
+        <div class="intro-feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14zM11 7h2v4h4v2h-4v4h-2v-4H7v-2h4z"/></svg>
+        </div>
+        <div class="intro-feature-body">
+          <div class="intro-feature-title">
+            <span data-lang-inline="es" class="active">Asesoramiento personalizado</span>
+            <span data-lang-inline="ca">Assessorament personalitzat</span>
+            <span data-lang-inline="en">Personalised advisory</span>
+          </div>
+          <p class="intro-feature-desc">
+            <span data-lang="es" class="active">Le recomendamos la mejor solución de transporte en función de su necesidad específica, ya sea en cargas parciales, grupajes o cargas completas.</span>
+            <span data-lang="ca">Li recomanem la millor solució de transport en funció de la seva necessitat específica, ja sigui en càrregues parcials, grupatges o càrregues completes.</span>
+            <span data-lang="en">We recommend the best transport solution based on your specific needs, whether partial loads, groupage or full loads.</span>
+          </p>
+        </div>
+      </div>
+      <div class="intro-feature">
+        <div class="intro-feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        </div>
+        <div class="intro-feature-body">
+          <div class="intro-feature-title">
+            <span data-lang-inline="es" class="active">Flota propia y red colaboradores</span>
+            <span data-lang-inline="ca">Flota pròpia i xarxa col·laboradors</span>
+            <span data-lang-inline="en">Own fleet &amp; partner network</span>
+          </div>
+          <p class="intro-feature-desc">
+            <span data-lang="es" class="active">Nuestra flota propia de 40 vehículos, la red Palletways y nuestra red de colaboradores nos permiten garantizar un transporte ágil, seguro y eficiente a nivel nacional e internacional.</span>
+            <span data-lang="ca">La nostra flota pròpia de 40 vehicles, la xarxa Palletways i la nostra xarxa de col·laboradors ens permeten garantir un transport àgil, segur i eficient a nivell nacional i internacional.</span>
+            <span data-lang="en">Our own fleet of 40 vehicles, the Palletways network and our partner network allow us to guarantee agile, safe and efficient transport nationally and internationally.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICIOS GRID — BENTO ASIMÉTRICO
+     ============================================================ -->
+<section id="servicios-grid">
+  <div class="sg-container">
+    <div class="sg-header">
+      <div>
+        <div class="section-label reveal">
+          <div class="section-label-line"></div>
+          <span class="section-label-text">
+            <span data-lang-inline="es" class="active">Nuestros Servicios</span>
+            <span data-lang-inline="ca">Els Nostres Serveis</span>
+            <span data-lang-inline="en">Our Services</span>
+          </span>
+        </div>
+        <h2 class="section-title reveal" style="font-size:clamp(40px,5vw,72px);color:var(--white);">
+          <span data-lang="es" class="active">Soluciones<br>a su medida</span>
+          <span data-lang="ca">Solucions<br>a la seva mida</span>
+          <span data-lang="en">Tailored<br>solutions</span>
+        </h2>
+      </div>
+      <div class="reveal">
+        <p class="sg-header-desc">
+          <span data-lang="es" class="active">Disponemos de una amplia gama de servicios de transporte terrestre adaptados a las necesidades de cada cliente. Tanto para envíos urgentes como para planificaciones regulares.</span>
+          <span data-lang="ca">Disposem d'una àmplia gamma de serveis de transport terrestre adaptats a les necessitats de cada client, tant per a enviaments urgents com per a planificacions regulars.</span>
+          <span data-lang="en">We offer a wide range of road transport services tailored to each client's needs, both for urgent shipments and regular planning.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="bento-grid">
+
+      <!-- 01 Aprovisionamientos -->
+      <div class="bento-card reveal">
+        <div class="bento-num">01</div>
+        <div class="bento-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Aprovisionamientos</span>
+          <span data-lang-inline="ca">Aprovisionaments</span>
+          <span data-lang-inline="en">Supply Replenishment</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Realizamos el transporte de materia prima a la línea de producción de sus clientes, integrándose en el proceso productivo entre el proveedor y el fabricante para garantizar continuidad.</span>
+          <span data-lang="ca">Realitzem el transport de matèria primera a la línia de producció dels seus clients, integrant-nos en el procés productiu entre el proveïdor i el fabricant per garantir continuïtat.</span>
+          <span data-lang="en">We carry out the transport of raw materials to your clients' production line, integrating into the production process between supplier and manufacturer to guarantee continuity.</span>
+        </p>
+        <a href="../../contacto/index.html" class="bento-link">
+          <span data-lang-inline="es" class="active">Consultar</span>
+          <span data-lang-inline="ca">Consultar</span>
+          <span data-lang-inline="en">Enquire</span>
+          <span class="bento-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- 02 Corta Distancia -->
+      <div class="bento-card reveal">
+        <div class="bento-num">02</div>
+        <div class="bento-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Corta Distancia</span>
+          <span data-lang-inline="ca">Curta Distància</span>
+          <span data-lang-inline="en">Short Haul</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Nuestra flota tiene una gran presencia local que permite responder rápidamente a sus necesidades de transporte urgente en el ámbito regional y comarcal.</span>
+          <span data-lang="ca">La nostra flota té una gran presència local que permet respondre ràpidament a les seves necessitats de transport urgent en l'àmbit regional i comarcal.</span>
+          <span data-lang="en">Our fleet has a strong local presence that allows us to respond quickly to your urgent transport needs at regional and county level.</span>
+        </p>
+        <a href="../../contacto/index.html" class="bento-link">
+          <span data-lang-inline="es" class="active">Consultar</span>
+          <span data-lang-inline="ca">Consultar</span>
+          <span data-lang-inline="en">Enquire</span>
+          <span class="bento-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- 03 Nacional e Internacional -->
+      <div class="bento-card reveal">
+        <div class="bento-num">03</div>
+        <div class="bento-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Transporte y Distribución</span>
+          <span data-lang-inline="ca">Transport i Distribució</span>
+          <span data-lang-inline="en">Transport &amp; Distribution</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Con nuestra flota de 40 vehículos, la red Palletways y colaboradores garantizamos un transporte terrestre ágil, seguro y eficiente en Península, Baleares, Canarias y toda Europa.</span>
+          <span data-lang="ca">Amb la nostra flota de 40 vehicles, la xarxa Palletways i col·laboradors garantim un transport terrestre àgil, segur i eficient a Península, Balears, Canàries i tota Europa.</span>
+          <span data-lang="en">With our fleet of 40 vehicles, the Palletways network and partners, we guarantee agile, safe and efficient road transport across mainland Spain, the Balearics, the Canaries and all of Europe.</span>
+        </p>
+        <a href="../../transporte/transporte-nacional-internacional/index.html" class="bento-link">
+          <span data-lang-inline="es" class="active">Más información</span>
+          <span data-lang-inline="ca">Més informació</span>
+          <span data-lang-inline="en">Learn more</span>
+          <span class="bento-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- 04 Torre de Control -->
+      <div class="bento-card reveal">
+        <div class="bento-num">04</div>
+        <div class="bento-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Torre de Control</span>
+          <span data-lang-inline="ca">Torre de Control</span>
+          <span data-lang-inline="en">Control Tower</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Realizamos gestión de flujos y soluciones adaptadas a cada cliente desde una única torre de control, centralizando toda la información logística en tiempo real.</span>
+          <span data-lang="ca">Realitzem gestió de fluxos i solucions adaptades a cada client des d'una única torre de control, centralitzant tota la informació logística en temps real.</span>
+          <span data-lang="en">We carry out flow management and tailored solutions for each client from a single control tower, centralising all logistics information in real time.</span>
+        </p>
+        <a href="../../contacto/index.html" class="bento-link">
+          <span data-lang-inline="es" class="active">Consultar</span>
+          <span data-lang-inline="ca">Consultar</span>
+          <span data-lang-inline="en">Enquire</span>
+          <span class="bento-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- 05 Grupajes -->
+      <div class="bento-card reveal">
+        <div class="bento-num">05</div>
+        <div class="bento-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Grupajes</span>
+          <span data-lang-inline="ca">Grupatges</span>
+          <span data-lang-inline="en">Groupage</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Optimizamos costes agrupando envíos de distintos clientes en un mismo vehículo. Ideal para mercancía que no requiere un camión completo. Frecuencias regulares garantizadas.</span>
+          <span data-lang="ca">Optimitzem costos agrupant enviaments de diferents clients en un mateix vehicle. Ideal per a mercaderia que no requereix un camió complet. Freqüències regulars garantides.</span>
+          <span data-lang="en">We optimise costs by grouping shipments from different clients in the same vehicle. Ideal for goods that don't require a full truck. Guaranteed regular frequencies.</span>
+        </p>
+        <a href="../../contacto/index.html" class="bento-link">
+          <span data-lang-inline="es" class="active">Más información</span>
+          <span data-lang-inline="ca">Més informació</span>
+          <span data-lang-inline="en">Learn more</span>
+          <span class="bento-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- 06 Cargas Completas — DESTACADO -->
+      <div class="bento-card reveal">
+        <div class="bento-num">06</div>
+        <div class="bento-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Cargas Completas</span>
+          <span data-lang-inline="ca">Càrregues Completes</span>
+          <span data-lang-inline="en">Full Loads</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Servicio dedicado en exclusiva para su mercancía. Máxima seguridad, rapidez y trazabilidad para cargas que requieren vehículo completo a nivel nacional e internacional.</span>
+          <span data-lang="ca">Servei dedicat en exclusiva per a la seva mercaderia. Màxima seguretat, rapidesa i traçabilitat per a càrregues que requereixen vehicle complet a nivell nacional i internacional.</span>
+          <span data-lang="en">Dedicated service exclusively for your goods. Maximum security, speed and traceability for loads requiring a full vehicle nationally and internationally.</span>
+        </p>
+        <a href="../../contacto/index.html" class="bento-link">
+          <span data-lang-inline="es" class="active">Solicitar presupuesto</span>
+          <span data-lang-inline="ca">Sol·licitar pressupost</span>
+          <span data-lang-inline="en">Request a quote</span>
+          <span class="bento-link-arrow" aria-hidden="true"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TORRE DE CONTROL — PROCESS STEPS
+     ============================================================ -->
+<section id="torre">
+  <div class="torre-container">
+    <div class="torre-left">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Metodología</span>
+          <span data-lang-inline="ca">Metodologia</span>
+          <span data-lang-inline="en">Methodology</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(36px,4.5vw,60px);">
+        <span data-lang="es" class="active">Cómo<br>trabajamos</span>
+        <span data-lang="ca">Com<br>treballem</span>
+        <span data-lang="en">How we<br>work</span>
+      </h2>
+      <p class="section-body reveal">
+        <span data-lang="es" class="active">Desde la recogida hasta la entrega, cada envío está coordinado y monitorizado en tiempo real desde nuestra torre de control en Barcelona y Tarragona.</span>
+        <span data-lang="ca">Des de la recollida fins al lliurament, cada enviament està coordinat i monitoritzat en temps real des de la nostra torre de control a Barcelona i Tarragona.</span>
+        <span data-lang="en">From collection to delivery, every shipment is coordinated and monitored in real time from our control tower in Barcelona and Tarragona.</span>
+      </p>
+      <div class="torre-visual reveal">
+        <canvas id="torre-canvas"></canvas>
+      </div>
+    </div>
+    <div class="torre-right">
+
+      <div class="process-step reveal">
+        <div class="process-step-num">01</div>
+        <div class="process-step-body">
+          <div class="process-step-title">
+            <span data-lang-inline="es" class="active">Análisis de necesidades</span>
+            <span data-lang-inline="ca">Anàlisi de necessitats</span>
+            <span data-lang-inline="en">Needs analysis</span>
+          </div>
+          <p class="process-step-desc">
+            <span data-lang="es" class="active">Estudiamos su necesidad específica de transporte, el tipo de mercancía, volumen, frecuencia y destinos para recomendar la modalidad más eficiente: grupaje o carga completa.</span>
+            <span data-lang="ca">Estudiem la seva necessitat específica de transport, el tipus de mercaderia, volum, freqüència i destinacions per recomanar la modalitat més eficient: grupatge o càrrega completa.</span>
+            <span data-lang="en">We study your specific transport needs, the type of goods, volume, frequency and destinations to recommend the most efficient modality: groupage or full load.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="process-step-num">02</div>
+        <div class="process-step-body">
+          <div class="process-step-title">
+            <span data-lang-inline="es" class="active">Planificación de rutas</span>
+            <span data-lang-inline="ca">Planificació de rutes</span>
+            <span data-lang-inline="en">Route planning</span>
+          </div>
+          <p class="process-step-desc">
+            <span data-lang="es" class="active">Diseñamos la ruta óptima combinando nuestra flota propia, la red Palletways y colaboradores para garantizar puntualidad y eficiencia en cada entrega.</span>
+            <span data-lang="ca">Dissenyem la ruta òptima combinant la nostra flota pròpia, la xarxa Palletways i col·laboradors per garantir puntualitat i eficiència en cada lliurament.</span>
+            <span data-lang="en">We design the optimal route combining our own fleet, the Palletways network and partners to guarantee punctuality and efficiency in every delivery.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="process-step-num">03</div>
+        <div class="process-step-body">
+          <div class="process-step-title">
+            <span data-lang-inline="es" class="active">Recogida y carga</span>
+            <span data-lang-inline="ca">Recollida i càrrega</span>
+            <span data-lang-inline="en">Collection &amp; loading</span>
+          </div>
+          <p class="process-step-desc">
+            <span data-lang="es" class="active">Nuestros equipos recogen la mercancía en origen con todos los controles de calidad y documentación necesarios. Capacidad de respuesta local gracias a nuestra presencia en la comarca.</span>
+            <span data-lang="ca">Els nostres equips recullen la mercaderia en origen amb tots els controls de qualitat i documentació necessaris. Capacitat de resposta local gràcies a la nostra presència a la comarca.</span>
+            <span data-lang="en">Our teams collect goods at origin with all necessary quality controls and documentation. Local response capacity thanks to our presence in the area.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="process-step-num">04</div>
+        <div class="process-step-body">
+          <div class="process-step-title">
+            <span data-lang-inline="es" class="active">Seguimiento y entrega</span>
+            <span data-lang-inline="ca">Seguiment i lliurament</span>
+            <span data-lang-inline="en">Tracking &amp; delivery</span>
+          </div>
+          <p class="process-step-desc">
+            <span data-lang="es" class="active">Monitorización en tiempo real desde nuestra torre de control. Confirmación de entrega y documentación en destino. Comunicación proactiva con el cliente en todo momento.</span>
+            <span data-lang="ca">Monitorització en temps real des de la nostra torre de control. Confirmació de lliurament i documentació en destinació. Comunicació proactiva amb el client en tot moment.</span>
+            <span data-lang="en">Real-time monitoring from our control tower. Delivery confirmation and documentation at destination. Proactive communication with the client at all times.</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ============================================================
+     TRANSFERS — SPLIT LAYOUT
+     ============================================================ -->
+<section id="transfers">
+  <div class="transfers-container">
+    <div class="transfers-left reveal-left">
+      <div class="transfers-img-wrap">
+        <div class="transfers-img-main">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80" alt="Transfers logísticos Barcelona Tarragona" loading="lazy">
+        </div>
+        <div class="transfers-img-accent">
+          <div class="transfers-accent-label">
+            <span data-lang-inline="es" class="active">Bases operativas</span>
+            <span data-lang-inline="ca">Bases operatives</span>
+            <span data-lang-inline="en">Operational bases</span>
+          </div>
+          <div class="transfers-accent-title">Barcelona<br>&amp; Tarragona</div>
+        </div>
+      </div>
+    </div>
+    <div class="transfers-right reveal-right">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Transfers</span>
+          <span data-lang-inline="ca">Transfers</span>
+          <span data-lang-inline="en">Transfers</span>
+        </span>
+      </div>
+      <h2 class="section-title" style="font-size:clamp(36px,4.5vw,62px);">
+        <span data-lang="es" class="active">Transfers nacional<br>e internacional</span>
+        <span data-lang="ca">Transfers nacional<br>i internacional</span>
+        <span data-lang="en">National &amp; international<br>transfers</span>
+      </h2>
+      <p class="section-body" style="margin-top:24px;max-width:440px;">
+        <span data-lang="es" class="active">Utilizando como base nuestras naves de Barcelona y Tarragona, ofrecemos un servicio eficaz y con garantía de descarga, custodia y entrega en destino de las cargas que obliguen al cliente o transportista a realizar una descarga de emergencia.</span>
+        <span data-lang="ca">Utilitzant com a base les nostres naus de Barcelona i Tarragona, oferim un servei eficaç i amb garantia de descàrrega, custòdia i lliurament a destinació de les càrregues que obliguin el client o transportista a realitzar una descàrrega d'emergència.</span>
+        <span data-lang="en">Using our warehouses in Barcelona and Tarragona as a base, we offer an effective service with guaranteed unloading, custody and delivery to destination for loads that require the client or carrier to perform an emergency unload.</span>
+      </p>
+      <div class="transfers-tags">
+        <span class="transfers-tag">
+          <span data-lang-inline="es" class="active">Descarga de emergencia</span>
+          <span data-lang-inline="ca">Descàrrega d'emergència</span>
+          <span data-lang-inline="en">Emergency unloading</span>
+        </span>
+        <span class="transfers-tag">
+          <span data-lang-inline="es" class="active">Custodia garantizada</span>
+          <span data-lang-inline="ca">Custòdia garantida</span>
+          <span data-lang-inline="en">Guaranteed custody</span>
+        </span>
+        <span class="transfers-tag">
+          <span data-lang-inline="es" class="active">Entrega a destino</span>
+          <span data-lang-inline="ca">Lliurament a destinació</span>
+          <span data-lang-inline="en">Delivery to destination</span>
+        </span>
+        <span class="transfers-tag">Barcelona</span>
+        <span class="transfers-tag">Tarragona</span>
+      </div>
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Solicitar transfer</span>
+          <span data-lang-inline="ca">Sol·licitar transfer</span>
+          <span data-lang-inline="en">Request a transfer</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="palletways-route-line"><div class="palletways-route-pulse"></div></div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-bg-text" aria-hidden="true">TM</div>
+  <div class="cta-container">
+    <div class="cta-label reveal">
+      <div class="cta-label-line"></div>
+      <span class="cta-label-text">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="cta-title reveal">
+      <span data-lang="es" class="active">
+        ¿Listo para
+        <span class="cta-red">optimizar</span>
+        <br>tu logística?
+      </span>
+      <span data-lang="ca">
+        Preparat per
+        <span class="cta-red">optimitzar</span>
+        <br>la teva logística?
+      </span>
+      <span data-lang="en">
+        Ready to
+        <span class="cta-red">optimize</span>
+        <br>your logistics?
+      </span>
+    </h2>
+    <p class="cta-desc reveal">
+      <span data-lang="es" class="active">Si buscas un operador logístico de confianza que ofrezca soluciones personalizadas y eficientes, estamos preparados para ayudarte.</span>
+      <span data-lang="ca">Si busques un operador logístic de confiança que ofereixi solucions personalitzades i eficients, estem preparats per ajudar-te.</span>
+      <span data-lang="en">If you're looking for a trusted logistics operator that offers personalised and efficient solutions, we're ready to help you.</span>
+    </p>
+    <div class="cta-actions reveal">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Enviar mensaje</span>
+          <span data-lang-inline="ca">Enviar missatge</span>
+          <span data-lang-inline="en">Send message</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:+34938911018" class="cta-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +34 938 911 018
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca" style="display:none;">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en" style="display:none;">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/grupajes-cargas-completas/index.html">
+            <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+            <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+            <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+          </a></li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2025 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">Cookies</a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   NAV SCROLL STATE
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 0.08;
+  revealObserver.observe(el);
+});
+
+/* ============================================================
+   COUNTER ANIMATION
+   ============================================================ */
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.innerHTML.replace(/^\d+/, '');
+      const duration = 1800;
+      const startTime = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.innerHTML = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    if (el.getAttribute('data-lang') !== lang) el.style.display = 'none';
+    else el.style.display = '';
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+  document.documentElement.lang = lang;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+
+function openMenu() {
+  menuOpen = true;
+  mobileMenu.style.display = 'flex';
+  mobileMenu.offsetHeight;
+  mobileMenu.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  hamburgerBtn.setAttribute('aria-label', 'Cerrar menú');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  hamburgerBtn.setAttribute('aria-label', 'Abrir menú');
+  document.body.style.overflow = '';
+  setTimeout(() => { if (!menuOpen) mobileMenu.style.display = 'none'; }, 400);
+}
+hamburgerBtn.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => closeMenu()); });
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.getAttribute('data-target');
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      sub.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ============================================================
+   STAGGER DELAYS
+   ============================================================ */
+document.querySelectorAll('.bento-grid .bento-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.07) + 's';
+});
+document.querySelectorAll('.flota-kpi').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.1) + 's';
+});
+document.querySelectorAll('.process-step').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.09) + 's';
+});
+
+/* ============================================================
+   HERO LOGISTICS NETWORK CANVAS
+   ============================================================ */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodeCount = 26;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.18, vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 2 + 1.5, pulse: Math.random() * Math.PI * 2,
+    });
+  }
+  const packets = [];
+  for (let i = 0; i < 10; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({ from: fromIdx, to: toIdx, t: Math.random(), speed: 0.003 + Math.random() * 0.004 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy; n.pulse += 0.025;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          const alpha = (1 - dist / 180) * 0.18;
+          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${alpha})`; ctx.lineWidth = 0.6; ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      const pulseR = n.r + Math.sin(n.pulse) * 0.6;
+      ctx.beginPath(); ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.7)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(n.x, n.y, pulseR + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(207,0,28,0.12)'; ctx.lineWidth = 1; ctx.stroke();
+    });
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        p.t = 0; p.from = p.to;
+        p.to = Math.floor(Math.random() * nodeCount);
+        while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount);
+      }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y;
+      const tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t, py = fy + (ty - fy) * p.t;
+      ctx.beginPath(); ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.fill();
+      const trailLen = 0.06;
+      const tStart = Math.max(0, p.t - trailLen);
+      const tpx = fx + (tx - fx) * tStart, tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)'); grad.addColorStop(1, 'rgba(255,200,200,0.4)');
+      ctx.beginPath(); ctx.moveTo(tpx, tpy); ctx.lineTo(px, py);
+      ctx.strokeStyle = grad; ctx.lineWidth = 1.2; ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   TORRE CANVAS (small network diagram)
+   ============================================================ */
+(function initTorreCanvas() {
+  const canvas = document.getElementById('torre-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Fixed hub nodes representing Barcelona, Tarragona, Spain, Europe
+  const hubs = [
+    { label: 'BCN', x: 0.18, y: 0.45, primary: true },
+    { label: 'TGN', x: 0.42, y: 0.6, primary: true },
+    { label: 'MAD', x: 0.62, y: 0.35, primary: false },
+    { label: 'VLC', x: 0.55, y: 0.7, primary: false },
+    { label: 'BIL', x: 0.3, y: 0.2, primary: false },
+    { label: 'PMI', x: 0.72, y: 0.55, primary: false },
+    { label: 'LIS', x: 0.25, y: 0.75, primary: false },
+    { label: 'PAR', x: 0.78, y: 0.18, primary: false },
+  ];
+
+  const connections = [[0,1],[0,2],[0,4],[1,3],[1,6],[2,3],[2,7],[3,5],[4,7],[0,7]];
+
+  let pulse = 0;
+  function draw() {
+    if (!canvas.offsetWidth) { requestAnimationFrame(draw); return; }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pulse += 0.018;
+
+    // Draw connections
+    connections.forEach(([a, b]) => {
+      const ax = hubs[a].x * canvas.width, ay = hubs[a].y * canvas.height;
+      const bx = hubs[b].x * canvas.width, by = hubs[b].y * canvas.height;
+      ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by);
+      ctx.strokeStyle = 'rgba(207,0,28,0.15)'; ctx.lineWidth = 1; ctx.stroke();
+
+      // Animated packet on some connections
+      const t = ((pulse * 0.4 + connections.indexOf([a,b]) * 0.3) % 1 + 1) % 1;
+      const px = ax + (bx - ax) * t, py = ay + (by - ay) * t;
+      ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.7)'; ctx.fill();
+    });
+
+    // Draw hubs
+    hubs.forEach((h, i) => {
+      const x = h.x * canvas.width, y = h.y * canvas.height;
+      const r = h.primary ? 6 + Math.sin(pulse + i) * 1.5 : 4 + Math.sin(pulse + i) * 1;
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = h.primary ? 'rgba(207,0,28,0.9)' : 'rgba(207,0,28,0.45)';
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, r + 6 + Math.sin(pulse + i) * 3, 0, Math.PI * 2);
+      ctx.strokeStyle = h.primary ? 'rgba(207,0,28,0.2)' : 'rgba(207,0,28,0.1)';
+      ctx.lineWidth = 1; ctx.stroke();
+      ctx.font = `bold ${h.primary ? 9 : 8}px 'Barlow Condensed', sans-serif`;
+      ctx.fillStyle = h.primary ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.35)';
+      ctx.textAlign = 'center';
+      ctx.fillText(h.label, x, y - r - 5);
+    });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   CTA NETWORK CANVAS
+   ============================================================ */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.12,
+    });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) {
+          const a = (1 - d / 220) * 0.12;
+          ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`; ctx.lineWidth = 0.8; ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)'; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Bloquear teclas DevTools
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+
+</body>
+</html>

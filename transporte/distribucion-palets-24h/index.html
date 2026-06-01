@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Distribución de paletería 24h en España y Portugal. Transports Montserrat, miembro de la red Palletways desde hace 12 años. Servicio Premium 24h y Economy 48h.">
+<title>Distribución de Palets 24h España y Portugal | Transports Montserrat</title>
+
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & RESET
+   ============================================================ */
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   LANG SWITCHER
+   ============================================================ */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: color 0.2s;
+}
+.mob-sub-item > a:hover { color: var(--white); }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+section { position: relative; }
+.section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.section-label-line {
+  width: 36px; height: 2px; flex-shrink: 0;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.4);
+}
+.section-label-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); text-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.section-body { font-size: 14.5px; line-height: 1.8; font-weight: 300; color: rgba(255,255,255,0.55); letter-spacing: 0.01em; }
+
+.reveal {
+  opacity: 0; transform: translateY(44px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-64px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(64px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  text-decoration: none; padding: 17px 40px;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 30px rgba(207,0,28,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform .35s var(--ease-expo), box-shadow .35s;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--red-bright), var(--red));
+  transform: translateX(-100%); transition: transform 0.35s var(--ease-expo);
+}
+.btn-primary:hover { transform: scaleX(1.03) translateY(-1px); box-shadow: 0 12px 40px rgba(207,0,28,0.55), inset 0 1px 0 rgba(255,255,255,0.15); }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-arrow { position: relative; z-index: 1; width: 16px; height: 16px; flex-shrink: 0; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 2px;
+  transition: color .25s, border-color .25s, letter-spacing .25s;
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.45); letter-spacing: 0.16em; }
+
+/* Lang inline/block */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* ============================================================
+   PAGE HERO — FULLSCREEN SPLIT WITH VERTICAL TIMELINE FEEL
+   ============================================================ */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(160deg, #020c1e 0%, #010814 55%, #030d20 100%);
+  padding-bottom: 80px;
+}
+
+/* Animated canvas */
+#hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.5; pointer-events: none; z-index: 1;
+}
+
+/* Grid background */
+.ph-bg-grid {
+  position: absolute; inset: 0; z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridShift 50s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 80%);
+}
+@keyframes gridShift { from { transform: translate(0,0); } to { transform: translate(80px,80px); } }
+
+/* Right image half */
+.ph-image-panel {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+  clip-path: polygon(14% 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden; z-index: 4;
+}
+.ph-image-bg {
+  position: absolute; inset: 0; z-index: 5;
+  background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&q=80');
+  background-size: cover; background-position: center;
+  transform: scale(1.1);
+  animation: phParallax 20s ease-in-out infinite alternate;
+  filter: saturate(0.4) contrast(1.1) brightness(0.65);
+}
+@keyframes phParallax { from { transform: scale(1.1) translateX(-1.5%); } to { transform: scale(1.1) translateX(1.5%); } }
+.ph-image-overlay {
+  position: absolute; inset: 0; z-index: 6;
+  background: linear-gradient(100deg, rgba(2,12,30,0.92) 0%, rgba(6,30,68,0.55) 55%, rgba(2,12,30,0.18) 100%);
+}
+
+/* Glow orbs */
+.ph-glow { position: absolute; pointer-events: none; z-index: 3; border-radius: 50%; filter: blur(90px); }
+.ph-glow-1 {
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(207,0,28,0.07) 0%, transparent 70%);
+  top: 5%; left: -150px;
+  animation: glowPulse 7s ease-in-out infinite alternate;
+}
+.ph-glow-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(13,74,143,0.1) 0%, transparent 70%);
+  bottom: 0; left: 30%;
+  animation: glowPulse 9s ease-in-out infinite alternate-reverse;
+}
+@keyframes glowPulse { from { opacity: 0.6; transform: scale(1); } to { opacity: 1; transform: scale(1.12); } }
+
+/* Noise */
+.ph-noise {
+  position: absolute; inset: 0; opacity: 0.038; z-index: 8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px; pointer-events: none;
+}
+
+/* Scan lines */
+.ph-scan-line {
+  position: absolute; height: 1px; z-index: 7;
+  background: linear-gradient(90deg, transparent 0%, rgba(207,0,28,0.0) 8%, rgba(207,0,28,0.5) 50%, rgba(207,0,28,0.0) 92%, transparent 100%);
+  width: 50%; filter: blur(0.5px);
+  animation: phScan 12s var(--ease-expo) infinite; opacity: 0;
+}
+.ph-scan-line:nth-child(1) { top: 28%; left: -20%; animation-delay: 0s; }
+.ph-scan-line:nth-child(2) { top: 58%; left: -20%; animation-delay: 4s; }
+.ph-scan-line:nth-child(3) { top: 80%; left: -20%; animation-delay: 8s; opacity: 0.4; }
+@keyframes phScan { 0% { opacity:0; transform: translateX(0); } 10% { opacity:1; } 90% { opacity:1; } 100% { opacity:0; transform: translateX(260%); } }
+
+/* Hero content left */
+.ph-content {
+  position: relative; z-index: 10;
+  padding: 0 64px; max-width: 700px; padding-top: 80px;
+  width: 100%;
+}
+.ph-breadcrumb {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 0.7s var(--easing) 0.3s forwards;
+}
+.ph-breadcrumb a {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+  text-decoration: none; transition: color .2s;
+}
+.ph-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.ph-breadcrumb-sep { font-size: 9px; color: rgba(207,0,28,0.5); }
+.ph-breadcrumb-current { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
+
+.ph-label {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 0.45s forwards;
+}
+.ph-label-line { width: 52px; height: 1.5px; background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3)); box-shadow: 0 0 8px rgba(207,0,28,0.5); }
+.ph-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(207,0,28,0.9); }
+
+.ph-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; line-height: 0.9; text-transform: uppercase;
+  letter-spacing: -0.018em; margin-bottom: 36px; overflow: hidden;
+}
+.ph-title-line { display: block; font-size: clamp(54px, 7.5vw, 110px); }
+.ph-title-line:nth-child(1) { animation: slideUp 0.9s var(--easing) 0.55s both; }
+.ph-title-line:nth-child(2) { color: var(--red); animation: slideUp 0.9s var(--easing) 0.70s both; }
+.ph-title-line:nth-child(3) { -webkit-text-stroke: 1.5px rgba(255,255,255,0.22); color: transparent; animation: slideUp 0.9s var(--easing) 0.85s both; }
+@keyframes slideUp { from { opacity:0; transform: translateY(100%); } to { opacity:1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+.ph-desc {
+  font-size: 16px; font-weight: 300; line-height: 1.72; letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.5); max-width: 500px; margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.05s forwards;
+}
+.ph-desc strong { color: rgba(255,255,255,0.88); font-weight: 500; }
+.ph-actions {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.22s forwards;
+}
+
+/* Bottom-right hero stats (absolute) */
+.ph-kpi-strip {
+  position: absolute; right: 56px; bottom: 80px; z-index: 20;
+  display: flex; flex-direction: column; gap: 32px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.45s forwards;
+}
+.ph-kpi { text-align: right; }
+.ph-kpi-num { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; text-shadow: 0 0 30px rgba(255,255,255,0.08); }
+.ph-kpi-num span { color: var(--red); text-shadow: 0 0 20px rgba(207,0,28,0.5); }
+.ph-kpi-label { font-size: 10px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+/* Scroll indicator */
+.ph-scroll {
+  position: absolute; bottom: 44px; left: 64px;
+  display: flex; align-items: center; gap: 16px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.7s forwards; z-index: 10;
+}
+.ph-scroll-line { width: 72px; height: 1px; background: rgba(255,255,255,0.14); position: relative; overflow: hidden; }
+.ph-scroll-line::after { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, var(--red), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100% { left:-100%; } 50% { left:100%; } }
+.ph-scroll-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+/* ============================================================
+   MARQUEE STRIP
+   ============================================================ */
+#marquee-strip {
+  background: linear-gradient(90deg, #b5001a 0%, var(--red) 30%, #cf001c 70%, #b5001a 100%);
+  padding: 13px 0; overflow: hidden; white-space: nowrap;
+  position: relative; z-index: 10;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(207,0,28,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.marquee-track { display: inline-flex; gap: 0; animation: marquee 28s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 28px; padding: 0 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+}
+.marquee-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.55); flex-shrink: 0; box-shadow: 0 0 4px rgba(255,255,255,0.3); }
+
+/* ============================================================
+   SERVICES GRID — BENTO LAYOUT
+   ============================================================ */
+#servicios-grid {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(13,74,143,0.08) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 140px 0 120px; overflow: hidden; position: relative;
+}
+#servicios-grid::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(207,0,28,0.2) 50%, transparent 90%);
+}
+#servicios-grid::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(207,0,28,0.03) 0%, transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(13,74,143,0.05) 0%, transparent 35%);
+}
+.sg-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
+.sg-header { margin-bottom: 80px; }
+.sg-title { font-size: clamp(44px,5.5vw,80px); color: var(--white); max-width: 700px; }
+.sg-desc { font-size: 15px; line-height: 1.78; color: rgba(255,255,255,0.42); max-width: 520px; margin-top: 28px; }
+
+/* Bento grid */
+.sg-bento { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: auto; gap: 3px; }
+
+.sg-card {
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 48px 44px; overflow: hidden; position: relative;
+  transition: background .45s var(--ease-expo), border-color .45s, box-shadow .45s;
+  cursor: default;
+}
+.sg-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transition: width .6s var(--ease-expo);
+  box-shadow: 0 0 12px rgba(207,0,28,0.4);
+}
+.sg-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+.sg-card:hover::after { width: 100%; }
+
+/* Card positions */
+.sg-card-premium { grid-column: span 5; background: linear-gradient(145deg, var(--red) 0%, #9a0015 100%) !important; border-color: transparent !important; box-shadow: 0 12px 50px rgba(207,0,28,0.35) !important; }
+.sg-card-premium:hover { transform: none; box-shadow: 0 20px 64px rgba(207,0,28,0.5) !important; }
+.sg-card-premium::after { background: rgba(255,255,255,0.3) !important; }
+.sg-card-economy { grid-column: span 4; }
+.sg-card-europa { grid-column: span 3; }
+.sg-card-tech { grid-column: span 4; }
+.sg-card-tracking { grid-column: span 4; }
+.sg-card-cobertura { grid-column: span 4; background: rgba(13,74,143,0.12) !important; border-color: rgba(13,74,143,0.2) !important; }
+
+.sg-card-icon {
+  width: 52px; height: 52px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .35s, transform .35s var(--ease-expo);
+}
+.sg-card-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--white); stroke-width: 1.5; }
+.sg-card:not(.sg-card-premium) .sg-card-icon { background: rgba(207,0,28,0.1); border-color: rgba(207,0,28,0.2); }
+.sg-card:not(.sg-card-premium) .sg-card-icon svg { stroke: var(--red); }
+.sg-card:hover .sg-card-icon { transform: scale(1.06) rotate(2deg); }
+
+.sg-card-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); margin-bottom: 20px;
+}
+.sg-card-badge-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5); }
+
+.sg-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: 0.02em; line-height: 1;
+  color: var(--white); margin-bottom: 16px;
+}
+.sg-card-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 80px; font-weight: 900; color: var(--white);
+  line-height: 1; letter-spacing: -0.04em;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.2);
+  margin-bottom: 8px;
+}
+.sg-card-num-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+  margin-bottom: 20px;
+}
+.sg-card-desc {
+  font-size: 13.5px; line-height: 1.72; color: rgba(255,255,255,0.6);
+}
+.sg-card-premium .sg-card-desc { color: rgba(255,255,255,0.8); }
+.sg-card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.sg-tag {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px;
+  border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.55);
+  transition: border-color .2s, color .2s;
+}
+.sg-card:hover .sg-tag { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.75); }
+
+/* Country tags */
+.sg-countries { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.sg-country { font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+
+/* ============================================================
+   VALUE — ALTERNATING SPLIT LAYOUT
+   ============================================================ */
+#valor-anadido {
+  background: var(--off-white); color: var(--text);
+  padding: 140px 0; overflow: hidden; position: relative;
+}
+#valor-anadido::before {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle at 100% 0%, rgba(6,48,98,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.va-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.va-header { margin-bottom: 80px; }
+.va-header .section-label-text { color: var(--red); }
+.va-header .section-title { font-size: clamp(44px,5.5vw,80px); color: var(--navy); }
+.va-header .va-desc { font-size: 15px; line-height: 1.75; color: rgba(20,20,20,0.5); max-width: 520px; margin-top: 24px; }
+
+/* Feature rows */
+.va-rows { display: flex; flex-direction: column; gap: 2px; }
+.va-row {
+  display: grid; grid-template-columns: 80px 1fr 1fr;
+  gap: 0; align-items: stretch;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: var(--white);
+  transition: box-shadow .4s var(--ease-expo), transform .4s var(--ease-expo);
+  overflow: hidden;
+}
+.va-row:hover { transform: translateX(8px); box-shadow: -6px 0 0 var(--red), 0 12px 40px rgba(0,0,0,0.08); }
+
+.va-row-num {
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.35); letter-spacing: 0.08em;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  min-height: 120px;
+  transition: background .3s;
+}
+.va-row:hover .va-row-num { background: var(--red); color: rgba(255,255,255,0.8); }
+
+.va-row-title {
+  padding: 32px 36px; border-right: 1px solid rgba(0,0,0,0.05);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.va-row-title h3 {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--navy);
+  margin-bottom: 8px; line-height: 1.05;
+  transition: color .25s;
+}
+.va-row:hover .va-row-title h3 { color: var(--red); }
+.va-row-title p { font-size: 12.5px; color: rgba(20,20,20,0.42); line-height: 1.6; }
+
+.va-row-detail {
+  padding: 32px 36px;
+  display: flex; align-items: center;
+  font-size: 13.5px; line-height: 1.68; color: rgba(20,20,20,0.55);
+}
+.va-row-detail strong { color: var(--navy); font-weight: 600; }
+
+/* ============================================================
+   TECHNOLOGY — VISUAL SHOWCASE
+   ============================================================ */
+#tecnologia {
+  background: var(--gray-dark);
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+.tech-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(207,0,28,0.1), transparent 40%),
+    radial-gradient(circle at 90% 60%, rgba(6,48,98,0.18), transparent 45%),
+    linear-gradient(145deg, #080f1c 0%, #040912 50%, #080f1c 100%);
+  z-index: 0;
+}
+.tech-route-line { position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(207,0,28,0.15), transparent); overflow: hidden; z-index: 1; }
+.tech-route-pulse { position: absolute; top: 0; left: -40%; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(207,0,28,0.6), transparent); animation: routePulse 4s ease-in-out infinite; }
+@keyframes routePulse { 0% { left: -40%; } 100% { left: 140%; } }
+
+.tech-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 2; }
+.tech-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 80px; }
+.tech-header .section-title { font-size: clamp(42px,5vw,74px); color: var(--white); }
+.tech-header .section-body { margin-top: 0; max-width: 420px; }
+
+/* Tech cards */
+.tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; }
+.tech-card {
+  padding: 56px 48px; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.055);
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo);
+}
+.tech-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(207,0,28,0.0), transparent);
+  transition: background .5s;
+}
+.tech-card:hover { background: rgba(255,255,255,0.045); border-color: rgba(255,255,255,0.1); transform: translateY(-4px); }
+.tech-card:hover::before { background: linear-gradient(90deg, transparent, var(--red), transparent); }
+.tech-card-icon { width: 60px; height: 60px; margin-bottom: 32px; }
+.tech-card-icon svg { width: 100%; height: 100%; }
+.tech-card-num { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; color: rgba(207,0,28,0.4); margin-bottom: 16px; }
+.tech-card-title { font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--white); margin-bottom: 18px; line-height: 1.1; }
+.tech-card-desc { font-size: 13.5px; line-height: 1.72; color: rgba(255,255,255,0.38); }
+
+/* ============================================================
+   NETWORK — NUMBERS STRIP
+   ============================================================ */
+#network-strip {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13,74,143,0.12) 0%, transparent 70%),
+    var(--navy);
+  padding: 100px 0; overflow: hidden; position: relative;
+}
+#network-strip::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+#network-strip::after {
+  content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.3) 50%, transparent 95%);
+}
+.ns-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.ns-label-row { display: flex; align-items: center; gap: 20px; margin-bottom: 60px; }
+.ns-label-row .section-label { margin-bottom: 0; }
+.ns-label-divider { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(207,0,28,0.2), transparent); }
+.ns-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; }
+.ns-stat { padding: 44px 32px; text-align: center; position: relative; overflow: hidden; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.045); transition: background .4s, transform .4s var(--ease-expo); }
+.ns-stat::after { content: ''; position: absolute; top: 0; left: 50%; width: 40px; height: 2px; background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3)); transform: translateX(-50%); box-shadow: 0 0 10px rgba(207,0,28,0.4); }
+.ns-stat:hover { background: rgba(255,255,255,0.05); transform: translateY(-4px); }
+.ns-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 56px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; }
+.ns-stat-val span { color: var(--red); text-shadow: 0 0 20px rgba(207,0,28,0.4); }
+.ns-stat-label { font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 10px; line-height: 1.4; }
+
+/* ============================================================
+   IMAGES GALLERY — VISUAL SHOWCASE
+   ============================================================ */
+#galeria {
+  background: #030b1a; padding: 120px 0; overflow: hidden; position: relative;
+}
+#galeria::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 10%, rgba(207,0,28,0.18) 50%, transparent 90%); }
+.gal-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.gal-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; flex-wrap: wrap; gap: 24px; }
+.gal-header .section-title { font-size: clamp(38px,4.5vw,64px); color: var(--white); }
+.gal-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 300px 220px; gap: 3px; }
+.gal-item { overflow: hidden; position: relative; cursor: pointer; }
+.gal-item img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.55) contrast(1.08) brightness(0.88); transition: transform .8s var(--ease-expo), filter .6s; display: block; }
+.gal-item:hover img { transform: scale(1.07); filter: saturate(0.85) contrast(1.08) brightness(1); }
+.gal-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(2,12,30,0.7) 100%); transition: opacity .4s; }
+.gal-item-main { grid-column: span 2; grid-row: span 2; }
+.gal-item-label {
+  position: absolute; bottom: 20px; left: 20px; z-index: 5;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.55);
+  opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s var(--ease-expo);
+}
+.gal-item:hover .gal-item-label { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 170px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 280px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-title em { font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 80px; padding-bottom: 30px; margin-bottom: 0; flex-wrap: wrap;
+}
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-contact-icon { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
+}
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; margin-left: auto; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+img { transition: opacity .5s; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .nav-links { gap: 16px; }
+  .sg-bento { grid-template-columns: repeat(6, 1fr); }
+  .sg-card-premium { grid-column: span 6; }
+  .sg-card-economy { grid-column: span 3; }
+  .sg-card-europa { grid-column: span 3; }
+  .sg-card-tech { grid-column: span 3; }
+  .sg-card-tracking { grid-column: span 3; }
+  .sg-card-cobertura { grid-column: span 6; }
+  .ns-stats { grid-template-columns: repeat(3, 1fr); }
+  .tech-header { grid-template-columns: 1fr; gap: 32px; }
+  .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 200px; }
+  .gal-item-main { grid-column: span 2; grid-row: span 1; }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+  .va-row { grid-template-columns: 60px 1fr; }
+  .va-row-detail { display: none; }
+}
+@media (max-width: 900px) {
+  #nav { padding: 0 24px; }
+  .ph-content { padding: 0 24px; padding-top: 80px; }
+  .ph-image-panel { display: none; }
+  .ph-kpi-strip { display: none; }
+  .sg-container, .va-container, .tech-container, .ns-container, .gal-container, .cta-container, .footer-container { padding: 0 24px; }
+  .sg-bento { grid-template-columns: 1fr; }
+  .sg-card-premium, .sg-card-economy, .sg-card-europa, .sg-card-tech, .sg-card-tracking, .sg-card-cobertura { grid-column: span 1; }
+  .ns-stats { grid-template-columns: repeat(2, 1fr); }
+  .tech-grid { grid-template-columns: 1fr; }
+  .gal-grid { grid-template-columns: 1fr; grid-template-rows: 240px 200px 200px 200px; }
+  .gal-item-main { grid-column: 1; grid-row: 1; }
+  .cta-bg-text { font-size: 100px; }
+  .footer-main { grid-template-columns: 1fr; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  .ph-scroll { left: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+
+  <ul class="nav-links" role="menubar">
+
+    <!-- EMPRESA -->
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- TRANSPORTE -->
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/grupajes-cargas-completas/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+          <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+          <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- PALLETWAYS -->
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+
+    <!-- NOTICIAS -->
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+
+    <!-- CONTACTO -->
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+
+  </ul>
+
+ 
+  <button class="mobile-menu-btn" id="hamburger-btn"
+          aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+</nav>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/grupajes-cargas-completas/index.html">
+        <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+        <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+        <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item"><a href="../../palletways/index.html">Palletways</a></div>
+  <div class="mob-nav-item"><a href="../../noticias/index.html">
+    <span data-lang-inline="es" class="active">Noticias</span>
+    <span data-lang-inline="ca">Notícies</span>
+    <span data-lang-inline="en">News</span>
+  </a></div>
+  <div class="mob-nav-item"><a href="../../contacto/index.html">
+    <span data-lang-inline="es" class="active">Contacto</span>
+    <span data-lang-inline="ca">Contacte</span>
+    <span data-lang-inline="en">Contact</span>
+  </a></div>
+
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAGE HERO
+     ============================================================ -->
+<section id="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="ph-bg-grid"></div>
+  <div class="ph-glow ph-glow-1"></div>
+  <div class="ph-glow ph-glow-2"></div>
+
+  <div class="ph-image-panel">
+    <div class="ph-image-bg"></div>
+    <div class="ph-image-overlay"></div>
+  </div>
+
+  <div class="ph-scan-line"></div>
+  <div class="ph-scan-line"></div>
+  <div class="ph-scan-line"></div>
+  <div class="ph-noise"></div>
+
+  <div class="ph-content">
+    
+
+    <div class="ph-label">
+      <div class="ph-label-line"></div>
+      <span class="ph-label-text">
+        <span data-lang-inline="es" class="active">Red Palletways · España · Portugal · Europa</span>
+        <span data-lang-inline="ca">Xarxa Palletways · Espanya · Portugal · Europa</span>
+        <span data-lang-inline="en">Palletways Network · Spain · Portugal · Europe</span>
+      </span>
+    </div>
+
+    <h1 class="ph-title">
+      <span class="ph-title-line" data-lang="es">Distribución</span>
+      <span class="ph-title-line" data-lang="ca">Distribució</span>
+      <span class="ph-title-line" data-lang="en">Pallet</span>
+
+      <span class="ph-title-line" data-lang="es">Paletería</span>
+      <span class="ph-title-line" data-lang="ca">Paleteria</span>
+      <span class="ph-title-line" data-lang="en">Distribution</span>
+
+      <span class="ph-title-line" data-lang="es">24h</span>
+      <span class="ph-title-line" data-lang="ca">24h</span>
+      <span class="ph-title-line" data-lang="en">24h</span>
+    </h1>
+
+    <p class="ph-desc">
+      <span data-lang="es" class="active">Transports Montserrat, miembro de la red <strong>Palletways</strong> desde hace más de 12 años. Distribución express de mercancía paletizada en <strong>España, Portugal y toda Europa</strong>.</span>
+      <span data-lang="ca">Transports Montserrat, membre de la xarxa <strong>Palletways</strong> des de fa més de 12 anys. Distribució exprés de mercaderia paletitzada a <strong>Espanya, Portugal i tota Europa</strong>.</span>
+      <span data-lang="en">Transports Montserrat, member of the <strong>Palletways</strong> network for over 12 years. Express distribution of palletised goods across <strong>Spain, Portugal and all of Europe</strong>.</span>
+    </p>
+
+    <div class="ph-actions">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Solicitar tarifa</span>
+          <span data-lang-inline="ca">Sol·licitar tarifa</span>
+          <span data-lang-inline="en">Request a quote</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="../../palletways/index.html" class="btn-secondary">
+        <span data-lang-inline="es" class="active">Red Palletways</span>
+        <span data-lang-inline="ca">Xarxa Palletways</span>
+        <span data-lang-inline="en">Palletways Network</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="ph-kpi-strip">
+    <div class="ph-kpi">
+      <div class="ph-kpi-num">400<span>+</span></div>
+      <div class="ph-kpi-label">
+        <span data-lang-inline="es" class="active">Miembros en<br>la red</span>
+        <span data-lang-inline="ca">Membres a<br>la xarxa</span>
+        <span data-lang-inline="en">Network<br>members</span>
+      </div>
+    </div>
+    <div class="ph-kpi">
+      <div class="ph-kpi-num">27<span></span></div>
+      <div class="ph-kpi-label">
+        <span data-lang-inline="es" class="active">Países<br>europeos</span>
+        <span data-lang-inline="ca">Països<br>europeus</span>
+        <span data-lang-inline="en">European<br>countries</span>
+      </div>
+    </div>
+    <div class="ph-kpi">
+      <div class="ph-kpi-num">30<span>k</span></div>
+      <div class="ph-kpi-label">
+        <span data-lang-inline="es" class="active">Palets<br>diarios</span>
+        <span data-lang-inline="ca">Palets<br>diaris</span>
+        <span data-lang-inline="en">Daily<br>pallets</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ph-scroll">
+    <div class="ph-scroll-line"></div>
+    <span class="ph-scroll-text">
+      <span data-lang-inline="es" class="active">Explorar</span>
+      <span data-lang-inline="ca">Explorar</span>
+      <span data-lang-inline="en">Explore</span>
+    </span>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     MARQUEE
+     ============================================================ -->
+<div id="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>Servicio Premium 24h</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Servicio Economy 48h</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>España · Portugal</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Trazabilidad en tiempo real</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Red Palletways</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>27 países europeos</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Más de 30.000 palets/día</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Plataformas elevadoras</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Comprobante digital de entrega</span><span class="marquee-dot"></span></div>
+    <!-- Duplicate for infinite loop -->
+    <div class="marquee-item"><span>Servicio Premium 24h</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Servicio Economy 48h</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>España · Portugal</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Trazabilidad en tiempo real</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Red Palletways</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>27 países europeos</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Más de 30.000 palets/día</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Plataformas elevadoras</span><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><span>Comprobante digital de entrega</span><span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SERVICES GRID — BENTO
+     ============================================================ -->
+<section id="servicios-grid">
+  <div class="sg-container">
+    <div class="sg-header">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Nuestros Servicios</span>
+          <span data-lang-inline="ca">Els Nostres Serveis</span>
+          <span data-lang-inline="en">Our Services</span>
+        </span>
+      </div>
+      <h2 class="section-title sg-title reveal">
+        <span data-lang="es" class="active">Soluciones de<br>distribución express</span>
+        <span data-lang="ca">Solucions de<br>distribució exprés</span>
+        <span data-lang="en">Express distribution<br>solutions</span>
+      </h2>
+      <p class="sg-desc reveal">
+        <span data-lang="es" class="active">Dos modalidades de servicio adaptadas a sus necesidades logísticas. Entregas garantizadas con trazabilidad total en toda la Península Ibérica y Europa.</span>
+        <span data-lang="ca">Dues modalitats de servei adaptades a les vostres necessitats logístiques. Lliuraments garantits amb traçabilitat total a tota la Península Ibèrica i Europa.</span>
+        <span data-lang="en">Two service levels tailored to your logistics needs. Guaranteed deliveries with full traceability across the Iberian Peninsula and Europe.</span>
+      </p>
+    </div>
+
+    <div class="sg-bento">
+
+      <!-- PREMIUM CARD — featured -->
+      <div class="sg-card sg-card-premium reveal">
+        <div class="sg-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="sg-card-badge">
+          <span class="sg-card-badge-dot"></span>
+          <span data-lang-inline="es" class="active">Servicio Estrella · Palletways</span>
+          <span data-lang-inline="ca">Servei Estrella · Palletways</span>
+          <span data-lang-inline="en">Flagship Service · Palletways</span>
+        </div>
+        <div class="sg-card-num">24h</div>
+        <div class="sg-card-num-label">
+          <span data-lang-inline="es" class="active">Servicio Premium España y Portugal</span>
+          <span data-lang-inline="ca">Servei Premium Espanya i Portugal</span>
+          <span data-lang-inline="en">Premium Service Spain and Portugal</span>
+        </div>
+        <p class="sg-card-desc">
+          <span data-lang="es" class="active">Entrega en 24 horas durante el día en el 95% de los códigos postales de España y Portugal. Servicio de máxima prioridad para su mercancía paletizada. Ideal para sectores de gran consumo, alimentación, vino y bebidas.</span>
+          <span data-lang="ca">Lliurament en 24 hores durant el dia al 95% dels codis postals d'Espanya i Portugal. Servei de màxima prioritat per a la vostra mercaderia paletitzada.</span>
+          <span data-lang="en">Next-day delivery within 95% of postal codes across Spain and Portugal. Highest priority service for your palletised goods.</span>
+        </p>
+        <div class="sg-card-tags">
+          <span class="sg-tag">
+            <span data-lang-inline="es" class="active">Prioridad máxima</span>
+            <span data-lang-inline="ca">Prioritat màxima</span>
+            <span data-lang-inline="en">Highest priority</span>
+          </span>
+          <span class="sg-tag">95% CP</span>
+          <span class="sg-tag">
+            <span data-lang-inline="es" class="active">Gran consumo</span>
+            <span data-lang-inline="ca">Gran consum</span>
+            <span data-lang-inline="en">FMCG</span>
+          </span>
+          <span class="sg-tag">
+            <span data-lang-inline="es" class="active">Alimentación</span>
+            <span data-lang-inline="ca">Alimentació</span>
+            <span data-lang-inline="en">Food</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- ECONOMY CARD -->
+      <div class="sg-card sg-card-economy reveal">
+        <div class="sg-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="sg-card-badge">
+          <span class="sg-card-badge-dot"></span>
+          <span data-lang-inline="es" class="active">Servicio Economy</span>
+          <span data-lang-inline="ca">Servei Economy</span>
+          <span data-lang-inline="en">Economy Service</span>
+        </div>
+        <div class="sg-card-num">48h</div>
+        <div class="sg-card-num-label">
+          <span data-lang-inline="es" class="active">Entrega en 48 horas</span>
+          <span data-lang-inline="ca">Lliurament en 48 hores</span>
+          <span data-lang-inline="en">48-hour delivery</span>
+        </div>
+        <p class="sg-card-desc">
+          <span data-lang="es" class="active">Servicio Economy 48h en España y Portugal. Misma cobertura, misma calidad, mismas tarifas tanto para recogidas como para entregas.</span>
+          <span data-lang="ca">Servei Economy 48h a Espanya i Portugal. Mateixa cobertura, mateixa qualitat, mateixes tarifes tant per a recollides com per a lliuraments.</span>
+          <span data-lang="en">Economy 48h service across Spain and Portugal. Same coverage, same quality, same rates for both pickups and deliveries.</span>
+        </p>
+      </div>
+
+      <!-- EUROPA CARD -->
+      <div class="sg-card sg-card-europa reveal">
+        <div class="sg-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="sg-card-badge">
+          <span class="sg-card-badge-dot"></span>
+          <span data-lang-inline="es" class="active">Alcance europeo</span>
+          <span data-lang-inline="ca">Abast europeu</span>
+          <span data-lang-inline="en">European reach</span>
+        </div>
+        <h3 class="sg-card-title">
+          <span data-lang-inline="es" class="active">Europa desde 3 días</span>
+          <span data-lang-inline="ca">Europa des de 3 dies</span>
+          <span data-lang-inline="en">Europe from 3 days</span>
+        </h3>
+        <p class="sg-card-desc">
+          <span data-lang="es" class="active">Salidas diarias a toda Europa. 23 hubs, más de 400 miembros, 27 países cubiertos.</span>
+          <span data-lang="ca">Sortides diàries a tota Europa. 23 hubs, més de 400 membres, 27 països coberts.</span>
+          <span data-lang="en">Daily departures to all of Europe. 23 hubs, over 400 members, 27 countries covered.</span>
+        </p>
+      </div>
+
+      <!-- TECH CARD — Impresión en cabina -->
+      <div class="sg-card sg-card-tech reveal">
+        <div class="sg-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </div>
+        <div class="sg-card-badge">
+          <span class="sg-card-badge-dot"></span>
+          <span data-lang-inline="es" class="active">Tecnología</span>
+          <span data-lang-inline="ca">Tecnologia</span>
+          <span data-lang-inline="en">Technology</span>
+        </div>
+        <h3 class="sg-card-title">
+          <span data-lang-inline="es" class="active">Impresión en cabina</span>
+          <span data-lang-inline="ca">Impressió en cabina</span>
+          <span data-lang-inline="en">In-cab printing</span>
+        </h3>
+        <p class="sg-card-desc">
+          <span data-lang="es" class="active">El sistema Palletways recopila toda la información del envío y permite imprimir etiquetas directamente desde la cabina del vehículo de recogida, agilizando el proceso.</span>
+          <span data-lang="ca">El sistema Palletways recull tota la informació de l'enviament i permet imprimir etiquetes directament des de la cabina del vehicle de recollida.</span>
+          <span data-lang="en">The Palletways system collects all shipment data and enables label printing directly from the collection vehicle cab, streamlining the process.</span>
+        </p>
+      </div>
+
+      <!-- TRACKING CARD -->
+      <div class="sg-card sg-card-tracking reveal">
+        <div class="sg-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="sg-card-badge">
+          <span class="sg-card-badge-dot"></span>
+          <span data-lang-inline="es" class="active">Seguimiento</span>
+          <span data-lang-inline="ca">Seguiment</span>
+          <span data-lang-inline="en">Tracking</span>
+        </div>
+        <h3 class="sg-card-title">
+          <span data-lang-inline="es" class="active">Trazabilidad total</span>
+          <span data-lang-inline="ca">Traçabilitat total</span>
+          <span data-lang-inline="en">Full traceability</span>
+        </h3>
+        <p class="sg-card-desc">
+          <span data-lang="es" class="active">Seguimiento en tiempo real desde la recogida hasta la entrega. Acceso inmediato a los albaranes originales firmados por el destinatario. Avisos de entrega por email o teléfono.</span>
+          <span data-lang="ca">Seguiment en temps real des de la recollida fins al lliurament. Accés immediat als albarans originals signats pel destinatari.</span>
+          <span data-lang="en">Real-time tracking from pickup to delivery. Immediate access to original signed delivery notes. Email or phone delivery alerts.</span>
+        </p>
+      </div>
+
+      <!-- COBERTURA CARD — wide -->
+      <div class="sg-card sg-card-cobertura reveal">
+        <div class="sg-card-badge">
+          <span class="sg-card-badge-dot"></span>
+          <span data-lang-inline="es" class="active">Cobertura internacional</span>
+          <span data-lang-inline="ca">Cobertura internacional</span>
+          <span data-lang-inline="en">International coverage</span>
+        </div>
+        <h3 class="sg-card-title">
+          <span data-lang-inline="es" class="active">21 países europeos con salidas diarias</span>
+          <span data-lang-inline="ca">21 països europeus amb sortides diàries</span>
+          <span data-lang-inline="en">21 European countries with daily departures</span>
+        </h3>
+        <div class="sg-countries">
+          <span class="sg-country">Alemania</span>
+          <span class="sg-country">Austria</span>
+          <span class="sg-country">Holanda</span>
+          <span class="sg-country">Bélgica</span>
+          <span class="sg-country">Luxemburgo</span>
+          <span class="sg-country">Suecia</span>
+          <span class="sg-country">Finlandia</span>
+          <span class="sg-country">Dinamarca</span>
+          <span class="sg-country">Francia</span>
+          <span class="sg-country">Italia</span>
+          <span class="sg-country">Reino Unido</span>
+          <span class="sg-country">Irlanda</span>
+          <span class="sg-country">Rep. Checa</span>
+          <span class="sg-country">Eslovaquia</span>
+          <span class="sg-country">Lituania</span>
+          <span class="sg-country">Letonia</span>
+          <span class="sg-country">Estonia</span>
+          <span class="sg-country">Polonia</span>
+          <span class="sg-country">Rumanía</span>
+          <span class="sg-country">Bulgaria</span>
+          <span class="sg-country">Hungría</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VALOR AÑADIDO — ALTERNATING ROWS
+     ============================================================ -->
+<section id="valor-anadido">
+  <div class="va-container">
+
+    <div class="va-header">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Valor Añadido</span>
+          <span data-lang-inline="ca">Valor Afegit</span>
+          <span data-lang-inline="en">Added Value</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(44px,5.5vw,80px);color:var(--navy);">
+        <span data-lang="es" class="active">Lo que nos<br>diferencia</span>
+        <span data-lang="ca">El que ens<br>diferencia</span>
+        <span data-lang="en">What sets<br>us apart</span>
+      </h2>
+      <p class="va-desc reveal">
+        <span data-lang="es" class="active">Más allá de la entrega. Nuestro compromiso es ofrecer soluciones completas que aporten valor real a su cadena de suministro.</span>
+        <span data-lang="ca">Més enllà del lliurament. El nostre compromís és oferir solucions completes que aportin valor real a la vostra cadena de subministrament.</span>
+        <span data-lang="en">Beyond delivery. Our commitment is to offer complete solutions that bring real value to your supply chain.</span>
+      </p>
+    </div>
+
+    <div class="va-rows">
+
+      <div class="va-row reveal">
+        <div class="va-row-num">01</div>
+        <div class="va-row-title">
+          <h3>
+            <span data-lang-inline="es" class="active">Entrega garantizada</span>
+            <span data-lang-inline="ca">Lliurament garantit</span>
+            <span data-lang-inline="en">Guaranteed delivery</span>
+          </h3>
+          <p>
+            <span data-lang-inline="es" class="active">95% de los códigos postales de España y Portugal</span>
+            <span data-lang-inline="ca">95% dels codis postals d'Espanya i Portugal</span>
+            <span data-lang-inline="en">95% of postal codes in Spain and Portugal</span>
+          </p>
+        </div>
+        <div class="va-row-detail">
+          <span data-lang="es" class="active">La red Palletways cubre el <strong>95% de los códigos postales</strong> de España y Portugal, garantizando que su mercancía paletizada llegue a prácticamente cualquier destino en 24h Premium o 48h Economy.</span>
+          <span data-lang="ca">La xarxa Palletways cobreix el <strong>95% dels codis postals</strong> d'Espanya i Portugal, garantint que la vostra mercaderia paletitzada arribi pràcticament a qualsevol destinació en 24h Premium o 48h Economy.</span>
+          <span data-lang="en">The Palletways network covers <strong>95% of postal codes</strong> across Spain and Portugal, ensuring your palletised goods reach virtually any destination within 24h Premium or 48h Economy.</span>
+        </div>
+      </div>
+
+      <div class="va-row reveal">
+        <div class="va-row-num">02</div>
+        <div class="va-row-title">
+          <h3>
+            <span data-lang-inline="es" class="active">Trazabilidad en tiempo real</span>
+            <span data-lang-inline="ca">Traçabilitat en temps real</span>
+            <span data-lang-inline="en">Real-time tracking</span>
+          </h3>
+          <p>
+            <span data-lang-inline="es" class="active">Portal web + albaranes digitales firmados</span>
+            <span data-lang-inline="ca">Portal web + albarans digitals signats</span>
+            <span data-lang-inline="en">Web portal + digital signed delivery notes</span>
+          </p>
+        </div>
+        <div class="va-row-detail">
+          <span data-lang="es" class="active">Acceso inmediato a los <strong>albaranes de entrega originales</strong> del cliente firmados por el destinatario, inmediatamente después de haberse entregado la mercancía. Seguimiento a tiempo real a través del portal Palletways.</span>
+          <span data-lang="ca">Accés immediat als <strong>albarans de lliurament originals</strong> del client signats pel destinatari, immediatament després d'haver-se lliurat la mercaderia.</span>
+          <span data-lang="en">Immediate access to the client's <strong>original delivery notes</strong> signed by the recipient, immediately after goods have been delivered. Real-time tracking through the Palletways portal.</span>
+        </div>
+      </div>
+
+      <div class="va-row reveal">
+        <div class="va-row-num">03</div>
+        <div class="va-row-title">
+          <h3>
+            <span data-lang-inline="es" class="active">Avisos de entrega programados</span>
+            <span data-lang-inline="ca">Avisos de lliurament programats</span>
+            <span data-lang-inline="en">Scheduled delivery alerts</span>
+          </h3>
+          <p>
+            <span data-lang-inline="es" class="active">Notificaciones por email o teléfono</span>
+            <span data-lang-inline="ca">Notificacions per correu o telèfon</span>
+            <span data-lang-inline="en">Email or phone notifications</span>
+          </p>
+        </div>
+        <div class="va-row-detail">
+          <span data-lang="es" class="active">Configure <strong>avisos automáticos de entrega</strong> que notifican via email o teléfono en el momento de la entrega. El comprobante digital incluye fecha, nombre, código de barras y firma del destinatario.</span>
+          <span data-lang="ca">Configureu <strong>avisos automàtics de lliurament</strong> que notifiquen via correu o telèfon en el moment del lliurament.</span>
+          <span data-lang="en">Set up <strong>automatic delivery alerts</strong> that notify via email or phone at the time of delivery. The digital proof includes date, name, barcode and recipient signature.</span>
+        </div>
+      </div>
+
+      <div class="va-row reveal">
+        <div class="va-row-num">04</div>
+        <div class="va-row-title">
+          <h3>
+            <span data-lang-inline="es" class="active">Entregas programadas y concertadas</span>
+            <span data-lang-inline="ca">Lliuraments programats i concertats</span>
+            <span data-lang-inline="en">Scheduled &amp; agreed deliveries</span>
+          </h3>
+          <p>
+            <span data-lang-inline="es" class="active">Grandes superficies y comercio al detalle</span>
+            <span data-lang-inline="ca">Grans superfícies i comerç al detall</span>
+            <span data-lang-inline="en">Large retailers and small shops</span>
+          </p>
+        </div>
+        <div class="va-row-detail">
+          <span data-lang="es" class="active">Atención especializada para <strong>grandes superficies y comercio al detalle</strong>. Vehículos equipados con plataformas elevadoras. Recogidas por parte de terceros. Mismas tarifas para recogidas y entregas.</span>
+          <span data-lang="ca">Atenció especialitzada per a <strong>grans superfícies i comerç al detall</strong>. Vehicles equipats amb plataformes elevadores. Recollides per part de tercers.</span>
+          <span data-lang="en">Specialist service for <strong>large retailers and small shops</strong>. Vehicles equipped with tail lifts. Third-party pickups. Same rates for pickups and deliveries.</span>
+        </div>
+      </div>
+
+      <div class="va-row reveal">
+        <div class="va-row-num">05</div>
+        <div class="va-row-title">
+          <h3>
+            <span data-lang-inline="es" class="active">Red especializada en gran consumo</span>
+            <span data-lang-inline="ca">Xarxa especialitzada en gran consum</span>
+            <span data-lang-inline="en">Specialist FMCG &amp; industrial network</span>
+          </h3>
+          <p>
+            <span data-lang-inline="es" class="active">Alimentación, vino y bebidas en seco</span>
+            <span data-lang-inline="ca">Alimentació, vi i begudes en sec</span>
+            <span data-lang-inline="en">Food, wine and dry beverages</span>
+          </p>
+        </div>
+        <div class="va-row-detail">
+          <span data-lang="es" class="active">Red especializada en el transporte de <strong>productos de gran consumo, alimentación, vino y bebidas en seco</strong>. Sector gran consumo e industrial. No transportamos productos ADR ni peligrosos.</span>
+          <span data-lang="ca">Xarxa especialitzada en el transport de <strong>productes de gran consum, alimentació, vi i begudes en sec</strong>. No transportem productes ADR ni perillosos.</span>
+          <span data-lang="en">Specialist network for <strong>FMCG, food, wine and dry beverages</strong>. Consumer goods and industrial sector. We do not carry ADR or dangerous goods.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     TECHNOLOGY — VISUAL SHOWCASE
+     ============================================================ -->
+<section id="tecnologia">
+  <div class="tech-bg"></div>
+  <div class="tech-route-line"><div class="tech-route-pulse"></div></div>
+
+  <div class="tech-container">
+    <div class="tech-header">
+      <div>
+        <div class="section-label reveal">
+          <div class="section-label-line"></div>
+          <span class="section-label-text">
+            <span data-lang-inline="es" class="active">Innovación Palletways</span>
+            <span data-lang-inline="ca">Innovació Palletways</span>
+            <span data-lang-inline="en">Palletways Innovation</span>
+          </span>
+        </div>
+        <h2 class="section-title reveal" style="font-size:clamp(42px,5vw,74px);color:var(--white);">
+          <span data-lang="es" class="active">Tecnología<br>al servicio<br>de su carga</span>
+          <span data-lang="ca">Tecnologia<br>al servei<br>de la seva càrrega</span>
+          <span data-lang="en">Technology<br>serving<br>your cargo</span>
+        </h2>
+      </div>
+      <div class="section-body reveal" style="margin-top:0;max-width:420px;">
+        <span data-lang="es" class="active">El sistema informático de Palletways recopila información en tiempo real sobre cada envío dentro de la red. Tecnología premiada internacionalmente. Control total de su cadena de suministro desde la recogida hasta la entrega.</span>
+        <span data-lang="ca">El sistema informàtic de Palletways recull informació en temps real sobre cada enviament dins de la xarxa. Tecnologia premiada internacionalment.</span>
+        <span data-lang="en">The Palletways IT system collects real-time information on every shipment within the network. Internationally award-winning technology. Full control of your supply chain from pickup to delivery.</span>
+      </div>
+    </div>
+
+    <div class="tech-grid">
+
+      <div class="tech-card reveal">
+        <div class="tech-card-num">01</div>
+        <div class="tech-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="8" width="44" height="32" rx="3" stroke="rgba(207,0,28,0.6)" stroke-width="1.5"/>
+            <rect x="15" y="15" width="10" height="18" stroke="rgba(207,0,28,0.4)" stroke-width="1"/>
+            <rect x="30" y="20" width="15" height="13" stroke="rgba(207,0,28,0.4)" stroke-width="1"/>
+            <path d="M22 48 L30 42 L38 48" stroke="rgba(207,0,28,0.5)" stroke-width="1.5"/>
+            <line x1="16" y1="52" x2="44" y2="52" stroke="rgba(207,0,28,0.3)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="tech-card-title">
+          <span data-lang-inline="es" class="active">Impresión en cabina</span>
+          <span data-lang-inline="ca">Impressió en cabina</span>
+          <span data-lang-inline="en">In-cab printing</span>
+        </h3>
+        <p class="tech-card-desc">
+          <span data-lang="es" class="active">El sistema recopila toda la información sobre un envío y permite imprimir las etiquetas directamente en la cabina del vehículo de recogida. Proceso ágil, sin errores.</span>
+          <span data-lang="ca">El sistema recull tota la informació sobre un enviament i permet imprimir les etiquetes directament a la cabina del vehicle de recollida. Procés àgil, sense errors.</span>
+          <span data-lang="en">The system collects all shipment data and enables label printing directly in the collection vehicle cab. Streamlined, error-free process.</span>
+        </p>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-card-num">02</div>
+        <div class="tech-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 30 C10 18 20 10 30 10 C40 10 50 18 50 30" stroke="rgba(207,0,28,0.5)" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <rect x="12" y="26" width="36" height="24" rx="2" stroke="rgba(207,0,28,0.6)" stroke-width="1.5"/>
+            <line x1="22" y1="38" x2="38" y2="38" stroke="rgba(207,0,28,0.5)" stroke-width="1"/>
+            <circle cx="30" cy="32" r="3" stroke="rgba(207,0,28,0.7)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="tech-card-title">
+          <span data-lang-inline="es" class="active">Arco de escaneo</span>
+          <span data-lang-inline="ca">Arc d'escaneig</span>
+          <span data-lang-inline="en">Scanning archway</span>
+        </h3>
+        <p class="tech-card-desc">
+          <span data-lang="es" class="active">El exclusivo sistema Archway fotografía cada paleta a medida que se desplaza hasta el centro de distribución. Visibilidad total que reduce significativamente los daños y el robo.</span>
+          <span data-lang="ca">El exclusiu sistema Archway fotografía cada paleta a mesura que es desplaça fins al centre de distribució. Visibilitat total que redueix significativament els danys i el robatori.</span>
+          <span data-lang="en">The exclusive Archway system photographs every pallet as it moves through the distribution centre. Full visibility that significantly reduces damage and theft.</span>
+        </p>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-card-num">03</div>
+        <div class="tech-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="18" stroke="rgba(207,0,28,0.4)" stroke-width="1.5"/>
+            <circle cx="30" cy="30" r="4" fill="rgba(207,0,28,0.7)"/>
+            <path d="M30 12 L30 18" stroke="rgba(207,0,28,0.6)" stroke-width="1.5"/>
+            <path d="M48 30 L42 30" stroke="rgba(207,0,28,0.6)" stroke-width="1.5"/>
+            <path d="M36 18 L30 30" stroke="rgba(207,0,28,0.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="tech-card-title">
+          <span data-lang-inline="es" class="active">Seguimiento y localización</span>
+          <span data-lang-inline="ca">Seguiment i localització</span>
+          <span data-lang-inline="en">Tracking &amp; tracing</span>
+        </h3>
+        <p class="tech-card-desc">
+          <span data-lang="es" class="active">El sistema recopila información en tiempo real sobre los envíos dentro de la red, permitiendo un seguimiento completo desde la recogida hasta la entrega final al destinatario.</span>
+          <span data-lang="ca">El sistema recull informació en temps real sobre els enviaments dins de la xarxa, permetent un seguiment complet des de la recollida fins al lliurament final.</span>
+          <span data-lang="en">The system collects real-time data on all shipments within the network, enabling complete tracking from pickup through to final delivery to the recipient.</span>
+        </p>
+      </div>
+
+      <div class="tech-card reveal">
+        <div class="tech-card-num">04</div>
+        <div class="tech-card-icon" aria-hidden="true">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="15" y="10" width="20" height="32" rx="4" stroke="rgba(207,0,28,0.6)" stroke-width="1.5"/>
+            <circle cx="25" cy="38" r="2" stroke="rgba(207,0,28,0.5)" stroke-width="1"/>
+            <line x1="19" y1="16" x2="31" y2="16" stroke="rgba(207,0,28,0.4)" stroke-width="1"/>
+            <line x1="19" y1="20" x2="31" y2="20" stroke="rgba(207,0,28,0.4)" stroke-width="1"/>
+            <path d="M35 30 L48 30 L48 50 L35 50 Z" stroke="rgba(207,0,28,0.4)" stroke-width="1"/>
+            <path d="M38 38 L44 38" stroke="rgba(207,0,28,0.5)" stroke-width="1"/>
+            <circle cx="41" cy="44" r="1.5" fill="rgba(207,0,28,0.6)"/>
+          </svg>
+        </div>
+        <h3 class="tech-card-title">
+          <span data-lang-inline="es" class="active">Comprobante digital en móvil</span>
+          <span data-lang-inline="ca">Comprovant digital al mòbil</span>
+          <span data-lang-inline="en">Mobile digital proof of delivery</span>
+        </h3>
+        <p class="tech-card-desc">
+          <span data-lang="es" class="active">En el momento de la entrega, se genera automáticamente una prueba digital con fecha, nombre, código de barras y firma. Enviada en tiempo real a todas las partes implicadas en todos los dispositivos.</span>
+          <span data-lang="ca">En el moment del lliurament, es genera automàticament una prova digital amb data, nom, codi de barres i firma. Enviada en temps real a totes les parts implicades.</span>
+          <span data-lang="en">At the time of delivery, a digital proof is automatically generated with date, name, barcode and signature. Sent in real-time to all parties on all devices.</span>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-bg-text" aria-hidden="true">24H</div>
+  <div class="cta-container">
+    <div class="cta-label reveal">
+      <div class="cta-label-line"></div>
+      <span class="cta-label-text">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="cta-title reveal">
+      <span data-lang="es" class="active">
+        ¿Listo para entregar en
+        <span class="cta-red">24h</span>?
+      </span>
+      <span data-lang="ca">
+        Preparat per lliurar en
+        <span class="cta-red">24h</span>?
+      </span>
+      <span data-lang="en">
+        Ready to deliver in
+        <span class="cta-red">24h</span>?
+      </span>
+    </h2>
+    <p class="cta-desc reveal">
+      <span data-lang="es" class="active">Solicite una tarifa personalizada para su mercancía paletizada. Nuestro equipo le asesorará sobre el servicio más adecuado para sus necesidades logísticas.</span>
+      <span data-lang="ca">Sol·liciteu una tarifa personalitzada per a la vostra mercaderia paletitzada. El nostre equip us assessorarà sobre el servei més adequat per a les vostres necessitats logístiques.</span>
+      <span data-lang="en">Request a personalised quote for your palletised goods. Our team will advise you on the most suitable service for your logistics needs.</span>
+    </p>
+    <div class="cta-actions reveal">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Solicitar tarifa</span>
+          <span data-lang-inline="ca">Sol·licitar tarifa</span>
+          <span data-lang-inline="en">Request a quote</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:+34938911018" class="cta-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +34 938 911 018
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca" style="display:none;">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en" style="display:none;">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/grupajes-cargas-completas/index.html">
+            <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+            <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+            <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+          </a></li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2025 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">Cookies</a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   NAV SCROLL STATE
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ============================================================
+   REVEAL OBSERVER
+   ============================================================ */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 5) * 0.07;
+  revealObserver.observe(el);
+});
+
+/* ============================================================
+   COUNTER ANIMATION
+   ============================================================ */
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.innerHTML.replace(/^\d+/, '');
+      const duration = 1800;
+      const startTime = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.innerHTML = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    if (el.getAttribute('data-lang') !== lang) el.style.display = 'none';
+    else el.style.display = '';
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+  document.documentElement.lang = lang;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+
+function openMenu() {
+  menuOpen = true;
+  mobileMenu.style.display = 'flex';
+  mobileMenu.offsetHeight;
+  mobileMenu.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  hamburgerBtn.setAttribute('aria-label', 'Cerrar menú');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  hamburgerBtn.setAttribute('aria-label', 'Abrir menú');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    if (!menuOpen) mobileMenu.style.display = 'none';
+  }, 400);
+}
+
+hamburgerBtn.addEventListener('click', () => {
+  menuOpen ? closeMenu() : openMenu();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOpen) closeMenu();
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => closeMenu());
+});
+
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.getAttribute('data-target');
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      sub.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ============================================================
+   HERO CANVAS — LOGISTICS NETWORK
+   ============================================================ */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodeCount = 32;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.16,
+      vy: (Math.random() - 0.5) * 0.16,
+      r: Math.random() * 2 + 1.5,
+      pulse: Math.random() * Math.PI * 2,
+    });
+  }
+
+  const packets = [];
+  for (let i = 0; i < 14; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({
+      from: fromIdx, to: toIdx,
+      t: Math.random(),
+      speed: 0.003 + Math.random() * 0.004,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      n.pulse += 0.022;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 190) {
+          const alpha = (1 - dist / 190) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      const pulseR = n.r + Math.sin(n.pulse) * 0.5;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.65)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(207,0,28,0.1)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        p.t = 0;
+        p.from = p.to;
+        p.to = Math.floor(Math.random() * nodeCount);
+        while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount);
+      }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y;
+      const tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t;
+      const py = fy + (ty - fy) * p.t;
+
+      ctx.beginPath();
+      ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.82)';
+      ctx.fill();
+
+      const trailLen = 0.06;
+      const tStart = Math.max(0, p.t - trailLen);
+      const tpx = fx + (tx - fx) * tStart;
+      const tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,200,200,0.35)');
+      ctx.beginPath();
+      ctx.moveTo(tpx, tpy);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   CTA CANVAS
+   ============================================================ */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) {
+          const a = (1 - d / 220) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   STAGGER DELAYS
+   ============================================================ */
+document.querySelectorAll('.ns-stat').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+});
+document.querySelectorAll('.sg-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.07) + 's';
+});
+document.querySelectorAll('.va-row').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.05) + 's';
+});
+document.querySelectorAll('.tech-card').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.1) + 's';
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Bloquear teclas DevTools
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+
+</body>
+</html>

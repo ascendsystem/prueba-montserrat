@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Logística In-House - Transports Montserrat. Gestión integral de las instalaciones del cliente. Reducimos costes e incrementamos productividad y eficiencia logística.">
+<title>Logística In-House | Transports Montserrat</title>
+
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & RESET
+   ============================================================ */
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   LANG SWITCHER
+   ============================================================ */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+#mobile-menu.animating { display: flex; }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  transition: color 0.2s;
+}
+.mob-sub-item > a:hover { color: var(--white); }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* ============================================================
+   PAGE HERO
+   ============================================================ */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(160deg, #020c1e 0%, #010814 55%, #030d20 100%);
+  padding-bottom: 80px;
+}
+
+#hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0.55; pointer-events: none; z-index: 1;
+}
+
+.hero-bg-grid {
+  position: absolute; inset: 0; z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  animation: gridShift 44s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 80%);
+}
+@keyframes gridShift { from { transform: translate(0,0); } to { transform: translate(72px,72px); } }
+
+.hero-bg-lines { position: absolute; inset: 0; overflow: hidden; z-index: 3; }
+.hero-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent 0%, rgba(207,0,28,0.0) 8%, rgba(207,0,28,0.65) 50%, rgba(207,0,28,0.0) 92%, transparent 100%);
+  height: 1px; width: 55%;
+  filter: blur(0.4px);
+  animation: lineMove 10s var(--ease-expo) infinite; opacity: 0;
+}
+.hero-line:nth-child(1) { top: 22%; left: -20%; animation-delay: 0s; }
+.hero-line:nth-child(2) { top: 52%; left: -20%; animation-delay: 3.2s; }
+.hero-line:nth-child(3) { top: 78%; left: -20%; animation-delay: 6.5s; }
+@keyframes lineMove { 0% { opacity:0; transform: translateX(0); } 10% { opacity:1; } 90% { opacity:1; } 100% { opacity:0; transform: translateX(265%); } }
+
+.hero-diagonal {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 52%;
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  overflow: hidden; z-index: 4;
+  background: linear-gradient(150deg, rgba(6,30,68,0.98) 0%, rgba(3,18,46,0.85) 100%);
+  box-shadow: inset -40px 0 80px rgba(0,0,0,0.4);
+}
+.hero-img-overlay {
+  position: absolute; inset: 0; z-index: 6;
+  background: linear-gradient(145deg, rgba(2,12,30,0.78) 0%, rgba(6,30,68,0.48) 50%, rgba(2,12,30,0.22) 100%);
+}
+.hero-img-bg {
+  position: absolute; inset: 0; z-index: 5;
+  background-image: url('../../assets/images/servicios/log2.jfif');
+  background-size: cover; background-position: center;
+  transform: scale(1.12);
+  animation: heroParallax 22s ease-in-out infinite alternate;
+  filter: saturate(0.5) contrast(1.1) brightness(0.82);
+  will-change: transform;
+}
+@keyframes heroParallax { from { transform: scale(1.12) translateX(-2%) translateY(0); } to { transform: scale(1.12) translateX(2%) translateY(-1%); } }
+
+.hero-noise {
+  position: absolute; inset: 0; opacity: 0.042; z-index: 8;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px; pointer-events: none;
+}
+
+.hero-glow {
+  position: absolute; pointer-events: none; z-index: 3;
+  border-radius: 50%; filter: blur(80px);
+}
+.hero-glow-1 {
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(207,0,28,0.08) 0%, transparent 70%);
+  top: 10%; left: -100px;
+  animation: glowPulse 6s ease-in-out infinite alternate;
+}
+.hero-glow-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(ellipse, rgba(13,74,143,0.12) 0%, transparent 70%);
+  bottom: -100px; right: 10%;
+  animation: glowPulse 8s ease-in-out infinite alternate-reverse;
+}
+@keyframes glowPulse { from { opacity: 0.6; transform: scale(1); } to { opacity: 1; transform: scale(1.1); } }
+
+.hero-content {
+  position: relative; z-index: 10;
+  padding: 0 56px; max-width: 680px; padding-top: 80px;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.8s var(--easing) 0.3s forwards;
+}
+.hero-eyebrow-line {
+  width: 52px; height: 1.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.5);
+}
+.hero-eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(207,0,28,0.9);
+  text-shadow: 0 0 20px rgba(207,0,28,0.3);
+}
+.hero-year-badge {
+  margin-left: auto;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(207,0,28,0.25);
+  background: rgba(207,0,28,0.08);
+  padding: 5px 14px; text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  transition: border-color .3s, background .3s;
+}
+.hero-year-badge:hover { border-color: rgba(207,0,28,0.5); background: rgba(207,0,28,0.15); }
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; line-height: 0.91; text-transform: uppercase;
+  letter-spacing: -0.015em; margin-bottom: 32px; overflow: hidden;
+}
+.hero-title-line { display: block; }
+.hero-title-line:nth-child(1),
+.hero-title-line:nth-child(2),
+.hero-title-line:nth-child(3) { font-size: clamp(52px,7.2vw,102px); line-height: 0.91; }
+.hero-title-line:nth-child(1) { animation: slideUp 0.9s var(--easing) 0.5s both; }
+.hero-title-line:nth-child(2) { animation: slideUp 0.9s var(--easing) 0.65s both; }
+.hero-title-line:nth-child(3) { animation: slideUp 0.9s var(--easing) 0.8s both; -webkit-text-stroke: 1.5px rgba(255,255,255,0.2) !important; }
+@keyframes slideUp { from { opacity:0; transform: translateY(100%); } to { opacity:1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+.hero-desc {
+  font-size: 15.5px; font-weight: 300; line-height: 1.75; letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.55); max-width: 480px; margin-bottom: 48px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.1s forwards;
+}
+.hero-desc strong { color: rgba(255,255,255,0.92); font-weight: 500; }
+.hero-actions {
+  display: flex; align-items: center; gap: 24px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.3s forwards; flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  text-decoration: none; padding: 17px 40px;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 30px rgba(207,0,28,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform .35s var(--ease-expo), box-shadow .35s;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--red-bright), var(--red));
+  transform: translateX(-100%); transition: transform 0.35s var(--ease-expo);
+}
+.btn-primary:hover { transform: scaleX(1.03) translateY(-1px); box-shadow: 0 12px 40px rgba(207,0,28,0.55), inset 0 1px 0 rgba(255,255,255,0.15); }
+.btn-primary:hover::before { transform: translateX(0); }
+.btn-primary span { position: relative; z-index: 1; }
+.btn-arrow { position: relative; z-index: 1; width: 16px; height: 16px; flex-shrink: 0; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 2px;
+  transition: color .25s, border-color .25s, letter-spacing .25s;
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.45); letter-spacing: 0.16em; }
+
+.hero-scroll-indicator {
+  position: absolute; bottom: 40px; left: 56px;
+  display: flex; align-items: center; gap: 16px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.8s forwards; z-index: 10;
+}
+.scroll-line {
+  width: 72px; height: 1px;
+  background: rgba(255,255,255,0.15); position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ''; position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100% { left:-100%; } 50% { left:100%; } }
+.scroll-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+/* Speed streaks */
+.speed-streak {
+  position: absolute; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: streakFly 4s linear infinite;
+  z-index: 2;
+}
+@keyframes streakFly { 0% { left: -30%; width: 20%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 110%; width: 20%; opacity: 0; } }
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+section { position: relative; }
+.section-label { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.section-label-line {
+  width: 36px; height: 2px; flex-shrink: 0;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.4);
+}
+.section-label-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--red); text-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+.section-body { font-size: 14.5px; line-height: 1.8; font-weight: 300; color: rgba(255,255,255,0.55); letter-spacing: 0.01em; }
+
+/* Reveal animations */
+.reveal {
+  opacity: 0; transform: translateY(44px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left {
+  opacity: 0; transform: translateX(-64px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0; transform: translateX(64px);
+  transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   MARQUEE
+   ============================================================ */
+#marquee-strip {
+  background: linear-gradient(90deg, #b5001a 0%, var(--red) 30%, #cf001c 70%, #b5001a 100%);
+  padding: 13px 0; overflow: hidden; white-space: nowrap;
+  position: relative; z-index: 10;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(207,0,28,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+}
+.marquee-track {
+  display: inline-flex; gap: 0;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 28px; padding: 0 32px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.92);
+}
+.marquee-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.55); flex-shrink: 0; box-shadow: 0 0 4px rgba(255,255,255,0.3); }
+
+/* ============================================================
+   INTRO / OVERVIEW SECTION
+   ============================================================ */
+#intro {
+  background: var(--off-white); color: var(--text);
+  padding: 128px 0; overflow: hidden; position: relative;
+}
+#intro::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle at 100% 0%, rgba(6,48,98,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+#intro::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 30% at 80% 20%, rgba(6,48,98,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(207,0,28,0.02) 0%, transparent 60%);
+  pointer-events: none;
+}
+.intro-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+  position: relative; z-index: 2;
+}
+.intro-left .section-label-text { color: var(--red); }
+.intro-left .section-title { font-size: clamp(40px,5vw,72px); color: var(--navy); letter-spacing: -0.02em; }
+.intro-left .section-body { color: rgba(20,20,20,0.6); margin-top: 24px; max-width: 480px; }
+.intro-right { position: relative; }
+.intro-img-stack { position: relative; height: 560px; }
+.intro-img-main {
+  position: absolute; top: 0; right: 0; width: 82%; height: 78%;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+}
+.intro-img-main img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 7s var(--ease-expo); filter: saturate(0.85) contrast(1.05); }
+.intro-img-main:hover img { transform: scale(1.06); }
+.intro-img-accent {
+  position: absolute; bottom: 0; left: 0; width: 50%; height: 44%;
+  overflow: hidden;
+  border: 5px solid var(--off-white);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.18);
+}
+.intro-img-accent img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.intro-badge {
+  position: absolute; top: 42%; left: 14%;
+  color: var(--white); padding: 20px 28px; z-index: 10;
+  background: linear-gradient(135deg, var(--red), #a80016);
+  clip-path: polygon(0 0, 91% 0, 100% 100%, 9% 100%);
+  box-shadow: 0 8px 30px rgba(207,0,28,0.4);
+}
+.intro-badge-num { font-family: 'Barlow Condensed', sans-serif; font-size: 48px; font-weight: 900; line-height: 1; letter-spacing: -0.02em; text-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+.intro-badge-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.85; }
+
+/* ============================================================
+   SERVICES LIST
+   ============================================================ */
+#services-list {
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(13,74,143,0.08) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+#services-list::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(207,0,28,0.2) 50%, transparent 90%);
+}
+#services-list::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(207,0,28,0.03) 0%, transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(13,74,143,0.05) 0%, transparent 35%);
+  z-index: 0;
+}
+.services-list-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 1; }
+.services-list-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 80px; }
+.services-list-header .section-title { font-size: clamp(42px,5vw,76px); color: var(--white); }
+.services-list-header-desc { font-size: 14.5px; line-height: 1.8; color: rgba(255,255,255,0.45); max-width: 400px; margin-bottom: 28px; }
+
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+}
+.service-card {
+  position: relative;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.055);
+  padding: 52px 44px; overflow: hidden;
+  transition: background .45s var(--ease-expo), border-color .45s, transform .45s var(--ease-expo), box-shadow .45s;
+  cursor: pointer; will-change: transform;
+}
+.service-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 2.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transition: width .55s var(--ease-expo);
+  box-shadow: 0 0 12px rgba(207,0,28,0.4);
+}
+.service-card::after {
+  content: ''; position: absolute; top: 0; right: 0;
+  width: 1px; height: 0%;
+  background: linear-gradient(180deg, transparent, rgba(207,0,28,0.3), transparent);
+  transition: height .55s var(--ease-expo);
+}
+.service-card:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.12); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(207,0,28,0.08); }
+.service-card:hover::before { width: 100%; }
+.service-card:hover::after { height: 100%; }
+.service-num { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.22em; color: rgba(207,0,28,0.45); margin-bottom: 32px; }
+.service-icon {
+  width: 54px; height: 54px;
+  background: rgba(207,0,28,0.09);
+  border: 1px solid rgba(207,0,28,0.18);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.06), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: background .35s, border-color .35s, box-shadow .35s, transform .35s var(--ease-expo);
+}
+.service-card:hover .service-icon { background: rgba(207,0,28,0.18); border-color: rgba(207,0,28,0.35); box-shadow: 0 0 24px rgba(207,0,28,0.2); transform: scale(1.06) rotate(2deg); }
+.service-icon svg { width: 22px; height: 22px; fill: var(--red); transition: transform .35s var(--ease-expo); }
+.service-card:hover .service-icon svg { transform: scale(1.08); }
+.service-title { font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--white); margin-bottom: 16px; line-height: 1.05; }
+.service-desc { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.38); }
+
+/* ============================================================
+   LOCATION / OPERATIVA
+   ============================================================ */
+#operativa {
+  background: var(--gray-dark); padding: 150px 0; overflow: hidden; position: relative;
+}
+.operativa-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(207,0,28,0.14), transparent 40%),
+    radial-gradient(circle at 85% 55%, rgba(6,48,98,0.22), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(255,255,255,0.04), transparent 55%),
+    linear-gradient(145deg, #080f1c 0%, #040912 50%, #080f1c 100%);
+  z-index: 0;
+}
+.operativa-container {
+  position: relative; z-index: 2;
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+}
+.operativa-right .section-title { font-size: clamp(40px,5vw,68px); color: var(--white); }
+.operativa-right .section-body { margin-top: 24px; max-width: 460px; }
+.operativa-img { position: relative; height: 480px; z-index: 2; }
+.operativa-img-main {
+  position: absolute; top: 0; left: 0; width: 85%; height: 85%; overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+.operativa-img-main img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.75) contrast(1.08); transition: transform 5s var(--ease-expo), filter 1s; }
+.operativa-img-main:hover img { transform: scale(1.06); filter: saturate(0.9) contrast(1.08); }
+.operativa-img-accent {
+  position: absolute; bottom: 0; right: 0; width: 50%; height: 46%;
+  background: linear-gradient(145deg, var(--red), #a80016);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; padding: 24px; text-align: center; z-index: 2;
+  box-shadow: 0 12px 50px rgba(207,0,28,0.4);
+}
+.operativa-accent-icon { margin-bottom: 8px; }
+.operativa-accent-icon svg { width: 36px; height: 36px; fill: none; stroke: rgba(255,255,255,0.8); stroke-width: 1.5; }
+.operativa-accent-text { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.9); text-align: center; line-height: 1.4; }
+
+/* ============================================================
+   NUMBERS
+   ============================================================ */
+#numbers {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(13,74,143,0.12) 0%, transparent 70%),
+    var(--navy);
+  padding: 110px 0; overflow: hidden; position: relative;
+}
+#numbers::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+.numbers-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 3fr; gap: 80px; align-items: center; }
+.numbers-left .section-title { font-size: clamp(36px,4vw,58px); color: var(--white); }
+.numbers-left .section-body { margin-top: 20px; }
+.numbers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+.number-card {
+  padding: 44px 36px; text-align: center; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.055);
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo), box-shadow .4s;
+}
+.number-card::after {
+  content: ''; position: absolute; top: 0; left: 50%;
+  width: 40px; height: 2.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(207,0,28,0.4);
+}
+.number-card:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.1); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
+.number-value { font-family: 'Barlow Condensed', sans-serif; font-size: 60px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em; text-shadow: 0 2px 20px rgba(255,255,255,0.05); }
+.number-value span { color: var(--red); text-shadow: 0 0 20px rgba(207,0,28,0.4); }
+.number-label { font-size: 10.5px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 10px; line-height: 1.4; }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 170px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 300px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-title em { font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main { display: flex; justify-content: space-between; align-items: flex-start; gap: 80px; padding-bottom: 60px; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; flex-wrap: wrap; }
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-contact-icon { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* Lang inline/block */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .nav-links { gap: 16px; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  .intro-container { gap: 60px; }
+  .operativa-container { gap: 60px; }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+}
+@media (max-width: 900px) {
+  #nav { padding: 0 24px; }
+  .intro-container { grid-template-columns: 1fr; gap: 60px; }
+  .intro-right { display: none; }
+  .services-list-header { grid-template-columns: 1fr; gap: 24px; }
+  .numbers-container { grid-template-columns: 1fr; gap: 40px; }
+  .operativa-container { grid-template-columns: 1fr; gap: 60px; }
+  .operativa-img { display: none; }
+}
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .hero-title-line:nth-child(1),
+  .hero-title-line:nth-child(2),
+  .hero-title-line:nth-child(3) { font-size: clamp(40px,12vw,64px); }
+  .intro-container, .services-list-container, .numbers-container,
+  .operativa-container, .cta-container, .footer-container { padding: 0 24px; }
+  .numbers-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-main { grid-template-columns: 1fr; }
+  .hero-content { padding: 0 24px; padding-top: 80px; }
+  .hero-scroll-indicator { left: 24px; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  .cta-bg-text { font-size: 120px; }
+  #nav { padding: 0 20px; }
+  .btn-primary { padding: 15px 32px; font-size: 11px; }
+}
+
+img { transition: opacity .5s; }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+
+  <!-- Logo -->
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png"
+         alt="Transports Montserrat"
+         class="nav-logo-img">
+  </a>
+
+  <!-- Desktop Menu -->
+  <ul class="nav-links" role="menubar">
+
+    <!-- EMPRESA -->
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- TRANSPORTE -->
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- PALLETWAYS -->
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+
+    <!-- NOTICIAS -->
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+
+    <!-- CONTACTO -->
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+
+  </ul>
+
+  <!-- Hamburger -->
+  <button class="mobile-menu-btn" id="hamburger-btn"
+          aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+</nav>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+
+  <!-- EMPRESA -->
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+
+  <!-- SERVICIOS -->
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+
+  <!-- TRANSPORTE -->
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+    </div>
+  </div>
+
+  <!-- PALLETWAYS -->
+  <div class="mob-nav-item">
+    <a href="../../palletways/index.html">Palletways</a>
+  </div>
+
+  <!-- NOTICIAS -->
+  <div class="mob-nav-item">
+    <a href="../../noticias/index.html">
+      <span data-lang-inline="es" class="active">Noticias</span>
+      <span data-lang-inline="ca">Notícies</span>
+      <span data-lang-inline="en">News</span>
+    </a>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="mob-nav-item">
+    <a href="../../contacto/index.html">
+      <span data-lang-inline="es" class="active">Contacto</span>
+      <span data-lang-inline="ca">Contacte</span>
+      <span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+
+  <!-- Bottom block -->
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAGE HERO
+     ============================================================ -->
+<section id="page-hero">
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+
+  <div class="hero-bg-grid"></div>
+
+  <div class="hero-bg-lines">
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+    <div class="hero-line"></div>
+  </div>
+
+  <div class="speed-streak" style="top:35%;animation-delay:0s;animation-duration:3.5s;"></div>
+  <div class="speed-streak" style="top:62%;animation-delay:1.8s;animation-duration:4.2s;opacity:0.5;"></div>
+  <div class="speed-streak" style="top:80%;animation-delay:3s;animation-duration:3s;opacity:0.3;"></div>
+
+  <div class="hero-noise"></div>
+
+  <div class="hero-diagonal">
+    <div class="hero-img-bg"></div>
+    <div class="hero-img-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">
+        <span data-lang-inline="es" class="active">Servicios · Barcelona · Vilafranca del Penedès</span>
+        <span data-lang-inline="ca">Serveis · Barcelona · Vilafranca del Penedès</span>
+        <span data-lang-inline="en">Services · Barcelona · Vilafranca del Penedès</span>
+      </span>
+      <span class="hero-year-badge">Est. 1940</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="hero-title-line" data-lang="es" style="display:block;">Logística</span>
+      <span class="hero-title-line" data-lang="ca" style="display:block;">Logística</span>
+      <span class="hero-title-line" data-lang="en" style="display:block;">In-House</span>
+
+      <span class="hero-title-line" style="color:var(--red);" data-lang="es">In-House</span>
+      <span class="hero-title-line" style="color:var(--red);" data-lang="ca">In-House</span>
+      <span class="hero-title-line" style="color:var(--red);" data-lang="en">Logistics</span>
+
+      <span class="hero-title-line" style="-webkit-text-stroke:1px rgba(255,255,255,0.3);color:transparent;" data-lang="es">en sus instalaciones</span>
+      <span class="hero-title-line" style="-webkit-text-stroke:1px rgba(255,255,255,0.3);color:transparent;" data-lang="ca">a les seves instal·lacions</span>
+      <span class="hero-title-line" style="-webkit-text-stroke:1px rgba(255,255,255,0.3);color:transparent;" data-lang="en">at your facilities</span>
+    </h1>
+
+    <p class="hero-desc">
+      <span data-lang="es" class="active"><strong>Productividad y eficiencia</strong> en los servicios logísticos. Nuestra experiencia en la gestión de las instalaciones del cliente permite mejorar la logística interna dejándola en manos de especialistas.</span>
+      <span data-lang="ca"><strong>Productivitat i eficiència</strong> en els serveis logístics. La nostra experiència en la gestió de les instal·lacions del client permet millorar la logística interna deixant-la en mans d'especialistes.</span>
+      <span data-lang="en"><strong>Productivity and efficiency</strong> in logistics services. Our experience managing client facilities allows us to improve internal logistics by placing it in specialist hands.</span>
+    </p>
+
+    <div class="hero-actions">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span data-lang="es" class="active">Solicitar información</span>
+        <span data-lang="ca">Sol·licitar informació</span>
+        <span data-lang="en">Request information</span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="#services-list" class="btn-secondary">
+        <span data-lang="es" class="active">Ver servicios</span>
+        <span data-lang="ca">Veure serveis</span>
+        <span data-lang="en">See services</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">
+      <span data-lang-inline="es" class="active">Desplazar</span>
+      <span data-lang-inline="ca">Desplaçar</span>
+      <span data-lang-inline="en">Scroll</span>
+    </span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div id="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Logística In-House <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gestión de Instalaciones <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Control de Stocks <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Picking y Manipulación <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Logística Inversa <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Aprovisionamiento <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gestión de Personal <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Distribución de Pedidos <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Rutas entre Plantas <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mejora Continua <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Logística In-House <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gestión de Instalaciones <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Control de Stocks <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Picking y Manipulación <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Logística Inversa <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Aprovisionamiento <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Gestión de Personal <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Distribución de Pedidos <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Rutas entre Plantas <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mejora Continua <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ============================================================
+     INTRO / OVERVIEW
+     ============================================================ -->
+<section id="intro">
+  <div class="intro-container">
+    <div class="intro-left">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Especialistas In-House</span>
+          <span data-lang-inline="ca">Especialistes In-House</span>
+          <span data-lang-inline="en">In-House Specialists</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(40px,5vw,72px);color:var(--navy);">
+        <span data-lang="es" class="active">Logística<br>integral en<br>sus instalaciones</span>
+        <span data-lang="ca">Logística<br>integral a<br>les seves instal·lacions</span>
+        <span data-lang="en">Full logistics<br>at your<br>own facilities</span>
+      </h2>
+      <p class="section-body reveal" style="color:rgba(20,20,20,0.6);margin-top:24px;max-width:480px;">
+        <span data-lang="es" class="active">Nuestra experiencia en la gestión de las instalaciones del cliente permite mejorar la logística interna dejándola en manos de especialistas. <strong>Reducimos los costes e incrementamos la productividad y la eficiencia</strong> de los servicios logísticos. Nuestros servicios in-house incluyen un abanico de servicios prestados directamente en las instalaciones de nuestros clientes.</span>
+        <span data-lang="ca">La nostra experiència en la gestió de les instal·lacions del client permet millorar la logística interna deixant-la en mans d'especialistes. <strong>Reduïm els costos i incrementem la productivitat i l'eficiència</strong> dels serveis logístics. Els nostres serveis in-house inclouen un ventall de serveis prestats directament a les instal·lacions dels nostres clients.</span>
+        <span data-lang="en">Our experience managing client facilities allows us to improve internal logistics by placing it in specialist hands. <strong>We reduce costs and increase productivity and efficiency</strong> in logistics services. Our in-house services include a wide range of services delivered directly at our clients' facilities.</span>
+      </p>
+    </div>
+    <div class="intro-right reveal-right">
+      <div class="intro-img-stack">
+        <div class="intro-img-main">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80" alt="Logística In-House Transports Montserrat" loading="lazy">
+        </div>
+        <div class="intro-img-accent">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=600&q=80" alt="Gestión de instalaciones logísticas" loading="lazy">
+        </div>
+        <div class="intro-badge" aria-hidden="true">
+          <div class="intro-badge-num">85</div>
+          <div class="intro-badge-text">
+            <span data-lang-inline="es" class="active">Años de<br>Experiencia</span>
+            <span data-lang-inline="ca">Anys<br>d'Experiència</span>
+            <span data-lang-inline="en">Years of<br>Experience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES LIST
+     ============================================================ -->
+<section id="services-list">
+  <div class="services-list-container">
+    <div class="services-list-header">
+      <div>
+        <div class="section-label reveal">
+          <div class="section-label-line"></div>
+          <span class="section-label-text">
+            <span data-lang-inline="es" class="active">Nuestros Servicios In-House</span>
+            <span data-lang-inline="ca">Els Nostres Serveis In-House</span>
+            <span data-lang-inline="en">Our In-House Services</span>
+          </span>
+        </div>
+        <h2 class="section-title reveal" style="font-size:clamp(42px,5vw,76px);color:var(--white);">
+          <span data-lang="es" class="active">Gestión<br>integral en<br>su empresa</span>
+          <span data-lang="ca">Gestió<br>integral a<br>la seva empresa</span>
+          <span data-lang="en">Complete<br>management<br>at your site</span>
+        </h2>
+      </div>
+      <div>
+        <p class="services-list-header-desc reveal">
+          <span data-lang="es" class="active">Un abanico completo de servicios prestados directamente en las instalaciones de nuestros clientes, con especialistas dedicados a optimizar cada proceso logístico.</span>
+          <span data-lang="ca">Un ventall complet de serveis prestats directament a les instal·lacions dels nostres clients, amb especialistes dedicats a optimitzar cada procés logístic.</span>
+          <span data-lang="en">A complete range of services delivered directly at our clients' facilities, with dedicated specialists optimising every logistics process.</span>
+        </p>
+        <a href="../../contacto/index.html" class="btn-primary reveal" style="display:inline-flex;">
+          <span>
+            <span data-lang-inline="es" class="active">Solicitar información</span>
+            <span data-lang-inline="ca">Sol·licitar informació</span>
+            <span data-lang-inline="en">Request information</span>
+          </span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- 01 Gestión de Instalaciones -->
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Gestión de<br>Instalaciones</span>
+          <span data-lang-inline="ca">Gestió de<br>Instal·lacions</span>
+          <span data-lang-inline="en">Facility<br>Management</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Gestión integral de las instalaciones del cliente, optimizando espacios, flujos y recursos para maximizar la eficiencia operativa.</span>
+          <span data-lang="ca">Gestió integral de les instal·lacions del client, optimitzant espais, fluxos i recursos per maximitzar l'eficiència operativa.</span>
+          <span data-lang="en">Full management of client facilities, optimising spaces, flows and resources to maximise operational efficiency.</span>
+        </p>
+      </div>
+
+      <!-- 02 Gestión de Personal -->
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Gestión de<br>Personal</span>
+          <span data-lang-inline="ca">Gestió de<br>Personal</span>
+          <span data-lang-inline="en">Personnel<br>Management</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Formación del equipo, definición de procesos y programas de mejora continua para elevar el rendimiento logístico en sus instalaciones.</span>
+          <span data-lang="ca">Formació de l'equip, definició de processos i programes de millora contínua per elevar el rendiment logístic a les seves instal·lacions.</span>
+          <span data-lang="en">Team training, process definition and continuous improvement programmes to raise logistics performance at your facilities.</span>
+        </p>
+      </div>
+
+      <!-- 03 Gestión de Stocks -->
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Gestión de<br>Stocks e Inventarios</span>
+          <span data-lang-inline="ca">Gestió de<br>Estocs i Inventaris</span>
+          <span data-lang-inline="en">Stock &amp;<br>Inventory Management</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Control y trazabilidad completa de existencias, inventarios periódicos y gestión de la rotación para garantizar la disponibilidad óptima.</span>
+          <span data-lang="ca">Control i traçabilitat completa d'existències, inventaris periòdics i gestió de la rotació per garantir la disponibilitat òptima.</span>
+          <span data-lang="en">Full control and traceability of stock, periodic inventories and rotation management to ensure optimal availability.</span>
+        </p>
+      </div>
+
+      <!-- 04 Gestión de Almacenes -->
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Gestión de<br>Almacenes</span>
+          <span data-lang-inline="ca">Gestió de<br>Magatzems</span>
+          <span data-lang-inline="en">Warehouse<br>Management</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Organización y conservación del material, optimización de ubicaciones y mantenimiento de las instalaciones de almacenaje del cliente.</span>
+          <span data-lang="ca">Organització i conservació del material, optimització d'ubicacions i manteniment de les instal·lacions d'emmagatzematge del client.</span>
+          <span data-lang="en">Organisation and preservation of materials, location optimisation and maintenance of client warehousing facilities.</span>
+        </p>
+      </div>
+
+      <!-- 05 Aprovisionamiento -->
+      <div class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.99-1.85L23 6H6"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Gestión de<br>Aprovisionamiento</span>
+          <span data-lang-inline="ca">Gestió de<br>Aprovisionament</span>
+          <span data-lang-inline="en">Supply<br>Management</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Planificación y ejecución del aprovisionamiento para garantizar la continuidad productiva, con control de costes y plazos de entrega.</span>
+          <span data-lang="ca">Planificació i execució de l'aprovisionament per garantir la continuïtat productiva, amb control de costos i terminis de lliurament.</span>
+          <span data-lang="en">Planning and execution of supply to ensure productive continuity, with cost and delivery lead time control.</span>
+        </p>
+      </div>
+
+      <!-- 06 Picking y Manipulación -->
+      <div class="service-card reveal">
+        <div class="service-num">06</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Pedidos, Pickings<br>&amp; Manipulados</span>
+          <span data-lang-inline="ca">Comandes, Pickings<br>&amp; Manipulats</span>
+          <span data-lang-inline="en">Orders, Pickings<br>&amp; Handling</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Preparación de pedidos, picking personalizado y operaciones de manipulación con altos estándares de precisión y agilidad operativa.</span>
+          <span data-lang="ca">Preparació de comandes, picking personalitzat i operacions de manipulació amb alts estàndards de precisió i agilitat operativa.</span>
+          <span data-lang="en">Order preparation, customised picking and handling operations with high standards of precision and operational agility.</span>
+        </p>
+      </div>
+
+      <!-- 07 Logística Inversa -->
+      <div class="service-card reveal">
+        <div class="service-num">07</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Logística<br>Inversa</span>
+          <span data-lang-inline="ca">Logística<br>Inversa</span>
+          <span data-lang-inline="en">Reverse<br>Logistics</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Gestión eficiente de devoluciones, retorno de materiales y reutilización de embalajes para minimizar costes y el impacto ambiental.</span>
+          <span data-lang="ca">Gestió eficient de devolucions, retorn de materials i reutilització d'embalatges per minimitzar costos i l'impacte ambiental.</span>
+          <span data-lang="en">Efficient management of returns, material recovery and packaging reuse to minimise costs and environmental impact.</span>
+        </p>
+      </div>
+
+      <!-- 08 Rutas Transporte -->
+      <div class="service-card reveal">
+        <div class="service-num">08</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Rutas de<br>Transporte</span>
+          <span data-lang-inline="ca">Rutes de<br>Transport</span>
+          <span data-lang-inline="en">Transport<br>Routes</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Gestión de las rutas de transporte entre plantas y/o almacenes del cliente, optimizando tiempos y reduciendo costes operativos.</span>
+          <span data-lang="ca">Gestió de les rutes de transport entre plantes i/o magatzems del client, optimitzant temps i reduint costos operatius.</span>
+          <span data-lang="en">Management of transport routes between client plants and/or warehouses, optimising timing and reducing operational costs.</span>
+        </p>
+      </div>
+
+      <!-- 09 Expediciones -->
+      <div class="service-card reveal">
+        <div class="service-num">09</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="service-title">
+          <span data-lang-inline="es" class="active">Expediciones<br>&amp; Distribución</span>
+          <span data-lang-inline="ca">Expedicions<br>&amp; Distribució</span>
+          <span data-lang-inline="en">Dispatch<br>&amp; Distribution</span>
+        </h3>
+        <p class="service-desc">
+          <span data-lang="es" class="active">Gestión de las expediciones y la distribución de los pedidos a clientes finales, con control de plazos y trazabilidad completa.</span>
+          <span data-lang="ca">Gestió de les expedicions i la distribució de les comandes a clients finals, amb control de terminis i traçabilitat completa.</span>
+          <span data-lang="en">Management of dispatch and distribution of orders to end clients, with full deadline control and traceability.</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NÚMEROS / STATS
+     ============================================================ -->
+<section id="numbers">
+  <div class="numbers-container">
+    <div class="numbers-left">
+      <h2 class="section-title reveal">
+        <span data-lang="es" class="active">Resultados<br>que hablan</span>
+        <span data-lang="ca">Resultats<br>que parlen</span>
+        <span data-lang="en">Results<br>that speak</span>
+      </h2>
+      <p class="section-body reveal">
+        <span data-lang="es" class="active">Décadas de experiencia gestionando operaciones logísticas in-house en instalaciones de clientes de toda la cadena de gran consumo.</span>
+        <span data-lang="ca">Dècades d'experiència gestionant operacions logístiques in-house a instal·lacions de clients de tota la cadena de gran consum.</span>
+        <span data-lang="en">Decades of experience managing in-house logistics operations at client facilities across the entire FMCG supply chain.</span>
+      </p>
+    </div>
+    <div class="numbers-grid">
+      <div class="number-card reveal">
+        <div class="number-value"><span class="counter" data-target="85">85</span><span>+</span></div>
+        <div class="number-label">
+          <span data-lang-inline="es" class="active">Años de<br>experiencia</span>
+          <span data-lang-inline="ca">Anys<br>d'experiència</span>
+          <span data-lang-inline="en">Years of<br>experience</span>
+        </div>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value"><span class="counter" data-target="55">55</span><span>k</span></div>
+        <div class="number-label">
+          <span data-lang-inline="es" class="active">m² de<br>almacén</span>
+          <span data-lang-inline="ca">m² de<br>magatzem</span>
+          <span data-lang-inline="en">m² of<br>warehouse</span>
+        </div>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value"><span class="counter" data-target="40">40</span><span>+</span></div>
+        <div class="number-label">
+          <span data-lang-inline="es" class="active">Vehículos<br>propios</span>
+          <span data-lang-inline="ca">Vehicles<br>propis</span>
+          <span data-lang-inline="en">Own<br>vehicles</span>
+        </div>
+      </div>
+      <div class="number-card reveal">
+        <div class="number-value"><span class="counter" data-target="100">100</span><span>%</span></div>
+        <div class="number-label">
+          <span data-lang-inline="es" class="active">Compromiso<br>con el cliente</span>
+          <span data-lang-inline="ca">Compromís<br>amb el client</span>
+          <span data-lang-inline="en">Commitment<br>to clients</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OPERATIVA LOGÍSTICA
+     ============================================================ -->
+<section id="operativa">
+  <div class="operativa-bg"></div>
+  <div class="operativa-container">
+    <div class="operativa-img reveal-left">
+      <div class="operativa-img-main">
+        <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&q=80" alt="Operativa logística Barcelona y Vilafranca del Penedès" loading="lazy">
+      </div>
+      <div class="operativa-img-accent">
+        <div class="operativa-accent-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div class="operativa-accent-text">Barcelona<br>&amp; Vilafranca<br>del Penedès</div>
+      </div>
+    </div>
+    <div class="operativa-right">
+      <div class="section-label reveal">
+        <div class="section-label-line" style="background:rgba(255,255,255,0.4);"></div>
+        <span class="section-label-text" style="color:rgba(255,255,255,0.6);">
+          <span data-lang-inline="es" class="active">Centros Operativos</span>
+          <span data-lang-inline="ca">Centres Operatius</span>
+          <span data-lang-inline="en">Operational Centres</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(38px,4.5vw,62px);color:var(--white);">
+        <span data-lang="es" class="active">Operativa logística<br>en Barcelona y<br>Vilafranca del Penedès</span>
+        <span data-lang="ca">Operativa logística<br>a Barcelona i<br>Vilafranca del Penedès</span>
+        <span data-lang="en">Logistics operations<br>in Barcelona and<br>Vilafranca del Penedès</span>
+      </h2>
+      <p class="section-body reveal" style="margin-top:24px;max-width:460px;">
+        <span data-lang="es" class="active">A Transports Montserrat, nos especializamos en el sector de gran consumo, con un enfoque particular en la alimentación seca. Nuestros centros operativos se encuentran en puntos estratégicos con excelente conexión con grandes ejes de consumo, al pie de la autopista AP-7, tanto en la provincia de Barcelona como en Tarragona. Esta ubicación nos permite ofrecer un servicio logístico ágil y adaptado a las necesidades del cliente.</span>
+        <span data-lang="ca">A Transports Montserrat, ens especialitzem en el sector de gran consum, amb un enfocament particular en l'alimentació seca. Els nostres centres operatius es troben en punts estratègics amb excel·lent connexió amb grans eixos de consum, al peu de l'autopista AP-7, tant a la província de Barcelona com a Tarragona. Aquesta ubicació ens permet oferir un servei logístic àgil i adaptat a les necessitats del client.</span>
+        <span data-lang="en">At Transports Montserrat, we specialise in the fast-moving consumer goods sector, with a particular focus on dry food. Our operational centres are located at strategic points with excellent connections to major consumption hubs, alongside the AP-7 motorway, in both the province of Barcelona and Tarragona. This location allows us to offer an agile logistics service tailored to client needs.</span>
+      </p>
+      <a href="../../contacto/index.html" class="btn-primary reveal" style="margin-top:40px;display:inline-flex;">
+        <span>
+          <span data-lang-inline="es" class="active">Contactar ahora</span>
+          <span data-lang-inline="ca">Contactar ara</span>
+          <span data-lang-inline="en">Contact us now</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-bg-text" aria-hidden="true">TM</div>
+  <div class="cta-container">
+    <div class="cta-label reveal">
+      <div class="cta-label-line"></div>
+      <span class="cta-label-text">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="cta-title reveal">
+      <span data-lang="es" class="active">
+        Listo para
+        <span class="cta-red">optimizar</span>
+        <br>
+        tu logística?
+      </span>
+      <span data-lang="ca">
+        Preparat per
+        <span class="cta-red">optimitzar</span>
+        <br>
+        la teva logística?
+      </span>
+      <span data-lang="en">
+        Ready to
+        <span class="cta-red">optimize</span>
+        <br>
+        your logistics?
+      </span>
+    </h2>
+    <p class="cta-desc reveal">
+      <span data-lang="es" class="active">Si buscas un operador logístico de confianza que gestione tu logística in-house con soluciones personalizadas y eficientes, estamos preparados para ayudarte.</span>
+      <span data-lang="ca">Si busques un operador logístic de confiança que gestioni la teva logística in-house amb solucions personalitzades i eficients, estem preparats per ajudar-te.</span>
+      <span data-lang="en">If you're looking for a trusted logistics operator to manage your in-house logistics with personalised and efficient solutions, we're ready to help you.</span>
+    </p>
+    <div class="cta-actions reveal">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Enviar mensaje</span>
+          <span data-lang-inline="ca">Enviar missatge</span>
+          <span data-lang-inline="en">Send message</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:+34938911018" class="cta-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +34 938 911 018
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+
+      <!-- BRAND -->
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png"
+               alt="Transports Montserrat"
+               class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">
+            Operador logístico con más de 85 años de experiencia.
+            Logística integral, almacenaje y transporte nacional e internacional.
+          </span>
+          <span data-lang="ca">
+            Operador logístic amb més de 85 anys d'experiència.
+            Logística integral, emmagatzematge i transport nacional i internacional.
+          </span>
+          <span data-lang="en">
+            Logistics operator with over 85 years of experience.
+            Full logistics, warehousing and international transport.
+          </span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">
+          +34 938 911 018
+        </a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">
+          montserrat@tmontserrat.com
+        </a>
+        <span class="footer-contact-item">
+          Vilafranca del Penedès · Sant Sadurní d'Anoia
+        </span>
+      </div>
+
+      <!-- SERVICIOS -->
+      <div class="footer-column">
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <!-- TRANSPORTE -->
+      <div class="footer-column">
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li>
+            <a href="../../transporte/grupajes-cargas-completas/index.html">
+                <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+                <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+                <span data-lang-inline="en">Groupage & Full Loads</span>
+            </a>
+        </li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <!-- EMPRESA -->
+      <div class="footer-column">
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2026 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">
+          <span data-lang-inline="es" class="active">Cookies</span>
+          <span data-lang-inline="ca">Cookies</span>
+          <span data-lang-inline="en">Cookies</span>
+        </a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   NAV SCROLL STATE
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ============================================================
+   HERO PARALLAX ON SCROLL
+   ============================================================ */
+const heroImgBg = document.querySelector('.hero-img-bg');
+if (heroImgBg) {
+  window.addEventListener('scroll', () => {
+    heroImgBg.style.transform = `scale(1.12) translateY(${window.scrollY * 0.15}px)`;
+  }, { passive: true });
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 0.08;
+  revealObserver.observe(el);
+});
+
+/* ============================================================
+   COUNTER ANIMATION
+   ============================================================ */
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.innerHTML.replace(/^\d+/, '');
+      const duration = 1800;
+      const startTime = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.innerHTML = Math.round(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    if (el.getAttribute('data-lang') !== lang) el.style.display = 'none';
+    else el.style.display = '';
+  });
+
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+
+  document.documentElement.lang = lang;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+
+function openMenu() {
+  menuOpen = true;
+  mobileMenu.style.display = 'flex';
+  mobileMenu.offsetHeight;
+  mobileMenu.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  hamburgerBtn.setAttribute('aria-label', 'Cerrar menú');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  hamburgerBtn.setAttribute('aria-label', 'Abrir menú');
+  document.body.style.overflow = '';
+  setTimeout(() => {
+    if (!menuOpen) mobileMenu.style.display = 'none';
+  }, 400);
+}
+
+hamburgerBtn.addEventListener('click', () => {
+  menuOpen ? closeMenu() : openMenu();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOpen) closeMenu();
+});
+
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => closeMenu());
+});
+
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.getAttribute('data-target');
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      sub.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ============================================================
+   SERVICE CARD TILT (desktop only)
+   ============================================================ */
+if (window.matchMedia('(pointer: fine)').matches) {
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(800px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+}
+
+/* ============================================================
+   STAGGER DELAYS
+   ============================================================ */
+document.querySelectorAll('.services-grid .service-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.07) + 's';
+});
+document.querySelectorAll('.numbers-grid .number-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.1) + 's';
+});
+
+/* ============================================================
+   HERO LOGISTICS NETWORK CANVAS
+   ============================================================ */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodeCount = 28;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 2 + 1.5,
+      pulse: Math.random() * Math.PI * 2,
+    });
+  }
+
+  const packets = [];
+  for (let i = 0; i < 12; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({
+      from: fromIdx, to: toIdx,
+      t: Math.random(),
+      speed: 0.003 + Math.random() * 0.004,
+    });
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      n.pulse += 0.025;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          const alpha = (1 - dist / 180) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      const pulseR = n.r + Math.sin(n.pulse) * 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.7)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(207,0,28,0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        p.t = 0;
+        p.from = p.to;
+        p.to = Math.floor(Math.random() * nodeCount);
+        while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount);
+      }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y;
+      const tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t;
+      const py = fy + (ty - fy) * p.t;
+
+      ctx.beginPath();
+      ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fill();
+
+      const trailLen = 0.06;
+      const tStart = Math.max(0, p.t - trailLen);
+      const tpx = fx + (tx - fx) * tStart;
+      const tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,200,200,0.4)');
+      ctx.beginPath();
+      ctx.moveTo(tpx, tpy);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   CTA NETWORK CANVAS
+   ============================================================ */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) {
+          const a = (1 - d / 220) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// Bloquear teclas DevTools
+document.addEventListener('keydown', function(e) {
+
+    // F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+        return false;
+    }
+
+    // Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+        return false;
+    }
+
+    // Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault();
+        return false;
+    }
+
+    // Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+        return false;
+    }
+
+    // Ctrl+U
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+        return false;
+    }
+
+});
+*/
+</script>
+
+</body>
+</html>

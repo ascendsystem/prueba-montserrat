@@ -1,0 +1,2777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Transporte Nacional e Internacional de mercancías. Cargas completas, grupajes, paletería exprés y cisternas isotérmicas. Transports Montserrat, desde 1940.">
+<title>Transporte Nacional e Internacional | Transports Montserrat</title>
+
+<link rel="icon" type="image/png" href="../../assets/icons/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DESIGN TOKENS & RESET
+   ============================================================ */
+:root {
+  --navy: #063062;
+  --navy-deep: #020c1e;
+  --navy-mid: #0d4a8f;
+  --red: #cf001c;
+  --red-bright: #ff0022;
+  --red-glow: rgba(207,0,28,0.2);
+  --gold: #e8a020;
+  --white: #ffffff;
+  --off-white: #f4f2ee;
+  --gray-light: #e8e5e0;
+  --gray-mid: #9a9590;
+  --gray-dark: #2a2520;
+  --text: #1a1614;
+  --easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --nav-h: 80px;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,0.35);
+  --shadow-md:  0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.55);
+  --shadow-red: 0 0 40px rgba(207,0,28,0.25);
+  --scroll-y: 0;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy-deep);
+  color: var(--white);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+#cursor, #cursor-ring { display: none; }
+@media (pointer: fine) {
+  body { cursor: none; }
+  #cursor {
+    display: block; position: fixed;
+    width: 10px; height: 10px;
+    background: var(--red);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px rgba(207,0,28,0.8), 0 0 6px rgba(207,0,28,1);
+    transition: width .18s var(--ease-expo), height .18s var(--ease-expo), background .18s, box-shadow .18s;
+  }
+  #cursor-ring {
+    display: block; position: fixed;
+    width: 38px; height: 38px;
+    border: 1px solid rgba(207,0,28,0.55);
+    border-radius: 50%; pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 8px rgba(207,0,28,0.1);
+    transition: width .3s var(--ease-expo), height .3s var(--ease-expo);
+  }
+  body:has(a:hover) #cursor { width: 16px; height: 16px; background: var(--red-bright); box-shadow: 0 0 20px rgba(255,0,34,0.9); }
+  body:has(a:hover) #cursor-ring { width: 52px; height: 52px; border-color: rgba(207,0,28,0.35); }
+  body:has(.btn-primary:hover) #cursor { width: 22px; height: 22px; background: var(--red-bright); box-shadow: 0 0 30px rgba(255,0,34,1); }
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--red), #ff4560, var(--red));
+  background-size: 200% 100%;
+  animation: progressShimmer 2s linear infinite;
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(207,0,28,0.7), 0 0 4px rgba(207,0,28,0.9);
+}
+@keyframes progressShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   LANG SWITCHER
+   ============================================================ */
+#lang-switcher {
+  position: fixed; top: 17px; right: 32px;
+  z-index: 1001; display: flex;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px; overflow: hidden;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.lang-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  background: transparent; border: none;
+  padding: 8px 14px; cursor: pointer;
+  transition: all .2s var(--ease-smooth);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.lang-btn:last-child { border-right: none; }
+.lang-btn.active, .lang-btn:hover { color: var(--white); background: linear-gradient(135deg, rgba(207,0,28,0.7), rgba(160,0,20,0.7)); box-shadow: 0 0 8px rgba(207,0,28,0.3); }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900; padding: 0 56px;
+  height: var(--nav-h); display: flex;
+  align-items: center; justify-content: space-between;
+  transition: background .5s var(--ease-expo), height .35s var(--ease-expo), border-color .3s, box-shadow .5s;
+}
+#nav.scrolled {
+  background: rgba(2, 10, 28, 0.97);
+  backdrop-filter: blur(28px) saturate(1.6);
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  height: 62px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 1px 0 rgba(207,0,28,0.15), 0 8px 40px rgba(0,0,0,0.5);
+}
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 130px; width: auto; object-fit: contain; }
+.nav-links {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 24px; list-style: none;
+}
+.nav-item { position: relative; }
+.nav-links > .nav-item > a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  display: flex; align-items: center; gap: 5px;
+  padding-bottom: 4px; position: relative;
+  transition: color .25s var(--ease-smooth), letter-spacing .25s;
+  white-space: nowrap;
+}
+.nav-links > .nav-item > a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+  transition: width .35s var(--ease-expo);
+}
+.nav-links > .nav-item > a:hover { color: var(--white); letter-spacing: 0.14em; }
+.nav-links > .nav-item > a:hover::after { width: 100%; }
+.nav-arrow { font-size: 8px; opacity: 0.6; transition: transform 0.25s; display: inline-block; margin-top: 1px; }
+.nav-item:hover > a .nav-arrow { transform: rotate(180deg); }
+.nav-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 0;
+  background: rgba(2, 10, 28, 0.98);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(207,0,28,0.05);
+  min-width: 230px; opacity: 0; visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  z-index: 999;
+}
+.nav-item:hover > .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav-dropdown li { list-style: none; }
+.nav-dropdown > li > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 20px; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-left: 2px solid transparent;
+  transition: all .22s var(--ease-smooth); white-space: nowrap;
+}
+.nav-dropdown > li > a:hover {
+  color: var(--white); background: rgba(207,0,28,0.12);
+  padding-left: 28px; border-left: 2px solid var(--red);
+}
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--white);
+  text-decoration: none;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  box-shadow: 0 4px 20px rgba(207,0,28,0.35);
+  padding: 10px 24px; flex-shrink: 0;
+  transition: background .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.nav-cta:hover { background: linear-gradient(135deg, var(--red-bright) 0%, var(--red) 100%); box-shadow: 0 6px 30px rgba(255,0,34,0.5); transform: scaleX(1.04); }
+
+/* ============================================================
+   HAMBURGER
+   ============================================================ */
+.mobile-menu-btn {
+  display: none; flex-direction: column; gap: 5px; cursor: pointer;
+  padding: 8px; background: none; border: none; z-index: 1100; position: relative;
+}
+.mobile-menu-btn span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(255,255,255,0.9);
+  transition: all .38s var(--ease-expo); transform-origin: center;
+}
+.mobile-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.mobile-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+#mobile-menu {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(2, 8, 22, 0.99);
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  overflow-y: auto; padding: 100px 32px 60px;
+  flex-direction: column; gap: 0;
+  opacity: 0; transform: translateX(100%);
+  transition: opacity 0.4s var(--easing), transform 0.4s var(--easing);
+}
+#mobile-menu.open { display: flex; opacity: 1; transform: translateX(0); }
+#mobile-menu.animating { display: flex; }
+.mob-nav-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.mob-nav-item > a, .mob-nav-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  background: none; border: none; width: 100%; cursor: pointer;
+  transition: color .25s, letter-spacing .25s;
+}
+.mob-nav-item > a:hover, .mob-nav-toggle:hover { color: var(--white); letter-spacing: 0.1em; }
+.mob-nav-toggle.active { color: var(--red); }
+.mob-nav-arrow { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0.5; transition: transform 0.3s var(--easing); flex-shrink: 0; }
+.mob-nav-toggle.active .mob-nav-arrow { transform: rotate(180deg); opacity: 1; color: var(--red); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--easing); padding-left: 16px; }
+.mob-sub.open { max-height: 800px; }
+.mob-sub-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+.mob-sub-item:last-child { border-bottom: none; }
+.mob-sub-item > a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s;
+}
+.mob-sub-item > a:hover { color: var(--white); }
+.mob-cta-block { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+.mob-cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.6); text-decoration: none; }
+.mob-lang { display: flex; gap: 12px; margin-top: 8px; }
+.mob-lang button { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; padding: 8px 18px; background: transparent; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.2s; }
+.mob-lang button.active, .mob-lang button:hover { color: var(--white); background: var(--red); border-color: var(--red); }
+
+/* ============================================================
+   GLOBAL ELEMENTS
+   ============================================================ */
+.section-label { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.section-label-line { width: 40px; height: 1.5px; background: var(--red); box-shadow: 0 0 8px rgba(207,0,28,0.5); flex-shrink: 0; }
+.section-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 10.5px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); }
+.section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.015em; }
+.section-body { font-size: 15px; line-height: 1.78; color: rgba(255,255,255,0.45); letter-spacing: 0.005em; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--red) 0%, #a80016 100%);
+  text-decoration: none; padding: 17px 40px;
+  clip-path: polygon(0 0, 94% 0, 100% 100%, 6% 100%);
+  position: relative; overflow: hidden;
+  box-shadow: 0 6px 30px rgba(207,0,28,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transition: transform .35s var(--ease-expo), box-shadow .35s;
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--red-bright), var(--red));
+  opacity: 0; transition: opacity .35s;
+}
+.btn-primary:hover { transform: translateY(-2px) scaleX(1.02); box-shadow: 0 10px 40px rgba(207,0,28,0.55); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-arrow { width: 18px; height: 18px; flex-shrink: 0; position: relative; z-index: 1; transition: transform .35s var(--ease-expo); }
+.btn-primary:hover .btn-arrow { transform: translateX(4px); }
+.btn-secondary {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11.5px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 3px; transition: color .25s, border-color .25s;
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,0.6); }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity 0.75s var(--ease-expo), transform 0.75s var(--ease-expo);
+}
+.reveal-left {
+  opacity: 0; transform: translateX(-40px);
+  transition: opacity 0.75s var(--ease-expo), transform 0.75s var(--ease-expo);
+}
+.reveal-right {
+  opacity: 0; transform: translateX(40px);
+  transition: opacity 0.75s var(--ease-expo), transform 0.75s var(--ease-expo);
+}
+.reveal.visible, .reveal-left.visible, .reveal-right.visible {
+  opacity: 1; transform: translate(0);
+}
+
+/* ============================================================
+   PAGE HERO — FULL VIEWPORT SPLIT LAYOUT
+   ============================================================ */
+#page-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(160deg, #020c1e 0%, #010814 55%, #030d20 100%);
+  padding-bottom: 80px;
+}
+
+/* Animated canvas background */
+#hero-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0.45; pointer-events: none; z-index: 1;
+}
+
+/* Grid overlay */
+.page-hero-grid {
+  position: absolute; inset: 0; z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: gridDrift 60s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 40% 50%, black 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 85% 70% at 40% 50%, black 20%, transparent 80%);
+}
+@keyframes gridDrift { from { transform: translate(0,0); } to { transform: translate(80px,80px); } }
+
+/* Ambient glow */
+.hero-orb-1 {
+  position: absolute; z-index: 3; pointer-events: none;
+  width: 700px; height: 500px; border-radius: 50%; filter: blur(100px);
+  background: radial-gradient(ellipse, rgba(207,0,28,0.06) 0%, transparent 70%);
+  top: -100px; left: -200px;
+  animation: orbFloat 9s ease-in-out infinite alternate;
+}
+.hero-orb-2 {
+  position: absolute; z-index: 3; pointer-events: none;
+  width: 600px; height: 600px; border-radius: 50%; filter: blur(120px);
+  background: radial-gradient(ellipse, rgba(13,74,143,0.1) 0%, transparent 70%);
+  bottom: -200px; right: 5%;
+  animation: orbFloat 12s ease-in-out infinite alternate-reverse;
+}
+@keyframes orbFloat { from { transform: scale(1) translate(0,0); } to { transform: scale(1.08) translate(20px, -20px); } }
+
+/* Noise texture */
+.hero-noise {
+  position: absolute; inset: 0; opacity: 0.04; z-index: 4; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* Speed streaks */
+.speed-streak {
+  position: absolute; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.055), transparent);
+  animation: streakFly 4s linear infinite;
+  z-index: 2;
+}
+@keyframes streakFly { 0% { left: -30%; width: 20%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 110%; width: 20%; opacity: 0; } }
+
+/* Hero scan lines */
+.hero-scan-line {
+  position: absolute; height: 1px; pointer-events: none; z-index: 3;
+  background: linear-gradient(90deg, transparent 0%, rgba(207,0,28,0) 8%, rgba(207,0,28,0.5) 50%, rgba(207,0,28,0) 92%, transparent 100%);
+  filter: blur(0.3px); width: 50%; animation: scanLine 12s ease-in-out infinite; opacity: 0;
+}
+.hero-scan-line:nth-child(1) { top: 30%; left: -10%; animation-delay: 0s; }
+.hero-scan-line:nth-child(2) { top: 60%; left: -10%; animation-delay: 4s; }
+.hero-scan-line:nth-child(3) { top: 85%; left: -10%; animation-delay: 8s; }
+@keyframes scanLine { 0% { opacity:0; transform: translateX(0); } 8% { opacity:1; } 92% { opacity:1; } 100% { opacity:0; transform: translateX(250%); } }
+
+/* RIGHT IMAGE PANEL — vertical split */
+.page-hero-image-panel {
+  position: absolute; top: 0; right: 0; width: 46%; height: 100%;
+  overflow: hidden; z-index: 5;
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+}
+.page-hero-img {
+  position: absolute; inset: 0;
+  background-image: url('../../assets/images/transporte/trans2.jfif');
+  background-size: cover; background-position: center;
+  filter: saturate(0.45) contrast(1.1) brightness(0.7);
+  transform: scale(1.08);
+  animation: panelParallax 20s ease-in-out infinite alternate;
+}
+@keyframes panelParallax { from { transform: scale(1.08) translateX(0); } to { transform: scale(1.08) translateX(2%); } }
+.page-hero-img-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(270deg, rgba(2,12,30,0.1) 0%, rgba(2,12,30,0.75) 100%);
+}
+.page-hero-img-scanline {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px
+  );
+}
+
+/* Red accent bar on panel */
+.page-hero-panel-accent {
+  position: absolute; top: 0; left: 0; width: 3px; height: 100%; z-index: 10;
+  background: linear-gradient(180deg, transparent 10%, var(--red) 50%, transparent 90%);
+  box-shadow: 0 0 30px rgba(207,0,28,0.6), 0 0 60px rgba(207,0,28,0.2);
+}
+
+/* Hero content left */
+.page-hero-content {
+  position: relative; z-index: 10;
+  padding: 0 56px; max-width: 700px; padding-top: 80px;
+  width: 58%;
+}
+.page-hero-breadcrumb {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 40px;
+  opacity: 0; animation: fadeUp 0.7s var(--easing) 0.2s forwards;
+}
+.page-hero-breadcrumb a, .page-hero-breadcrumb span {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none;
+  color: rgba(255,255,255,0.3); transition: color .2s;
+}
+.page-hero-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+.page-hero-breadcrumb .sep { color: rgba(207,0,28,0.5); font-size: 10px; }
+.page-hero-breadcrumb .current { color: var(--red); }
+
+.page-hero-eyebrow {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 0.4s forwards;
+}
+.page-hero-eyebrow-line {
+  width: 52px; height: 1.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 8px rgba(207,0,28,0.5);
+}
+.page-hero-eyebrow-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase;
+  color: rgba(207,0,28,0.9); text-shadow: 0 0 20px rgba(207,0,28,0.3);
+}
+.page-hero-badge {
+  margin-left: auto;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(207,0,28,0.25);
+  background: rgba(207,0,28,0.08);
+  padding: 5px 14px; text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.page-hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; line-height: 0.89; text-transform: uppercase;
+  letter-spacing: -0.02em; margin-bottom: 36px; overflow: hidden;
+}
+.page-hero-title-line {
+  display: block; font-size: clamp(52px, 7.5vw, 108px);
+}
+.page-hero-title-line:nth-child(1) { animation: slideUp 0.9s var(--easing) 0.55s both; }
+.page-hero-title-line:nth-child(2) { color: var(--red); animation: slideUp 0.9s var(--easing) 0.7s both; }
+.page-hero-title-line:nth-child(3) {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.22);
+  color: transparent;
+  animation: slideUp 0.9s var(--easing) 0.85s both;
+}
+@keyframes slideUp { from { opacity:0; transform: translateY(100%); } to { opacity:1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+.page-hero-desc {
+  font-size: 15.5px; font-weight: 300; line-height: 1.78;
+  color: rgba(255,255,255,0.5); max-width: 500px; margin-bottom: 52px;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.05s forwards;
+}
+.page-hero-desc strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+.page-hero-actions {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.25s forwards;
+}
+
+/* Hero bottom KPI strip */
+.page-hero-kpis {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  z-index: 11; padding: 0 56px;
+  display: flex; align-items: stretch;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, transparent 0%, rgba(2,8,22,0.85) 100%);
+  backdrop-filter: blur(4px);
+  opacity: 0; animation: fadeUp 0.8s var(--easing) 1.5s forwards;
+}
+.page-hero-kpi {
+  flex: 1; padding: 28px 32px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  transition: background .3s;
+}
+.page-hero-kpi:last-child { border-right: none; }
+.page-hero-kpi:hover { background: rgba(255,255,255,0.025); }
+.page-hero-kpi-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 38px; font-weight: 900; line-height: 1;
+  color: var(--white); letter-spacing: -0.025em;
+}
+.page-hero-kpi-num span { color: var(--red); }
+.page-hero-kpi-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-top: 6px; line-height: 1.4;
+}
+
+/* ============================================================
+   INTRO / MANIFESTO SECTION
+   ============================================================ */
+#intro {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(13,74,143,0.08) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 140px 0; overflow: hidden; position: relative;
+}
+#intro::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.2) 50%, transparent 95%);
+}
+.intro-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 120px; align-items: start;
+}
+.intro-left { position: sticky; top: 120px; }
+.intro-left .section-label { margin-bottom: 28px; }
+.intro-left .section-title { font-size: clamp(38px, 4.5vw, 64px); color: var(--white); margin-bottom: 32px; }
+.intro-left .section-body { color: rgba(255,255,255,0.42); }
+.intro-left-actions { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+.intro-stat-row {
+  display: flex; gap: 3px; margin-top: 56px;
+}
+.intro-stat {
+  flex: 1; padding: 24px 20px; position: relative;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.intro-stat::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--red); box-shadow: 0 0 8px rgba(207,0,28,0.4);
+}
+.intro-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 40px; font-weight: 900; color: var(--white); line-height: 1; letter-spacing: -0.03em;
+}
+.intro-stat-num span { color: var(--red); }
+.intro-stat-label {
+  font-size: 9.5px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); margin-top: 8px; line-height: 1.4;
+}
+
+/* Right: content blocks */
+.intro-right { display: flex; flex-direction: column; gap: 0; }
+.intro-block {
+  padding: 44px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: padding-left .4s var(--ease-expo);
+}
+.intro-block:first-child { padding-top: 0; }
+.intro-block:last-child { border-bottom: none; }
+.intro-block:hover { padding-left: 12px; }
+.intro-block-tag {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+}
+.intro-block-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
+  line-height: 1.1; margin-bottom: 14px;
+}
+.intro-block-desc {
+  font-size: 14.5px; line-height: 1.78; color: rgba(255,255,255,0.42);
+}
+
+/* ============================================================
+   SERVICES BENTO GRID
+   ============================================================ */
+#modalidades {
+  background: var(--navy);
+  padding: 140px 0; overflow: hidden; position: relative;
+}
+#modalidades::before {
+  content: ''; position: absolute; top: -1px; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, var(--red) 50%, transparent 95%);
+  box-shadow: 0 0 20px rgba(207,0,28,0.4);
+}
+.modalidades-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.modalidades-header { text-align: center; margin-bottom: 80px; }
+.modalidades-header .section-label { justify-content: center; margin-bottom: 24px; }
+.modalidades-header .section-title { font-size: clamp(42px, 5.5vw, 80px); color: var(--white); }
+.modalidades-header .section-body { max-width: 540px; margin: 24px auto 0; }
+
+/* Bento grid layout */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  gap: 3px;
+}
+.bento-card {
+  position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 44px 40px;
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo), box-shadow .4s;
+  cursor: default;
+}
+.bento-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  transition: width .55s var(--ease-expo); box-shadow: 0 0 12px rgba(207,0,28,0.4);
+}
+.bento-card:hover { background: rgba(255,255,255,0.045); border-color: rgba(255,255,255,0.09); transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(207,0,28,0.06); }
+.bento-card:hover::before { width: 100%; }
+
+/* Bento layout placements */
+.bento-card:nth-child(1) { grid-column: span 5; grid-row: span 1; }
+.bento-card:nth-child(2) { grid-column: span 7; grid-row: span 1; }
+.bento-card:nth-child(3) { grid-column: span 4; grid-row: span 1; }
+.bento-card:nth-child(4) { grid-column: span 4; grid-row: span 1; }
+.bento-card:nth-child(5) { grid-column: span 4; grid-row: span 1; }
+
+/* Featured card */
+.bento-card-featured {
+  background: linear-gradient(145deg, var(--red) 0%, #a80016 100%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 12px 50px rgba(207,0,28,0.4) !important;
+}
+.bento-card-featured:hover { transform: translateY(-5px); box-shadow: 0 20px 64px rgba(207,0,28,0.55) !important; }
+.bento-card-featured::before { background: rgba(255,255,255,0.25) !important; }
+.bento-card-featured .bento-icon { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.3); }
+.bento-card-featured .bento-icon svg { stroke: var(--white); }
+.bento-card-featured .bento-num { color: rgba(255,255,255,0.45); }
+.bento-card-featured .bento-title { color: var(--white); }
+.bento-card-featured .bento-desc { color: rgba(255,255,255,0.7); }
+
+.bento-num {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; color: rgba(207,0,28,0.4); margin-bottom: 28px;
+}
+.bento-icon {
+  width: 52px; height: 52px;
+  background: rgba(207,0,28,0.08); border: 1px solid rgba(207,0,28,0.16);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .3s, border-color .3s, transform .3s var(--ease-expo);
+}
+.bento-card:hover .bento-icon { background: rgba(207,0,28,0.16); border-color: rgba(207,0,28,0.3); transform: scale(1.05) rotate(1deg); }
+.bento-icon svg { width: 22px; height: 22px; fill: none; stroke: var(--red); stroke-width: 1.5; transition: transform .3s; }
+.bento-card:hover .bento-icon svg { transform: scale(1.1); }
+.bento-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
+  margin-bottom: 14px; line-height: 1.05;
+}
+.bento-desc { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.36); }
+
+/* ============================================================
+   PROCESO / TIMELINE SECTION
+   ============================================================ */
+#proceso {
+  background: var(--gray-dark);
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+.proceso-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(207,0,28,0.1), transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(6,48,98,0.18), transparent 45%),
+    linear-gradient(145deg, #060e1c 0%, #030a14 50%, #060e1c 100%);
+}
+.proceso-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; position: relative; z-index: 2; }
+.proceso-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 100px; }
+.proceso-header .section-title { font-size: clamp(40px, 5vw, 72px); color: var(--white); }
+.proceso-header .section-body { color: rgba(255,255,255,0.4); }
+
+/* Timeline */
+.timeline { position: relative; }
+.timeline::before {
+  content: ''; position: absolute; top: 0; left: 36px; width: 1px; bottom: 0;
+  background: linear-gradient(180deg, var(--red) 0%, rgba(207,0,28,0.1) 100%);
+  box-shadow: 0 0 8px rgba(207,0,28,0.2);
+}
+.timeline-item {
+  display: grid; grid-template-columns: 72px 1fr; gap: 48px;
+  margin-bottom: 64px; position: relative;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot {
+  position: relative; z-index: 2; flex-shrink: 0;
+  width: 72px; height: 72px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 2px;
+  background: rgba(207,0,28,0.1); border: 1px solid rgba(207,0,28,0.25);
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .3s, border-color .3s, transform .3s var(--ease-expo), box-shadow .3s;
+}
+.timeline-item:hover .timeline-dot {
+  background: var(--red); border-color: var(--red);
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(207,0,28,0.5);
+}
+.timeline-dot-num {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 900;
+  color: var(--red); line-height: 1; transition: color .3s;
+}
+.timeline-item:hover .timeline-dot-num { color: var(--white); }
+.timeline-content {
+  padding-top: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-bottom: 60px;
+  transition: padding-left .4s var(--ease-expo);
+}
+.timeline-item:last-child .timeline-content { border-bottom: none; padding-bottom: 0; }
+.timeline-item:hover .timeline-content { padding-left: 8px; }
+.timeline-tag {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 9.5px; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); margin-bottom: 10px;
+}
+.timeline-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--white);
+  margin-bottom: 16px; line-height: 1.05;
+}
+.timeline-desc { font-size: 14.5px; line-height: 1.78; color: rgba(255,255,255,0.4); }
+
+/* ============================================================
+   TRACKING / PORTAL SECTION  — split layout
+   ============================================================ */
+#tracking {
+  background: var(--off-white);
+  color: var(--text); padding: 150px 0; overflow: hidden; position: relative;
+}
+.tracking-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center;
+}
+.tracking-left .section-label .section-label-line { background: var(--red); }
+.tracking-left .section-label .section-label-text { color: var(--red); }
+.tracking-left .section-title { font-size: clamp(38px, 4.5vw, 66px); color: var(--navy); margin-bottom: 28px; }
+.tracking-left .section-body { color: rgba(20,20,20,0.5); }
+.tracking-features { margin-top: 52px; display: flex; flex-direction: column; gap: 0; }
+.tracking-feature {
+  display: flex; align-items: flex-start; gap: 22px;
+  padding: 28px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: padding-left .35s var(--ease-expo);
+}
+.tracking-feature:last-child { border-bottom: none; }
+.tracking-feature:hover { padding-left: 10px; }
+.tracking-feature-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: var(--navy);
+  clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(6,48,98,0.25);
+  transition: background .3s, transform .3s var(--ease-expo);
+}
+.tracking-feature:hover .tracking-feature-icon { background: var(--red); transform: scale(1.06); }
+.tracking-feature-icon svg { width: 18px; height: 18px; fill: none; stroke: var(--white); stroke-width: 1.5; }
+.tracking-feature-body {}
+.tracking-feature-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--navy); margin-bottom: 6px;
+}
+.tracking-feature-desc { font-size: 13.5px; line-height: 1.65; color: rgba(20,20,20,0.48); }
+
+/* Tracking right — visual mock portal */
+.tracking-right { position: relative; }
+.tracking-portal-wrap {
+  position: relative; height: 580px;
+}
+.tracking-portal-main {
+  position: absolute; top: 0; left: 0; width: 85%; height: 80%;
+  overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+}
+.tracking-portal-main img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.8) contrast(1.05); transition: transform 6s var(--ease-expo); }
+.tracking-portal-main:hover img { transform: scale(1.05); }
+.tracking-portal-accent {
+  position: absolute; bottom: 0; right: 0; width: 50%; height: 44%;
+  background: linear-gradient(145deg, var(--navy), var(--navy-mid));
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; padding: 24px; text-align: center; z-index: 2;
+  box-shadow: 0 12px 50px rgba(6,48,98,0.4);
+}
+.tracking-portal-accent-num {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 52px; font-weight: 900;
+  color: var(--white); line-height: 1;
+}
+.tracking-portal-accent-text {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+.tracking-portal-tag {
+  position: absolute; top: 32px; right: -20px;
+  background: var(--red); color: var(--white); padding: 14px 20px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  clip-path: polygon(0 0, 92% 0, 100% 100%, 8% 100%);
+  box-shadow: 0 8px 30px rgba(207,0,28,0.4); z-index: 5;
+}
+
+/* ============================================================
+   COBERTURA SECTION — dark alternating
+   ============================================================ */
+#cobertura {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy-deep);
+  padding: 150px 0; overflow: hidden; position: relative;
+}
+#cobertura::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.2) 50%, transparent 95%);
+}
+.cobertura-container {
+  max-width: 1400px; margin: 0 auto; padding: 0 48px;
+}
+.cobertura-header { text-align: center; margin-bottom: 80px; }
+.cobertura-header .section-label { justify-content: center; }
+.cobertura-header .section-title { font-size: clamp(40px, 5vw, 74px); color: var(--white); margin-top: 20px; }
+.cobertura-header .section-body { max-width: 560px; margin: 28px auto 0; }
+
+.cobertura-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 80px;
+}
+.cobertura-card {
+  padding: 52px 40px; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.055);
+  transition: background .4s var(--ease-expo), border-color .4s, transform .4s var(--ease-expo), box-shadow .4s;
+}
+.cobertura-card::after {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 2.5px;
+  background: linear-gradient(90deg, var(--red), rgba(207,0,28,0.3));
+  box-shadow: 0 0 10px rgba(207,0,28,0.4);
+}
+.cobertura-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.09); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.cobertura-card-icon {
+  width: 60px; height: 60px; margin-bottom: 28px;
+  background: rgba(207,0,28,0.08); border: 1px solid rgba(207,0,28,0.16);
+  display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
+  transition: background .3s, border-color .3s;
+}
+.cobertura-card:hover .cobertura-card-icon { background: rgba(207,0,28,0.18); border-color: rgba(207,0,28,0.3); }
+.cobertura-card-icon svg { width: 26px; height: 26px; fill: none; stroke: var(--red); stroke-width: 1.5; }
+.cobertura-card-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 24px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--white); margin-bottom: 16px;
+}
+.cobertura-card-desc { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.36); margin-bottom: 24px; }
+.cobertura-card-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cobertura-card-list li {
+  font-size: 12.5px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 10px;
+}
+.cobertura-card-list li::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--red); flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(207,0,28,0.5);
+}
+
+/* Highlight bar */
+.cobertura-highlight {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;
+}
+.cobertura-hl-item {
+  padding: 36px 32px; text-align: center;
+  background: rgba(207,0,28,0.06); border: 1px solid rgba(207,0,28,0.12);
+  transition: background .3s, border-color .3s, transform .3s;
+}
+.cobertura-hl-item:hover { background: rgba(207,0,28,0.12); border-color: rgba(207,0,28,0.22); transform: translateY(-3px); }
+.cobertura-hl-num {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 900;
+  color: var(--white); line-height: 1; letter-spacing: -0.02em;
+}
+.cobertura-hl-num span { color: var(--red); }
+.cobertura-hl-label {
+  font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); margin-top: 8px; line-height: 1.4;
+}
+
+/* ============================================================
+   VALORES / TRUST SECTION — light bg
+   ============================================================ */
+#valores {
+  background: var(--off-white);
+  color: var(--text); padding: 150px 0; overflow: hidden; position: relative;
+}
+.valores-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.valores-header {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 80px;
+}
+.valores-header .section-title { font-size: clamp(40px, 5vw, 72px); color: var(--navy); }
+.valores-header .section-body { color: rgba(20,20,20,0.5); }
+.valores-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px;
+}
+.valor-card {
+  background: var(--white); overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.04);
+  padding: 44px 32px; text-align: center;
+  transition: transform .45s var(--ease-expo), box-shadow .45s, border-color .3s;
+  position: relative;
+}
+.valor-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  transform: scaleX(0); transition: transform .45s var(--ease-expo);
+  box-shadow: 0 0 12px rgba(207,0,28,0.4);
+}
+.valor-card:hover { transform: translateY(-8px); box-shadow: 0 28px 70px rgba(0,0,0,0.12); }
+.valor-card:hover::before { transform: scaleX(1); }
+.valor-card-circle {
+  width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 24px;
+  background: var(--red); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 30px rgba(207,0,28,0.3);
+  transition: transform .35s var(--ease-expo), box-shadow .35s;
+}
+.valor-card:hover .valor-card-circle { transform: scale(1.1); box-shadow: 0 12px 40px rgba(207,0,28,0.4); }
+.valor-card-circle svg { width: 32px; height: 32px; fill: none; stroke: var(--white); stroke-width: 1.5; }
+.valor-card-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--navy); margin-bottom: 10px;
+}
+.valor-card-desc { font-size: 12.5px; line-height: 1.6; color: rgba(20,20,20,0.48); }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+#cta {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(13,74,143,0.1) 0%, transparent 70%),
+    var(--navy);
+  padding: 170px 0; overflow: hidden; position: relative;
+}
+#cta::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(207,0,28,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(207,0,28,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.25; pointer-events: none; z-index: 0; }
+.cta-bg-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 300px; font-weight: 900;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.06em; white-space: nowrap; pointer-events: none; user-select: none;
+}
+.cta-container { max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center; position: relative; z-index: 5; }
+.cta-label { display: inline-flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.cta-label-line { width: 32px; height: 1px; background: var(--red); }
+.cta-label-text { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); }
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(52px, 7vw, 92px) !important;
+  font-weight: 900; text-transform: uppercase; line-height: 0.95;
+  color: var(--white); margin-bottom: 28px; letter-spacing: -0.015em;
+  display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+}
+.cta-title em { font-style: italic; color: var(--red); font-family: 'Playfair Display', serif; }
+.cta-desc { font-size: 15.5px; line-height: 1.75; color: rgba(255,255,255,0.42); max-width: 520px; margin: 0 auto 52px; letter-spacing: 0.005em; }
+.cta-actions { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.cta-phone { display: flex; align-items: center; gap: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.55); text-decoration: none; transition: color .25s, transform .25s var(--ease-expo); }
+.cta-phone:hover { color: var(--white); transform: translateX(4px); }
+.cta-red { color: #d4001f; font-size: 1.6em; font-weight: 800; line-height: 1; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#footer { background: #010916; padding: 80px 0 40px; border-top: 1px solid rgba(255,255,255,0.045); position: relative; }
+#footer::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent 5%, rgba(207,0,28,0.5) 40%, rgba(207,0,28,0.5) 60%, transparent 95%);
+  box-shadow: 0 0 16px rgba(207,0,28,0.2);
+}
+.footer-container { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+.footer-main {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 80px; padding-bottom: 30px; margin-bottom: 0; flex-wrap: wrap;
+}
+.footer-main > div { min-width: 180px; }
+.footer-brand { max-width: 320px; }
+.footer-brand-logo { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.footer-logo-img { height: 130px; width: auto; object-fit: contain; margin-bottom: 20px; }
+.footer-brand-desc { font-size: 12.5px; line-height: 1.75; color: rgba(255,255,255,0.3); max-width: 280px; margin-bottom: 28px; }
+.footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; margin-bottom: 10px; transition: color .25s; }
+.footer-contact-item:hover { color: rgba(255,255,255,0.7); }
+.footer-contact-icon { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+.footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 24px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a { font-size: 12.5px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color .25s var(--ease-smooth), padding-left .25s var(--ease-smooth); }
+.footer-links a:hover { color: rgba(255,255,255,0.8); padding-left: 8px; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;
+}
+.footer-copyright { font-size: 11.5px; color: rgba(255,255,255,0.18); letter-spacing: 0.06em; }
+.footer-legal { display: flex; gap: 24px; margin-left: auto; }
+.footer-legal a { font-size: 11.5px; color: rgba(255,255,255,0.18); text-decoration: none; transition: color 0.2s; letter-spacing: 0.06em; }
+.footer-legal a:hover { color: rgba(255,255,255,0.45); }
+
+/* ============================================================
+   LANG
+   ============================================================ */
+[data-lang] { display: none; }
+[data-lang].active { display: block; }
+[data-lang-inline] { display: none; }
+[data-lang-inline].active { display: inline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1200px) {
+  .nav-links { gap: 16px; }
+  .intro-container { grid-template-columns: 1fr; gap: 60px; }
+  .intro-left { position: static; }
+  .intro-stat-row { display: none; }
+  .bento-card:nth-child(1), .bento-card:nth-child(2) { grid-column: span 6; }
+  .bento-card:nth-child(3), .bento-card:nth-child(4), .bento-card:nth-child(5) { grid-column: span 4; }
+  .cobertura-grid { grid-template-columns: repeat(2, 1fr); }
+  .cobertura-highlight { grid-template-columns: repeat(2, 1fr); }
+  .valores-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1024px) {
+  .nav-links { display: none !important; }
+  .nav-cta { display: none; }
+  .mobile-menu-btn { display: flex; }
+  #lang-switcher { right: 72px; }
+  .tracking-container { grid-template-columns: 1fr; gap: 60px; }
+  .tracking-right { display: none; }
+  .proceso-header { grid-template-columns: 1fr; gap: 32px; }
+  .valores-header { grid-template-columns: 1fr; gap: 28px; }
+}
+@media (max-width: 900px) {
+  #nav { padding: 0 24px; }
+  .page-hero-image-panel { display: none; }
+  .page-hero-content { width: 100%; }
+  .page-hero-kpis { padding: 0 24px; }
+  .page-hero-kpi { padding: 22px 16px; }
+  .page-hero-kpi-num { font-size: 28px; }
+  .bento-card:nth-child(1), .bento-card:nth-child(2) { grid-column: span 12; }
+  .bento-card:nth-child(3), .bento-card:nth-child(4), .bento-card:nth-child(5) { grid-column: span 12; }
+  .cobertura-grid { grid-template-columns: 1fr; }
+  .valores-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .page-hero-content { padding: 0 24px; padding-top: 80px; }
+  .page-hero-kpis { display: none; }
+  .intro-container, .modalidades-container, .proceso-container,
+  .tracking-container, .cobertura-container, .valores-container,
+  .cta-container, .footer-container { padding: 0 24px; }
+  .timeline { }
+  .timeline::before { left: 28px; }
+  .timeline-item { grid-template-columns: 56px 1fr; gap: 24px; }
+  .timeline-dot { width: 56px; height: 56px; }
+  .cobertura-highlight { grid-template-columns: repeat(2, 1fr); }
+  .valores-grid { grid-template-columns: 1fr 1fr; }
+  .footer-main { flex-direction: column; gap: 40px; }
+  #lang-switcher { right: 64px; top: 18px; }
+  .lang-btn { padding: 7px 10px; }
+  .cta-bg-text { font-size: 120px; }
+  #nav { padding: 0 20px; }
+}
+img { transition: opacity .5s; }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Language Switcher -->
+<div id="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('es')">ES</button>
+  <button class="lang-btn" onclick="setLang('ca')">CA</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav id="nav" role="navigation" aria-label="Menú principal">
+
+  <a href="../../index.html" class="nav-logo" aria-label="Transports Montserrat - Inicio">
+    <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="nav-logo-img">
+  </a>
+
+  <ul class="nav-links" role="menubar">
+
+    <!-- EMPRESA -->
+    <li class="nav-item" role="none">
+      <a href="../../empresa/historia/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Empresa</span>
+        <span data-lang-inline="ca">Empresa</span>
+        <span data-lang-inline="en">Company</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../empresa/historia/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Historia</span>
+          <span data-lang-inline="ca">Història</span>
+          <span data-lang-inline="en">History</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/equipo/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Equipo</span>
+          <span data-lang-inline="ca">Equip</span>
+          <span data-lang-inline="en">Team</span>
+        </a></li>
+        <li role="none"><a href="../../empresa/calidad/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Política de Calidad</span>
+          <span data-lang-inline="ca">Política de Qualitat</span>
+          <span data-lang-inline="en">Quality Policy</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- SERVICIOS -->
+    <li class="nav-item" role="none">
+      <a href="../../servicios/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Servicios</span>
+        <span data-lang-inline="ca">Serveis</span>
+        <span data-lang-inline="en">Services</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../servicios/logistica-integral-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística Integral</span>
+          <span data-lang-inline="ca">Logística Integral</span>
+          <span data-lang-inline="en">Full Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/logistica-in-house/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Logística In-House</span>
+          <span data-lang-inline="ca">Logística In-House</span>
+          <span data-lang-inline="en">In-House Logistics</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-dedicado/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+          <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+          <span data-lang-inline="en">Dedicated Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/almacenaje-multicliente/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+          <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+          <span data-lang-inline="en">Multi-client Storage</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/manipulacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Manipulación</span>
+          <span data-lang-inline="ca">Manipulació</span>
+          <span data-lang-inline="en">Handling</span>
+        </a></li>
+        <li role="none"><a href="../../servicios/consolidacion/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Consolidación</span>
+          <span data-lang-inline="ca">Consolidació</span>
+          <span data-lang-inline="en">Consolidation</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- TRANSPORTE -->
+    <li class="nav-item" role="none">
+      <a href="../../transporte/index.html" role="menuitem" aria-haspopup="true" aria-expanded="false">
+        <span data-lang-inline="es" class="active">Transporte</span>
+        <span data-lang-inline="ca">Transport</span>
+        <span data-lang-inline="en">Transport</span>
+        <span class="nav-arrow" aria-hidden="true">&#9660;</span>
+      </a>
+      <ul class="nav-dropdown" role="menu">
+        <li role="none"><a href="../../transporte/transporte-vino-granel-barcelona/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+          <span data-lang-inline="ca">Transport Vi a Granel</span>
+          <span data-lang-inline="en">Bulk Wine Transport</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/transporte-nacional-internacional/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+          <span data-lang-inline="ca">Nacional i Internacional</span>
+          <span data-lang-inline="en">National &amp; International</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-palets-24h/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+          <span data-lang-inline="ca">Distribució Palets 24h</span>
+          <span data-lang-inline="en">Pallet Distribution 24h</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/distribucion-paleteria-europa/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+          <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+          <span data-lang-inline="en">European Pallet Distribution</span>
+        </a></li>
+        <li role="none"><a href="../../transporte/grupajes-cargas-completas/index.html" role="menuitem">
+          <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+          <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+          <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+        </a></li>
+      </ul>
+    </li>
+
+    <!-- PALLETWAYS -->
+    <li class="nav-item" role="none">
+      <a href="../../palletways/index.html" role="menuitem">Palletways</a>
+    </li>
+
+    <!-- NOTICIAS -->
+    <li class="nav-item" role="none">
+      <a href="../../noticias/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Noticias</span>
+        <span data-lang-inline="ca">Notícies</span>
+        <span data-lang-inline="en">News</span>
+      </a>
+    </li>
+
+    <!-- CONTACTO -->
+    <li class="nav-item" role="none">
+      <a href="../../contacto/index.html" role="menuitem">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </a>
+    </li>
+
+  </ul>
+
+
+
+  <button class="mobile-menu-btn" id="hamburger-btn"
+          aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+</nav>
+
+<!-- ============================================================
+     MOBILE MENU
+     ============================================================ -->
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-empresa">
+      <span data-lang-inline="es" class="active">Empresa</span>
+      <span data-lang-inline="ca">Empresa</span>
+      <span data-lang-inline="en">Company</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-empresa">
+      <div class="mob-sub-item"><a href="../../empresa/historia/index.html">
+        <span data-lang-inline="es" class="active">Historia</span>
+        <span data-lang-inline="ca">Història</span>
+        <span data-lang-inline="en">History</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/equipo/index.html">
+        <span data-lang-inline="es" class="active">Equipo</span>
+        <span data-lang-inline="ca">Equip</span>
+        <span data-lang-inline="en">Team</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../empresa/calidad/index.html">
+        <span data-lang-inline="es" class="active">Política de Calidad</span>
+        <span data-lang-inline="ca">Política de Qualitat</span>
+        <span data-lang-inline="en">Quality Policy</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-servicios">
+      <span data-lang-inline="es" class="active">Servicios</span>
+      <span data-lang-inline="ca">Serveis</span>
+      <span data-lang-inline="en">Services</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-servicios">
+      <div class="mob-sub-item"><a href="../../servicios/logistica-integral-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Logística Integral</span>
+        <span data-lang-inline="ca">Logística Integral</span>
+        <span data-lang-inline="en">Full Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/logistica-in-house/index.html">
+        <span data-lang-inline="es" class="active">Logística In-House</span>
+        <span data-lang-inline="ca">Logística In-House</span>
+        <span data-lang-inline="en">In-House Logistics</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-dedicado/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+        <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+        <span data-lang-inline="en">Dedicated Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/almacenaje-multicliente/index.html">
+        <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+        <span data-lang-inline="ca">Emmagatzematge Multicliente</span>
+        <span data-lang-inline="en">Multi-client Storage</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/manipulacion/index.html">
+        <span data-lang-inline="es" class="active">Manipulación</span>
+        <span data-lang-inline="ca">Manipulació</span>
+        <span data-lang-inline="en">Handling</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../servicios/consolidacion/index.html">
+        <span data-lang-inline="es" class="active">Consolidación</span>
+        <span data-lang-inline="ca">Consolidació</span>
+        <span data-lang-inline="en">Consolidation</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <button class="mob-nav-toggle" aria-expanded="false" data-target="mob-transporte">
+      <span data-lang-inline="es" class="active">Transporte</span>
+      <span data-lang-inline="ca">Transport</span>
+      <span data-lang-inline="en">Transport</span>
+      <span class="mob-nav-arrow" aria-hidden="true">&#9660;</span>
+    </button>
+    <div class="mob-sub" id="mob-transporte">
+      <div class="mob-sub-item"><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+        <span data-lang-inline="es" class="active">Transporte Vino a Granel</span>
+        <span data-lang-inline="ca">Transport Vi a Granel</span>
+        <span data-lang-inline="en">Bulk Wine Transport</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/transporte-nacional-internacional/index.html">
+        <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+        <span data-lang-inline="ca">Nacional i Internacional</span>
+        <span data-lang-inline="en">National &amp; International</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-palets-24h/index.html">
+        <span data-lang-inline="es" class="active">Distribución Palets 24h</span>
+        <span data-lang-inline="ca">Distribució Palets 24h</span>
+        <span data-lang-inline="en">Pallet Distribution 24h</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/distribucion-paleteria-europa/index.html">
+        <span data-lang-inline="es" class="active">Distribución Paletería Europa</span>
+        <span data-lang-inline="ca">Distribució Paleteria Europa</span>
+        <span data-lang-inline="en">European Pallet Distribution</span>
+      </a></div>
+      <div class="mob-sub-item"><a href="../../transporte/grupajes-cargas-completas/index.html">
+        <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+        <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+        <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../palletways/index.html">Palletways</a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../noticias/index.html">
+      <span data-lang-inline="es" class="active">Noticias</span>
+      <span data-lang-inline="ca">Notícies</span>
+      <span data-lang-inline="en">News</span>
+    </a>
+  </div>
+
+  <div class="mob-nav-item">
+    <a href="../../contacto/index.html">
+      <span data-lang-inline="es" class="active">Contacto</span>
+      <span data-lang-inline="ca">Contacte</span>
+      <span data-lang-inline="en">Contact</span>
+    </a>
+  </div>
+
+  <div class="mob-cta-block">
+    <a href="tel:+34938911018" class="mob-cta-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      +34 938 911 018
+    </a>
+    <div class="mob-lang">
+      <button class="active" onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ca')">CA</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAGE HERO — vertical split, stats strip at bottom
+     ============================================================ -->
+<section id="page-hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="page-hero-grid"></div>
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <div class="hero-noise"></div>
+
+  <div class="hero-scan-line"></div>
+  <div class="hero-scan-line"></div>
+  <div class="hero-scan-line"></div>
+
+  <div class="speed-streak" style="top:28%;animation-delay:0s;animation-duration:3.8s;"></div>
+  <div class="speed-streak" style="top:55%;animation-delay:2s;animation-duration:4.5s;opacity:0.4;"></div>
+
+  <!-- Right image panel -->
+  <div class="page-hero-image-panel">
+    <div class="page-hero-img" style="background-image:url('../../assets/images/transporte/trans2.jfif')"></div>
+    <div class="page-hero-img-overlay"></div>
+    <div class="page-hero-img-scanline"></div>
+    <div class="page-hero-panel-accent"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="page-hero-content">
+    
+
+    <div class="page-hero-eyebrow">
+      <div class="page-hero-eyebrow-line"></div>
+      <span class="page-hero-eyebrow-text">
+        <span data-lang-inline="es" class="active">Península · Baleares · Canarias · Europa</span>
+        <span data-lang-inline="ca">Península · Balears · Canàries · Europa</span>
+        <span data-lang-inline="en">Peninsula · Balearics · Canaries · Europe</span>
+      </span>
+      <span class="page-hero-badge">Est. 1940</span>
+    </div>
+
+    <h1 class="page-hero-title">
+      <span class="page-hero-title-line" data-lang="es">Transporte</span>
+      <span class="page-hero-title-line" data-lang="ca">Transport</span>
+      <span class="page-hero-title-line" data-lang="en">Transport</span>
+
+      <span class="page-hero-title-line" style="color:var(--red);" data-lang="es">Nacional</span>
+      <span class="page-hero-title-line" style="color:var(--red);" data-lang="ca">Nacional</span>
+      <span class="page-hero-title-line" style="color:var(--red);" data-lang="en">National</span>
+
+      <span class="page-hero-title-line" style="-webkit-text-stroke:1px rgba(255,255,255,0.3);color:transparent;" data-lang="es">Internacional</span>
+      <span class="page-hero-title-line" style="-webkit-text-stroke:1px rgba(255,255,255,0.3);color:transparent;" data-lang="ca">Internacional</span>
+      <span class="page-hero-title-line" style="-webkit-text-stroke:1px rgba(255,255,255,0.3);color:transparent;" data-lang="en">International</span>
+    </h1>
+
+    <p class="page-hero-desc">
+      <span data-lang="es" class="active"><strong>Más de 80 años</strong> coordinando transportes logísticos con un único objetivo: garantizarte una logística eficiente, ágil y adaptada a tus necesidades en toda España y Europa.</span>
+      <span data-lang="ca"><strong>Més de 80 anys</strong> coordinant transports logístics amb un únic objectiu: garantir-te una logística eficient, àgil i adaptada a les teves necessitats a tota Espanya i Europa.</span>
+      <span data-lang="en"><strong>Over 80 years</strong> coordinating logistics transport with one goal: guaranteeing efficient, agile logistics tailored to your needs across Spain and Europe.</span>
+    </p>
+
+    <div class="page-hero-actions">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Solicitar presupuesto</span>
+          <span data-lang-inline="ca">Sol·licitar pressupost</span>
+          <span data-lang-inline="en">Request a quote</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:+34938911018" class="btn-secondary">+34 938 911 018</a>
+    </div>
+  </div>
+
+  
+</section>
+
+<!-- ============================================================
+     INTRO — sticky left / scrolling right
+     ============================================================ -->
+<section id="intro">
+  <div class="intro-container">
+
+    <div class="intro-left reveal-left">
+      <div class="section-label">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Nuestra Filosofía</span>
+          <span data-lang-inline="ca">La Nostra Filosofia</span>
+          <span data-lang-inline="en">Our Philosophy</span>
+        </span>
+      </div>
+      <h2 class="section-title">
+        <span data-lang="es" class="active">Eficacia<br>en cada<br>envío</span>
+        <span data-lang="ca">Eficàcia<br>en cada<br>enviament</span>
+        <span data-lang="en">Efficiency<br>in every<br>shipment</span>
+      </h2>
+      <p class="section-body" style="margin-top:24px;">
+        <span data-lang="es" class="active">Coordinamos los transportes logísticos para garantizarte una logística eficiente y acorde con tus necesidades. Con flota propia, red Palletways y una extensa red de colaboradores.</span>
+        <span data-lang="ca">Coordinem els transports logístics per garantir-te una logística eficient i d'acord amb les teves necessitats. Amb flota pròpia, xarxa Palletways i una extensa xarxa de col·laboradors.</span>
+        <span data-lang="en">We coordinate logistics transport to guarantee efficient logistics adapted to your needs. With own fleet, Palletways network and an extensive partner network.</span>
+      </p>
+      <div class="intro-left-actions">
+        <a href="../../contacto/index.html" class="btn-primary" style="display:inline-flex;">
+          <span>
+            <span data-lang-inline="es" class="active">Solicitar información</span>
+            <span data-lang-inline="ca">Sol·licitar informació</span>
+            <span data-lang-inline="en">Request information</span>
+          </span>
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="../../palletways/index.html" class="btn-secondary">
+          <span data-lang-inline="es" class="active">Red Palletways →</span>
+          <span data-lang-inline="ca">Xarxa Palletways →</span>
+          <span data-lang-inline="en">Palletways Network →</span>
+        </a>
+      </div>
+
+      <div class="intro-stat-row">
+        <div class="intro-stat reveal" data-delay="0">
+          <div class="intro-stat-num">55<span>k</span></div>
+          <div class="intro-stat-label">
+            <span data-lang-inline="es" class="active">m² almacén</span>
+            <span data-lang-inline="ca">m² magatzem</span>
+            <span data-lang-inline="en">m² warehouse</span>
+          </div>
+        </div>
+        <div class="intro-stat reveal" data-delay="0.1">
+          <div class="intro-stat-num">12<span>+</span></div>
+          <div class="intro-stat-label">
+            <span data-lang-inline="es" class="active">Años Palletways</span>
+            <span data-lang-inline="ca">Anys Palletways</span>
+            <span data-lang-inline="en">Years Palletways</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-right">
+      <div class="intro-block reveal">
+        <div class="intro-block-tag">
+          <span data-lang-inline="es" class="active">01 — Logística Eficiente</span>
+          <span data-lang-inline="ca">01 — Logística Eficient</span>
+          <span data-lang-inline="en">01 — Efficient Logistics</span>
+        </div>
+        <h3 class="intro-block-title">
+          <span data-lang-inline="es" class="active">Tu socio de confianza<br>desde 1940</span>
+          <span data-lang-inline="ca">El teu soci de confiança<br>des de 1940</span>
+          <span data-lang-inline="en">Your trusted partner<br>since 1940</span>
+        </h3>
+        <p class="intro-block-desc">
+          <span data-lang="es" class="active">La logística eficiente es el pilar de cualquier operación comercial exitosa. En Transports Montserrat, aportamos la experiencia necesaria para ofrecer resultados superiores de forma constante. Podrás realizar un seguimiento de tus activos en todo momento, estando al tanto de su ubicación y estado en tiempo real.</span>
+          <span data-lang="ca">La logística eficient és el pilar de qualsevol operació comercial exitosa. A Transports Montserrat, aportem l'experiència necessària per oferir resultats superiors de manera constant. Podràs fer un seguiment dels teus actius en tot moment.</span>
+          <span data-lang="en">Efficient logistics is the pillar of any successful commercial operation. At Transports Montserrat, we bring the necessary experience to consistently deliver superior results. You can track your assets at any time, staying informed of their location and status in real time.</span>
+        </p>
+      </div>
+
+      <div class="intro-block reveal">
+        <div class="intro-block-tag">
+          <span data-lang-inline="es" class="active">02 — Cobertura Completa</span>
+          <span data-lang-inline="ca">02 — Cobertura Completa</span>
+          <span data-lang-inline="en">02 — Full Coverage</span>
+        </div>
+        <h3 class="intro-block-title">
+          <span data-lang-inline="es" class="active">España completa<br>y toda Europa</span>
+          <span data-lang-inline="ca">Espanya completa<br>i tota Europa</span>
+          <span data-lang-inline="en">All of Spain<br>and all of Europe</span>
+        </h3>
+        <p class="intro-block-desc">
+          <span data-lang="es" class="active">Servicio Nacional en Península, Baleares y Canarias, e Internacional hacia toda Europa. Contamos con flota propia de 40 vehículos y nuestra red Palletways para garantizarte un transporte ágil, seguro y eficiente con las máximas garantías y fiabilidad.</span>
+          <span data-lang="ca">Servei Nacional a Península, Balears i Canàries, i Internacional cap a tota Europa. Comptem amb flota pròpia de 40 vehicles i la nostra xarxa Palletways per garantir-te un transport àgil, segur i eficient.</span>
+          <span data-lang="en">National service to the Peninsula, Balearics and Canaries, and International across all of Europe. With our own fleet of 40 vehicles and our Palletways network, we guarantee agile, safe and efficient transport with maximum reliability.</span>
+        </p>
+      </div>
+
+      <div class="intro-block reveal">
+        <div class="intro-block-tag">
+          <span data-lang-inline="es" class="active">03 — Asesoramiento</span>
+          <span data-lang-inline="ca">03 — Assessorament</span>
+          <span data-lang-inline="en">03 — Advisory</span>
+        </div>
+        <h3 class="intro-block-title">
+          <span data-lang-inline="es" class="active">Solución óptima<br>para cada necesidad</span>
+          <span data-lang-inline="ca">Solució òptima<br>per a cada necessitat</span>
+          <span data-lang-inline="en">Optimal solution<br>for every need</span>
+        </h3>
+        <p class="intro-block-desc">
+          <span data-lang="es" class="active">Te asesoramos y recomendamos la mejor solución de transporte-logístico según tus requisitos de carga. Disponemos de espacio en nuestros almacenes y en los de nuestros colaboradores para descargas de emergencia en toda España y Europa.</span>
+          <span data-lang="ca">T'assessorem i recomanem la millor solució de transport-logístic segons els teus requisits de càrrega. Disposem d'espai als nostres magatzems i als dels nostres col·laboradors per a descàrregues d'emergència a tota Espanya i Europa.</span>
+          <span data-lang="en">We advise you and recommend the best logistics-transport solution according to your load requirements. We have space in our warehouses and those of our partners for emergency unloading across Spain and Europe.</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     MODALIDADES — Bento grid
+     ============================================================ -->
+<section id="modalidades">
+  <div class="modalidades-container">
+    <div class="modalidades-header">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Modalidades de Transporte</span>
+          <span data-lang-inline="ca">Modalitats de Transport</span>
+          <span data-lang-inline="en">Transport Modes</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal">
+        <span data-lang="es" class="active">Soluciones<br>para cada<br>tipo de carga</span>
+        <span data-lang="ca">Solucions<br>per a cada<br>tipus de càrrega</span>
+        <span data-lang="en">Solutions<br>for every<br>type of load</span>
+      </h2>
+      <p class="section-body reveal">
+        <span data-lang="es" class="active">Adaptamos el servicio de transporte a las características de tu mercancía. Desde paletería exprés hasta cargas completas, grupajes e intermodal.</span>
+        <span data-lang="ca">Adaptem el servei de transport a les característiques de la teva mercaderia. Des de paleteria exprés fins a càrregues completes, grupatges i intermodal.</span>
+        <span data-lang="en">We adapt the transport service to the characteristics of your goods. From express pallets to full loads, groupage and intermodal.</span>
+      </p>
+    </div>
+
+    <div class="bento-grid">
+
+      <!-- Cargas Completas — wide card -->
+      <div class="bento-card reveal">
+        <div class="bento-num">01</div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Cargas<br>Completas</span>
+          <span data-lang-inline="ca">Càrregues<br>Completes</span>
+          <span data-lang-inline="en">Full<br>Loads</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Especialistas en transporte de cargas completas en nacional y en Europa, con las máximas garantías, fiabilidad y puntualidad. Tu mercancía viaja en exclusiva.</span>
+          <span data-lang="ca">Especialistes en transport de càrregues completes a nacional i Europa, amb les màximes garanties i fiabilitat.</span>
+          <span data-lang="en">Specialists in full load transport nationally and across Europe, with maximum guarantees and reliability. Your goods travel exclusively.</span>
+        </p>
+      </div>
+
+      <!-- Grupaje — featured wide card -->
+      <div class="bento-card bento-card-featured reveal">
+        <div class="bento-num">02</div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Grupaje</span>
+          <span data-lang-inline="ca">Grupatge</span>
+          <span data-lang-inline="en">Groupage</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Optimiza costes consolidando tu carga con otros envíos. Gracias al gran volumen que gestionamos y nuestra red Palletways, tu mercancía viaja con la misma seguridad que un completo.</span>
+          <span data-lang="ca">Optimitza costos consolidant la teva càrrega amb altres enviaments. Gràcies al gran volum que gestionem i la nostra xarxa Palletways.</span>
+          <span data-lang="en">Optimise costs by consolidating your load with other shipments. Thanks to the high volume we manage and our Palletways network, your goods travel with the same safety as a full load.</span>
+        </p>
+      </div>
+
+      <!-- Paletería Exprés -->
+      <div class="bento-card reveal">
+        <div class="bento-num">03</div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Paletería<br>Exprés</span>
+          <span data-lang-inline="ca">Paleteria<br>Exprés</span>
+          <span data-lang-inline="en">Express<br>Pallets</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Distribución rápida de palets con trazabilidad completa desde origen hasta destino final. Tiempos de tránsito adaptados a tus plazos.</span>
+          <span data-lang="ca">Distribució ràpida de palets amb traçabilitat completa. Temps de trànsit adaptats als teus terminis.</span>
+          <span data-lang="en">Fast pallet distribution with full traceability from origin to final destination. Transit times adapted to your deadlines.</span>
+        </p>
+      </div>
+
+      <!-- Cisternas Isotérmicas -->
+      <div class="bento-card reveal">
+        <div class="bento-num">04</div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Cisternas<br>Isotérmicas</span>
+          <span data-lang-inline="ca">Cisternes<br>Isotèrmiques</span>
+          <span data-lang-inline="en">Isothermal<br>Tanks</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Flota propia de cisternas de acero inoxidable con control de temperatura constante para mercancías que requieren condiciones especiales.</span>
+          <span data-lang="ca">Flota pròpia de cisternes d'acer inoxidable amb control de temperatura constant per a mercaderies que requereixen condicions especials.</span>
+          <span data-lang="en">Own fleet of stainless steel tanks with constant temperature control for goods requiring special conditions.</span>
+        </p>
+      </div>
+
+      <!-- Transporte Intermodal -->
+      <div class="bento-card reveal">
+        <div class="bento-num">05</div>
+        <div class="bento-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3 class="bento-title">
+          <span data-lang-inline="es" class="active">Transporte<br>Intermodal</span>
+          <span data-lang-inline="ca">Transport<br>Intermodal</span>
+          <span data-lang-inline="en">Intermodal<br>Transport</span>
+        </h3>
+        <p class="bento-desc">
+          <span data-lang="es" class="active">Combinamos carretera, ferrocarril y transporte marítimo para optimizar cada ruta. La solución más eficiente para grandes volúmenes o destinos específicos.</span>
+          <span data-lang="ca">Combinem carretera, ferrocarril i transport marítim per optimitzar cada ruta. La solució més eficient per a grans volums.</span>
+          <span data-lang="en">We combine road, rail and maritime transport to optimise each route. The most efficient solution for large volumes or specific destinations.</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESO — timeline
+     ============================================================ -->
+<section id="proceso">
+  <div class="proceso-bg"></div>
+  <div class="proceso-container">
+    <div class="proceso-header">
+      <div>
+        <div class="section-label reveal">
+          <div class="section-label-line"></div>
+          <span class="section-label-text">
+            <span data-lang-inline="es" class="active">Cómo Trabajamos</span>
+            <span data-lang-inline="ca">Com Treballem</span>
+            <span data-lang-inline="en">How We Work</span>
+          </span>
+        </div>
+        <h2 class="section-title reveal" style="font-size:clamp(40px,5vw,72px);color:var(--white);">
+          <span data-lang="es" class="active">Tu logística,<br>paso a paso</span>
+          <span data-lang="ca">La teva logística,<br>pas a pas</span>
+          <span data-lang="en">Your logistics,<br>step by step</span>
+        </h2>
+      </div>
+      <div>
+        <p class="section-body reveal" style="color:rgba(255,255,255,0.4);">
+          <span data-lang="es" class="active">Afrontar los nuevos retos de logística depende de la actitud innovadora de la empresa responsable. En Transports Montserrat nos posicionamos como vuestro mejor aliado para cumplir vuestros plazos y objetivos, sin sorpresas de última hora.</span>
+          <span data-lang="ca">Afrontar els nous reptes de logística depèn de l'actitud innovadora de l'empresa responsable. A Transports Montserrat ens posicionem com el vostre millor aliat per complir els vostres terminis i objectius.</span>
+          <span data-lang="en">Meeting the new logistics challenges depends on the innovative attitude of the responsible company. At Transports Montserrat we position ourselves as your best ally to meet your deadlines and objectives, with no last-minute surprises.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">
+          <div class="timeline-dot-num">01</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag">
+            <span data-lang-inline="es" class="active">Asesoramiento</span>
+            <span data-lang-inline="ca">Assessorament</span>
+            <span data-lang-inline="en">Advisory</span>
+          </div>
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Análisis de tus necesidades</span>
+            <span data-lang-inline="ca">Anàlisi de les teves necessitats</span>
+            <span data-lang-inline="en">Analysis of your needs</span>
+          </h3>
+          <p class="timeline-desc">
+            <span data-lang="es" class="active">Te asesoramos y ayudamos a escoger la mejor solución de transporte-logístico según tus requisitos de carga, plazos y destinos. Nuestro equipo experto evalúa cada caso de forma personalizada para ofrecerte la solución más eficiente y económica.</span>
+            <span data-lang="ca">T'assessorem i ajudem a triar la millor solució de transport-logístic segons els teus requisits de càrrega, terminis i destinacions. El nostre equip expert avalua cada cas de manera personalitzada.</span>
+            <span data-lang="en">We advise and help you choose the best logistics-transport solution according to your load requirements, deadlines and destinations. Our expert team evaluates each case in a personalised way.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">
+          <div class="timeline-dot-num">02</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag">
+            <span data-lang-inline="es" class="active">Recogida</span>
+            <span data-lang-inline="ca">Recollida</span>
+            <span data-lang-inline="en">Collection</span>
+          </div>
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Coordinación y recogida<br>eficiente</span>
+            <span data-lang-inline="ca">Coordinació i recollida<br>eficient</span>
+            <span data-lang-inline="en">Efficient coordination<br>and collection</span>
+          </h3>
+          <p class="timeline-desc">
+            <span data-lang="es" class="active">Coordinamos la recogida de tu mercancía en origen con nuestra flota propia de más de 40 vehículos o a través de nuestra red de colaboradores en toda España. Rapidez y puntualidad garantizadas.</span>
+            <span data-lang="ca">Coordinem la recollida de la teva mercaderia en origen amb la nostra flota pròpia de més de 40 vehicles o a través de la nostra xarxa de col·laboradors a tota Espanya.</span>
+            <span data-lang="en">We coordinate the collection of your goods at origin with our own fleet of over 40 vehicles or through our partner network across Spain. Speed and punctuality guaranteed.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">
+          <div class="timeline-dot-num">03</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag">
+            <span data-lang-inline="es" class="active">Tránsito</span>
+            <span data-lang-inline="ca">Trànsit</span>
+            <span data-lang-inline="en">Transit</span>
+          </div>
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Transporte con trazabilidad<br>total</span>
+            <span data-lang-inline="ca">Transport amb traçabilitat<br>total</span>
+            <span data-lang-inline="en">Transport with full<br>traceability</span>
+          </h3>
+          <p class="timeline-desc">
+            <span data-lang="es" class="active">Tu mercancía se desplaza bajo control total. Nuestro portal web te permite seguir en tiempo real el estado del envío hasta su destino final, con albaranes escaneados disponibles para todos los envíos de paletería.</span>
+            <span data-lang="ca">La teva mercaderia es desplaça sota control total. El nostre portal web et permet seguir en temps real l'estat de l'enviament fins al seu destí final, amb albarans escanejats disponibles.</span>
+            <span data-lang="en">Your goods move under full control. Our web portal allows you to follow the status of the shipment in real time until its final destination, with scanned delivery notes available for all pallet shipments.</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot">
+          <div class="timeline-dot-num">04</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-tag">
+            <span data-lang-inline="es" class="active">Entrega</span>
+            <span data-lang-inline="ca">Lliurament</span>
+            <span data-lang-inline="en">Delivery</span>
+          </div>
+          <h3 class="timeline-title">
+            <span data-lang-inline="es" class="active">Entrega puntual<br>en destino</span>
+            <span data-lang-inline="ca">Lliurament puntual<br>a destí</span>
+            <span data-lang-inline="en">Punctual delivery<br>at destination</span>
+          </h3>
+          <p class="timeline-desc">
+            <span data-lang="es" class="active">Entregamos en el plazo acordado, con confirmación digital y documentación completa. Nuestro equipo está disponible para resolver cualquier incidencia antes, durante y después de la entrega. Confía en Transports Montserrat para una logística ágil, segura y adaptada a tus necesidades.</span>
+            <span data-lang="ca">Lliurem en el termini acordat, amb confirmació digital i documentació completa. El nostre equip està disponible per resoldre qualsevol incidència.</span>
+            <span data-lang="en">We deliver within the agreed timeframe, with digital confirmation and complete documentation. Our team is available to resolve any incident before, during and after delivery.</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRACKING / PORTAL SECTION
+     ============================================================ -->
+<section id="tracking">
+  <div class="tracking-container">
+
+    <div class="tracking-left">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Portal de Seguimiento</span>
+          <span data-lang-inline="ca">Portal de Seguiment</span>
+          <span data-lang-inline="en">Tracking Portal</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal" style="font-size:clamp(38px,4.5vw,66px);color:var(--navy);">
+        <span data-lang="es" class="active">Tus envíos,<br>bajo control<br>total</span>
+        <span data-lang="ca">Els teus enviaments,<br>sota control<br>total</span>
+        <span data-lang="en">Your shipments,<br>under full<br>control</span>
+      </h2>
+      <p class="section-body reveal" style="color:rgba(20,20,20,0.5);margin-top:20px;">
+        <span data-lang="es" class="active">Nuestro portal web para el seguimiento online de las entregas te permite consultar en cualquier momento el estado de tus expediciones. Trazabilidad completa desde el origen hasta el destino final.</span>
+        <span data-lang="ca">El nostre portal web per al seguiment online de les entregues et permet consultar en qualsevol moment l'estat de les teves expedicions. Traçabilitat completa des de l'origen fins al destí final.</span>
+        <span data-lang="en">Our online delivery tracking portal allows you to check the status of your shipments at any time. Full traceability from origin to final destination.</span>
+      </p>
+
+      <div class="tracking-features">
+        <div class="tracking-feature reveal">
+          <div class="tracking-feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="tracking-feature-body">
+            <div class="tracking-feature-title">
+              <span data-lang-inline="es" class="active">Seguimiento en tiempo real</span>
+              <span data-lang-inline="ca">Seguiment en temps real</span>
+              <span data-lang-inline="en">Real-time tracking</span>
+            </div>
+            <p class="tracking-feature-desc">
+              <span data-lang="es" class="active">Consulta el estado de tus envíos en tiempo real desde cualquier dispositivo. Portal 24/7 accesible sin instalaciones adicionales.</span>
+              <span data-lang="ca">Consulta l'estat dels teus enviaments en temps real des de qualsevol dispositiu. Portal 24/7 accessible sense instal·lacions addicionals.</span>
+              <span data-lang="en">Check the status of your shipments in real time from any device. 24/7 portal accessible without additional installations.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="tracking-feature reveal">
+          <div class="tracking-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="tracking-feature-body">
+            <div class="tracking-feature-title">
+              <span data-lang-inline="es" class="active">Albaranes escaneados</span>
+              <span data-lang-inline="ca">Albarans escanejats</span>
+              <span data-lang-inline="en">Scanned delivery notes</span>
+            </div>
+            <p class="tracking-feature-desc">
+              <span data-lang="es" class="active">Para todos los envíos de paletería encontrarás en el portal web los albaranes escaneados y firmados de las entregas realizadas.</span>
+              <span data-lang="ca">Per a tots els enviaments de paleteria trobaràs al portal web els albarans escanejats i signats de les entregues realitzades.</span>
+              <span data-lang="en">For all pallet shipments you will find scanned and signed delivery notes in the web portal.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="tracking-feature reveal">
+          <div class="tracking-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="tracking-feature-body">
+            <div class="tracking-feature-title">
+              <span data-lang-inline="es" class="active">Gestión de incidencias</span>
+              <span data-lang-inline="ca">Gestió d'incidències</span>
+              <span data-lang-inline="en">Incident management</span>
+            </div>
+            <p class="tracking-feature-desc">
+              <span data-lang="es" class="active">Nuestro equipo te acompaña a lo largo de todo el proceso. Ante cualquier incidencia, actuamos de inmediato para garantizar el cumplimiento de plazos.</span>
+              <span data-lang="ca">El nostre equip t'acompanya al llarg de tot el procés. Davant qualsevol incidència, actuem de manera immediata per garantir el compliment dels terminis.</span>
+              <span data-lang="en">Our team accompanies you throughout the entire process. In the event of any incident, we act immediately to guarantee compliance with deadlines.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tracking-right reveal-right">
+      <div class="tracking-portal-wrap">
+        <div class="tracking-portal-main">
+          <img src="../../assets/images/transporte/trans1.jpg" alt="Transporte de mercancías paletizado" loading="lazy">
+        </div>
+        <div class="tracking-portal-accent">
+          <div class="tracking-portal-accent-num">100%</div>
+          <div class="tracking-portal-accent-text">
+            <span data-lang-inline="es" class="active">Trazabilidad<br>online</span>
+            <span data-lang-inline="ca">Traçabilitat<br>online</span>
+            <span data-lang-inline="en">Online<br>traceability</span>
+          </div>
+        </div>
+        <div class="tracking-portal-tag">
+          <span data-lang-inline="es" class="active">Portal 24/7</span>
+          <span data-lang-inline="ca">Portal 24/7</span>
+          <span data-lang-inline="en">Portal 24/7</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     COBERTURA — geographic coverage
+     ============================================================ -->
+<section id="cobertura">
+  <div class="cobertura-container">
+    <div class="cobertura-header">
+      <div class="section-label reveal">
+        <div class="section-label-line"></div>
+        <span class="section-label-text">
+          <span data-lang-inline="es" class="active">Cobertura Geográfica</span>
+          <span data-lang-inline="ca">Cobertura Geogràfica</span>
+          <span data-lang-inline="en">Geographic Coverage</span>
+        </span>
+      </div>
+      <h2 class="section-title reveal">
+        <span data-lang="es" class="active">España<br>y Europa</span>
+        <span data-lang="ca">Espanya<br>i Europa</span>
+        <span data-lang="en">Spain<br>and Europe</span>
+      </h2>
+      <p class="section-body reveal">
+        <span data-lang="es" class="active">Ofrecemos soluciones flexibles de transporte en toda España, adaptando los tiempos de tránsito a tus necesidades de entrega. Gracias a nuestra amplia red Palletways, llegamos a toda Europa con las mismas garantías.</span>
+        <span data-lang="ca">Oferim solucions flexibles de transport a tota Espanya, adaptant els temps de trànsit a les teves necessitats d'entrega. Gràcies a la nostra àmplia xarxa Palletways, arribem a tota Europa.</span>
+        <span data-lang="en">We offer flexible transport solutions across Spain, adapting transit times to your delivery needs. Thanks to our extensive Palletways network, we reach all of Europe with the same guarantees.</span>
+      </p>
+    </div>
+
+    <div class="cobertura-grid">
+      <div class="cobertura-card reveal">
+        <div class="cobertura-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="cobertura-card-title">
+          <span data-lang-inline="es" class="active">Nacional</span>
+          <span data-lang-inline="ca">Nacional</span>
+          <span data-lang-inline="en">National</span>
+        </h3>
+        <p class="cobertura-card-desc">
+          <span data-lang="es" class="active">Cobertura completa en toda la Península Ibérica, Baleares y Canarias con tiempos de tránsito express y estándar.</span>
+          <span data-lang="ca">Cobertura completa a tota la Península Ibèrica, Balears i Canàries amb temps de trànsit exprés i estàndard.</span>
+          <span data-lang="en">Full coverage across the Iberian Peninsula, Balearics and Canaries with express and standard transit times.</span>
+        </p>
+        <ul class="cobertura-card-list">
+          <li><span data-lang-inline="es" class="active">Península Ibérica</span><span data-lang-inline="ca">Península Ibèrica</span><span data-lang-inline="en">Iberian Peninsula</span></li>
+          <li><span data-lang-inline="es" class="active">Islas Baleares</span><span data-lang-inline="ca">Illes Balears</span><span data-lang-inline="en">Balearic Islands</span></li>
+          <li><span data-lang-inline="es" class="active">Islas Canarias</span><span data-lang-inline="ca">Illes Canàries</span><span data-lang-inline="en">Canary Islands</span></li>
+        </ul>
+      </div>
+
+      <div class="cobertura-card reveal">
+        <div class="cobertura-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <h3 class="cobertura-card-title">
+          <span data-lang-inline="es" class="active">Europa</span>
+          <span data-lang-inline="ca">Europa</span>
+          <span data-lang-inline="en">Europe</span>
+        </h3>
+        <p class="cobertura-card-desc">
+          <span data-lang="es" class="active">A través de nuestra red Palletways, la mayor red de distribución paletizada de Europa, llegamos a más de 30 países.</span>
+          <span data-lang="ca">A través de la nostra xarxa Palletways, la major xarxa de distribució paletitzada d'Europa, arribem a més de 30 països.</span>
+          <span data-lang="en">Through our Palletways network, Europe's largest pallet distribution network, we reach more than 30 countries.</span>
+        </p>
+        <ul class="cobertura-card-list">
+          <li><span data-lang-inline="es" class="active">Francia, Alemania, UK</span><span data-lang-inline="ca">França, Alemanya, UK</span><span data-lang-inline="en">France, Germany, UK</span></li>
+          <li><span data-lang-inline="es" class="active">Italia, Portugal, Benelux</span><span data-lang-inline="ca">Itàlia, Portugal, Benelux</span><span data-lang-inline="en">Italy, Portugal, Benelux</span></li>
+          <li><span data-lang-inline="es" class="active">+30 países destino</span><span data-lang-inline="ca">+30 països destí</span><span data-lang-inline="en">+30 destination countries</span></li>
+        </ul>
+      </div>
+
+      <div class="cobertura-card reveal">
+        <div class="cobertura-card-icon">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3 class="cobertura-card-title">
+          <span data-lang-inline="es" class="active">Red Palletways</span>
+          <span data-lang-inline="ca">Xarxa Palletways</span>
+          <span data-lang-inline="en">Palletways Network</span>
+        </h3>
+        <p class="cobertura-card-desc">
+          <span data-lang="es" class="active">Miembro de la red Palletways desde hace más de 12 años. La mayor red de distribución paletizada del continente europeo.</span>
+          <span data-lang="ca">Membre de la xarxa Palletways des de fa més de 12 anys. La major xarxa de distribució paletitzada del continent europeu.</span>
+          <span data-lang="en">Member of the Palletways network for over 12 years. The largest palletised distribution network on the European continent.</span>
+        </p>
+        <ul class="cobertura-card-list">
+          <li><span data-lang-inline="es" class="active">Entregas exprés 24-48h</span><span data-lang-inline="ca">Entregues exprés 24-48h</span><span data-lang-inline="en">Express deliveries 24-48h</span></li>
+          <li><span data-lang-inline="es" class="active">Trazabilidad completa</span><span data-lang-inline="ca">Traçabilitat completa</span><span data-lang-inline="en">Full traceability</span></li>
+          <li><span data-lang-inline="es" class="active">12+ años de pertenencia</span><span data-lang-inline="ca">12+ anys de pertinença</span><span data-lang-inline="en">12+ years of membership</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cobertura-highlight">
+      <div class="cobertura-hl-item reveal">
+        <div class="cobertura-hl-num">80<span>+</span></div>
+        <div class="cobertura-hl-label">
+          <span data-lang-inline="es" class="active">Años de experiencia</span>
+          <span data-lang-inline="ca">Anys d'experiència</span>
+          <span data-lang-inline="en">Years of experience</span>
+        </div>
+      </div>
+      <div class="cobertura-hl-item reveal">
+        <div class="cobertura-hl-num">40<span>+</span></div>
+        <div class="cobertura-hl-label">
+          <span data-lang-inline="es" class="active">Vehículos propios</span>
+          <span data-lang-inline="ca">Vehicles propis</span>
+          <span data-lang-inline="en">Own vehicles</span>
+        </div>
+      </div>
+      <div class="cobertura-hl-item reveal">
+        <div class="cobertura-hl-num"><span>+</span>30</div>
+        <div class="cobertura-hl-label">
+          <span data-lang-inline="es" class="active">Países destino</span>
+          <span data-lang-inline="ca">Països destí</span>
+          <span data-lang-inline="en">Destination countries</span>
+        </div>
+      </div>
+      <div class="cobertura-hl-item reveal">
+        <div class="cobertura-hl-num">12<span>+</span></div>
+        <div class="cobertura-hl-label">
+          <span data-lang-inline="es" class="active">Años en Palletways</span>
+          <span data-lang-inline="ca">Anys a Palletways</span>
+          <span data-lang-inline="en">Years in Palletways</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VALORES — trust section
+     ============================================================ -->
+<section id="valores">
+  <div class="valores-container">
+    <div class="valores-header">
+      <div>
+        <div class="section-label reveal">
+          <div class="section-label-line" style="background:var(--red);"></div>
+          <span class="section-label-text" style="color:var(--red);">
+            <span data-lang-inline="es" class="active">Nuestros Valores</span>
+            <span data-lang-inline="ca">Els Nostres Valors</span>
+            <span data-lang-inline="en">Our Values</span>
+          </span>
+        </div>
+        <h2 class="section-title reveal" style="font-size:clamp(40px,5vw,72px);color:var(--navy);">
+          <span data-lang="es" class="active">Lo que nos<br>distingue</span>
+          <span data-lang="ca">El que ens<br>distingeix</span>
+          <span data-lang="en">What sets<br>us apart</span>
+        </h2>
+      </div>
+      <div>
+        <p class="section-body reveal" style="color:rgba(20,20,20,0.5);">
+          <span data-lang="es" class="active">Nuestro equipo está comprometido en ofrecerte el mejor servicio posible, ayudándote a crecer y expandir tu negocio. Con más de 80 años de experiencia, simplificamos el transporte y la gestión logística de nuestros clientes.</span>
+          <span data-lang="ca">El nostre equip està compromès a oferir-te el millor servei possible, ajudant-te a créixer i expandir el teu negoci. Amb més de 80 anys d'experiència, simplifiquem el transport i la gestió logística dels nostres clients.</span>
+          <span data-lang="en">Our team is committed to offering you the best possible service, helping you grow and expand your business. With over 80 years of experience, we simplify transport and logistics management for our clients.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="valores-grid">
+      <div class="valor-card reveal">
+        <div class="valor-card-circle">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="valor-card-title">
+          <span data-lang-inline="es" class="active">Compromiso</span>
+          <span data-lang-inline="ca">Compromís</span>
+          <span data-lang-inline="en">Commitment</span>
+        </div>
+        <p class="valor-card-desc">
+          <span data-lang="es" class="active">Cumplimos nuestros compromisos con el cliente, sin sorpresas de última hora ni excusas.</span>
+          <span data-lang="ca">Complim els nostres compromisos amb el client, sense sorpreses de darrera hora.</span>
+          <span data-lang="en">We fulfil our commitments to clients, without last-minute surprises or excuses.</span>
+        </p>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-card-circle">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="valor-card-title">
+          <span data-lang-inline="es" class="active">Agilidad</span>
+          <span data-lang-inline="ca">Agilitat</span>
+          <span data-lang-inline="en">Agility</span>
+        </div>
+        <p class="valor-card-desc">
+          <span data-lang="es" class="active">Actuamos con rapidez y flexibilidad para adaptarnos a los cambios del mercado y de tus necesidades.</span>
+          <span data-lang="ca">Actuem amb rapidesa i flexibilitat per adaptar-nos als canvis del mercat i de les teves necessitats.</span>
+          <span data-lang="en">We act quickly and flexibly to adapt to market changes and your needs.</span>
+        </p>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-card-circle">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="valor-card-title">
+          <span data-lang-inline="es" class="active">Proactividad</span>
+          <span data-lang-inline="ca">Proactivitat</span>
+          <span data-lang-inline="en">Proactivity</span>
+        </div>
+        <p class="valor-card-desc">
+          <span data-lang="es" class="active">Anticipamos problemas y buscamos soluciones antes de que se conviertan en incidencias reales.</span>
+          <span data-lang="ca">Anticipem problemes i busquem solucions abans que es converteixin en incidències reals.</span>
+          <span data-lang="en">We anticipate problems and seek solutions before they become real incidents.</span>
+        </p>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-card-circle">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <div class="valor-card-title">
+          <span data-lang-inline="es" class="active">Mejora Continua</span>
+          <span data-lang-inline="ca">Millora Contínua</span>
+          <span data-lang-inline="en">Continuous Improvement</span>
+        </div>
+        <p class="valor-card-desc">
+          <span data-lang="es" class="active">Invertimos continuamente en tecnología, formación y procesos para ofrecerte siempre lo mejor.</span>
+          <span data-lang="ca">Invertim contínuament en tecnologia, formació i processos per oferir-te sempre el millor.</span>
+          <span data-lang="en">We continuously invest in technology, training and processes to always offer you the best.</span>
+        </p>
+      </div>
+
+      <div class="valor-card reveal">
+        <div class="valor-card-circle">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1"/><path d="M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <div class="valor-card-title">
+          <span data-lang-inline="es" class="active">Flexibilidad</span>
+          <span data-lang-inline="ca">Flexibilitat</span>
+          <span data-lang-inline="en">Flexibility</span>
+        </div>
+        <p class="valor-card-desc">
+          <span data-lang="es" class="active">Adaptamos nuestros servicios a tus necesidades, con soluciones a medida para cada tipo de carga y destino.</span>
+          <span data-lang="ca">Adaptem els nostres serveis a les teves necessitats, amb solucions a mida per a cada tipus de càrrega i destí.</span>
+          <span data-lang="en">We adapt our services to your needs, with tailor-made solutions for each type of load and destination.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section id="cta">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-bg-text" aria-hidden="true">TM</div>
+  <div class="cta-container">
+    <div class="cta-label reveal">
+      <div class="cta-label-line"></div>
+      <span class="cta-label-text">
+        <span data-lang-inline="es" class="active">Contacto</span>
+        <span data-lang-inline="ca">Contacte</span>
+        <span data-lang-inline="en">Contact</span>
+      </span>
+      <div class="cta-label-line"></div>
+    </div>
+    <h2 class="cta-title reveal">
+      <span data-lang="es" class="active">
+        Listo para
+        <span class="cta-red">optimizar</span>
+        <br>tu logística?
+      </span>
+      <span data-lang="ca">
+        Preparat per
+        <span class="cta-red">optimitzar</span>
+        <br>la teva logística?
+      </span>
+      <span data-lang="en">
+        Ready to
+        <span class="cta-red">optimize</span>
+        <br>your logistics?
+      </span>
+    </h2>
+    <p class="cta-desc reveal">
+      <span data-lang="es" class="active">Si necesitas asesoramiento o apoyo en transporte y logística, no dudes en contactarnos: estamos aquí para ayudarte a cumplir tus plazos y objetivos.</span>
+      <span data-lang="ca">Si necessites assessorament o suport en transport i logística, no dubtis a contactar-nos: estem aquí per ajudar-te a complir els teus terminis i objectius.</span>
+      <span data-lang="en">If you need advice or support in transport and logistics, don't hesitate to contact us: we're here to help you meet your deadlines and objectives.</span>
+    </p>
+    <div class="cta-actions reveal">
+      <a href="../../contacto/index.html" class="btn-primary">
+        <span>
+          <span data-lang-inline="es" class="active">Enviar mensaje</span>
+          <span data-lang-inline="ca">Enviar missatge</span>
+          <span data-lang-inline="en">Send message</span>
+        </span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="tel:+34938911018" class="cta-phone">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3-8.63A2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        +34 938 911 018
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer id="footer">
+  <div class="footer-container">
+    <div class="footer-main">
+
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="../../assets/images/logo.png" alt="Transports Montserrat" class="footer-logo-img">
+        </div>
+        <p class="footer-brand-desc">
+          <span data-lang="es" class="active">Operador logístico con más de 85 años de experiencia. Logística integral, almacenaje y transporte nacional e internacional.</span>
+          <span data-lang="ca" style="display:none;">Operador logístic amb més de 85 anys d'experiència. Logística integral, emmagatzematge i transport nacional i internacional.</span>
+          <span data-lang="en" style="display:none;">Logistics operator with over 85 years of experience. Full logistics, warehousing and international transport.</span>
+        </p>
+        <a href="tel:+34938911018" class="footer-contact-item">+34 938 911 018</a>
+        <a href="mailto:montserrat@tmontserrat.com" class="footer-contact-item">montserrat@tmontserrat.com</a>
+        <span class="footer-contact-item">Vilafranca del Penedès · Sant Sadurní d'Anoia</span>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Servicios</span>
+          <span data-lang-inline="ca">Serveis</span>
+          <span data-lang-inline="en">Services</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../servicios/logistica-integral-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Logística Integral</span>
+            <span data-lang-inline="ca">Logística Integral</span>
+            <span data-lang-inline="en">Full Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/logistica-in-house/index.html">
+            <span data-lang-inline="es" class="active">Logística In-House</span>
+            <span data-lang-inline="ca">Logística In-House</span>
+            <span data-lang-inline="en">In-House Logistics</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-dedicado/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Dedicado</span>
+            <span data-lang-inline="ca">Emmagatzematge Dedicat</span>
+            <span data-lang-inline="en">Dedicated Storage</span>
+          </a></li>
+          <li><a href="../../servicios/almacenaje-multicliente/index.html">
+            <span data-lang-inline="es" class="active">Almacenaje Multicliente</span>
+            <span data-lang-inline="ca">Emmagatzematge Multiclient</span>
+            <span data-lang-inline="en">Multi-client Storage</span>
+          </a></li>
+          <li><a href="../../servicios/manipulacion/index.html">
+            <span data-lang-inline="es" class="active">Manipulación</span>
+            <span data-lang-inline="ca">Manipulació</span>
+            <span data-lang-inline="en">Handling</span>
+          </a></li>
+          <li><a href="../../servicios/consolidacion/index.html">
+            <span data-lang-inline="es" class="active">Consolidación</span>
+            <span data-lang-inline="ca">Consolidació</span>
+            <span data-lang-inline="en">Consolidation</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Transporte</span>
+          <span data-lang-inline="ca">Transport</span>
+          <span data-lang-inline="en">Transport</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../transporte/transporte-vino-granel-barcelona/index.html">
+            <span data-lang-inline="es" class="active">Vino a Granel</span>
+            <span data-lang-inline="ca">Vi a Granel</span>
+            <span data-lang-inline="en">Bulk Wine</span>
+          </a></li>
+          <li><a href="../../transporte/transporte-nacional-internacional/index.html">
+            <span data-lang-inline="es" class="active">Nacional e Internacional</span>
+            <span data-lang-inline="ca">Nacional i Internacional</span>
+            <span data-lang-inline="en">National &amp; International</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-palets-24h/index.html">
+            <span data-lang-inline="es" class="active">Distribución 24h</span>
+            <span data-lang-inline="ca">Distribució 24h</span>
+            <span data-lang-inline="en">24h Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/distribucion-paleteria-europa/index.html">
+            <span data-lang-inline="es" class="active">Distribución Europa</span>
+            <span data-lang-inline="ca">Distribució Europa</span>
+            <span data-lang-inline="en">European Distribution</span>
+          </a></li>
+          <li><a href="../../transporte/grupajes-cargas-completas/index.html">
+            <span data-lang-inline="es" class="active">Grupajes y Cargas Completas</span>
+            <span data-lang-inline="ca">Grupatges i Càrregues Completes</span>
+            <span data-lang-inline="en">Groupage &amp; Full Loads</span>
+          </a></li>
+          <li><a href="../../palletways/index.html">
+            <span data-lang-inline="es" class="active">Red Palletways</span>
+            <span data-lang-inline="ca">Xarxa Palletways</span>
+            <span data-lang-inline="en">Palletways Network</span>
+          </a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">
+          <span data-lang-inline="es" class="active">Empresa</span>
+          <span data-lang-inline="ca">Empresa</span>
+          <span data-lang-inline="en">Company</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../../empresa/historia/index.html">
+            <span data-lang-inline="es" class="active">Historia</span>
+            <span data-lang-inline="ca">Història</span>
+            <span data-lang-inline="en">History</span>
+          </a></li>
+          <li><a href="../../empresa/equipo/index.html">
+            <span data-lang-inline="es" class="active">Nuestro Equipo</span>
+            <span data-lang-inline="ca">El Nostre Equip</span>
+            <span data-lang-inline="en">Our Team</span>
+          </a></li>
+          <li><a href="../../empresa/calidad/index.html">
+            <span data-lang-inline="es" class="active">Política de Calidad</span>
+            <span data-lang-inline="ca">Política de Qualitat</span>
+            <span data-lang-inline="en">Quality Policy</span>
+          </a></li>
+          <li><a href="../../noticias/index.html">
+            <span data-lang-inline="es" class="active">Noticias</span>
+            <span data-lang-inline="ca">Notícies</span>
+            <span data-lang-inline="en">News</span>
+          </a></li>
+          <li><a href="../../contacto/index.html">
+            <span data-lang-inline="es" class="active">Contacto</span>
+            <span data-lang-inline="ca">Contacte</span>
+            <span data-lang-inline="en">Contact</span>
+          </a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copyright">
+        © 2025 Transports Montserrat S.L. —
+        <span data-lang-inline="es" class="active">Todos los derechos reservados</span>
+        <span data-lang-inline="ca">Tots els drets reservats</span>
+        <span data-lang-inline="en">All rights reserved</span>
+      </span>
+      <div class="footer-legal">
+        <a href="../../legal/aviso-legal/index.html">
+          <span data-lang-inline="es" class="active">Aviso Legal</span>
+          <span data-lang-inline="ca">Avís Legal</span>
+          <span data-lang-inline="en">Legal Notice</span>
+        </a>
+        <a href="../../legal/cookies/index.html">Cookies</a>
+        <a href="../../legal/privacidad/index.html">
+          <span data-lang-inline="es" class="active">Privacidad</span>
+          <span data-lang-inline="ca">Privacitat</span>
+          <span data-lang-inline="en">Privacy</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+/* ============================================================
+   CUSTOM CURSOR
+   ============================================================ */
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  (function animateCursorRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animateCursorRing);
+  })();
+}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = ((scrollTop / docHeight) * 100) + '%';
+}, { passive: true });
+
+/* ============================================================
+   NAV SCROLL STATE
+   ============================================================ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseFloat(entry.target.dataset.delay || 0);
+      setTimeout(() => entry.target.classList.add('visible'), delay * 1000);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+revealEls.forEach((el, i) => {
+  if (!el.dataset.delay) el.dataset.delay = (i % 4) * 0.07;
+  revealObserver.observe(el);
+});
+
+/* ============================================================
+   LANGUAGE SWITCHER
+   ============================================================ */
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('.mob-lang button').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+    if (el.getAttribute('data-lang') !== lang) el.style.display = 'none';
+    else el.style.display = '';
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+  document.documentElement.lang = lang;
+}
+
+/* ============================================================
+   MOBILE MENU
+   ============================================================ */
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+let menuOpen = false;
+
+function openMenu() {
+  menuOpen = true;
+  mobileMenu.style.display = 'flex';
+  mobileMenu.offsetHeight;
+  mobileMenu.classList.add('open');
+  hamburgerBtn.classList.add('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'true');
+  hamburgerBtn.setAttribute('aria-label', 'Cerrar menú');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  menuOpen = false;
+  mobileMenu.classList.remove('open');
+  hamburgerBtn.classList.remove('open');
+  hamburgerBtn.setAttribute('aria-expanded', 'false');
+  hamburgerBtn.setAttribute('aria-label', 'Abrir menú');
+  document.body.style.overflow = '';
+  setTimeout(() => { if (!menuOpen) mobileMenu.style.display = 'none'; }, 400);
+}
+
+hamburgerBtn.addEventListener('click', () => { menuOpen ? closeMenu() : openMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => closeMenu()); });
+
+document.querySelectorAll('.mob-nav-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const targetId = toggle.getAttribute('data-target');
+    const sub = document.getElementById(targetId);
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-nav-toggle').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      sub.classList.add('open');
+      toggle.classList.add('active');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+/* ============================================================
+   HERO CANVAS — logistics network
+   ============================================================ */
+(function initHeroCanvas() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodeCount = 28;
+  const nodes = [];
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      r: Math.random() * 2 + 1.5,
+      pulse: Math.random() * Math.PI * 2,
+    });
+  }
+
+  const packets = [];
+  for (let i = 0; i < 12; i++) {
+    const fromIdx = Math.floor(Math.random() * nodeCount);
+    let toIdx = Math.floor(Math.random() * nodeCount);
+    while (toIdx === fromIdx) toIdx = Math.floor(Math.random() * nodeCount);
+    packets.push({ from: fromIdx, to: toIdx, t: Math.random(), speed: 0.003 + Math.random() * 0.004 });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy; n.pulse += 0.025;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodeCount; i++) {
+      for (let j = i + 1; j < nodeCount; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 180) {
+          const alpha = (1 - dist / 180) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      const pulseR = n.r + Math.sin(n.pulse) * 0.6;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.7)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, pulseR + 4 + Math.sin(n.pulse) * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(207,0,28,0.12)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    });
+    packets.forEach(p => {
+      p.t += p.speed;
+      if (p.t >= 1) {
+        p.t = 0; p.from = p.to;
+        p.to = Math.floor(Math.random() * nodeCount);
+        while (p.to === p.from) p.to = Math.floor(Math.random() * nodeCount);
+      }
+      const fx = nodes[p.from].x, fy = nodes[p.from].y;
+      const tx = nodes[p.to].x, ty = nodes[p.to].y;
+      const px = fx + (tx - fx) * p.t;
+      const py = fy + (ty - fy) * p.t;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.fill();
+      const trailLen = 0.06;
+      const tStart = Math.max(0, p.t - trailLen);
+      const tpx = fx + (tx - fx) * tStart;
+      const tpy = fy + (ty - fy) * tStart;
+      const grad = ctx.createLinearGradient(tpx, tpy, px, py);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(1, 'rgba(255,200,200,0.4)');
+      ctx.beginPath();
+      ctx.moveTo(tpx, tpy);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   CTA CANVAS
+   ============================================================ */
+(function initCtaCanvas() {
+  const canvas = document.getElementById('cta-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const nodes = [];
+  for (let i = 0; i < 18; i++) {
+    nodes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: (Math.random() - 0.5) * 0.12,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+    });
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) {
+          const a = (1 - d / 220) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = `rgba(207,0,28,${a})`;
+          ctx.lineWidth = 0.8;
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(207,0,28,0.4)';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============================================================
+   STAGGER DELAYS
+   ============================================================ */
+document.querySelectorAll('.bento-grid .bento-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.07) + 's';
+});
+document.querySelectorAll('.valores-grid .valor-card').forEach((card, i) => {
+  card.style.transitionDelay = (i * 0.08) + 's';
+});
+document.querySelectorAll('.timeline-item').forEach((item, i) => {
+  item.dataset.delay = i * 0.1;
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang('es');
+
+/*
+// Bloquear clic derecho
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.key === 'u') { e.preventDefault(); return false; }
+});
+*/
+</script>
+
+</body>
+</html>
